@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="lobby.css">
+</head>
+<body>
+    <div id="lobby">
+        <h1 id="userTitle">사용자님 ROOMLIST</h1>
+        <div id="roomGroup">
+            <div class="room">
+                <span class="room-title">비트 회의방</span>
+                <span class="total-people">3 / 6</span><br>
+                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            </div>
+            <div class="room" onclick="hover()">
+                <span class="room-title">비트 회의방</span>
+                <span class="total-people">3 / 6</span><br>
+                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            </div>
+            <div class="room">
+                <span class="room-title">비트 회의방</span>
+                <span class="total-people">3 / 6</span><br>
+                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            </div>
+            <div class="room">
+                <span class="room-title">비트 회의방</span>
+                <span class="total-people">3 / 6</span><br>
+                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            </div>
+            <div class="room" onclick="location.href='#open'">
+                <span id="regist-room" class="glyphicon glyphicon-plus-sign"></span>
+            </div>
+        </div>
+    </div>
+    <div class="room-regist-box" id="open">
+       <div>
+            <h1 id="roomRegistTitle">New ROOM</h1>
+            <div id="roomRegNm">
+                <p class="room-ex">ROOM NAME</p>
+                <input type="text" class="input" placeholder=""><br>
+            </div>
+            <div id="roomReSc">
+                <p class="room-ex">SECURITY</p>
+                <span class="room-regist-security">
+                    <label for="roomFree">
+                        <input type="radio" id="roomFree" name="regisec" value="M" onclick="offPass()" /><span class="sec">공개</span>
+                    </label>
+                    <label for="roomPass">
+                        <input type="radio" id="roomPass" name="regisec" value="F" onclick="openPass()" /><span class="sec">비공개</span>
+                    </label>
+                </span>
+            </div>
+            <!-- 비공개 버튼 누를시에만 나타나도록-->
+            <div id="roomRePa" >
+                <p class="room-ex">ROOM 비밀번호 입력</p>
+                <input type="password" class="input">
+            </div>
+            <div id="roomReBtns">
+                <a href="" class="room-regist-btn">ROOM 생성</a>
+                <a href="#close" class="room-regist-btn">닫기</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openPass() {
+            var pass = document.querySelector("#roomRePa");
+            pass.style.display = "block"
+        }
+        function offPass() {
+            var pass = document.querySelector("#roomRePa");
+            pass.style.display = "none"
+        }
+    </script>
+</body>
+</html>
