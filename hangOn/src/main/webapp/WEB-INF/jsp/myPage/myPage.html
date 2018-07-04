@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="myPage.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div id="myPage">
+        <div id="myPageProfileArea">
+            <span id="myPageClose">
+                X
+            </span>
+            <div>
+                <div id="myPageImgArea">
+                    <img src="/resources/image/defalutImg.jpg"/>
+                </div>
+                <div id="myPageProfileImgBtns">
+                    <span>
+                        <input type="radio" id="myPageProfileImgBtn1" name="myPageProfileImgBtn" checked/>
+                        <label for="myPageProfileImgBtn1">기본이미지</label><br><br>
+                    </span>
+                    <span>
+                        <input type="radio" id="myPageProfileImgBtn2" name="myPageProfileImgBtn" />
+                        <label for="myPageProfileImgBtn2">사진 불러오기(jpg,gif,png)</label><br><br>
+                    </span>
+                    <span id="myPageImgURL"><span></span><button>불러오기</button></span>
+                    <input id="myPageImgInput" type="file"/>
+                </div>
+            </div>
+            <div id="myPageDetailArea">
+                <div>
+                    이름
+                    <div>
+                        정진솔
+                    </div>
+                </div>
+                <div>
+                    이메일
+                    <div id="myPageEmail">
+                        abcd@gmail.com
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="myPagePassBtn">비밀번호 변경</button>
+                <button id="myPageOutBtn">회원탈퇴</button>
+            </div>
+          
+            
+        </div>
+    </div>
+    <script>
+        const myPageImgInput = $("#myPageImgInput");
+        const myPageImgURLSpan = $("#myPageImgURL span");
+        $("#myPageProfileImgBtns button").on("click",function(){
+            myPageImgInput.click();
+        });
+        myPageImgInput.on("change",function(){
+            myPageImgURLSpan.text(this.value);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#myPageProfileArea img").prop("src",e.target.result);
+            };
+            reader.readAsDataURL($(this)[0].files[0]);
+            $("#myPageProfileImgBtn2").prop("checked",true)
+        });
+        $("#myPageProfileImgBtn2").on("click",function(){
+            myPageImgInput.click();
+        });
+        $("#myPageProfileImgBtn1").on("click",function(){
+            $("#myPageProfileArea img").prop("src","defalutImg.jpg");
+            myPageImgURLSpan.text("");
+        });
+    </script>
+</body>
+</html>

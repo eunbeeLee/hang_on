@@ -1,0 +1,111 @@
+#myPage{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+
+
+#myPageProfileArea{
+    top:23%;
+    left:35%;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 1);
+    height: 440px;
+    width: 30%;
+    padding: 1.5%;
+}
+
+
+
+
+#myPageClose{
+    position: absolute;
+    right: 3%;
+    top: 2%;
+    border-radius: 100px;
+    width: 33px;
+}
+#myPageClose i{
+	font-size: 20px;
+	padding-top: 5px;
+}
+
+
+
+#myPageImgArea{
+    width: 130px;
+    height: 130px;
+    border: 1px solid black;
+    float: left;
+    margin-right: 5%;
+}
+
+
+
+#myPageImgArea img{
+    width: 100%;
+    height: 100%;
+}
+
+
+#myPageImgInput{
+    display: none;
+}
+
+
+
+#myPageAttachImgBtn i {
+	padding-top: 5px;
+}
+
+
+
+#myPageDetailArea div{
+    margin-bottom: 5%;
+}
+
+#myPageDetailArea div div{
+    margin-top: 1%;
+    border: 1px solid black;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 5px;
+}
+
+#myPageEmail{
+    background-color: khaki;
+}
+
+#myPagePassBtn, #myPageOutBtn{
+    width: 48%;
+    height: 50px;
+}
+
+#myPagePassBtn{
+    margin-right: 2.5%
+}
+
+#myPageImgURL{
+	float: left;
+	margin-right: 5px;
+	width: 55.5%;
+}
+#myPageProfileImgBtns span label{
+	margin: 0px;
+}
+#myPageProfileImgBtns{
+	margin-bottom: 30px;
+}
+#myPageNameUpdateBtn{
+	height: 25px;
+}
+#myPageNameUpdateBtn i{
+	font-size: 20px;
+	padding-top: 1px;
+}
