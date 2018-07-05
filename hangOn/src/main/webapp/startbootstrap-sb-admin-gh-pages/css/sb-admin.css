@@ -13,6 +13,7 @@ body.sticky-footer {
 
 body.sticky-footer .content-wrapper {
   min-height: calc(100vh - 56px - 56px);
+  width : 100%;
 }
 
 body.fixed-nav {
