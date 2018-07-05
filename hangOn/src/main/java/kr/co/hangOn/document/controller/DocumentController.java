@@ -11,12 +11,7 @@ public class DocumentController {
 	@RequestMapping("/{documentNo}/view.do")
 	public String documentView(@PathVariable int documentNo, Model model) {
 		System.out.println(documentNo+"문서 입장");
-		return "document/test";
+		return "document/view";
 	}
-	
-	@RequestMapping("/mypage.do")
-	public String mypage() {
-		System.out.println("개인 페이지 입장");
-		return "mypage/view";
-	}
+
 }

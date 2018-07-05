@@ -5,6 +5,7 @@
 const myPageImgInput = $("#myPageImgInput");
 const myPageImgURL = $("#myPageImgURL");
 const myPageName = $("#myPageName");
+const myPage = $("#myPage");
 $("#myPageAttachImgBtn").on("click",function(){
     myPageImgInput.click();
 });
@@ -15,7 +16,7 @@ myPageImgInput.on("change",function(){
         $("#myPageProfileArea img").prop("src",e.target.result);
     };
     reader.readAsDataURL($(this)[0].files[0]);
-    $("#myPageProfileImgBtn2").prop("checked",true)
+    $("#myPageProfileImgBtn2").prop("checked",true);
 });
 $("#myPageProfileImgBtn2").on("click",function(){
     myPageImgInput.click();
@@ -31,5 +32,11 @@ $("#myPageNameUpdateBtn").on("click",function(){
 	}else{
 		myPageName.css("background-color","khaki").prop("readonly",true);
 		$("#myPageNameUpdateBtn i").text("create");
-	}
-})
+	};
+});
+$("#openMyPageBtn").on("click",function(){
+	myPage.fadeIn(300);
+});
+$("#myPageClose").on("click",function(){
+	myPage.fadeOut(300);
+});

@@ -5,10 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/view.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" >
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div id="myPage" >
@@ -22,7 +18,7 @@
 			
             <div>
                 <div id="myPageImgArea">
-                    <img src="/hangOn/resources/image/defalutImg.jpg"/>
+                    <img src="${param.profilePath}"/>
                 </div>
                 <div id="myPageProfileImgBtns">
                     <span>
@@ -47,13 +43,13 @@
 	          <button id="myPageNameUpdateBtn" type="button" class="btn btn-default" style="padding: 0px !important;">
 			  	<i class="material-icons">create</i>
 			  </button>
-	          <input class="form-control" id="myPageName" type="text" aria-describedby="idHelp" readonly value="정진솔">
+	          <input class="form-control" id="myPageName" type="text" aria-describedby="idHelp" readonly value="${param.name}">
 	        </div>
 	        
 	        
 	        <div class="form-group">
 	          <label for="myPageEmail">이메일</label>
-	          <input class="form-control" id="myPageEmail" type="email" aria-describedby="emailHelp" readonly value="abcd@gmail.com">
+	          <input class="form-control" id="myPageEmail" type="email" aria-describedby="emailHelp" readonly value="${param.mail}">
 	        </div>
         
         
@@ -65,6 +61,5 @@
             
         </div>
     </div>
-    <script src="${pageContext.request.contextPath}/resources/js/mypage/view.js"></script>
 </body>
 </html>

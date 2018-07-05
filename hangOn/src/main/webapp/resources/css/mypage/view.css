@@ -112,3 +112,6 @@
 #myPageName{
 	background-color: khaki;
 }
+#myPage{
+	display: none;
+}

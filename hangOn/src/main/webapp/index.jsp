@@ -14,10 +14,10 @@
 		문서공유 페이지 바로가기
 	</a>
 	<hr>
-	<a href='<c:url value="/document/35/view.do"/>'>
-		mypage 바로가기
+	<a href='<c:url value="/lobby/view.do"/>'>
+		lobby 바로가기
 	</a>
-
+	<hr>
 
 </body>
 </html>
