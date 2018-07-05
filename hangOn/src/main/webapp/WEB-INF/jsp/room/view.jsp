@@ -1,44 +1,31 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
-  <!-- 구글 아이콘 -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    .content-wrapper{
-      padding: 0px;
-    }
-    div{
-      border: 1px solid black;
-    }
-    .main-doc{
-      width: 100%;
-      padding: 0px;
-      height: 663px;
-      float: left;
-    }
-    .main-doc,.user{
-      float: left;
-    }
-  </style>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+ 	<title>SB Admin - Start Bootstrap Template</title>
+	<!-- Bootstrap core CSS-->
+	<link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom fonts for this template-->
+	<link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!-- Custom styles for this template-->
+	<link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
+	<!-- 구글 아이콘 -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
+	
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img src="../resources/image/HangOnLogo.png"></a>
+    <a class="navbar-brand" href="index.html"><img id="hangOnLogo" src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,7 +38,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="다운로드">
-          <a class="nav-link" href="charts.html">
+          <a id="downNav" class="nav-link" href="charts.html">
               <i class="material-icons">folder</i>
             <span class="nav-link-text">다운로드</span>
           </a>
@@ -143,18 +130,20 @@
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-charts.min.js"></script>
+
   </div>
+	<!-- Bootstrap core JavaScript-->
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Page level plugin JavaScript-->
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+	<!-- Custom scripts for this page-->
+	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/room/room.js"></script>
 </body>
 
 </html>

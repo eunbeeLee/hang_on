@@ -1,0 +1,18 @@
+.content-wrapper{
+  padding: 0px;
+}
+div{
+  border: 1px solid black;
+}
+.main-doc{
+  width: 100%;
+  padding: 0px;
+  height: 663px;
+  float: left;
+}
+.main-doc,.user{
+  float: left;
+}
+#hangOnLogo{
+	width:45%;
+}
