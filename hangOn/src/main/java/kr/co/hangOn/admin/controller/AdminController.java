@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	
 	@RequestMapping("/dashBoard.do")
-	public String documentView() {
+	public String dashBoardView() {
 		return "admin/dashBoard";
+	}
+	@RequestMapping("/userMgm.do")
+	public String userMgmView() {
+		return "admin/userMgm";
 	}
 
 }

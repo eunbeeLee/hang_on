@@ -39,14 +39,14 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="대쉬보드">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="dashBoard.do">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">대쉬보드</span>
           </a>
         </li>
  
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="사용자관리">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="userMgm.do">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">사용자관리</span>
           </a>
@@ -85,7 +85,7 @@
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="col-md-5 col-xs-12">
+    <div class="col-lg-4 col-md-6 col-xs-12">
             <!-- Example Bar Chart Card-->
           <div class="card mb-3">
             <div class="card-header">
@@ -110,7 +110,7 @@
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
           </div>
-  <div class="col-md-6 col-xs-12">
+  <div class="col-lg-4 col-md-6 col-xs-12">
   <!-- 월별 회의갯수-->
    <div class="card mb-3" id="pieChartContent">
      <div class="card-header">
@@ -122,7 +122,7 @@
    </div>
    </div>
    
-    <div class="col-md-12 col-xs-12">
+    <div class="col-lg-10 col-md-10 col-xs-12">
          <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-area-chart"></i> Area Chart Example</div>
