@@ -18,6 +18,10 @@
 		lobby 바로가기
 	</a>
 	<hr>
+	<a href='<c:url value="/admin/dashBoard.do"/>'>
+		admin-dashBoard 바로가기
+	</a>
+	<hr>
 
 </body>
 </html>
