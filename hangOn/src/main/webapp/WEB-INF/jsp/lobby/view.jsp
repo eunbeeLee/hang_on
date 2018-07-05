@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/view.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/lobby.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" >
@@ -26,6 +27,7 @@
 <body>
 
 <!-- Navigation-->
+<div id="nav">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html"><img id="hangOnLogo"src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,32 +94,58 @@
       </ul>
     </div>
   </nav>
-
+</div>
     <div id="lobby">
-        <h1 id="userTitle">사용자님 ROOMLIST</h1>
+        <h1 id="userTitle">홍길동님 ROOM_LIST</h1>
         <div id="roomGroup">
-            <div class="room">
-                <span class="room-title">비트 회의방</span>
-                <span class="total-people">3 / 6</span><br>
-                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            <div class="room-box">
+                <div class="room">
+                    <span class="room-title">비트 회의방</span>
+                    <span class="total-people">3 / 6</span><br>
+                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+                </div>
+                <div class="room-over">
+                    <button class="room-btn">참여</button>
+                    <button class="room-btn">탈퇴</button>
+                </div>
             </div>
-            <div class="room" onclick="hover()">
-                <span class="room-title">비트 회의방</span>
-                <span class="total-people">3 / 6</span><br>
-                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            <div class="room-box">
+                <div class="room">
+                    <span class="room-title">비트 회의방</span>
+                    <span class="total-people">3 / 6</span><br>
+                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+                </div>
+                <div class="room-over">
+                    <button class="room-btn">참여</button>
+                    <button class="room-btn">탈퇴</button>
+                </div>
             </div>
-            <div class="room">
-                <span class="room-title">비트 회의방</span>
-                <span class="total-people">3 / 6</span><br>
-                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            <div class="room-box">
+                <div class="room">
+                    <span class="room-title">비트 회의방</span>
+                    <span class="total-people">3 / 6</span><br>
+                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+                </div>
+                <div class="room-over">
+                    <button class="room-btn">참여</button>
+                    <button class="room-btn">탈퇴</button>
+                </div>
             </div>
-            <div class="room">
-                <span class="room-title">비트 회의방</span>
-                <span class="total-people">3 / 6</span><br>
-                <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+            <div class="room-box">
+                <div class="room" onclick="hover()">
+                    <span class="room-title">비트 회의방</span>
+                    <span class="total-people">3 / 6</span><br>
+                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
+                </div>
+                <div class="room-over">
+                    <button class="room-btn">참여</button>
+                    <button class="room-btn">탈퇴</button>
+                </div>
             </div>
-            <div class="room" onclick="location.href='#open'">
-                <span id="regist-room" class="fa fa-plus-square-o"></span>
+            <div class="room-box">
+                <div class="room plus" onclick="location.href='#open'">
+                    <span id="regist-room" class="fa fa-plus-circle"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -145,14 +173,14 @@
                 <input type="password" class="input">
             </div>
             <div id="roomReBtns">
-                <a href="" class="room-regist-btn">ROOM 생성</a>
-                <a href="#close" class="room-regist-btn">닫기</a>
+                <button class="room-regist-btn">ROOM 생성</button>
+                <button class="back room-regist-btn" onclick="location.href='#close'">닫기</button>
             </div>
         </div>
     </div>
     
     <!-- 하단 -->
-      <div class="content-wrapper">
+   <div class="content-wrapper">
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
