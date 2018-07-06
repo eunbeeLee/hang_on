@@ -24,7 +24,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html"><img id="hangOnLogo" src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
@@ -155,6 +155,7 @@
 	<!-- Custom scripts for this page-->
 	<script src="${pageContext.request.contextPath}/resources/js/room/room.js"></script>
 	
+	<script src="${pageContext.request.contextPath}/resources/js/document/pdfobject.min.js"></script><%-- document js 진솔 --%>
 	<script src="${pageContext.request.contextPath}/resources/js/document/document.js"></script><%-- document js 진솔 --%>
 </body>
 
