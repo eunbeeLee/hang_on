@@ -45,10 +45,10 @@
           </a>
         </li>
  
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="사용자관리">
-          <a class="nav-link" href="userMgm.do">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="회의방관리">
+          <a class="nav-link" href="roomMgm.do">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">사용자관리</span>
+            <span class="nav-link-text">회의방관리</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="회의기록">
