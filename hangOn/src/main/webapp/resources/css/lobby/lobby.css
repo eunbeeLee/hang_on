@@ -1,19 +1,9 @@
 body {
-    background: linear-gradient(132deg, #ddc2b842, #81cfee6c);
-    background-size: 400% 400%;
-    animation: BackgroundGradient 15s ease infinite;
+	background-color: #c6c6c6;
 }
   
-  
-  
-  @keyframes BackgroundGradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  
 p, span, input, button{
-	font-family: 'Poor Story', cursive;
+	font-family: sans-serif;
 }
 button {
 	cursor: pointer;
@@ -32,7 +22,7 @@ button {
     margin-left: 10%;
     color: black;
     font-size: 50px;
-    font-family: 'Poor Story', cursive;
+    font-family: sans-serif;
     margin-top: 30px;
     margin-bottom:30px;
     font-weight: bold;
@@ -130,118 +120,5 @@ button {
     opacity: 0.5;
 }
 
-/* 방생성 창 띄우기 이벤트*/
-.room-regist-box {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    opacity:0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
-}
-.room-regist-box:target {
-    opacity:1;
-    pointer-events: auto;
-}
-.room-regist-box > div {
-    padding: 30px 30px;
-	position: relative;
-	top: 10%;
-	left: 33%;
-	width: 35%;
-	height: 76%;
-	border: 1px solid black;
-	background-color: white;
-    border-radius: 30px;
-}
-
-/* 방 생성 버튼 / 취소 버튼 */
-.room-regist-btn {
-    width: 48%;
-    height: 60%;
-    margin-top: 20px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 11px 38px;
-    border: 2px white solid;
-    transition: all 0.2s ease 0s;
-    border-radius: 5px;
-    background-color: #a8a7a7da;
-}
-.room-regist-btn:active {
-	position:relative;
-	top:1px;
-}
-
-.room-regist-security{
-    width: 100%;
-    display: block;
-    transition:all 0.1s linear;
-    margin: 0 auto;
-  }
-.sec{
-    color: grey;
-    font-size: 15px;
-    border: 1px solid grey;
-    display: block;
-    float: left;
-    width: 100%;
-    height: 43px;
-    border-radius: 2px;
-    padding-top: 10px;
-    text-align: center;
-    cursor: pointer;
-}
-.room-regist-security label{
-    width: 49%;
-}
-.room-regist-security input{
-    position:absolute;
-    z-index: 9;
-    display:none
-}
-.room-regist-security input:checked+span {
-    background-color: #dbdbdb;
-}
-#roomRegistTitle {
-    text-align: center;
-    margin-bottom: 30px;
-}
-.room-ex {
-    border-bottom: 1px solid gray;
-    font-size: 20px;
-    color: gray;
-}
-#roomRegNm {
-    margin-bottom: 25px;
-}
-#roomReSc{
-    margin-bottom: 30px;
-}
-#roomRePa {
-    margin-bottom: 50px;
-    display: none;
-}
-#roomReBtns {
-    position: absolute;
-    width: 90%;
-    bottom: 20px;
-}
-
-.input {
-    margin-top: 3px;
-    width: 100%;
-    height: 40px;
-    font-size: 30px;
-    border: 1px solid lightgray;
-    border-bottom: 1px solid gray;
-    padding: 10px 10px;
-}
 
 
