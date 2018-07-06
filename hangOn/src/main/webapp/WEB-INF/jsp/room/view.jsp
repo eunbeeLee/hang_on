@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="문서공유">
-          <a class="nav-link" href="tables.html">
+          <a id="documentNav" class="nav-link">
             <i class="material-icons">file_copy</i>
             <span class="nav-link-text">문서공유</span>
           </a>
