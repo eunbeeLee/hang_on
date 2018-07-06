@@ -67,3 +67,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.btn-period{
+	background-color:#dbd0ef;
+	wi
+}

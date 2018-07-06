@@ -84,58 +84,149 @@
       </ul>
     </div>
   </nav>
-  <div class="content-wrapper">
-    <div class="col-lg-4 col-md-6 col-xs-12">
-            <!-- Example Bar Chart Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-bar-chart"></i>사용량</div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-8 my-auto">
-                  <canvas id="myBarChart" width="100" height="50"></canvas>
-                </div>
-                <div class="col-sm-4 text-center my-auto">
-                  <div class="h4 mb-0 text-primary">$34,693</div>
-                  <div class="small text-muted">YTD Revenue</div>
-                  <hr>
-                  <div class="h4 mb-0 text-warning">$18,474</div>
-                  <div class="small text-muted">YTD Expenses</div>
-                  <hr>
-                  <div class="h4 mb-0 text-success">$16,219</div>
-                  <div class="small text-muted">YTD Margin</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
-          </div>
-  <div class="col-lg-4 col-md-6 col-xs-12">
-  <!-- 월별 회의갯수-->
-   <div class="card mb-3" id="pieChartContent">
-     <div class="card-header">
-       <i class="fa fa-pie-chart"></i>회의 갯수</div>
-     <div class="card-body">
-       <canvas id="myPieChart" width="100%" height="100"></canvas>
-     </div>
-     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-   </div>
-   </div>
-   
-    <div class="col-lg-10 col-md-10 col-xs-12">
-         <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
-        <div class="card-body">
-          <canvas id="myAreaChart" width="100%" height="30"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    <div class="content-wrapper">
+    
+      <!-- 검색조건 -->
+      <div id="searchContent">
+		<form class="form-inline">
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputEmail3">시작일</label>
+		    <input type="date" class="form-control" id="exampleInputEmail3" placeholder="2018-07-01">
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputPassword3">종료일</label>
+		    <input type="date" class="form-control" id="exampleInputPassword3" placeholder="2018-07-05">
+		  </div>
+		  <button type="submit" class="btn btn-default">검색</button>
+		<div>
+		  <button type="submit" class="btn btn-sm btn-period">최근 일주일</button>
+		  <button type="submit" class="btn btn-sm btn-period">최근 30일</button>
+		  <button type="submit" class="btn btn-sm btn-period">최근 60일</button>
+		  <button type="submit" class="btn btn-sm btn-period">최근 90일</button>
+		</div>
+		</form>
+		
       </div>
+      <!-- 검색종료 -->
+	  
+	  
+	  <div class="col-md-9">
+	    <table class="table table-condensed table-striped table-bordered" id="historyTable">
+	      <thead>
+	        <tr>
+	          <th>이름</th>
+	          <th>이메일</th>
+	          <th>접속일시</th>
+	          <th>행동</th>
+	          <th>ip주소</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>회의시작</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>문서공유</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>회의시작</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>문서공유</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>회의시작</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>문서공유</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>회의시작</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>문서공유</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>회의시작</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      	<tr>
+	      	  <td>이은비</td>
+	      	  <td>eunbee1224@gmail.com</td>
+	      	  <td>2018-07-01 15:55</td>
+	      	  <td>문서공유</td>
+	      	  <td>169.192.10.8</td>
+	      	</tr>
+	      </tbody>
+	    </table>
+	  </div>	
+    <!-- pagination -->
+   <ul class="pagination">
+     <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+       <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+     </li>
+     <li class="paginate_button page-item active">
+       <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+     </li>
+     <li class="paginate_button page-item ">
+       <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+     </li>
+     <li class="paginate_button page-item ">
+       <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+     </li>
+     <li class="paginate_button page-item ">
+       <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+     </li><li class="paginate_button page-item ">
+       <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+     </li><li class="paginate_button page-item ">
+       <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+     </li>
+     <li class="paginate_button page-item next" id="dataTable_next">
+       <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+     </li>
+   </ul>
+    <!-- !pagination -->
     </div>
+    
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
+      <div>
         <div class="text-center">
           <small>Copyright © hangOn 2018</small>
         </div>
@@ -163,7 +254,6 @@
         </div>
       </div>
     </div>
-  </div>
 </body>
 <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
