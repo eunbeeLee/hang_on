@@ -86,6 +86,8 @@
   </nav>
   <div class="content-wrapper">
     <div class="main-doc">
+    	<div id="documentCall">
+    	</div>
       <div class="user" style="height: 20%;">
           <i class="material-icons">videocam</i>
           <i class="material-icons">videocam_off</i>

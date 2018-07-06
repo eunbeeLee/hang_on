@@ -6,10 +6,25 @@
   padding: 0px;
   height: 663px;
   float: left;
+  position: relative;
 }
 .main-doc,.user{
   float: left;
 }
 #hangOnLogo{
 	width:45%;
+}
+
+
+
+
+
+/*진솔 문서공유 영역*/
+#documentCall{
+	background-color: blue;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 500;
+	display: none;
 }
