@@ -21,6 +21,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/down.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -86,8 +87,13 @@
   </nav>
   <div class="content-wrapper">
     <div class="main-doc">
-    	<div id="documentCall">
-    	</div>
+    	
+    	<%-- 문서공유 영역 진솔 --%>
+    	<c:import url="/WEB-INF/jsp/document/view.jsp">
+			<c:param name="msg" value="test"/>
+		</c:import>
+    	<%-- 문서공유 영역 진솔 --%>
+		
       <div class="user" style="height: 20%;">
           <i class="material-icons">videocam</i>
           <i class="material-icons">videocam_off</i>
@@ -148,6 +154,8 @@
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 	<!-- Custom scripts for this page-->
 	<script src="${pageContext.request.contextPath}/resources/js/room/room.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/document/document.js"></script><%-- document js 진솔 --%>
 </body>
 
 </html>

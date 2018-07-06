@@ -7,7 +7,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>테스트</h1>
-	<h1>${documentNo}</h1>
+	<div id="documentArea">
+
+
+        <div>
+
+        </div>
+
+
+        <div>
+
+        </div>
+
+
+        <div>
+
+        </div>
+
+        
+    </div>
 </body>
 </html>
