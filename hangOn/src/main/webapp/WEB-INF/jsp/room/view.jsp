@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -19,7 +20,7 @@
 	<!-- 구글 아이콘 -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
-	
+	<link href="${pageContext.request.contextPath}/resources/css/room/down.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -132,6 +133,8 @@
     </div>
 
   </div>
+<c:import url="/WEB-INF/jsp/room/down.jsp">
+</c:import>
 	<!-- Bootstrap core JavaScript-->
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -142,7 +145,6 @@
 	<!-- Custom scripts for all pages-->
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 	<!-- Custom scripts for this page-->
-	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/room/room.js"></script>
 </body>
 
