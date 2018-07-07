@@ -87,22 +87,22 @@
     <div class="content-wrapper">
     
       <!-- 검색조건 -->
-      <div id="searchContent">
+      <div id="searchPeriod" class="row">
 		<form class="form-inline">
 		  <div class="form-group">
 		    <label class="sr-only" for="exampleInputEmail3">시작일</label>
-		    <input type="date" class="form-control" id="exampleInputEmail3" placeholder="2018-07-01">
-		  </div>
+		    <input type="date" class="form-control" id="exampleInputEmail3" value="2018-07-01">
+		  </div> -
 		  <div class="form-group">
 		    <label class="sr-only" for="exampleInputPassword3">종료일</label>
-		    <input type="date" class="form-control" id="exampleInputPassword3" placeholder="2018-07-05">
+		    <input type="date" class="form-control" id="exampleInputPassword3" value="2018-07-05">
 		  </div>
-		  <button type="submit" class="btn btn-default">검색</button>
-		<div>
-		  <button type="submit" class="btn btn-sm btn-period">최근 일주일</button>
-		  <button type="submit" class="btn btn-sm btn-period">최근 30일</button>
-		  <button type="submit" class="btn btn-sm btn-period">최근 60일</button>
-		  <button type="submit" class="btn btn-sm btn-period">최근 90일</button>
+		  <button type="submit" id="periodSearchBtn"class="btn btn-default">검색</button>
+		<div id="recentSearchBtn">
+		  <button type="submit" class="btn btn-default btn-sm btn-recent">최근 일주일</button>
+		  <button type="submit" class="btn btn-default btn-sm btn-recent">최근 30일</button>
+		  <button type="submit" class="btn btn-default btn-sm btn-recent">최근 60일</button>
+		  <button type="submit" class="btn btn-default btn-sm btn-recent">최근 90일</button>
 		</div>
 		</form>
 		
@@ -110,7 +110,7 @@
       <!-- 검색종료 -->
 	  
 	  
-	  <div class="col-md-9">
+	  <div class="col-md-9" id="tableContainer">
 	    <table class="table table-condensed table-striped table-bordered" id="historyTable">
 	      <thead>
 	        <tr>
@@ -195,7 +195,10 @@
 	      </tbody>
 	    </table>
 	  </div>	
+	  <div class="row">
+   <div class="col-md-3"></div>
     <!-- pagination -->
+   <div class="col-md-4">
    <ul class="pagination">
      <li class="paginate_button page-item previous disabled" id="dataTable_previous">
        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
@@ -220,7 +223,10 @@
        <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
      </li>
    </ul>
+   </div> 
     <!-- !pagination -->
+    <div class="col-md-4"></div>
+	  </div>
     </div>
     
     <!-- /.container-fluid-->
