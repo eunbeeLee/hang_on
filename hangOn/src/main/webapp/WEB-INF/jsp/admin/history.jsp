@@ -85,7 +85,7 @@
     </div>
   </nav>
     <div class="content-wrapper">
-    
+    <div class="container-fluid">
       <!-- 검색조건 -->
       <div id="searchPeriod" class="row">
 		<form class="form-inline">
@@ -228,7 +228,7 @@
     <div class="col-md-4"></div>
 	  </div>
     </div>
-    
+    </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
