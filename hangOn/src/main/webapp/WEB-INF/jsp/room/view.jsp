@@ -22,6 +22,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/down.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/chat.css">	
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
@@ -34,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="채팅">
-          <a class="nav-link" href="index.html">
+          <a id="chatNav" class="nav-link" href="index.html">
               <i class="material-icons">chat</i>
             <span class="nav-link-text">채팅</span>
           </a>
@@ -141,6 +142,9 @@
     </div>
 
   </div>
+  <c:import  url="/WEB-INF/jsp/room/chat.jsp">
+</c:import>
+  
 <c:import url="/WEB-INF/jsp/room/down.jsp">
 </c:import>
 	<!-- Bootstrap core JavaScript-->
