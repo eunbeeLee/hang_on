@@ -10,6 +10,7 @@
 		<result column="room_password" property="roomPassword" />
 		<result column="room_join_code" property="roomJoinCode" />
 		<result column="room_del_state" property="roomDelState" />
+		<result column="user_no" property="userNo" />
 	</resultMap>
 	
 	<!-- 방 생성 -->
@@ -25,7 +26,7 @@
 	<select id="selectJoinCodeByRandomNum" parameterType="string" resultType="int">
 		select count(*)
 		  from tb_room
-		 where room_join_code = #{roomJoinCode}
+		 where room_join_code = #{roomJoinCode} 
 	</select>
 	
 	

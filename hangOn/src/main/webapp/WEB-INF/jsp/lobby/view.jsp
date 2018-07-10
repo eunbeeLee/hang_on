@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/view.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/lobby.css">
@@ -23,6 +24,11 @@
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
+<script>
+if ("${msg}") {
+	alert("${msg}")
+}
+</script>
 </head>
 <body>
 
@@ -87,7 +93,7 @@
   </nav>
 </div>
     <div id="lobby">
-        <h1 id="userTitle">홍길동님 ROOM_LIST</h1>
+        <h1 id="userTitle">ROOMLIST</h1>
         <div id="roomGroup">
             <div class="room-box">
                 <div class="room">
@@ -174,5 +180,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/lobby/lobby.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/lobby/roomRegist.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mypage/view.js"></script>
+
+
 </body>
 </html>

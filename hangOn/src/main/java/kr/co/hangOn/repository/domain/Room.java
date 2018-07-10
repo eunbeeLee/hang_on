@@ -10,7 +10,15 @@ public class Room {
 	private String roomPassword;
 	private String roomJoinCode;
 	private String roomDelState;
+	private int userNo;
 	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	public int getRoomNo() {
 		return roomNo;
 	}

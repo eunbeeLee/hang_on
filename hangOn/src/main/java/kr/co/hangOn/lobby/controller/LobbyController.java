@@ -27,28 +27,28 @@ public class LobbyController {
 	@RequestMapping(value = "/roomRegist.do", method= {RequestMethod.POST})
 	public String lobbyRoomRegist(Room room, RedirectAttributes attr) {
 		service.roomRegist(room);
-		return "redirect: /hangOn/room/view.do?no="+ room.getRoomNo();
+		return "redirect:/room/"+ room.getRoomNo() +"/view.do";
 	}
 	
 	// 방 찾기
 	@RequestMapping(value = "/roomFind.do", method= {RequestMethod.POST})
-	public String lobbyRoomFind(Room room) {
+	public String lobbyRoomFind(Room room, RedirectAttributes attr) {
 		Room roomResult = service.roomFind(room);
-//		System.out.println(roomResult.getRoomNo());
-//		if(roomResult == null) {
-//			return "redirect: view.do";
-////			attr.addFlashAttribute("msg", "room 찾기 오류 : room 코드를 확인해주세요.");
-//		}
-//		else if (roomResult.getRoomDelState().equals("ba02")) {
-////			attr.addFlashAttribute("msg", "room 찾기 오류 : 삭제된 room 입니다.");
-//			return "redirect: view.do";
-//		}
-//		else if (room.getRoomPassword() != roomResult.getRoomPassword()) {
-////			attr.addFlashAttribute("msg", "room 찾기 오류 : room 비밀번호를 확인해주세요.");
-//			return "redirect: view.do";
-//		} else {
-			return "redirect: /hangOn/room/view.do?no="+ roomResult.getRoomNo();
-//		}
+		if(roomResult == null) {
+			attr.addFlashAttribute("msg", "room 찾기 오류: room 코드를 확인해주세요.");
+			return "redirect:view.do";
+		}
+		else if (roomResult.getRoomDelState().equals("ba02")) {
+			attr.addFlashAttribute("msg", "room 찾기 오류: 삭제된 room 입니다.");
+			return "redirect:view.do";
+		}
+		else if (!room.getRoomPassword().equals(roomResult.getRoomPassword())) {
+			attr.addFlashAttribute("msg", "room 찾기 오류: room 비밀번호를 확인해주세요.");
+			return "redirect:view.do";
+		} else {
+			// room 에 참여사람 등록
+			return "redirect:/room/"+roomResult.getRoomNo()+"/view.do";
+		}
 	}
 	
 	

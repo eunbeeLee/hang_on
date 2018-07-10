@@ -42,7 +42,6 @@ public class LobbyServiceImpl implements LobbyService {
 	@Override
 	public Room roomFind(Room room) {
 		return mapper.findRoom(room);
-		
 	}
 
 	
