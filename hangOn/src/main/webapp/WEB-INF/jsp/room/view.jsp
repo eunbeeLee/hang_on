@@ -23,6 +23,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/room/down.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/chat.css">	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/video.css">	
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
@@ -103,21 +104,19 @@
           <span class="glyphicon glyphicon-volume-up"></span>
           <span class="glyphicon glyphicon-volume-off"></span>
       </div>
+      
+
+       <!-- local/remote videos container -->
+       <div id="videos-container"></div>
+       
+       
     </div>
   
 
 
 
-
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © hangOn 2018</small>
-        </div>
-      </div>
-    </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
@@ -143,10 +142,17 @@
 
   </div>
   <c:import  url="/WEB-INF/jsp/room/chat.jsp">
-</c:import>
+  </c:import>
   
-<c:import url="/WEB-INF/jsp/room/down.jsp">
-</c:import>
+  <c:import url="/WEB-INF/jsp/room/down.jsp">
+  </c:import>
+  <div style="display: none">
+  	  <input type="text" id="conference-name" placeholder="Conference Name" style="width: 50%;">
+      <button id="setup-new-room" class="setup">새로운 방생성</button>
+
+      <!-- list of all available conferencing rooms -->
+      <table style="width: 100%;" id="rooms-list"></table>
+  </div>
 	<!-- Bootstrap core JavaScript-->
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -161,6 +167,17 @@
 	
 	<script src="${pageContext.request.contextPath}/resources/js/document/pdfobject.min.js"></script><%-- document js 진솔 --%>
 	<script src="${pageContext.request.contextPath}/resources/js/document/document.js"></script><%-- document js 진솔 --%>
+	
+	<!-- video confernece -->
+	<script src="https://cdn.webrtc-experiment.com/getMediaElement.min.js"> </script>
+    <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/IceServersHandler.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/CodecsHandler.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/video-conferencing/RTCPeerConnection-v1.5.js"> </script>
+    <script src="https://cdn.webrtc-experiment.com/video-conferencing/conference.js"> </script>
+    
+	<script src="${pageContext.request.contextPath}/resources/js/room/video.js"></script>
 </body>
 
 </html>

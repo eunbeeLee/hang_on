@@ -6,14 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/room")
 public class RoomController {
-	@RequestMapping("/view.do")
+	@RequestMapping("/{roomNo}/view.do")
 	public String view() {
-		System.out.println("로비 입장");
 		return "room/view";
+	}
+	@RequestMapping("/{roomNo}/test.do")
+	public String test() {
+		return "room/test";
 	}
 	@RequestMapping("/{downNo}/down.do")
 	public String down() {
-		System.out.println("로비 입장");
 		return "room/view";
 	}
 }
