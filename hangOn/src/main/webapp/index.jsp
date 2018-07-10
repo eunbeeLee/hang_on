@@ -9,7 +9,6 @@
 </head>
 <body>
 	
-	
 	<a href='<c:url value="/document/35/view.do"/>'>
 		문서공유 페이지 바로가기
 	</a>
@@ -20,6 +19,10 @@
 	<hr>
 	<a href='<c:url value="/admin/dashBoard.do"/>'>
 		admin-dashBoard 바로가기
+	</a>
+	<hr>
+	<a href='<c:url value="/main/main.do"/>'>
+		메인 바로가기
 	</a>
 	<hr>
 

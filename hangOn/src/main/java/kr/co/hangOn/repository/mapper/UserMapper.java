@@ -1,5 +1,7 @@
 package kr.co.hangOn.repository.mapper;
 
-public class UserMapper {
+import kr.co.hangOn.repository.domain.User;
 
+public interface UserMapper {
+	User login(String userEmail);
 }

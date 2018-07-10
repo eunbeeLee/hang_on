@@ -25,7 +25,7 @@
 	        	<a class="nav-link" >회원가입</a>
 	        </li>
 	        <li class="nav-item">
-	        	<a class="nav-link" href="customerService"><i class="fa fa-info-circle"></i>고객센터</a>
+	        	<a class="nav-link" href="../customerService.do"><i class="fa fa-info-circle"></i>고객센터</a>
 	        </li>
         </ul>
     </div>
@@ -56,11 +56,11 @@
       <form>
         <div class="form-group">
           <label for="exampleInputEmail1">이메일 주소</label>
-          <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요">
+          <input class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="이메일을 입력하세요">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">비밀번호</label>
-          <input class="form-control" id="exampleInputPassword1" type="password" placeholder="비밀번호를 입력하세요">
+          <input class="form-control" id="pw" type="password" placeholder="비밀번호를 입력하세요">
         </div>
         <div class="form-group">
           <div class="form-check">
@@ -68,7 +68,7 @@
             <input class="form-check-input" type="checkbox">비밀번호 기억하기</label>
           </div>
         </div>
-        <a class="btn btn-primary btn-block" id="login" href="#">로그인</a>
+        <button class="btn btn-primary btn-block" id="login" type="button">로그인</button>
       </form>
       <div class="text-center">
         <a class="d-block small mt-3" href="register.do">회원가입</a>
@@ -79,9 +79,44 @@
 </div>
 
 <script>
+
 	$('#login').click(function () {
-		alert("아직 준비중!");
+		var userEmail = $('#email').val();
+		var userPw = $('#pw').val();
+		
+		console.log(userEmail);
+		console.log(userPw);
+		
+		if(userEmail == '') {
+			alert("이메일 주소를 입력해주세요");
+			return false;
+		} 
+		if(userPw == '') {
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		$.ajax({
+			url: `${pageContext.request.contextPath}/main/loginPost.json`,
+			data: {userEmail: userEmail, userPw: userPw},
+			type: "POST",
+			dataType: "json",
+			success: function(result){
+				console.log(result);
+	 			if (result.startsWith("/")){
+	 				location.href = `${pageContext.request.contextPath}` + result;
+	 				return;
+	 			}
+	 			alert(result);
+			}
+		});
 	});
+	
+	var sessionUserEmail = '${UserEmail}';
+	console.log(sessionUserEmail);
+	console.log("hi");
+	
+	var whatisjson = '${pageContext.request.contextPath}/main/loginPost.json';
+	console.log(whatisjson);
 </script>
 
 <!-- footer -->
