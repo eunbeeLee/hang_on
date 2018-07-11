@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RoomController {
 	@RequestMapping("/{roomNo}/view.do")
 	public String view() {
+		
+		
 		return "room/view";
 	}
 	@RequestMapping("/{roomNo}/test.do")

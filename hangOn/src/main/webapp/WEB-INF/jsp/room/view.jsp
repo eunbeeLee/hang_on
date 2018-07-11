@@ -96,7 +96,7 @@
     <div class="main-doc">
 
 		
-     <!--  
+     <%--  
      <div class="user" style="height: 20%;">
           <i class="material-icons">videocam</i>
           <i class="material-icons">videocam_off</i>
@@ -105,7 +105,7 @@
           <span class="glyphicon glyphicon-volume-up"></span>
           <span class="glyphicon glyphicon-volume-off"></span>
       </div>
-       -->
+       --%>
 
        <!-- local/remote videos container -->
        <table id="videos-container"></table>
@@ -125,12 +125,11 @@
   
   <c:import url="/WEB-INF/jsp/room/down.jsp">
   </c:import>
-  <div style="display: none">
-  	  <input type="text" id="conference-name" placeholder="Conference Name" style="width: 50%;">
-      <button id="setup-new-room" class="setup">새로운 방생성</button>
-
+  <div id="setup-room">
+  	  <input type="text" id="conference-name">
+      <button id="setup-new-room" class="setup">new</button>
       <!-- list of all available conferencing rooms -->
-      <table style="width: 100%;" id="rooms-list"></table>
+      <table id="rooms-list"></table>
   </div>
 	<!-- Bootstrap core JavaScript-->
 	<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>

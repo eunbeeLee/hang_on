@@ -38,6 +38,10 @@ var config = {
             buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
         });
         mediaElement.id = media.stream.streamid;
+        
+        mediaElement.onclick = function(event) {
+        	pinVideo($(this)["0"].media.srcObject);
+		};
         videosContainer.appendChild(mediaElement);
     },
     onRemoteStreamEnded: function(stream, video) {
@@ -85,7 +89,7 @@ var config = {
         }
     },
     onReady: function() {
-        console.log('접속준비가 완료됨');
+//        console.log('접속준비가 완료됨');
     }
 };
 /*접속하기 */
@@ -110,6 +114,7 @@ function setupNewRoomButtonClickHandler() {
     });
 }
 
+
 function captureUserMedia(callback, failure_callback) {
     var video = document.createElement('video');
     video.muted = true;
@@ -125,10 +130,8 @@ function captureUserMedia(callback, failure_callback) {
         video.setAttribute('controls', true);
     }
     // 클릭시 핀고정 전체화면
-    video.onclick = function() {
-    	this.style.color = 'red';
-    }
-
+    video.onclick = pinVideo;
+    
     getUserMedia({
         video: video,
         onsuccess: function(stream) {
@@ -205,3 +208,37 @@ function scaleVideos() {
 }
 
 window.onresize = scaleVideos;
+
+//클릭시 이벤트 설정 함수
+function pinVideo(stream) {
+	let dom = $('.main-doc');
+	var video = document.createElement('video');
+    video.muted = true;
+    video.volume = 0;
+
+    try {
+        video.setAttributeNode(document.createAttribute('autoplay'));
+        video.setAttributeNode(document.createAttribute('playsinline'));
+        video.setAttributeNode(document.createAttribute('controls'));
+    } catch (e) {
+        video.setAttribute('autoplay', true);
+        video.setAttribute('playsinline', true);
+        video.setAttribute('controls', true);
+    }
+    getUserMedia({
+        video: video,
+        onsuccess: function(stream) {
+            config.attachStream = stream;
+
+            var mediaElement = getMediaElement(video, {
+            	//	width: (videosContainer.clientWidth / 5) - 50,
+                width: '100%',
+                buttons: []
+            });
+            dom.append(mediaElement);
+
+        },
+        onerror: function() {
+        }
+    });
+}
