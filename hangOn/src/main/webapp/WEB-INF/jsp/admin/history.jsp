@@ -19,8 +19,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
   <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
-  <!-- 아이콘 출력을 위한
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <style>
 	#hangOnLogo{
 	width:45%;
@@ -112,87 +110,7 @@
 	  
 	  <div class="col-md-9" id="tableContainer">
 	    <table class="table table-condensed table-striped table-bordered" id="historyTable">
-	      <thead>
-	        <tr>
-	          <th>이름</th>
-	          <th>이메일</th>
-	          <th>접속일시</th>
-	          <th>행동</th>
-	          <th>ip주소</th>
-	        </tr>
-	      </thead>
-	      <tbody>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>회의시작</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>문서공유</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>회의시작</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>문서공유</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>회의시작</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>문서공유</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>회의시작</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>문서공유</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>회의시작</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      	<tr>
-	      	  <td>이은비</td>
-	      	  <td>eunbee1224@gmail.com</td>
-	      	  <td>2018-07-01 15:55</td>
-	      	  <td>문서공유</td>
-	      	  <td>169.192.10.8</td>
-	      	</tr>
-	      </tbody>
+	      
 	    </table>
 	  </div>	
 	  <div class="row">
@@ -261,6 +179,10 @@
       </div>
     </div>
 </body>
+<!-- history JavaScript -->
+ 	<script src="${pageContext.request.contextPath}/resources/js/admin/history.js"></script>
+ 	
+ 	
 <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
