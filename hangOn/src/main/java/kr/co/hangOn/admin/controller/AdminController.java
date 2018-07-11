@@ -1,14 +1,20 @@
 package kr.co.hangOn.admin.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.hangOn.admin.service.adminService;
+import kr.co.hangOn.repository.domain.History;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+	@Autowired
+	private adminService service;
 	@RequestMapping("/dashBoard.do")
 	public String dashBoardView() {
 		return "admin/dashBoard";
@@ -21,5 +27,12 @@ public class AdminController {
 	public String historyView() {
 		return "admin/history";
 	}
+	
+	@RequestMapping("/makeList.json")
+	@ResponseBody
+	public List<History> historyTable(int userNo) throws Exception{
+		return service.selectHistoryByUser(userNo);
+	}
+
 
 }
