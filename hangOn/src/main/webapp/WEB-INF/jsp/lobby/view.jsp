@@ -92,8 +92,9 @@ if ("${msg}") {
     </div>
   </nav>
 </div>
+  <div id="bodyCover">
     <div id="lobby">
-        <h1 id="userTitle">ROOMLIST</h1>
+        <h1 id="userTitle">ROOM  LIST</h1>
         <div id="roomGroup">
             <div class="room-box">
                 <div class="room">
@@ -146,24 +147,9 @@ if ("${msg}") {
             </div>
         </div>
     </div>
-    
-    <!-- 하단 -->
-   <div class="content-wrapper">
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
+ </div>   
 
   
-  </div>
 <!-- 방생성 창 불러오기 -->
 <c:import url="/WEB-INF/jsp/lobby/roomRegist.jsp">
 </c:import>

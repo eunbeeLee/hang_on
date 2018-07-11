@@ -16,17 +16,18 @@
                    <button class="room-regist regist-btn">Room 생성</button>
                </div>
                <h1 id="roomRegistTitle">ROOM FIND</h1>
-               <form method="post" action="<%=request.getContextPath()%>/lobby/roomFind.do">
+               <form id="roomFindForm" method="post" action="<%=request.getContextPath()%>/lobby/roomFind.do">
 	               <div id="roomRegNm">
 	                   <p class="room-ex">ROOM CODE</p>
-	                   <input name="roomJoinCode" type="text" class="input" placeholder=""><br>
+	                   <input maxlength="6" name="roomJoinCode" type="text" class="input" placeholder=""><br>
 	               </div>
 	               <div id="roomRePa" >
 	                   <p class="room-ex">ROOM PASSWORD</p>
-	                   <input name="roomPassword" type="password" class="input">
+	                   <input maxlength="10" name="roomPassword" type="password" class="input">
 	               </div>
+	               <div id="roomFindResult"></div>
 	               <div id="roomReBtns">
-	                   <button type="submit" id="roomFindBtn" class="room-regist-btn">ROOM 입장</button>
+	                   <button type="button" id="roomFindBtn" class="room-regist-btn">ROOM 입장</button>
 	                   <button type="button" class="back room-regist-btn">닫기</button>
 	               </div>
                </form>
@@ -37,17 +38,17 @@
                    <button class="room-regist regist-btn">Room 생성</button>
                </div>
                 <h1 id="roomRegistTitle">New ROOM</h1>
-                <form method="post" action="<%=request.getContextPath()%>/lobby/roomRegist.do">
+                <form id="roomRegistForm" method="post" action="<%=request.getContextPath()%>/lobby/roomRegist.do">
 	                <div id="roomRegNm">
 	                    <p class="room-ex">ROOM NAME</p>
-	                    <input name="roomName" type="text" class="input" placeholder=""><br>
+	                    <input maxlength="20" name="roomName" type="text" class="input" placeholder=""><br>
 	                </div>
 	                <div id="roomRePa" >
 	                    <p class="room-ex">ROOM PASSWORD</p>
-	                    <input name="roomPassword" type="password" class="input">
+	                    <input maxlength="10" name="roomPassword" type="password" class="input">
 	                </div>
 	                <div id="roomReBtns">
-	                    <button type="submit" class="room-regist-btn">ROOM 생성</button>
+	                    <button id="roomRegistBtn" type="button" class="room-regist-btn">ROOM 생성</button>
 	                    <button type="button" class="back room-regist-btn">닫기</button>
 	                </div>
                 </form>

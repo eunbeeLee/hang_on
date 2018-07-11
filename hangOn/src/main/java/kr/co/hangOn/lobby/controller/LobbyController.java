@@ -27,7 +27,7 @@ public class LobbyController {
 	@RequestMapping(value = "/roomRegist.do", method= {RequestMethod.POST})
 	public String lobbyRoomRegist(Room room, RedirectAttributes attr) {
 		service.roomRegist(room);
-		return "redirect:/room/"+ room.getRoomNo() +"/view.do";
+		return "redirect:/room/"+ room.getRoomJoinCode() +"/view.do";
 	}
 	
 	// 방 찾기
@@ -43,11 +43,11 @@ public class LobbyController {
 			return "redirect:view.do";
 		}
 		else if (!room.getRoomPassword().equals(roomResult.getRoomPassword())) {
-			attr.addFlashAttribute("msg", "room 찾기 오류: room 비밀번호를 확인해주세요.");
+			attr.addFlashAttribute("msg", "room 찾기 오류: room 비밀번호가 다릅니다.");
 			return "redirect:view.do";
 		} else {
 			// room 에 참여사람 등록
-			return "redirect:/room/"+roomResult.getRoomNo()+"/view.do";
+			return "redirect:/room/"+roomResult.getRoomJoinCode()+"/view.do";
 		}
 	}
 	
