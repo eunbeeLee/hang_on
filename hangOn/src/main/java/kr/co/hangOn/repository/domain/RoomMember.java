@@ -1,15 +1,15 @@
 package kr.co.hangOn.repository.domain;
 
 public class RoomMember {
-	private int roonNo;
+	private int roomNo;
 	private int userNo;
 	private String roomAuthCode;
 	private String roomConnectCode;
-	public int getRoonNo() {
-		return roonNo;
+	public int getRoomNo() {
+		return roomNo;
 	}
-	public void setRoonNo(int roonNo) {
-		this.roonNo = roonNo;
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
 	public int getUserNo() {
 		return userNo;
