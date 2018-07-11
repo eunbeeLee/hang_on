@@ -6,3 +6,11 @@ audio, video {
 	transition: all 1s ease;
 	vertical-align: top;
 }
+
+#videos-container{
+    bottom: -51px;
+    right: 0px;
+    position: absolute;
+    width: 99%;
+    height: 200px;
+}

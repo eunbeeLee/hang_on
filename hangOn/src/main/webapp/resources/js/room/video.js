@@ -33,7 +33,8 @@ var config = {
     },
     onRemoteStream: function(media) {
         var mediaElement = getMediaElement(media.video, {
-            width: (videosContainer.clientWidth / 5) - 50,
+//            width: (videosContainer.clientWidth / 5) - 50,
+            width: 260,
             buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
         });
         mediaElement.id = media.stream.streamid;
@@ -123,6 +124,10 @@ function captureUserMedia(callback, failure_callback) {
         video.setAttribute('playsinline', true);
         video.setAttribute('controls', true);
     }
+    // 클릭시 핀고정 전체화면
+    video.onclick = function() {
+    	this.style.color = 'red';
+    }
 
     getUserMedia({
         video: video,
@@ -130,7 +135,8 @@ function captureUserMedia(callback, failure_callback) {
             config.attachStream = stream;
 
             var mediaElement = getMediaElement(video, {
-                width: (videosContainer.clientWidth / 5) - 50,
+            	//	width: (videosContainer.clientWidth / 5) - 50,
+                width: 260,
                 buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
             });
             mediaElement.toggle('mute-audio');
