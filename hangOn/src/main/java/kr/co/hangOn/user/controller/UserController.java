@@ -1,8 +1,9 @@
 package kr.co.hangOn.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -25,7 +26,7 @@ public class UserController {
 	
 	@RequestMapping("/loginPost.json")
 	@ResponseBody
-	public String login(User user, Model model) throws Exception {
+	public String login(User user, HttpSession session) throws Exception {
 		System.out.println("들어오나요");
 		User loginUser = userService.login(user.getUserEmail());
 		
@@ -37,8 +38,7 @@ public class UserController {
 		} else if (!loginUser.getUserPw().equals(user.getUserPw())) {
 			msg = "비밀번호가 잘못됐습니다";
 		} else {
-			model.addAttribute("UserEmail", loginUser.getUserEmail());
-			model.addAttribute("UserName", loginUser.getUserName());
+			session.setAttribute("user", loginUser);
 			return "/main/main.do";
 		}
 		return msg;
