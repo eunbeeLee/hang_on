@@ -1,0 +1,113 @@
+#roomRegistBox {
+    background-color: rgba(0, 0, 0, 0.8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.room-plus-box {
+    padding: 20px 20px;
+    margin: 0 auto;
+    width: 40%;
+    height: 650px;
+    top: 9%;
+    left: 29%;
+    position: absolute;
+    border: 1px solid grey;
+	background-color: rgb(236, 236, 236);
+	border-radius: 8px;
+}
+.regist-btn{
+  width: 49.5%;
+  height: 100%;
+  cursor: pointer;  
+  background-color:transparent;
+  border: none;
+  font-size: 30px;
+  transition: all 0.2s ease 0s;
+  font-weight: bold;
+}
+.regist-btn:hover {
+    background: rgb(229, 209, 238);
+    transition-duration: 10ms;
+}
+
+.room-plus-box > div {
+	width: 100%;
+	height: 100%;
+}
+#roomRegist {
+    display: none;
+}
+
+.room-ex {
+    border-bottom: 1px solid gray;
+    font-size: 20px;
+    color: black;
+}
+
+/* 방 생성 버튼 / 취소 버튼 */
+.room-regist-btn {
+    width: 49%;
+    height: 100%;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 11px 38px;
+    border: 2px E3C8E8 solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-regist-btn:active {
+	position:relative;
+	top:1px;
+}
+.room-regist-security{
+    width: 100%;
+    display: block;
+    transition:all 0.1s linear;
+    margin: 0 auto;
+}
+
+#roomRegistTitle {
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
+#roomRegNm {
+    margin-bottom: 25px;
+}
+#roomRePa {
+    margin-bottom: 50px;
+}
+#roomReBtns {
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
+    width: 100%;
+    height: 80px;
+}
+.high-btn {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid darkslategrey;
+    margin-bottom: 10px;
+}
+
+.input {
+    margin-top: 3px;
+    width:100%;
+    height: 40px;
+    font-size: 30px;
+    border: 1px solid lightgray;
+    border-bottom: 1px solid gray;
+    padding: 10px 20px;
+    background-color:transparent;
+}

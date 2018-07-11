@@ -13,9 +13,13 @@ public class AdminController {
 	public String dashBoardView() {
 		return "admin/dashBoard";
 	}
-	@RequestMapping("/userMgm.do")
+	@RequestMapping("/roomMgm.do")
 	public String userMgmView() {
-		return "admin/userMgm";
+		return "admin/roomMgm";
+	}
+	@RequestMapping("/history.do")
+	public String historyView() {
+		return "admin/history";
 	}
 
 }

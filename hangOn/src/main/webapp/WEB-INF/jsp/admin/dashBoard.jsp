@@ -52,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="회의기록">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="history.do">
             <i class="fa fa-clipboard"></i>
             <span class="nav-link-text">회의기록</span>
           </a>

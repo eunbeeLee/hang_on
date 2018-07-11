@@ -52,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="회의기록">
-          <a class="nav-link" href="userMgm.do">
+          <a class="nav-link" href="history.do">
             <i class="fa fa-clipboard"></i>
             <span class="nav-link-text">회의기록</span>
           </a>
@@ -86,150 +86,61 @@
   </nav>
 <!-- 검색 -->
   <div class="content-wrapper">
+  <div class="container-fluid">
           <div id="searchContainer">
            <form class="navbar-form navbar-left" role="search">
              <div class="form-group">
                <input type="text" id="roomSearchInput"class="form-control col-md-4 col-lg-4" placeholder="채팅방이름">
-               <button type="submit" class="btn btn-default">검색</button>
+               <button id="roomSearchBtn" type="submit" class="btn btn-default">검색</button>
              </div>
             </form>
           </div>
+          <!-- !검색 -->
+          <h6>생성된 회의방 갯수 : 2</h6>
+          
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
          </div> 
           
           
 <!-- 아코디언 예제 시작 -->
 
-  <div class=" col-md-10 col-xs-12 panel panel-default">
+  <div class="col-md-8 col-xs-12 panel panel-default room-header">
     <div class=" card mb-3 panel-heading" role="tab" id="headingOne">
-      <h4 class="card-header">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    파이널 프로젝트
-        </a>
-      </h4>
+      <h6 class="card-header" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <strong>파이널 프로젝트</strong>
+      </h6>
     </div>
+    <div >
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
                 <div id="existRoomList" class="container col-md-11">
 				<form>
-			         <div class="form-group">
-			           <label for="inputPassword" class="col-md-2 control-label"><strong>회의방설명</strong></label>
+			         <div class="form-group row">
+			           <label for="inputPassword" class="col-md-2 control-label">회의방설명</label>
 			           <div class="col-md-10">
-			             <input type="text" class="form-control" placeholder="회의방설명">
+			             <textarea class="form-control" id="roomInfo" placeholder="회의방설명"></textarea>
 			           </div>
 			         </div>
-			         <div class="form-group">
-			           <label for="inputPassword" class="col-md-2 control-label"><strong>비밀번호</strong></label>
-			           <div class="col-md-10">
-			             <input type="password" class="form-control" id="oldInputPassword" placeholder="기존의 비밀번호를 입력하세요">
-			             <input type="password" class="form-control" id="newInputPassword" placeholder="새로운 비밀번호를 입력하세요">
-			           </div>
-			         </div>
-			       <div class="form-group">
-			           <label class="col-sm-2 control-label"><strong>생성날짜</strong></label>
-			           <div class="col-sm-10">
-			             <p class="form-control-static">2018.08.01 15:55</p>
-			           </div>
-			         </div>
-			       <div class="form-group">
-			           <label class="col-sm-2 control-label"><strong>총 회의 시간</strong></label>
-			           <div class="col-sm-10">
-			             <p class="form-control-static">01:34:23</p>
-			           </div>
-			         </div>
-				  <table class="table table-border">
-					  <thead>
-					    <tr>
-					      <th>이름</th>
-					      <th>이메일</th>
-					      <th>마지막 참여시간</th>
-					      <th>권한</th>
-					      <th>권한부여</th>
-					      <th>삭제</th>
-					    </tr>
-					  </thead> 
-					  
-					  <tbody>
-					  <tr>
-					  	<td>이은비</td>
-					  	<td>eundee1224@gmail.com</td>
-					  	<td>2018.08.01 15:55</td>
-					  	<td>참여자</td>
-					  	<td>
-						  <label class="switch">
-						  <input type="checkbox">
-						  <span class="slider round"></span>
-						</label>
-						</td>
-						<td>
-						  <button type="button" class="btn btn-sm btn-danger">삭제</button>
-						</td>
-					  </tr>
-					  <tr>
-					  	<td>이은비</td>
-					  	<td>eundee1224@gmail.com</td>
-					  	<td>2018.08.01 15:55</td>
-					  	<td>참여자</td>
-					  	<td>
-						  <label class="switch">
-						  <input type="checkbox">
-						  <span class="slider round"></span>
-						</label>
-						</td>
-						<td>
-						  <button type="button" class="btn btn-sm btn-danger">삭제</button>
-						</td>
-					  </tr>
-					  	
-					  </tbody>
-				  </table>
-				  
-				  <button type="submit" class="btn btn-default pull-right">제출</button>
-				</form>   	
-            </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <div class=" col-md-10 col-xs-12 panel panel-default">
-    <div class=" card mb-3 panel-heading" role="tab" id="headingTwo">
-      <h4 class="card-header">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    파이널 프로젝트
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-                <div id="existRoomList" class="container col-md-11">
-				<form>
-			         <div class="form-group">
-			           <label for="inputPassword" class="col-md-2 control-label"><strong>회의방설명</strong></label>
-			           <div class="col-md-10">
-			             <input type="text" class="form-control" placeholder="회의방설명">
-			           </div>
-			         </div>
-			         <div class="form-	group">
+			         <div class="form-group row">
 			           <label for="inputPassword" class="col-md-2 control-label">비밀번호</label>
 			           <div class="col-md-10">
-			             <input type="password" class="form-control" id="oldInputPassword" placeholder="기존의 비밀번호를 입력하세요">
-			             <input type="password" class="form-control" id="newInputPassword" placeholder="새로운 비밀번호를 입력하세요">
+			             <input type="password" class="form-control pass-input" id="oldInputPassword" placeholder="기존의 비밀번호를 입력하세요">
+			             <input type="password" class="form-control pass-input" id="newInputPassword" placeholder="새로운 비밀번호를 입력하세요">
 			           </div>
 			         </div>
-			       <div class="form-group">
+			       <div class="form-group row fix-content">
 			           <label class="col-sm-2 control-label">생성날짜</label>
 			           <div class="col-sm-10">
 			             <p class="form-control-static">2018.08.01 15:55</p>
 			           </div>
 			         </div>
-			       <div class="form-group">
+			       <div class="form-group row fix-content ">
 			           <label class="col-sm-2 control-label">총 회의 시간</label>
 			           <div class="col-sm-10">
 			             <p class="form-control-static">01:34:23</p>
 			           </div>
 			         </div>
-				  <table class="table table-border">
+				  <table class="table table-border" id="roomMembertTable">
 					  <thead>
 					    <tr>
 					      <th>이름</th>
@@ -254,7 +165,7 @@
 						</label>
 						</td>
 						<td>
-						  <button type="button" class="btn btn-sm btn-danger">삭제</button>
+						  <button type="button" class="btn btn-sm btn-danger mem-del-btn">내보내기</button>
 						</td>
 					  </tr>
 					  <tr>
@@ -269,25 +180,28 @@
 						</label>
 						</td>
 						<td>
-						  <button type="button" class="btn btn-sm btn-danger">삭제</button>
+						  <button type="button" class="btn btn-sm btn-danger mem-del-btn">내보내기</button>
 						</td>
 					  </tr>
 					  	
 					  </tbody>
 				  </table>
 				  
-				  <button type="submit" class="btn btn-default pull-right">제출</button>
+				  <button type="submit" class="btn btn-default pull-right room-edit-btn" id="roomDelBtn">삭제</button>
+				  <button type="submit" class="btn btn-default pull-right room-edit-btn" id="roomModBtn">수정</button>
 				</form>   	
             </div>
       </div>
     </div>
+    
+    
+    
+    </div>
   </div>
-  
-
-
+ 
 <!-- 아코디언 예제 끝 -->
+	</div>
     <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -318,6 +232,7 @@
       </div>
     </div>
   </div>
+    <!-- /.content-wrapper-->
 </body>
 <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>

@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/view.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/lobby.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/roomRegist.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.css">
@@ -23,6 +24,11 @@
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
+<script>
+if ("${msg}") {
+	alert("${msg}")
+}
+</script>
 </head>
 <body>
 
@@ -38,15 +44,6 @@
       <ul class="navbar-nav ml-auto">
         <!-- 종모양아이콘 -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-bell"></i>
-            <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
-            </span>
-            <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
-          </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">New Alerts:</h6>
             <div class="dropdown-divider"></div>
@@ -96,7 +93,7 @@
   </nav>
 </div>
     <div id="lobby">
-        <h1 id="userTitle">홍길동님 ROOM_LIST</h1>
+        <h1 id="userTitle">ROOMLIST</h1>
         <div id="roomGroup">
             <div class="room-box">
                 <div class="room">
@@ -132,7 +129,7 @@
                 </div>
             </div>
             <div class="room-box">
-                <div class="room" onclick="hover()">
+                <div class="room">
                     <span class="room-title">비트 회의방</span>
                     <span class="total-people">3 / 6</span><br>
                     <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
@@ -143,38 +140,9 @@
                 </div>
             </div>
             <div class="room-box">
-                <div class="room plus" onclick="location.href='#open'">
+                <div class="room plus" >
                     <span id="regist-room" class="fa fa-plus-circle"></span>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="room-regist-box" id="open">
-       <div>
-            <h1 id="roomRegistTitle">New ROOM</h1>
-            <div id="roomRegNm">
-                <p class="room-ex">ROOM NAME</p>
-                <input type="text" class="input" placeholder=""><br>
-            </div>
-            <div id="roomReSc">
-                <p class="room-ex">SECURITY</p>
-                <span class="room-regist-security">
-                    <label for="roomFree">
-                        <input type="radio" id="roomFree" name="regisec" value="M" onclick="offPass()" /><span class="sec">공개</span>
-                    </label>
-                    <label for="roomPass">
-                        <input type="radio" id="roomPass" name="regisec" value="F" onclick="openPass()" /><span class="sec">비공개</span>
-                    </label>
-                </span>
-            </div>
-            <!-- 비공개 버튼 누를시에만 나타나도록-->
-            <div id="roomRePa" >
-                <p class="room-ex">ROOM 비밀번호 입력</p>
-                <input type="password" class="input">
-            </div>
-            <div id="roomReBtns">
-                <button class="room-regist-btn">ROOM 생성</button>
-                <button class="back room-regist-btn" onclick="location.href='#close'">닫기</button>
             </div>
         </div>
     </div>
@@ -196,6 +164,10 @@
 
   
   </div>
+<!-- 방생성 창 불러오기 -->
+<c:import url="/WEB-INF/jsp/lobby/roomRegist.jsp">
+</c:import>
+  
 
 <%-- 개인 페이지 불러오기 (진솔) --%>
 <c:import url="/WEB-INF/jsp/mypage/view.jsp">
@@ -206,6 +178,9 @@
 </c:import>
 
 <script src="${pageContext.request.contextPath}/resources/js/lobby/lobby.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lobby/roomRegist.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mypage/view.js"></script>
+
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 #roomSearchInput{
-	width: 40%;
+	width: 20%;
+	vertical-align: middle;
 }
 
 .form-control{
@@ -15,6 +16,9 @@
   display: inline-block;
   width: 50px;
   height: 24px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 /* Hide default HTML checkbox */
@@ -67,3 +71,103 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.btn-recent{
+	background-color:#dbd0ef;
+/* 	width: 80%; */
+	font-size: 13px;
+	padding: 3px;
+}
+/* .btn-recent:hover{ */
+/* 	background-color:#dbd0ef; */
+/* 	color: black; */
+	
+/* } */
+.btn-recent:hover { 
+	background: #b39bdd; 
+
+	border: 1px solid rgba(0, 0, 0, 0.05); 
+	box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2); 
+	color: #ffffff; 
+}
+
+#searchPeriod,#searchContainer{
+	margin: 18px;
+}
+#recentSearchBtn{
+	margin-left:25px;
+}
+#tableContainer{
+	margin-top : 40px;
+	height:480px;
+}
+#historyTable td{
+	padding: 7px;
+	font-size: 15px;
+}
+#periodSearchBtn{
+	margin-left: 5px;
+}
+.page-link{
+	color: #8d68cc; 
+}
+.page-link:hover {
+	color: #8d68cc; 
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #b39bdd;
+    border-color: #8d68cc;
+}
+.room-header{
+	font-size: 15px;
+}
+.card-header:hover{
+	background-color: #dbd0ef;
+	color : #636363;
+}
+.card-header a{
+	color : #000000;
+}
+.fix-content{
+	margin-bottom: 0px;
+}
+.pass-input{
+	margin-bottom: 5px;
+	font-size: 13px;
+}
+#roomInfo{
+	font-size: 13px;
+}
+#roomMembertTable td{
+	vertical-align: middle;
+	padding: 5px;
+	font-size: 15px;
+}
+.mem-del-btn{
+	font-size: 13px;
+	
+}
+  .buttonHolder{
+  margin:80px auto;
+  width:400px;
+}
+.room-edit-btn{
+	background-color: white;
+	border: 1px solid #c0c0c0;
+/* 	color : #c0c0c0; */
+/* 	font-weight: bold; */
+	margin: 0px 5px 5px 0px;
+}
+.room-edit-btn:hover{
+	background-color: #c0c0c0;
+	color: white;
+	
+}
+
+
+
+
+
+		
