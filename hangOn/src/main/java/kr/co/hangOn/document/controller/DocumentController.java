@@ -1,17 +1,26 @@
 package kr.co.hangOn.document.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.hangOn.document.service.DocumentService;
+import kr.co.hangOn.repository.domain.DocumentGroup;
 
 @Controller
 @RequestMapping("/document")
 public class DocumentController {
-	@RequestMapping("/{documentNo}/view.do")
-	public String documentView(@PathVariable int documentNo, Model model) {
-		System.out.println(documentNo+"문서 입장");
-		return "document/view";
+	@Autowired
+	private DocumentService documentService;
+	
+	@RequestMapping(value="/parser.json", method=RequestMethod.POST)  
+	@ResponseBody
+	public DocumentGroup parser(DocumentGroup documentGroup,HttpServletRequest request) throws Exception{
+		System.out.println("pdf 변환 시작");
+		return documentService.pdfParser(documentService.saveOriFile(documentGroup,request),request);
 	}
-
 }

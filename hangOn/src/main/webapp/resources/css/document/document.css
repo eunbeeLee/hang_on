@@ -9,7 +9,6 @@
 #documentArea .row{
 	height: 100%;
 }
-
 #documentList,#documentShare,#documentView{
 	height: 100%;
 	display: inline-block;
@@ -32,12 +31,27 @@
 	position: relative;
 }
 #documentReadyScreen{
-	color:white;
-	background-color: rgba(52,58,64);
+	display:none;
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	z-index: 900;	
+	z-index: 900;
+	background-color: white;
+}
+#documentReadyScreen>div{
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	top: 0%;
+	right: 30%;
+	z-index: 950;
+}
+#documentReadyScreen>div>img{
+	width: 100%;
+	height: 100%;
+} 
+#documentReadyScreen form{
+	display: none;
 }
 #documentFileUpload{
 	display: none;
@@ -80,7 +94,29 @@
 	color: white;
 	padding-right: 5%;
 }
-
+#documentChange{
+	margin-top:15px;
+	height: 40px;
+	width: 5%;
+	top:0%;
+	left: 1.5%;
+	position: absolute;
+	padding-top: 5px;
+	text-align: center;
+	background-color: rgba(52,58,64,.8);
+	opacity: .3;
+	transition: .5s;
+	border-radius: 10px;
+}
+#documentChange:hover{
+	opacity: 1;
+	transition: .5s;
+}
+#documentChange i{
+	font-size: 21px;
+	right: 3px !important;
+	bottom: 3px !important;
+}
 #documentUtilBtns{
 	margin-top:15px;
 	height: 80px;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hangOn.repository.mapper.DocumentMapper">
+	<resultMap type="documentGroup" id="documentGroupMap">
+		<result column="doc_group_no" property="docGroupNo" />
+		<result column="doc_ori_path" property="docOriPath" />
+		<result column="doc_ori_name" property="docOriName" />
+		<result column="doc_pdf_path" property="docPdfPath" />
+		<result column="doc_img_path" property="docImgPath" />
+		<result column="room_no" property="roomNo" />
+	</resultMap>
+	<resultMap type="document" id="documentMap">
+		<result column="doc_page_no" property="docPageNo" />
+		<result column="doc_path" property="docPath" />
+		<result column="doc_group_no" property="docGroupNo" />
+	</resultMap>
+	
+	
+	<insert id="insertDocumentGroup" parameterType="documentGroup" useGeneratedKeys="true" keyProperty="docGroupNo">
+		insert into tb_document_group (
+			doc_ori_path,
+			doc_ori_name,
+			doc_img_path,
+			<if test="docPdfPath != null">
+				doc_pdf_path,
+		 	</if>
+			room_no
+		) values (
+			#{docOriPath},
+			#{docOriName},
+			#{docImgPath},
+			<if test="docPdfPath != null">
+				#{docPdfPath},
+		 	</if>
+			#{roomNo}
+		)
+	</insert>
+	
+	<insert id="insertDocument" parameterType="document">
+		insert into tb_document (
+			doc_page_no,
+			doc_path,
+			doc_group_no
+		) values (
+			#{docPageNo},
+			#{docPath},
+			#{docGroupNo}
+		)
+	</insert>
+
+	
+	
+</mapper>
