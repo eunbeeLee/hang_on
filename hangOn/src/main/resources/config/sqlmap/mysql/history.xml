@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hangOn.repository.mapper.HistoryMapper">
+	<resultMap id="historyMap" type="history">
+		<result column="act_name" property="actName"></result>
+		<result column="connect_time" property="connectTime"></result>
+		<result column="ip_addr" property="ipAddr"></result>
+		<result column="room_name" property="roomName"></result>
+		<result column="user_name" property="userName"></result>
+		<result column="user_email" property="userEmail"></result>
+	</resultMap>
+	
+	<select id="selectHistoryByUser" parameterType="int" resultMap="historyMap">
+		 select (select code_info
+				   from tb_code
+		          where h.act_code = code_no) as act_name, 
+		          connect_time, 
+		          ip_addr, 
+		          (select room_name
+		             from tb_room
+					where h.room_no = room_no) as room_name,
+		           (select u.user_name
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_name,
+		          (select u.user_email
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_email
+		  from tb_history as h
+		 where room_no in (select room_no
+				 		     from tb_room
+				 		    where user_no = #{userNo})
+	</select>
+</mapper>

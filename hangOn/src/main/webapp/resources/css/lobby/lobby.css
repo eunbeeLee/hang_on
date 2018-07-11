@@ -1,10 +1,16 @@
 body {
-	background-color: #c6c6c6;
+	background-image: url(lobbyback.jpg);
+	background-size: cover;
 }
   
-p, span, input, button{
-	font-family: sans-serif;
+.room > .room-title, .total-people, .room-people{
+	font-family: 'Nanum Myeongjo', serif;
+	color: white;
 }
+#regist-room {
+	color: white;
+}
+
 button {
 	cursor: pointer;
 }
@@ -12,20 +18,32 @@ button {
 #nav {
 	height: 65px;
 }
+#bodyCover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(140, 140, 140, 0.5);	
+	overflow: auto;
+}
 
 #lobby {
-    height: 1000px;
-    position: relative;
+	margin-top: 6%;
+	width: 100%;
+	position: relative;
 }
 
 #userTitle {
-    margin-left: 10%;
-    color: black;
+	font-variant:small-caps;
+	font-weight: bold;
+	letter-spacing: 10px;
+    margin-left: 7%;
+    color: white;
     font-size: 50px;
-    font-family: sans-serif;
     margin-top: 30px;
-    margin-bottom:30px;
-    font-weight: bold;
+    margin-bottom:10px;
 }
 
 #roomGroup {
@@ -62,13 +80,13 @@ button {
     height:170px;  
     text-align:center; transition:all 0.8s, color 0.2s 0.2s;  
     float: left;
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 30px 30px;
     cursor: pointer;  
-    box-shadow:12px 12px 12px rgba(95, 95, 97, 0.76); 
-    border-top: 5px solid #9797e8;
-    border-bottom: 5px solid #9797e8;
-    background-color: rgba(237, 231, 246, 0.555);
+    box-shadow:8px 8px 8px rgba(140, 140, 140, 0.1); 
+	background-image: url(po.jpg);
+	background-size: cover;
+/* 	opacity: 0.7; */
 }
 
 
@@ -102,7 +120,6 @@ button {
     font-size: 20px;
     float: right;
     font-weight: bold;
-    color: dimgray;
 }
 
 /* 블럭안의 화상채팅방에 현재 들어와있는 사람이름 */
@@ -117,7 +134,7 @@ button {
 }
 
 .room:hover{
-    opacity: 0.5;
+    opacity: 1;
 }
 
 
