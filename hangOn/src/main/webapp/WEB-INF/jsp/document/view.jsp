@@ -9,60 +9,31 @@
 <body>
 	<div id="documentArea">
 	<div id="documentReadyScreen">
-		<h1>파일을 올려주세요</h1>
-		<h1>지금은 pdf 파일만 가능합니다</h1>
-		<h1>이 화면은 테스트용 화면입니다</h1>
-		<h1>기능 개발시 사라지고 바로 파일 업로드 화면이 나옵니다</h1>
-		<button class="document-attach">파일 올리기</button>
-		<input type="file" id="documentFileUpload">
+		<div>
+			<img src="${pageContext.request.contextPath}/resources/image/loading.gif">
+		</div>
+		<form id="uploadFileForm" action="/hangOn/document/parser.json" enctype="multipart/form-data">
+			<input type="file" name="file" id="documentFileUpload" accept=".pdf">
+			<input type="hidden" name="roomNo" value="2">
+		</form>
 	</div>
 
     <div class="row">
     
     
         <div id="documentList" class="col-sm-2">
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>1</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>2</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>3</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>4</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>5</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>6</span>
-        	</div>
-        	
-        	<div class="document-list-prev">
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample.png">
-        		<span>7</span>
-        	</div>
-        	
         </div>
         
-        
+     
         
         
         <div id="documentShare" class="col-sm-6">
+        	
+        	<div id="documentChange">
+	        	<button class="document-util-btn btn btn-default" title="문서변경">
+		        		<i class="material-icons">file_copy</i>
+	        	</button>
+        	</div>
         	
         	<div id="documentUtilBtns">
         	
@@ -123,10 +94,7 @@
         	
         	
         	<div id="documentShareView">
-        		
-        		<%-- 샘플테스트 --%>
-        		<img src="${pageContext.request.contextPath}/resources/image/documentSample2.png">
-        		
+        		<img src="">	
         	</div>
         	
         </div>

@@ -41,11 +41,11 @@
                 <form id="roomRegistForm" method="post" action="<%=request.getContextPath()%>/lobby/roomRegist.do">
 	                <div id="roomRegNm">
 	                    <p class="room-ex">ROOM NAME</p>
-	                    <input maxlength="20" name="roomName" type="text" class="input" placeholder=""><br>
+	                    <input maxlength="10" name="roomName" type="text" class="input" placeholder=""><br>
 	                </div>
 	                <div id="roomRePa" >
 	                    <p class="room-ex">ROOM PASSWORD</p>
-	                    <input maxlength="10" name="roomPassword" type="password" class="input">
+	                    <input id="roomPassword" maxlength="10" name="roomPassword" type="password" class="input">
 	                </div>
 	                <div id="roomReBtns">
 	                    <button id="roomRegistBtn" type="button" class="room-regist-btn">ROOM 생성</button>

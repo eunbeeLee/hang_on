@@ -11,8 +11,24 @@ public class Room {
 	private String roomJoinCode;
 	private String roomDelState;
 	private int userNo;
+	// 현재 접속중인 유저 수
+	private int roomConnectUserCount;
+	// 방에 등록되어 있지만 접속중이 아닌 유저 수
+	private int roomNoConnectUserCount;
 	
 	
+	public int getRoomConnectUserCount() {
+		return roomConnectUserCount;
+	}
+	public void setRoomConnectUserCount(int roomConnectUserCount) {
+		this.roomConnectUserCount = roomConnectUserCount;
+	}
+	public int getRoomNoConnectUserCount() {
+		return roomNoConnectUserCount;
+	}
+	public void setRoomNoConnectUserCount(int roomNoConnectUserCount) {
+		this.roomNoConnectUserCount = roomNoConnectUserCount;
+	}
 	public int getUserNo() {
 		return userNo;
 	}

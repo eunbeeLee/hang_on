@@ -35,7 +35,7 @@ if ("${msg}") {
 <!-- Navigation-->
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img id="hangOnLogo"src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
+    <a class="navbar-brand" href="view.do"><img id="hangOnLogo"src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -84,10 +84,20 @@ if ("${msg}") {
             <i class="fa fa-info-circle"></i>고객센터</a>
         </li>
         <!-- 사용자 아이콘 -->
-        <li id="openMyPageBtn" class="nav-item">
-          <a class="nav-link" >
-            <i class="fa fa-user-circle-o"></i>홍길동님</a>
-        </li>
+        <c:choose>
+        	<c:when test="${empty user}">
+		        <li id="openMyPageBtn" class="nav-item">
+		          <a class="nav-link" >
+		            <i class="fa fa-user-circle-o"></i>로그인 하세요</a>
+		        </li>
+        	</c:when>
+        	<c:otherwise>
+		        <li id="openMyPageBtn" class="nav-item">
+		          <a class="nav-link" >
+		            <i class="fa fa-user-circle-o"></i>${user.userName}님</a>
+		        </li>
+        	</c:otherwise>
+        </c:choose>
       </ul>
     </div>
   </nav>
@@ -96,50 +106,36 @@ if ("${msg}") {
     <div id="lobby">
         <h1 id="userTitle">ROOM  LIST</h1>
         <div id="roomGroup">
-            <div class="room-box">
-                <div class="room">
-                    <span class="room-title">비트 회의방</span>
-                    <span class="total-people">3 / 6</span><br>
-                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
-                </div>
-                <div class="room-over">
-                    <button class="room-btn">참여</button>
-                    <button class="room-btn">탈퇴</button>
-                </div>
-            </div>
-            <div class="room-box">
-                <div class="room">
-                    <span class="room-title">비트 회의방</span>
-                    <span class="total-people">3 / 6</span><br>
-                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
-                </div>
-                <div class="room-over">
-                    <button class="room-btn">참여</button>
-                    <button class="room-btn">탈퇴</button>
-                </div>
-            </div>
-            <div class="room-box">
-                <div class="room">
-                    <span class="room-title">비트 회의방</span>
-                    <span class="total-people">3 / 6</span><br>
-                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
-                </div>
-                <div class="room-over">
-                    <button class="room-btn">참여</button>
-                    <button class="room-btn">탈퇴</button>
-                </div>
-            </div>
-            <div class="room-box">
-                <div class="room">
-                    <span class="room-title">비트 회의방</span>
-                    <span class="total-people">3 / 6</span><br>
-                    <p class="room-people">현재 참여중인 사람 1, 사람2, 사람3, 사람4</p>
-                </div>
-                <div class="room-over">
-                    <button class="room-btn">참여</button>
-                    <button class="room-btn">탈퇴</button>
-                </div>
-            </div>
+           	<c:choose>
+		    	<c:when test="${empty room}">
+		            <div class="room-box">
+		                <div class="room">
+		                    <span class="room-title">비트 회의방</span>
+		                    <span class="total-people">3 / 6</span><br>
+		                    <p class="room-people">방에대한 설명입니다.</p>
+		                </div>
+		                <div class="room-over">
+		                    <button class="room-btn">참여</button>
+		                    <button class="room-btn">탈퇴</button>
+		                </div>
+		            </div>
+		    	</c:when>    
+		    	<c:otherwise>
+		            <c:forEach var="room" items="${room}">
+			            <div class="room-box">
+			                <div class="room">
+			                    <span class="room-title">${room.roomName }</span>
+			                    <span class="total-people">${room.roomConnectUserCount} / ${room.roomNoConnectUserCount}</span><br>
+			                    <p class="room-people">${room.roomInfo}방설명자리</p>
+			                </div>
+			                <div class="room-over">
+			                    <button class="room-btn" onclick = "location.href = '${pageContext.request.contextPath}/room/${room.roomJoinCode}/view.do'">참여</button>
+			                    <button class="room-btn">탈퇴</button>
+			                </div>
+			            </div>
+		            </c:forEach>
+		    	</c:otherwise>
+           </c:choose> 
             <div class="room-box">
                 <div class="room plus" >
                     <span id="regist-room" class="fa fa-plus-circle"></span>

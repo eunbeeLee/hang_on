@@ -12,13 +12,19 @@
 		<result column="room_del_state" property="roomDelState" />
 		<result column="user_no" property="userNo" />
 	</resultMap>
+	<resultMap type="roomMember" id="roomMemberMap">
+		<result column="room_no" property="roomNo" />
+		<result column="user_no" property="userNo" />
+		<result column="room_auth_code" property="roomAuthCode" />
+		<result column="room_connect_code" property="roomConnectCode" />
+	</resultMap>
 	
 	<!-- 방 생성 -->
-	<insert id="insertRoom" parameterType="room" useGeneratedKeys="true" keyProperty="roomNo">
+	<insert id="insertRoom" parameterType="room" useGeneratedKeys="true" keyProperty="roomNo" >
 		insert into tb_room (
 			room_name, room_password, room_join_code, user_no
 		) values (
-			#{roomName}, #{roomPassword}, #{roomJoinCode}, 7
+			#{roomName}, #{roomPassword}, #{roomJoinCode}, #{userNo}
 		)
 	</insert>
 	
@@ -36,6 +42,65 @@
 		  from tb_room
 		 where room_join_code = #{roomJoinCode}
 	</select>
+	
+	<!-- 방생성 동시에 멤버추가 -->
+	<insert id="insertNewRoomMember" parameterType="roomMember">
+		insert into tb_room_member(
+			room_no, user_no, room_auth_code
+		) values (
+			#{roomNo}, #{userNo}, #{roomAuthCode}
+		)
+	</insert>
+
+	<!-- 방찾기 중복확인 후 멤버추가 -->
+	<insert id="insertFindRoomMember" parameterType="roomMember">
+		insert into tb_room_member(
+			room_no, user_no
+		) values (
+			#{roomNo}, #{userNo}
+		)
+	</insert>
+	
+	<!-- 방찾기 유저 중복확인 -->
+	<select id="selectFindUserCount" parameterType="roomMember" resultType="int">
+		select count(*)
+		  from tb_room_member
+		 where room_no = #{roomNo} AND user_no = #{userNo}
+	</select>
+	
+	<!-- 로비 리스트 불러오기 -->
+	<select id="selectLobbyList" parameterType="int" resultMap="roomMap">
+		select *
+		  from tb_room
+		 where room_no IN (
+		 	select room_no
+		 	  from tb_room_member
+		 	 where user_no = #{userNo}
+		 )
+	</select>
+	
+	<!-- 방 참여인수가 6명이하 인지 확인 (탈퇴한 회원을 제외)-->
+	<select id="selectRoomCount" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_room_member
+		 where room_no = #{roomNo} AND room_connect_code NOT IN('bb13');
+	</select>
+
+	<!-- 접속중인 유저 -->	
+	<select id="selectRoomConnectCnt" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_room_member
+		 where room_no = #{roomNo} AND room_connect_code = 'bb11'
+	</select>
+
+	<!-- 접속 안한 유저 -->
+	<select id="selectRoomNoConnectCnt" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_room_member
+		 where room_no = #{roomNo} AND room_connect_code = 'bb12'
+	</select>
+	
+	
 	
 	
 </mapper>

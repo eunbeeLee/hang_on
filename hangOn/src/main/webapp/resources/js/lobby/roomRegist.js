@@ -53,15 +53,15 @@ $("#roomFindBtn").click(function (e) {
 
 $("#roomRegistBtn").click(function () {
 	var $name = $("input[name=roomName]");
-	var $pass = $("input[name=roomPassword]");
+	var $pass = $("#roomPassword");
 	if($name.val().length == 0) {
 		alert("방 이름을 설정해주세요");
 		$name.select();
-	}else if($pass.val().length == 0) {
-		alert("방 비밀번호를 설정해주세요");
+	} else if($pass.val().length == 0) {
+		alert("방 비밀번호를 입력해주세요");
 		$pass.select();
 	} else if($pass.val().length < 8 || $pass.val().length > 10) {
-		alert("방 비밀번호를 8자 이상 10자이하로 설정해주세요");
+		alert("방 비밀번호를 확인해주세요");
 		$pass.select();
 	} else {
 		$("#roomRegistForm").submit();
