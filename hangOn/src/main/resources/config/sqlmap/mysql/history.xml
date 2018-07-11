@@ -31,4 +31,40 @@
 				 		     from tb_room
 				 		    where user_no = #{userNo})
 	</select>
+	
+	<select id="selectHistoryCountByUser" parameterType="history" resultType="int">
+		select count(*)
+		  from tb_history
+		 where user_no = #{userNo}
+	</select>
+	<select id="selectHistoryByPeriod" parameterType="history" resultMap="historyMap">
+		SELECT
+		    A.*
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        tb_history.* 
+		    FROM
+		        (select (select code_info
+				  from tb_code
+		          where h.act_code = code_no) as act_name, 
+		          connect_time,
+		          ip_addr, 
+		          (select room_name
+		             from tb_room
+					where h.room_no = room_no) as room_name,
+		           (select u.user_name
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_name,
+		          (select u.user_email
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_email
+		           from tb_history h
+		           where user_no=#{userNo}) tb_history,
+		       (SELECT @ROWNUM := 0) R
+		) A
+		WHERE
+		    A.ROWNUM between #{begin} and #{end};
+	</select>
 </mapper>

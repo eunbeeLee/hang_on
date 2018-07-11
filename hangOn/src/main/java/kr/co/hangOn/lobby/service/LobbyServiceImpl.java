@@ -41,7 +41,7 @@ public class LobbyServiceImpl implements LobbyService {
     	// db에 새로운 room 저장
     	mapper.insertRoom(room);
     	
-    	// 방 멤버 생성
+//    	 방 멤버 생성
     	RoomMember member = new RoomMember();
     	member.setRoomNo(room.getRoomNo());
     	member.setUserNo(room.getUserNo());

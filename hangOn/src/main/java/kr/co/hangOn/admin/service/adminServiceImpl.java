@@ -17,6 +17,16 @@ public class adminServiceImpl implements adminService {
 	public List<History> selectHistoryByUser(int userNo) {
 		return mapper.selectHistoryByUser(userNo);
 	}
+
+	@Override
+	public int selectHistoryCountByUser(History history) {
+		return mapper.selectHistoryCountByUser(history);
+	}
+
+	@Override
+	public List<History> selectHistoryByPeriod(History history) {
+		return mapper.selectHistoryByPeriod(history);
+	}
 	
 	
 }

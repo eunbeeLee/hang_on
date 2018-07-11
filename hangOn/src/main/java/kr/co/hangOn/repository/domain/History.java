@@ -1,15 +1,46 @@
 package kr.co.hangOn.repository.domain;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class History {
-	 private String actName;
+	 private int userNo;
+	 public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+	private String actName;
 	 private Date connectTime;
 	 private String ipAddr;
 	 private String roomName;
 	 private String userName;
 	 private String userEmail;
+	 
+	private int pageNo =1;
+	private int begin;
+	private int end;
+	
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getBegin() {
+		return (pageNo -1) * 11 + 1;
+	}
+	public int getEnd() {
+		return pageNo * 11;
+	}
+	
+	
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -46,4 +77,7 @@ public class History {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	
+
 }
