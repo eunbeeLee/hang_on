@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>kr.co.hangOn</groupId>
-  <artifactId>hangOn</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>hangOn</name>
-  <description>hangOn</description>
-   <dependencies>
+<modelVersion>4.0.0</modelVersion>
+<groupId>kr.co.hangOn</groupId>
+<artifactId>hangOn</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<packaging>war</packaging>
+<name>hangOn</name>
+<description>hangOn</description>
+	
+	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -126,14 +127,15 @@
 		    <artifactId>spring-websocket</artifactId>
 		    <version>5.0.6.RELEASE</version>
 		</dependency>	
-		<!-- DB 연결 -->		
-		  <!-- MySQL -->
+		
+		<!-- DB 연결, MySQL -->		
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.5</version>
         </dependency>
-		  <dependency>
+        
+		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>5.0.6.RELEASE</version>
@@ -153,32 +155,58 @@
 		    <version>1</version>
 		</dependency>
 			
-			<!-- https://mvnrepository.com/artifact/org.sitemesh/sitemesh -->
-	<dependency>
-	    <groupId>org.sitemesh</groupId>
-	    <artifactId>sitemesh</artifactId>
-	    <version>3.0.1</version>
-	</dependency>	
+		<!-- https://mvnrepository.com/artifact/org.sitemesh/sitemesh -->
+		<dependency>
+		    <groupId>org.sitemesh</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>3.0.1</version>
+		</dependency>	
 	
-	<!-- 구글에서 지원해주는 라이브러리입니다 진솔 -->
-	<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-	<dependency>
-	    <groupId>com.google.guava</groupId>
-	    <artifactId>guava</artifactId>
-	    <version>25.1-jre</version>
-	</dependency>
+		<!-- 구글에서 지원해주는 라이브러리입니다 진솔 -->
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>25.1-jre</version>
+		</dependency>
 
-	<!-- 진솔 pdf 관련 -->
-	<!-- pdfBox -->
-	<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
-	<dependency>
-	    <groupId>org.apache.pdfbox</groupId>
-	    <artifactId>pdfbox</artifactId>
-	    <version>1.8.4</version>
-	</dependency>
-
-	
-			
+		<!-- PDFBox, 진솔 pdf 관련 -->
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>1.8.4</version>
+		</dependency>
+		
+		<!-- Tiles Core -->
+		<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+		    <version>3.0.5</version>
+		</dependency>
+		 
+		<!-- Tiles Servlet -->
+		<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-servlet -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-servlet</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		 
+		<!-- Tiles JSP -->
+		<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+				
+		<!-- Tiles extras -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-extras</artifactId>
+		    <version>3.0.8</version>
+		</dependency>		
 	</dependencies>
   
   	<build>

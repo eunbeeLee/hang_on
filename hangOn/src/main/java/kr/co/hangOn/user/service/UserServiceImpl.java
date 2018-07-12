@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService{
 		return mapper.login(userEmail);
 	}
 
+	@Override
+	public void stateCodeChanger(String userEmail) throws Exception {
+		mapper.stateCodeChanger(userEmail);
+	}
+
 }

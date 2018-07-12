@@ -21,7 +21,7 @@
 		admin-dashBoard 바로가기
 	</a>
 	<hr>
-	<a href='<c:url value="/main/main.do"/>'>
+	<a href='<c:url value="/main/login.do"/>'>
 		메인 바로가기
 	</a>
 	<hr>
