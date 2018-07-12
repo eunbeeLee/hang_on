@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.hangOn.lobby.service.LobbyService;
@@ -74,7 +75,18 @@ public class LobbyController {
 			// room 에 참여사람 등록
 			return "redirect:/room/"+roomResult.getRoomJoinCode()+"/view.do";
 		}
+	}
+	
+	@RequestMapping(value = "/leave.do", method= {RequestMethod.GET})
+	public String roomLeave(int roomNo, HttpSession session) {
+		User user = (User)session.getAttribute("user");
 		
+		RoomMember roomMember = new RoomMember();
+		roomMember.setUserNo(user.getUserNo());
+		roomMember.setRoomNo(roomNo);
+		
+		service.roomUserLeave(roomMember);
+		return "redirect:view.do";
 	}
 	
 	

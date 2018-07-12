@@ -60,6 +60,7 @@ public class LobbyServiceImpl implements LobbyService {
 	public int roomFindUser(RoomMember member) {
 		// 사용자가 등록한 방인지 확인
 		int userCount = mapper.selectFindUserCount(member);
+		System.out.println(userCount);
 		// 방 참여인수가 6명인지 확인
 		int roomCount = mapper.selectRoomCount(member.getRoomNo());
 		if(userCount == 1) {
@@ -68,8 +69,15 @@ public class LobbyServiceImpl implements LobbyService {
 			return 2;
 		}
 		else {
-			mapper.insertFindRoomMember(member);
-			return 0;
+			// 탈퇴한 회원인지 아닌지 확인
+			int leaveCnt = mapper.selectUserLeaveCount(member);
+			if(leaveCnt == 1) {
+				mapper.updateUserRoomRegist(member);
+				return 0;
+			} else {
+				mapper.insertFindRoomMember(member);
+				return 0;
+			}
 		}
 	}
 
@@ -83,6 +91,11 @@ public class LobbyServiceImpl implements LobbyService {
 			r.setRoomNoConnectUserCount(mapper.selectRoomNoConnectCnt(r.getRoomNo()));
 		}
 		return resultRoom;
+	}
+
+	@Override
+	public void roomUserLeave(RoomMember roomMember) {
+		mapper.updateUserRoomLeave(roomMember);
 	}
 
 	

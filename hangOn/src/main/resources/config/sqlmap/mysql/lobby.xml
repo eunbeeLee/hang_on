@@ -65,7 +65,7 @@
 	<select id="selectFindUserCount" parameterType="roomMember" resultType="int">
 		select count(*)
 		  from tb_room_member
-		 where room_no = #{roomNo} AND user_no = #{userNo}
+		 where room_no = #{roomNo} AND user_no = #{userNo} AND room_connect_code NOT IN('bb13')
 	</select>
 	
 	<!-- 로비 리스트 불러오기 -->
@@ -75,7 +75,7 @@
 		 where room_no IN (
 		 	select room_no
 		 	  from tb_room_member
-		 	 where user_no = #{userNo}
+		 	 where user_no = #{userNo} AND room_connect_code NOT IN('bb13')
 		 )
 	</select>
 	
@@ -83,7 +83,7 @@
 	<select id="selectRoomCount" parameterType="int" resultType="int">
 		select count(*)
 		  from tb_room_member
-		 where room_no = #{roomNo} AND room_connect_code NOT IN('bb13');
+		 where room_no = #{roomNo} AND room_connect_code NOT IN('bb13')
 	</select>
 
 	<!-- 접속중인 유저 -->	
@@ -98,6 +98,27 @@
 		select count(*)
 		  from tb_room_member
 		 where room_no = #{roomNo} AND room_connect_code = 'bb12'
+	</select>
+	
+	<!-- 탈퇴하는 회원 -->
+	<update id="updateUserRoomLeave" parameterType="roomMember">
+		update tb_room_member
+		   set room_connect_code = 'bb13'
+		 where room_no = #{roomNo} AND user_no = #{userNo}
+	</update>
+	
+	<!-- 탈퇴한 회원이 재가입시 -->
+	<update id="updateUserRoomRegist" parameterType="roomMember">
+		update tb_room_member
+		   set room_connect_code = 'bb12'
+		 where room_no = #{roomNo} AND user_no = #{userNo}
+	</update>
+	
+	<!-- 탈퇴한 회원인지 확인 -->
+	<select id="selectUserLeaveCount" parameterType="roomMember" resultType="int">
+		select count(*)
+		  from tb_room_member
+		 where room_no = #{roomNo} AND user_no = #{userNo} AND room_connect_code = 'bb13'
 	</select>
 	
 	

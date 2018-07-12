@@ -26,4 +26,10 @@ public interface LobbyMapper {
 	int selectRoomConnectCnt(int roomNo);
 	// 방에 접속 안한 유저 수
 	int selectRoomNoConnectCnt(int roomNo);
+	// 방 탈퇴
+	void updateUserRoomLeave(RoomMember member);
+	// 탈퇴한 회원이 방에 재가입
+	void updateUserRoomRegist(RoomMember member);
+	// 그방에 탈퇴한 회원인지 아닌지 확인
+	int selectUserLeaveCount(RoomMember member);
 }

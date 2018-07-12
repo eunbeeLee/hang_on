@@ -15,5 +15,7 @@ public interface LobbyService {
 
 	List<Room> roomList(int userNo);
 
+	void roomUserLeave(RoomMember roomMember);
+
 }
  
