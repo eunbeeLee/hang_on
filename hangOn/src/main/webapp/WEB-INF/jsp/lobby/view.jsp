@@ -21,6 +21,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/lobby.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/roomRegist.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/mainNav.css">
+	<!-- Bootstrap core JavaScript-->
+<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Page level plugin JavaScript-->
+<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+<!-- Custom scripts for this page-->
+
 <script>
 if ("${msg}") {
 	alert("${msg}")
@@ -127,7 +138,7 @@ if ("${msg}") {
 			                </div>
 			                <div class="room-over">
 			                    <button class="room-btn" onclick = "location.href = '${pageContext.request.contextPath}/room/${room.roomJoinCode}/view.do'">참여</button>
-			                    <button class="room-btn">탈퇴</button>
+			                    <button class="room-btn" onclick = "location.href = '${pageContext.request.contextPath}/lobby/leave.do?roomNo=${room.roomNo}'">탈퇴</button>
 			                </div>
 			            </div>
 		            </c:forEach>
@@ -141,6 +152,7 @@ if ("${msg}") {
         </div>
     </div>
  </div>   
+   
 
   
 <!-- 방생성 창 불러오기 -->
@@ -156,16 +168,6 @@ if ("${msg}") {
 	<c:param name="no" value="1"/>
 </c:import>
 
-	<!-- Bootstrap core JavaScript-->
-<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
-<!-- Page level plugin JavaScript-->
-<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
-<!-- Custom scripts for this page-->
 <script src="${pageContext.request.contextPath}/resources/js/lobby/lobby.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/lobby/roomRegist.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mypage/view.js"></script>
