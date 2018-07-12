@@ -97,7 +97,7 @@
 	<select id="selectRoomNoConnectCnt" parameterType="int" resultType="int">
 		select count(*)
 		  from tb_room_member
-		 where room_no = #{roomNo} AND room_connect_code = 'bb12'
+		 where room_no = #{roomNo} 
 	</select>
 	
 	<!-- 탈퇴하는 회원 -->
