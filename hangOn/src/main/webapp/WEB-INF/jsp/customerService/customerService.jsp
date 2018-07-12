@@ -5,13 +5,31 @@
     <title>고객센터</title>
     <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/resources/css/main/customerService.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/customerService/customerService.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
-<body>
+<body class="fixed-nav sticky-footer" id="page-top">
+
+<!-- 네비게이션 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#"><img id="hangOnLogo" src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+	        <li class="nav-item">
+	        	<a class="nav-link" >로그인</a>
+	        </li>
+	        <li class="nav-item">
+	        	<a class="nav-link" >회원가입</a>
+	        </li>
+	        <li class="nav-item">
+	        	<a class="nav-link" ><i class="fa fa-info-circle"></i>고객센터</a>
+	        </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- 왼쪽 창 -->
 	<div id="table-on-the-left">
@@ -111,6 +129,15 @@
 		</div>
 	</div>
 </div>
+
+<!-- footer -->
+<footer class="sticky-footer">
+	<div class="container">
+		<div class="text-center">
+			<small>Copyright © Your Website 2018</small>
+		</div>
+	</div>
+</footer>
 
 </body>
 </html>

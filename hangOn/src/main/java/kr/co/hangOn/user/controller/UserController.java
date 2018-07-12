@@ -13,20 +13,24 @@ import kr.co.hangOn.user.service.UserService;
 
 @Controller
 @RequestMapping("/main")
+@SessionAttributes({"UserName", "UserEmail"})
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/main.do")
 	public String main() {
-		return "main/login";
+		return "main/main";
 	}
 	
 	@RequestMapping("/loginPost.json")
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
+		System.out.println("들어오나요");
 		User loginUser = userService.login(user.getUserEmail());
+		
+		System.out.println(user.getUserEmail());
 		String msg = "";
 		
 		if (loginUser == null) {
@@ -35,25 +39,19 @@ public class UserController {
 			msg = "비밀번호가 잘못됐습니다";
 		} else {
 			session.setAttribute("user", loginUser);
-			userService.stateCodeChanger(loginUser.getUserEmail());
-			return "/main/login.do";
+			return "/main/main.do";
 		}
 		return msg;
 	}
 	
 	@RequestMapping("/register.do")
 	public String register() {
-		return "main/register";
+		return "register/register";
 	}
 	
-	@RequestMapping("/forgotPassword.do")
+	@RequestMapping("/forgotPassword")
 	public String forgotPassword() {
-		return "main/forgotPassword";
-	}
-	
-	@RequestMapping("/customerService.do")
-	public String customerService() {
-		return "main/customerService";
+		return "forgotPassword/forgotPassword";
 	}
 
 	
