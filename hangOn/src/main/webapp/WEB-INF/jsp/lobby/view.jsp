@@ -92,6 +92,9 @@ if ("${msg}") {
             <i class="fa fa-info-circle"></i>고객센터</a>
         </li>
         <!-- 사용자 아이콘 -->
+		<li class="nav-item"><a class="nav-link" href='<c:url value="/admin/dashBoard.do"/>'> 
+		  관리자페이지</a></li>
+        <!-- 사용자 아이콘 -->
         <c:choose>
         	<c:when test="${empty user}">
 		        <li id="openMyPageBtn" class="nav-item">
@@ -106,7 +109,13 @@ if ("${msg}") {
 		        </li>
         	</c:otherwise>
         </c:choose>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>로그아웃</a>
+        </li>
       </ul>
+    </div>
+  </nav>
     </div>
   </nav>
 </div>
@@ -132,9 +141,9 @@ if ("${msg}") {
 		            <c:forEach var="room" items="${room}">
 			            <div class="room-box">
 			                <div class="room">
-			                    <span class="room-title">${room.roomName }</span>
-			                    <span class="total-people">${room.roomConnectUserCount} / ${room.roomNoConnectUserCount}</span><br>
-			                    <p class="room-people">${room.roomInfo}방설명자리</p>
+			                    <span class="room-title">[ ${room.roomName } ]</span><br>
+			                    <h6 class="room-people">${room.roomInfo}방설명자리</h6><br>
+			                    <h5 class="total-people">${room.roomConnectUserCount} / ${room.roomNoConnectUserCount}</h5>
 			                </div>
 			                <div class="room-over">
 			                    <button class="room-btn" onclick = "location.href = '${pageContext.request.contextPath}/room/${room.roomJoinCode}/view.do'">참여</button>
@@ -146,7 +155,7 @@ if ("${msg}") {
            </c:choose> 
             <div class="room-box">
                 <div class="room plus" >
-                    <span id="regist-room" class="fa fa-plus-circle"></span>
+                    <span id="registRoom" class="fa fa-plus-circle"></span>
                 </div>
             </div>
         </div>

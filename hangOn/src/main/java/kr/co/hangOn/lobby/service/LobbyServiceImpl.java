@@ -60,7 +60,6 @@ public class LobbyServiceImpl implements LobbyService {
 	public int roomFindUser(RoomMember member) {
 		// 사용자가 등록한 방인지 확인
 		int userCount = mapper.selectFindUserCount(member);
-		System.out.println(userCount);
 		// 방 참여인수가 6명인지 확인
 		int roomCount = mapper.selectRoomCount(member.getRoomNo());
 		if(userCount == 1) {

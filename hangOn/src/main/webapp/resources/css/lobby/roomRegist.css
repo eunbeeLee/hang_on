@@ -11,28 +11,13 @@
 .room-plus-box {
     padding: 20px 20px;
     margin: 0 auto;
-    width: 40%;
-    height: 650px;
-    top: 9%;
-    left: 29%;
+    width: 30%;
+    height: 610px;
+    top: 13%;
+    left: 34%;
     position: absolute;
     border: 1px solid grey;
-	background-color: rgb(236, 236, 236);
-	border-radius: 8px;
-}
-.regist-btn{
-  width: 49.5%;
-  height: 100%;
-  cursor: pointer;  
-  background-color:transparent;
-  border: none;
-  font-size: 30px;
-  transition: all 0.2s ease 0s;
-  font-weight: bold;
-}
-.regist-btn:hover {
-    background: rgb(229, 209, 238);
-    transition-duration: 10ms;
+	background-color: #ffffff;
 }
 
 .room-plus-box > div {
@@ -46,22 +31,23 @@
 .room-ex {
     border-bottom: 1px solid gray;
     font-size: 20px;
+    text-align: center;
     color: black;
 }
 
 /* 방 생성 버튼 / 취소 버튼 */
 .room-regist-btn {
-    width: 49%;
-    height: 100%;
-    color: black;
+    width: 50%;
+    height: 80%;
+    color: #9797e8;
     font-size: 20px;
     font-weight: bold;
-    padding: 11px 38px;
-    border: 2px E3C8E8 solid;
-    border-radius: 5px;
+    padding: 10px 38px;
+    border-radius: 50px;
     cursor: pointer;
+    float: right;
+    background-color: #ebebeb;
 }
-
 .room-regist-btn:active {
 	position:relative;
 	top:1px;
@@ -74,8 +60,7 @@
 }
 
 #roomRegistTitle {
-    text-align: center;
-    margin-top: 120px;
+    margin-top: 80px;
     margin-bottom: 30px;
 }
 #roomRegNm {
@@ -88,16 +73,46 @@
     position: absolute;
     left: 5px;
     bottom: 10px;
-    width: 100%;
+    width: 96%;
     height: 80px;
 }
+.regist-btn{
+  display: inline-block;
+  width: 40%;
+  height: 90%;
+  cursor: pointer;  
+  border: none;
+  font-size: 30px;
+  font-weight:bold;
+  color: grey;
+  text-align: center;
+  background-color: #dbdbdb;
+}
+.regist-btn:hover {
+	color: #9797e8;
+    transition-duration: 20ms;
+}
+#roomRegistClose{
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 23px;
+}
+#roomRegistClose i{
+	font-size: 40px;
+	padding-top: 5px;
+}
 .high-btn {
+	margin-left: 15px;
+	margin-top: 10px;
     position: absolute;
+    font-variant:small-caps;
     left: 0px;
     top: 0px;
-    width: 100%;
-    height: 100px;
-    border-bottom: 2px solid darkslategrey;
+    width: 98%;
+    height: 60px;
     margin-bottom: 10px;
 }
 
@@ -105,9 +120,9 @@
     margin-top: 3px;
     width:100%;
     height: 40px;
-    font-size: 30px;
+    font-size: 20px;
     border: 1px solid lightgray;
     border-bottom: 1px solid gray;
-    padding: 10px 20px;
+    padding: 10px 16px;
     background-color:transparent;
 }
