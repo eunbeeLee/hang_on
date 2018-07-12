@@ -24,8 +24,13 @@ public class adminServiceImpl implements adminService {
 	}
 
 	@Override
-	public List<History> selectHistoryByPeriod(History history) {
-		return mapper.selectHistoryByPeriod(history);
+	public List<History> selectHistoryByAllPeriod(History history) {
+		return mapper.selectHistoryByAllPeriod(history);
+	}
+
+	@Override
+	public List<History> selectRecentPeriod(History history) {
+		return mapper.selectRecentPeriod(history);
 	}
 	
 	

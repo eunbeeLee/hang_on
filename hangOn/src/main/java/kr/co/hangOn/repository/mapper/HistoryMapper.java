@@ -12,7 +12,10 @@ public interface HistoryMapper {
 	//사용자별 히스토리 글 갯수
 	int selectHistoryCountByUser(History history);
 	
-	//사용자별 히스토리 기간 조회
-	List<History> selectHistoryByPeriod(History history);
+	//사용자별 히스토리 전체기간 조회
+	List<History> selectHistoryByAllPeriod(History history);
+	
+	//사용자별 히스토리 최근일자 조회
+	List<History> selectRecentPeriod(History history);
 	
 }

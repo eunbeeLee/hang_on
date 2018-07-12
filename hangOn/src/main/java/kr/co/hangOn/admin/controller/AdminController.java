@@ -49,22 +49,20 @@ public class AdminController {
 		search.setPageNo(pageNo != -1 ? pageNo : 1);
 		history.setBegin(search.getBegin());
 		history.setEnd(search.getEnd());
-		
-//		System.out.println("BeginNo : "+search.getBegin());
-//		System.out.println("EndNo : "+search.getEnd());
-		
-		List <History> hList = service.selectHistoryByPeriod(history);
+		List <History> hList = service.selectHistoryByAllPeriod(history);
 		int count = service.selectHistoryCountByUser(history);
-		
-//		for(History h : hList) {
-//			System.out.println(h.getUserNo());
-//		}
 		Map<String , Object> result = new HashMap<>();
 		result.put("hList", hList);
 		result.put("pageResult", new PageResult(search.getPageNo(), count));
-
 		
 		return result;
+	}
+	
+	@RequestMapping("/searchRecent.json")
+	@ResponseBody
+	public List<History> selectHistoryByPeriod(History history){
+		System.out.println("넘어온 날짜 : "+history.getrDays());
+		return service.selectRecentPeriod(history);
 	}
 
 }
