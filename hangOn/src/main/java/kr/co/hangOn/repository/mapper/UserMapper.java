@@ -4,4 +4,6 @@ import kr.co.hangOn.repository.domain.User;
 
 public interface UserMapper {
 	User login(String userEmail);
+    void stateCodeChanger(String userEmail);
+
 }

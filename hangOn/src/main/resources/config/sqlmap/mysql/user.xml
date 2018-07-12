@@ -19,4 +19,12 @@
 	 where user_email=#{userEmail}
 </select>
 
+<update id="stateCodeChanger" parameterType="user">
+    update hangon.tb_user
+       set user_state_code = 'aa01'
+     where user_email = #{userEmail}
+</update>
+
+
+
 </mapper>
