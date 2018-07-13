@@ -3,10 +3,19 @@
  */
 window.onload = function(){
 	pageList();
-	recentBtn;
-	console
+	var btnId="";
+	 $('body').click(function(e){
+	        var id = e.target.getAttribute('id');
+	        if ( ( id != '') && (id != null)){ 
+	        btnId=id;
+	        if(btnId =="sevenBtn" || btnId =="thirtyBtn" 
+	        	||btnId =="sixtyBtn" ||btnId =="ninetyBtn" ||btnId =="allPeriodBtn")
+	        	{ recentBtn(btnId);}}
+	    });
+
 };
 function pageList(pageNo){
+//	console.log("페이지리스트 출력");
 	if(pageNo == ""){
 		pageNo = 1;
 	}
@@ -23,7 +32,7 @@ function pageList(pageNo){
 }
 /*히스토리 테이블 출력 함수*/
 function makeTableList(result){
-//			console.log(result.hList);
+			console.log(result.rDays);
 			var hTable = document.querySelector("#historyTable");
 			html = '<thead>\
 		        	  <tr>\
@@ -49,14 +58,13 @@ function makeTableList(result){
 			html +="</tbody>";
 			hTable.innerHTML=html;
 			
-			makePageLink(result.pageResult);
+			makePageLink(result.pageResult, result.rDays);
 		};
 
 /* 페이징 함수*/
 function makePageLink(data){
-//	console.dir(data);
+	console.dir(data);
 	var page = document.querySelector("#paginationContent");
-	
 	var html = "";
 	if (data.count != 0) {
 		var clz = "";
@@ -65,17 +73,12 @@ function makePageLink(data){
 			clz = "disabled";
 		}
 		html += '<li id="dataTable_previous" class="paginate_button page-item previous '+ clz + '">';
-		
 		var fn = "";
-		
 		if (data.prev == true) {
-			fn = "javascript:pageList(" + (data.beginPage - 1) + ");";
-		}
-		
+			fn = "javascript:pageList(" + (data.beginPage - 1) + ");";}
 		html +='<a href="'+fn+'" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous\
 				</a>\
 				</li>';
-		
 	    for (var i = data.beginPage; i <= data.endPage; i++) {
 	    	if (i == data.pageNo) {
 			    html += '<li class="paginate_button page-item active">\
@@ -131,45 +134,37 @@ function dateCipher(date){
 }
 
 /*날짜 조회 버튼 구분 함수*/
-function recentBtn(){
-	let btn =document.querySelectorAll(".btn-recent");
-	sdfsd
-	
-	btn.onClick = function(){
-		console.log("클릭");
-	let sevenBtn = document.querySelector("#sevenBtn");
-	let thirtyBtn = document.querySelector("#thirtyBtn");
-	let sixtyBtn = document.querySelector("#sixtyBtn");
-	let ninetyBtn = document.querySelector("#ninetyBtn");
-	let rDays="";
-	if(sevenBtn.onClick){
-		rDays = 7;
-	}else if(thirtyBtn.onClick){
-		rDays = 30;
-	}else if(sixtyBtn.onClick){
-		rDays = 60;
-	}else if(ninetyBtn.onClick){
-		rDays = 90;
+function recentBtn(btnId){
+//	console.log("버튼 아이디 :",btnId);
+	var rDays ="";
+	switch(btnId){
+	case "sevenBtn": rDays=7; break;
+	case "thirtyBtn":rDays=30; break;
+	case "sixtyBtn" :rDays=60; break;
+	case "ninetyBtn":rDays=90; break;
+	default : rDays=0; break;
 	}
+	console.log("기간날짜 :",rDays);
 	searchRecentPeriod(rDays)
-	}
 }
 
 /*최근 날짜조회 함수*/
 function searchRecentPeriod(rDays){
-	console.log(rDays);
+	var hTable = document.querySelector("#historyTable");
+	var page = document.querySelector("#paginationContent");
+	hTable.innerHTML="";
+	page.innerHTML = "";
 		$.ajax({
-			url : "searchRecent.json",
+			url : "makeHistoryPage.json",
 			data : {"rDays" : rDays, "userNo" : 7},
 			dateType : "json",
-			type : "GET"
-		}).done(function(data){
-			console.log(data);
-		})
+			type : "POST"
+		}).done(makeTableList)
 		.fail(function(e){
 			console.log(e);
 		});
 }
+
 
 
 

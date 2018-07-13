@@ -18,4 +18,7 @@ public interface HistoryMapper {
 	//사용자별 히스토리 최근일자 조회
 	List<History> selectRecentPeriod(History history);
 	
+	//최근 일자 히스토리 갯수
+	int selectRecentHistoryCount(History history);
+	
 }

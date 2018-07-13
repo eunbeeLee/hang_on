@@ -10,5 +10,6 @@ public interface adminService {
 	int selectHistoryCountByUser(History history);
 	List<History> selectHistoryByAllPeriod(History history);
 	List<History> selectRecentPeriod(History history);
+	int selectRecentHistoryCount(History history);
 }
  

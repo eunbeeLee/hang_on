@@ -101,6 +101,7 @@
 		  <button id="thirtyBtn" type="button" class="btn btn-default btn-sm btn-recent">최근 30일</button>
 		  <button id="sixtyBtn" type="button" class="btn btn-default btn-sm btn-recent">최근 60일</button>
 		  <button id="ninetyBtn" type="button" class="btn btn-default btn-sm btn-recent">최근 90일</button>
+		  <button id="allPeriodBtn" type="button" class="btn btn-default btn-sm btn-recent">전체기간</button>
 		</div>
 		</form>
 		

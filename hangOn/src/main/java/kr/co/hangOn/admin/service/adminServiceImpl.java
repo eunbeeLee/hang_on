@@ -32,6 +32,11 @@ public class adminServiceImpl implements adminService {
 	public List<History> selectRecentPeriod(History history) {
 		return mapper.selectRecentPeriod(history);
 	}
+
+	@Override
+	public int selectRecentHistoryCount(History history) {
+		return mapper.selectRecentHistoryCount(history);
+	}
 	
 	
 }

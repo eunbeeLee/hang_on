@@ -48,21 +48,24 @@ public class AdminController {
 		Page search = new Page();
 		search.setPageNo(pageNo != -1 ? pageNo : 1);
 		history.setBegin(search.getBegin());
-		history.setEnd(search.getEnd());
-		List <History> hList = service.selectHistoryByAllPeriod(history);
-		int count = service.selectHistoryCountByUser(history);
+		history.setEnd(search.getEnd() );
+//		System.out.println("rDay : "+history.getrDays());
+		List <History> hList = null;
+		int count = 0;
+		if(history.getrDays() == 0) {
+			hList = service.selectHistoryByAllPeriod(history);
+			count = service.selectHistoryCountByUser(history);
+		}else {
+			hList = service.selectRecentPeriod(history);
+			count = service.selectRecentHistoryCount(history);
+		}
 		Map<String , Object> result = new HashMap<>();
 		result.put("hList", hList);
 		result.put("pageResult", new PageResult(search.getPageNo(), count));
+		result.put("rDays", history.getrDays());
 		
 		return result;
 	}
 	
-	@RequestMapping("/searchRecent.json")
-	@ResponseBody
-	public List<History> selectHistoryByPeriod(History history){
-		System.out.println("넘어온 날짜 : "+history.getrDays());
-		return service.selectRecentPeriod(history);
-	}
 
 }
