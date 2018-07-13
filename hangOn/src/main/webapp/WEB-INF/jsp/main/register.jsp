@@ -26,16 +26,16 @@
       <div class="card-header" id="register-text"><strong>계정을 만드세요</strong></div>
       <div class="card-body">
       <br>
-        <form action="${pageContext.request.contextPath}/main/register.do" onsubmit="emailChecker()">
+        <form action="${pageContext.request.contextPath}/main/register.do" method="POST" id="form">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputEmail1">이메일 주소</label>
-                <input class="form-control" id="exampleInputEmail" type="email" aria-describedby="emailHelp" placeholder="이메일 주소를 입력하세요">
+                <label for="userEmail">이메일 주소</label>
+                <input class="form-control" id="userEmail" type="email" name="userEmail" aria-describedby="emailHelp" placeholder="이메일 주소를 입력하세요">
               </div>
               <div class="col-md-6">
-                <label for="exampleInputName">이름</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="이름을 입력하세요">
+                <label for="userName">이름</label>
+                <input class="form-control" id="userName" type="text" name="userName" aria-describedby="nameHelp" placeholder="이름을 입력하세요">
               </div>
             </div>
           </div>
@@ -44,16 +44,16 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputPassword1">비밀번호</label>
-                <input class="form-control" id="exampleInputPassword" type="password" placeholder="비밀번호를 입력하세요">
+                <label for="userPw">비밀번호</label>
+                <input class="form-control" id="userPw" type="password" name="userPw" placeholder="비밀번호를 입력하세요">
               </div>
               <div class="col-md-6">
-                <label for="exampleConfirmPassword">비밀번호 확인</label>
-                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="비밀번호를 다시 입력하세요">
+                <label for="userPwCheck">비밀번호 확인</label>
+                <input class="form-control" id="userPwCheck" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력하세요">
               </div>
             </div>
           </div> <br>
-          <button id="registerBtn" class="btn btn-primary btn-block" type="submit">등록</button>
+          <button type="submit" id="registerBtn" class="btn btn-primary btn-block">등록</button>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="${pageContext.request.contextPath}/main/login.do">메인 페이지로 가기</a>
@@ -66,9 +66,10 @@
 
 <script>
 	
-	var userEmail = $("#exampleInputEmail").val();
+	emailDuplicateChecker = 1;
 	
-	$("#exampleInputEmail").keyup(function () {
+	$("#userEmail").keyup(function () {
+		let userEmail = $("#userEmail").val();
 		$.ajax({
 			url : `${pageContext.request.contextPath}/main/emailCheck.json`,
 			data : {userEmail : userEmail},
@@ -76,37 +77,45 @@
 			dataType : "json",
 			success : function (no) {
 				var msg = "사용가능한 아이디 입니다";
+				emailDuplicateChecker = 1;
 				if (no == 1){
 					msg = "중복된 아이디 입니다";
+					emailDuplicateChecker = 2;
 				}
 				$("#emailCheck").text(msg);
 			}
 		})
 	});
 	
-	$("#registerBtn").click(function emailChecker() {
-		if ( $("#exampleInputEmail").val() == "") {
+	$("#registerBtn").click(function (e) {
+		e.preventDefault();
+		
+		if ( $("#userEmail").val() == "") {
 			alert("이메일을 입력하세요")
 			return false;
 		}
-		else if ( $("#exampleInputName").val() == "") {
+		else if ( $("#userName").val() == "") {
 			alert("이름을 입력하세요")
 			return false;
 		}
-		else if ( $("#exampleInputPassword").val() == "") {
+		else if ( $("#userPw").val() == "") {
 			alert("비밀번호를 입력하세요")
 			return false;
 		}
-		else if ( $("#exampleConfirmPassword").val() == "") {
+		else if ( $("#userPwCheck").val() == "") {
 			alert("비밀번호 확인 부분에 비밀번호를 다시 입력하세요")
 			return false;
 		}
-		else if ( $("#exampleConfirmPassword").val() != $("#exampleInputPassword").val()) {
+		else if ( $("#userPw").val() != $("#userPwCheck").val()) {
 			alert("비밀번호 재입력을 확인해주세요")
 			return false;
 		}
+		else if (emailDuplicateChecker == 2) {
+			alert("이메일 중복입니다")
+			return false;
+		}
 		else {
-			alert("가입을 축하합니다")
+			$("#form").submit();
 			return true;
 		}
 	});

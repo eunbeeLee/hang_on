@@ -21,4 +21,6 @@ public interface HistoryMapper {
 	//최근 일자 히스토리 갯수
 	int selectRecentHistoryCount(History history);
 	
+	//히스토리 입력
+	void insertHistory(History history);
 }

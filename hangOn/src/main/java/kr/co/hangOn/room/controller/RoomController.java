@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.RoomMember;
 import kr.co.hangOn.repository.domain.User;
 import kr.co.hangOn.room.service.RoomService;
@@ -22,9 +23,15 @@ public class RoomController {
 		RoomMember roomMember = new RoomMember();
 		String joinCode=req.getRequestURI().split("/")[3];
 		roomMember.setRoomJoinCode(joinCode);
-		roomMember.setUserNo(((User)session.getAttribute("user")).getUserNo());
+		int userNo = ((User)session.getAttribute("user")).getUserNo();
+		roomMember.setUserNo(userNo);
 		roomMember.setType("in");
 		service.roomMemberUpdate(roomMember);
+		History history = new History();
+		history.setUserNo(userNo);
+		history.setIpAddr(req.getRemoteAddr());
+		history.setActName("da01");
+		service.historyInsert(history ,joinCode);
 		return "room/view";
 	}
 	

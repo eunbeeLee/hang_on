@@ -27,6 +27,9 @@
 	        <li class="nav-item">
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/customerService.do"><i class="fa fa-info-circle"></i>고객센터</a>
 	        </li>
+	        <li class="nav-item">
+	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/logout.do">로그아웃</a>
+	        </li>
         </ul>
     </div>
 </nav>
