@@ -19,6 +19,7 @@ import kr.co.hangOn.repository.domain.PageResult;
 public class AdminController {
 	@Autowired
 	private adminService service;
+	
 	@RequestMapping("/dashBoard.do")
 	public String dashBoardView() {
 		return "admin/dashBoard";
@@ -32,18 +33,13 @@ public class AdminController {
 		return "admin/history";
 	}
 	
-	@RequestMapping("/makeList.json")
-	@ResponseBody
-	public List<History> historyTable(int userNo) throws Exception{
-		return service.selectHistoryByUser(userNo);
-	}
-
 	@RequestMapping("/makeHistoryPage.json")
 	@ResponseBody
 	public Map<String, Object> historyPage(History history){
 //		System.out.println("넘어온 페이지 번호 : "+history.getPageNo());
 		
 //		System.out.println("넘어온 회원번호 : "+history.getPageNo());
+//		System.out.println("넘어온 날짜 : "+history.getrDays());
 		int pageNo = history.getPageNo();
 		Page search = new Page();
 		search.setPageNo(pageNo != -1 ? pageNo : 1);
