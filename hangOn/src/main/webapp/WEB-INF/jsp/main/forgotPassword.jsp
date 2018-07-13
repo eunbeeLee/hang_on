@@ -30,20 +30,36 @@
         <h4>비밀번호를 잊어버리셨나요?</h4><br>
         <p> 이메일을 입력해주시면 새 비밀번호를 보내드립니다</p>
       </div>
-      <form>
+      <form action="${pageContext.request.contextPath}/mail/forgotPassword.do" method="POST" id="form">
         <div class="form-group">
-          <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="이메일 주소를 입력하세요">
+          <input class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="이메일 주소를 입력하세요">
         </div>
-        <a class="btn btn-primary btn-block" href="login.html">새 비밀번호를 보내드립니다</a>
+        <button type="submit" class="btn btn-primary btn-block" id="btn">새 비밀번호를 보내드립니다</button>
       </form>
       <div class="text-center">
-        <a class="d-block small mt-3" href="register.html">회원가입 페이지로 이동하기</a>
-        <a class="d-block small" href="login.html">메인 페이지로 이동하기</a>
+        <a class="d-block small mt-3" href="${pageContext.request.contextPath}/main/login.do">회원가입 페이지로 이동하기</a>
       </div>
     </div>
   </div>
 </div>
-
 </div>
+
+<script>
+	
+	$("#btn").click(function () {
+		if($("#btn").val() == "") {
+			alert("이메일을 입력해주세요")
+			return false;
+		}
+	});
+	
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
