@@ -17,4 +17,19 @@ public class UserServiceImpl implements UserService{
 		return mapper.login(userEmail);
 	}
 
+	@Override
+	public void stateCodeChanger(String userEmail) {
+		mapper.stateCodeChanger(userEmail);
+	}
+
+	@Override
+	public int emailCheck(String userEmail) {
+		return mapper.emailCheck(userEmail);
+	}
+
+	@Override
+	public void register(User user) {
+		mapper.register(user);
+	}
+
 }

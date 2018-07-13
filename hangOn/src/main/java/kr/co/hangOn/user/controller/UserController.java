@@ -35,14 +35,28 @@ public class UserController {
 			msg = "비밀번호가 잘못됐습니다";
 		} else {
 			session.setAttribute("user", loginUser);
+			userService.stateCodeChanger(loginUser.getUserEmail());
 			return "/main/login.do";
 		}
 		return msg;
 	}
 	
-	@RequestMapping("/register.do")
-	public String register() {
+	@RequestMapping("/emailCheck.json")
+	@ResponseBody
+	public int emailCheck(String userEmail) throws Exception {
+		int no = userService.emailCheck(userEmail);
+		return no;
+	}
+	
+	@RequestMapping("/registerForm.do")
+	public String registerForm(User user) {
 		return "main/register";
+	}
+	
+	@RequestMapping("/register.do")
+	public String register(User user) {
+		userService.register(user);
+		return "redirect:/main/login.do";
 	}
 	
 	@RequestMapping("/forgotPassword.do")

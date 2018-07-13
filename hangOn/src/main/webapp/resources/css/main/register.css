@@ -4,6 +4,11 @@
 	opacity: 0.7; 
 }
 
+#emailCheck {
+	font-size: 5px;
+	color: red;
+}
+
 #register-box {
 	position: fixed;
 	z-index: 30;
@@ -12,6 +17,10 @@
 	margin: 0;
 	top: 15%;
 	left: 30%;
+}
+
+#register-text {
+	text-align: center;
 }
 
 html {

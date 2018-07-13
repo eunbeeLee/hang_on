@@ -16,7 +16,7 @@
 <select id="login" parameterType="string" resultMap="userMap">
 	select *
 	  from hangon.tb_user
-	 where user_email=#{userEmail}
+	 where user_email = #{userEmail}
 </select>
 
 <update id="stateCodeChanger" parameterType="user">
@@ -24,6 +24,24 @@
        set user_state_code = 'aa01'
      where user_email = #{userEmail}
 </update>
+
+<select id="emailCheck" parameterType="string" resultType="int">
+	select count(*)
+	  from hangon.tb_user
+	 where user_email = #{userEmail}
+</select>
+
+<insert id="register" parameterType="user">
+	insert hangon.tb_user (
+		user_email,
+		user_name,
+		user_pw
+	) values (
+		#{userEmail},
+		#{userName},
+		#{userPw}
+	)
+</insert>
 
 
 

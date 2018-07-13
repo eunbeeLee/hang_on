@@ -28,7 +28,7 @@
     <div class="card-body">
       <div class="text-center mt-4 mb-5">
         <h4>비밀번호를 잊어버리셨나요?</h4><br>
-        <p>등록된 이메일을 입력해주시면 새로운 비밀번호를 보내드립니다</p>
+        <p> 이메일을 입력해주시면 새 비밀번호를 보내드립니다</p>
       </div>
       <form>
         <div class="form-group">

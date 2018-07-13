@@ -53,7 +53,7 @@
         <button class="btn btn-primary btn-block" id="login" type="button">로그인</button>
       </form>
       <div class="text-center">
-        <a class="d-block small mt-3" href="register.do">회원가입</a>
+        <a class="d-block small mt-3" href="registerForm.do">회원가입</a>
         <a class="d-block small" href="forgotPassword.do">비밀번호를 잊어버리셨나요?</a>
       </div>
     </div>
@@ -92,13 +92,6 @@
 			}
 		});
 	});
-	
-	var sessionUserEmail = '${UserEmail}';
-	console.log(sessionUserEmail);
-	console.log("hi");
-	
-	var whatisjson = '${pageContext.request.contextPath}/main/loginPost.json';
-	console.log(whatisjson);
 	
 </script>
 

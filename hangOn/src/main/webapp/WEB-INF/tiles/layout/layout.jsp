@@ -11,6 +11,7 @@
    <div class="container">
 	   <tiles:insertAttribute name="header" />
 	   <tiles:insertAttribute name="content" />
+<%-- 	   <tiles:insertAttribute name="menu" /> --%>
 	   <tiles:insertAttribute name="footer" />
    </div>
 

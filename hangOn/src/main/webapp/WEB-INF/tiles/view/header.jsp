@@ -22,7 +22,7 @@
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/login.do">메인페이지</a>
 	        </li>
 	        <li class="nav-item">
-	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/register.do">회원가입</a>
+	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/registerForm.do">회원가입</a>
 	        </li>
 	        <li class="nav-item">
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/customerService.do"><i class="fa fa-info-circle"></i>고객센터</a>

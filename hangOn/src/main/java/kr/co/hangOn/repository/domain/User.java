@@ -1,13 +1,13 @@
 package kr.co.hangOn.repository.domain;
 
 public class User {
+	private int userNo;
 	private String userName;
 	private String userEmail;
 	private String userPw;
 	private String userStateCode;
 	private String userExistCode;
 	private String userAuthCode;
-	private int userNo;
 	
 	public int getUserNo() {
 		return userNo;
