@@ -1,12 +1,16 @@
 package kr.co.hangOn.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.SessionScope;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.hangOn.repository.domain.User;
 import kr.co.hangOn.user.service.UserService;
@@ -35,6 +39,7 @@ public class UserController {
 			msg = "비밀번호가 잘못됐습니다";
 		} else {
 			session.setAttribute("user", loginUser);
+			session.setAttribute("userEmail", loginUser.getUserEmail());
 			userService.stateCodeChanger(loginUser.getUserEmail());
 			return "/main/login.do";
 		}
@@ -43,20 +48,22 @@ public class UserController {
 	
 	@RequestMapping("/emailCheck.json")
 	@ResponseBody
-	public int emailCheck(String userEmail) throws Exception {
+	public int emailCheck(HttpServletRequest request) throws Exception {
+		String userEmail = request.getParameter("userEmail");
 		int no = userService.emailCheck(userEmail);
 		return no;
 	}
 	
-	@RequestMapping("/registerForm.do")
+	@RequestMapping(value = "/registerForm.do")
 	public String registerForm(User user) {
 		return "main/register";
 	}
 	
-	@RequestMapping("/register.do")
-	public String register(User user) {
+	@RequestMapping(value = "/register.do", method= {RequestMethod.POST})
+	public String register(User user, RedirectAttributes attr) {
 		userService.register(user);
-		return "redirect:/main/login.do";
+		attr.addFlashAttribute("msg", "가입을 축하합니다.");
+		return "redirect:login.do";
 	}
 	
 	@RequestMapping("/forgotPassword.do")
@@ -67,5 +74,11 @@ public class UserController {
 	@RequestMapping("/customerService.do")
 	public String customerService() {
 		return "main/customerService";
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:login.do";
 	}
 }

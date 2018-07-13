@@ -13,7 +13,7 @@
 	<result column="user_auth_code" property="userAuthCode"/>
 </resultMap>
 
-<select id="login" parameterType="string" resultMap="userMap">
+<select id="login" parameterType="String" resultMap="userMap">
 	select *
 	  from hangon.tb_user
 	 where user_email = #{userEmail}
@@ -25,7 +25,7 @@
      where user_email = #{userEmail}
 </update>
 
-<select id="emailCheck" parameterType="string" resultType="int">
+<select id="emailCheck" parameterType="String" resultType="int">
 	select count(*)
 	  from hangon.tb_user
 	 where user_email = #{userEmail}

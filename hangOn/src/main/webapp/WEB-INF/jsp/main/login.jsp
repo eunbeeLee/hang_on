@@ -9,6 +9,11 @@
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script>
+if ("${msg}") {
+	alert("${msg}")
+}
+</script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -61,13 +66,16 @@
 </div>
 
 <script>
-
+	
+	sessionUserEmail = '${userEmail}';
+	
+	$(document).ready( function () {
+		console.log(sessionUserEmail);
+	});
+	
 	$('#login').click(function () {
 		var userEmail = $('#email').val();
 		var userPw = $('#pw').val();
-		
-		console.log(userEmail);
-		console.log(userPw);
 		
 		if(userEmail == '') {
 			alert("이메일 주소를 입력해주세요");
@@ -83,7 +91,6 @@
 			type: "POST",
 			dataType: "json",
 			success: function(result){
-				console.log(result);
 	 			if (result.startsWith("/")){
 	 				location.href = `${pageContext.request.contextPath}` + result;
 	 				return;
