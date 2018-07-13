@@ -6,7 +6,6 @@
 		<result column="doc_group_no" property="docGroupNo" />
 		<result column="doc_ori_path" property="docOriPath" />
 		<result column="doc_ori_name" property="docOriName" />
-		<result column="doc_pdf_path" property="docPdfPath" />
 		<result column="doc_img_path" property="docImgPath" />
 		<result column="room_no" property="roomNo" />
 	</resultMap>
@@ -22,17 +21,11 @@
 			doc_ori_path,
 			doc_ori_name,
 			doc_img_path,
-			<if test="docPdfPath != null">
-				doc_pdf_path,
-		 	</if>
 			room_no
 		) values (
 			#{docOriPath},
 			#{docOriName},
 			#{docImgPath},
-			<if test="docPdfPath != null">
-				#{docPdfPath},
-		 	</if>
 			#{roomNo}
 		)
 	</insert>

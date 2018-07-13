@@ -104,7 +104,7 @@
 	padding-top: 5px;
 	text-align: center;
 	background-color: rgba(52,58,64,.8);
-	opacity: .3;
+	opacity: .1;
 	transition: .5s;
 	border-radius: 10px;
 }
@@ -127,7 +127,7 @@
 	padding-top: 10px;
 	text-align: center;
 	background-color: rgba(52,58,64,.8);
-	opacity: .3;
+	opacity: .1;
 	transition: .5s;
 	border-radius: 10px;
 }
@@ -145,7 +145,7 @@
 	padding-top: 10px;
 	text-align: center;
 	background-color: rgba(52,58,64,.8);
-	opacity: .3;
+	opacity: .1;
 	transition: .5s;
 	border-radius: 10px;
 }

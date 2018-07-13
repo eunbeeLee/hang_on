@@ -37,22 +37,18 @@ public class DocumentServiceImpl implements DocumentService {
 		if (index != -1) { ext = oriName.substring(index); }                // 3. 파일명에서 확장자명(.포함)을 추출	.jsp .html 등
 		String systemName = UUID.randomUUID().toString() + ext;				// 시스템에 저장하는 파일명 (랜덤생성 파일명 + 확장자)
 		
-		String saveFolder = "/resources/upload_file/document/"+documentGroup.getRoomNo()+"/"+systemName;
+		String saveFolder = "/resources/upload_file/document/"+documentGroup.getRoomNo()+"/"+UUID.randomUUID().toString();
 		String realFolder = context.getRealPath(saveFolder);
-		
 		File fileFolder = new File(realFolder);
 		if(!fileFolder.exists()) { fileFolder.mkdirs(); } 					// 디렉토리 생성
+		file.transferTo(new File(realFolder+"/view.pdf"));	            	// 서버에 파일 저장
 		
-		file.transferTo(new File(realFolder+"/"+systemName));	            // 서버에 파일 저장
-		
-		if(ext.toUpperCase().equals(".PDF")) {
-			documentGroup.setDocPdfPath(saveFolder+"/"+systemName);
-		}
 		mapper.insertDocumentGroup(
 			documentGroup.setDocOriName(oriName)
-						 .setDocOriPath(saveFolder+"/"+systemName)
-						 .setDocImgPath(saveFolder+"/"+systemName)
+						 .setDocOriPath(saveFolder+"/view.pdf")
+						 .setDocImgPath(saveFolder+"/")
 		);
+		
 		return documentGroup.setFile(null);
 	}
 
@@ -60,7 +56,7 @@ public class DocumentServiceImpl implements DocumentService {
 	public DocumentGroup pdfParser(DocumentGroup documentGroup,HttpServletRequest request) throws Exception{
 		String imageFormat = "png";
 		PDDocument PDFDocument = null; 
-		File file = new File(request.getServletContext().getRealPath(documentGroup.getDocPdfPath()));
+		File file = new File(request.getServletContext().getRealPath(documentGroup.getDocOriPath()));
 		PDFDocument = PDDocument.load(file);
 		int endOfPages = PDFDocument.getNumberOfPages();
 		String savePath = request.getServletContext().getRealPath(documentGroup.getDocImgPath());
@@ -84,18 +80,5 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 		return documentGroup.setDocument(document);
 	}
-	
-
-
-	
-
-//	
-//	@Transactional(rollbackFor=Exception.class)
-//	@Override
-//	public void createProject(Project project) {
-//		mapper.insertProject(project);
-//		mapper.insertProjectParticipant(project);
-//	}
-
 	
 }
