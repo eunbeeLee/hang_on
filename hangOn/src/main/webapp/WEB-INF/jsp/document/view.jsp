@@ -79,15 +79,15 @@
         	</div>
 
         	<div id="documentPageView">  		
-        		<button id="doc-util-btn-left" class="document-util-btn btn btn-default">
+        		<button id="doc-util-btn-left" class="document-util-btn btn btn-default document-order-btn">
         			<i class="fa fa-chevron-left " aria-hidden="true"></i>
         		</button>
         		<span>
         		  <input class="form-control" id="documentViewPageOrder"
-        		  type="text" aria-describedby="idHelp" value="1"> <i>/&nbsp;&nbsp;<i>100</i></i>
+        		  type="text" aria-describedby="idHelp" value="1"> <i>/&nbsp;&nbsp;<i id="documentMaxIndex">100</i></i>
         		</span>
         		
-        		<button id="doc-util-btn-right" class="document-util-btn btn btn-default">
+        		<button id="doc-util-btn-right" class="document-util-btn btn btn-default document-order-btn">
         			<i class="fa fa-chevron-right " aria-hidden="true"></i>
         		</button>        	
         	</div>

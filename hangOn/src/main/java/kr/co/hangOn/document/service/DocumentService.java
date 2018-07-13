@@ -12,6 +12,5 @@ import kr.co.hangOn.repository.domain.DocumentGroup;
 public interface DocumentService {
 	public DocumentGroup saveOriFile(DocumentGroup documentGroup,HttpServletRequest request) throws Exception;
 	public DocumentGroup pdfParser(DocumentGroup documentGroup,HttpServletRequest request) throws Exception;
-
 }
  

@@ -8,7 +8,6 @@ public class DocumentGroup {
 	private int docGroupNo;
 	private String docOriPath;
 	private String docOriName;
-	private String docPdfPath;
 	private String docImgPath;
 	private int roomNo;
 	private MultipartFile file;
@@ -33,13 +32,6 @@ public class DocumentGroup {
 	}
 	public DocumentGroup setDocOriName(String docOriName) {
 		this.docOriName = docOriName;
-		return this;
-	}
-	public String getDocPdfPath() {
-		return docPdfPath;
-	}
-	public DocumentGroup setDocPdfPath(String docPdfPath) {
-		this.docPdfPath = docPdfPath;
 		return this;
 	}
 	public int getRoomNo() {
