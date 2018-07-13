@@ -21,6 +21,32 @@ public class History {
 	private int begin;
 	private int end;
 	
+	
+	private Date beginDate;
+	private Date endDate; 
+	
+	private int rDays;
+	
+	
+	
+	public int getrDays() {
+		return rDays;
+	}
+	public void setrDays(int rDays) {
+		this.rDays = rDays;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public Date getBeginDate() {
+		return beginDate;
+	}
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
 	public void setBegin(int begin) {
 		this.begin = begin;
 	}

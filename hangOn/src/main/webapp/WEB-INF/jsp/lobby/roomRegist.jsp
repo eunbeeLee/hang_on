@@ -12,8 +12,11 @@
         <div class="room-plus-box">
            <div id="roomEntrance">
                <div class="high-btn">
-                   <button class="room-find regist-btn">Room 찾기</button>
-                   <button class="room-regist regist-btn">Room 생성</button>
+               	<div class="room-find regist-btn">room find</div>
+               	<div  class="room-regist regist-btn">room regist</div>
+               	<button id="roomRegistClose" type="button" class="back btn btn-default" style="padding: 0px !important;">
+				<i class="material-icons">close</i>
+			</button>
                </div>
                <h1 id="roomRegistTitle">ROOM FIND</h1>
                <form id="roomFindForm" method="post" action="<%=request.getContextPath()%>/lobby/roomFind.do">
@@ -28,16 +31,18 @@
 	               <div id="roomFindResult"></div>
 	               <div id="roomReBtns">
 	                   <button type="button" id="roomFindBtn" class="room-regist-btn">ROOM 입장</button>
-	                   <button type="button" class="back room-regist-btn">닫기</button>
 	               </div>
                </form>
            </div>
            <div id="roomRegist">
-               <div  class="high-btn">
-                   <button class="room-find regist-btn">Room 찾기</button>
-                   <button class="room-regist regist-btn">Room 생성</button>
+               <div class="high-btn">
+               	<div class="room-find regist-btn">room find</div>
+               	<div  class="room-regist regist-btn">room regist</div>
+               	<button id="roomRegistClose" type="button" class="back btn btn-default" style="padding: 0px !important;">
+				<i class="material-icons">close</i>
+			</button>
                </div>
-                <h1 id="roomRegistTitle">New ROOM</h1>
+                <h1 id="roomRegistTitle">NEW ROOM</h1>
                 <form id="roomRegistForm" method="post" action="<%=request.getContextPath()%>/lobby/roomRegist.do">
 	                <div id="roomRegNm">
 	                    <p class="room-ex">ROOM NAME</p>
@@ -49,7 +54,6 @@
 	                </div>
 	                <div id="roomReBtns">
 	                    <button id="roomRegistBtn" type="button" class="room-regist-btn">ROOM 생성</button>
-	                    <button type="button" class="back room-regist-btn">닫기</button>
 	                </div>
                 </form>
             </div>

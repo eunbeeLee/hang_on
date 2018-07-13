@@ -9,6 +9,9 @@
 		<result column="room_name" property="roomName"></result>
 		<result column="user_name" property="userName"></result>
 		<result column="user_email" property="userEmail"></result>
+		<result column="r_days" property="rDays"></result>
+		<result column="begin_date" property="beginDate"></result>
+		<result column="begin_end" property="beginEnd"></result>
 	</resultMap>
 	
 	<select id="selectHistoryByUser" parameterType="int" resultMap="historyMap">
@@ -30,6 +33,7 @@
 		 where room_no in (select room_no
 				 		     from tb_room
 				 		    where user_no = #{userNo})
+		order by connect_time desc;
 	</select>
 	
 	<select id="selectHistoryCountByUser" parameterType="history" resultType="int">
@@ -37,7 +41,7 @@
 		  from tb_history
 		 where user_no = #{userNo}
 	</select>
-	<select id="selectHistoryByPeriod" parameterType="history" resultMap="historyMap">
+	<select id="selectHistoryByAllPeriod" parameterType="history" resultMap="historyMap">
 		SELECT
 		    A.*
 		FROM
@@ -61,10 +65,51 @@
 		              from tb_user as u
 					 where u.user_no = h.user_no) as user_email
 		           from tb_history h
-		           where user_no=#{userNo}) tb_history,
+		           where user_no=#{userNo}
+		           order by connect_time desc) tb_history,
 		       (SELECT @ROWNUM := 0) R
 		) A
 		WHERE
 		    A.ROWNUM between #{begin} and #{end};
+	</select>
+	
+	<select id="selectRecentPeriod" parameterType="history" resultMap="historyMap">
+  		SELECT
+		    A.*
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        tb_history.* 
+		    FROM
+		        (select (select code_info
+				  from tb_code
+		          where h.act_code = code_no) as act_name, 
+		          connect_time,
+		          ip_addr, 
+		          (select room_name
+		             from tb_room
+					where h.room_no = room_no) as room_name,
+		           (select u.user_name
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_name,
+		          (select u.user_email
+		              from tb_user as u
+					 where u.user_no = h.user_no) as user_email
+		           from tb_history h
+		           where user_no=#{userNo}
+                    and connect_time between (SELECT date_add(now(),INTERVAL -#{rDays} DAY) FROM dual) and now()
+		           order by connect_time desc) tb_history,
+		       (SELECT @ROWNUM := 0) R
+		) A
+		WHERE
+		    A.ROWNUM between #{begin} and #{end};
+	</select>
+	
+	<select id="selectRecentHistoryCount" parameterType="history" resultType="int">
+	    select count(*)
+		  from tb_history h
+		 where user_no=#{userNo}
+		   and connect_time between (SELECT date_add(now(),INTERVAL -#{rDays} DAY) FROM dual) and now();
 	</select>
 </mapper>
