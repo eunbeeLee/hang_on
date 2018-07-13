@@ -89,13 +89,13 @@
 		<form class="form-inline">
 		  <div class="form-group">
 		    <label class="sr-only" for="exampleInputEmail3">시작일</label>
-		    <input type="date" class="form-control" id="exampleInputEmail3" value="2018-07-01">
+		    <input type="date" class="form-control" id="startHistory">
 		  </div> -
 		  <div class="form-group">
 		    <label class="sr-only" for="exampleInputPassword3">종료일</label>
-		    <input type="date" class="form-control" id="exampleInputPassword3" value="2018-07-05">
+		    <input type="date" class="form-control" id="endHistory">
 		  </div>
-		  <button type="submit" id="periodSearchBtn"class="btn btn-default">검색</button>
+		  <button type="button" id="periodSearchBtn"class="btn btn-default">검색</button>
 		<div id="recentSearchBtn">
 		  <button id="sevenBtn" type="button" class="btn btn-default btn-sm btn-recent">최근 일주일</button>
 		  <button id="thirtyBtn" type="button" class="btn btn-default btn-sm btn-recent">최근 30일</button>

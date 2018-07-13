@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.hangOn.admin.service.adminService;
+import kr.co.hangOn.admin.service.AdminService;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Page;
 import kr.co.hangOn.repository.domain.PageResult;
@@ -18,7 +18,7 @@ import kr.co.hangOn.repository.domain.PageResult;
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private adminService service;
+	private AdminService service;
 	
 	@RequestMapping("/dashBoard.do")
 	public String dashBoardView() {
@@ -36,31 +36,7 @@ public class AdminController {
 	@RequestMapping("/makeHistoryPage.json")
 	@ResponseBody
 	public Map<String, Object> historyPage(History history){
-//		System.out.println("넘어온 페이지 번호 : "+history.getPageNo());
-		
-//		System.out.println("넘어온 회원번호 : "+history.getPageNo());
-//		System.out.println("넘어온 날짜 : "+history.getrDays());
-		int pageNo = history.getPageNo();
-		Page search = new Page();
-		search.setPageNo(pageNo != -1 ? pageNo : 1);
-		history.setBegin(search.getBegin());
-		history.setEnd(search.getEnd() );
-//		System.out.println("rDay : "+history.getrDays());
-		List <History> hList = null;
-		int count = 0;
-		if(history.getrDays() == 0) {
-			hList = service.selectHistoryByAllPeriod(history);
-			count = service.selectHistoryCountByUser(history);
-		}else {
-			hList = service.selectRecentPeriod(history);
-			count = service.selectRecentHistoryCount(history);
-		}
-		Map<String , Object> result = new HashMap<>();
-		result.put("hList", hList);
-		result.put("pageResult", new PageResult(search.getPageNo(), count));
-		result.put("rDays", history.getrDays());
-		
-		return result;
+		return service.historyPageInfo(history);
 	}
 	
 

@@ -3,20 +3,23 @@
  */
 window.onload = function(){
 	pageList();
+	searchCertainPeriod();
 	var btnId="";
+	var startHistory = document.querySelector("#startHistory");
+	var endHistory = document.querySelector("#endHistory");
 	 $('body').click(function(e){
 	        var id = e.target.getAttribute('id');
 	        if ( ( id != '') && (id != null)){ 
 	        btnId=id;
 	        if(btnId =="sevenBtn" || btnId =="thirtyBtn" 
-	        	||btnId =="sixtyBtn" ||btnId =="ninetyBtn" ||btnId =="allPeriodBtn")
-	        	{ recentBtn(btnId);}}
+	        	||btnId =="sixtyBtn" ||btnId =="ninetyBtn" ||btnId =="allPeriodBtn" 
+	        	||btnId =="periodSearchBtn")
+	        	{ recentBtn(btnId);}
+	        }
 	    });
 
 };
 function pageList(pageNo, rDays){
-//	console.log("페이지리스트 출력");
-//	console.log("pageList 함수 rDays : ", rDays )
 	if(pageNo == ""){
 		pageNo = 1;
 	}
@@ -27,17 +30,12 @@ function pageList(pageNo, rDays){
 		url : "makeHistoryPage.json", 
 		data : {"pageNo" : pageNo, "userNo" : 7, "rDays" : rDays}, 
 		dateType : "json",
-		type : "POST",
-//		success : makeTableList,
-		error : function(e){
-			console.dir(e);
-		}
+		type : "POST"
 	}).done(makeTableList)
 }
 /*히스토리 테이블 출력 함수*/
 function makeTableList(result){
-//	console.log('================');
-//			console.log(result.rDays);
+	console.log("makeTableList : ",result);
 			var hTable = document.querySelector("#historyTable");
 			html = '<thead>\
 		        	  <tr>\
@@ -68,15 +66,14 @@ function makeTableList(result){
 
 /* 페이징 함수*/
 function makePageLink(data){
-//	data = data.pageResult;
-//	console.log(data);
-//	console.log("makeLink함수 rDays: ",data.rDays);
+	console.log("시작일 : ", data.startDate);
+	console.log("페이지 결과: ", data.pageResult);
+	
 	var page = document.querySelector("#paginationContent");
 	var html = "";
 	if (data.pageResult.count != 0) {
 		var clz = "";
 		if (data.pageResult.prev == false) {
-//			console.log("prev 값 : false 확인");
 			clz = "disabled";
 		}
 		html += '<li id="dataTable_previous" class="paginate_button page-item previous '+ clz + '">';
@@ -100,7 +97,6 @@ function makePageLink(data){
 	    
 		clz = "";
 		if (data.pageResult.next == false) {
-//			console.log("next 값 : false 확인");
 			clz = "disabled";
 		}
 		html += '<li id="dataTable_next" class="paginate_button page-item next ' + clz + '">';
@@ -142,16 +138,15 @@ function dateCipher(date){
 
 /*날짜 조회 버튼 구분 함수*/
 function recentBtn(btnId){
-//	console.log("버튼 아이디 :",btnId);
 	var rDays ="";
 	switch(btnId){
 	case "sevenBtn": rDays=7; break;
 	case "thirtyBtn":rDays=30; break;
 	case "sixtyBtn" :rDays=60; break;
 	case "ninetyBtn":rDays=90; break;
+	case "periodSearchBtn":rDays=100; break;
 	default : rDays=0; break;
 	}
-//	console.log("기간날짜 :",rDays);
 	searchRecentPeriod(rDays)
 }
 
@@ -159,11 +154,16 @@ function recentBtn(btnId){
 function searchRecentPeriod(rDays){
 	var hTable = document.querySelector("#historyTable");
 	var page = document.querySelector("#paginationContent");
+	
+	var startDate = document.getElementById("startHistory").value;
+	var endDate = document.getElementById("endHistory").value;
+//	console.log("검색날짜 :"+rDays);
+//	console.log("시작일", startDate);
 	hTable.innerHTML="";
 	page.innerHTML = "";
 		$.ajax({
 			url : "makeHistoryPage.json",
-			data : {"rDays" : rDays, "userNo" : 7},
+			data : {"rDays" : rDays, "userNo" : 7, "beginDate":startDate, "endDate" :endDate},
 			dateType : "json",
 			type : "POST"
 		}).done(makeTableList)
@@ -172,6 +172,12 @@ function searchRecentPeriod(rDays){
 		});
 }
 
+/*특정 날짜 조회 검색 함수*/
+ function searchCertainPeriod(){
+	 let today = dateParser(new Date().toLocaleDateString()).slice(0,10);
+	 startHistory.setAttribute("value", today);
+	 endHistory.setAttribute("value", today);
+ }
 
 
 
