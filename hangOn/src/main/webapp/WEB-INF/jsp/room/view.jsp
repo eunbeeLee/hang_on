@@ -155,6 +155,9 @@
     <script src="https://cdn.webrtc-experiment.com/video-conferencing/RTCPeerConnection-v1.5.js"> </script>
     <script src="https://cdn.webrtc-experiment.com/video-conferencing/conference.js"> </script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    
+	<script src="${pageContext.request.contextPath}/resources/js/room/chat.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/room/video.js"></script>
 </body>
 

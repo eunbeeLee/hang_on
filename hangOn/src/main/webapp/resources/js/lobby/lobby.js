@@ -12,7 +12,7 @@ function offPass() {
 }
 $(".room").click(function () {
     $(this).siblings().css("display", "block");
-    $(this).css("opacity","0.3");
+    $(this).css("opacity","0.7");
 });
 
 $(".room-over").mouseleave(function () {
@@ -22,3 +22,4 @@ $(".room-over").mouseleave(function () {
 $(".back").click(function () {
     $(".plus").css("opacity", "none");
 });
+
