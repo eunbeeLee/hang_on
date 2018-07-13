@@ -35,4 +35,5 @@
 		 where user_no=#{userNo}
 		 and room_no=#{roomNo}
 	</update>
+	
 </mapper>

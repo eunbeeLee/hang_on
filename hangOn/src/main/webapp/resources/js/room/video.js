@@ -33,14 +33,41 @@ var config = {
     },
     onRemoteStream: function(media) {
         var mediaElement = getMediaElement(media.video, {
-//            width: (videosContainer.clientWidth / 5) - 50,
             width: 260,
-            buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
+            buttons: ['mute-audio', 'mute-video', 'volume-slider']
         });
+        console.dir(media.video);
         mediaElement.id = media.stream.streamid;
         
         mediaElement.onclick = function(event) {
-        	pinVideo($(this)["0"].media.srcObject);
+        	/* 화면복사 */      	
+        	let dom = $('.main-doc');
+        	var video = document.createElement('video');
+        	    video.muted = true;
+        	    video.volume = 0;
+    	    try {
+    	        video.setAttributeNode(document.createAttribute('autoplay'));
+    	        video.setAttributeNode(document.createAttribute('playsinline'));
+    	        video.setAttributeNode(document.createAttribute('controls'));
+    	    } catch (e) {
+    	        video.setAttribute('autoplay', true);
+    	        video.setAttribute('playsinline', true);
+    	        video.setAttribute('controls', true);
+    	    }
+    	    getUserMedia({
+    	        video: video,
+    	        onsuccess: function(stream) {
+	            config.attachStream = media.video.srcObject;
+	            video.srcObject = media.video.srcObject;
+	            var mediaElement = getMediaElement(video, {
+	                width: '100%',
+	                buttons: []
+	            });
+	            dom.append(mediaElement);
+    	        },
+    	        onerror: function() {
+    	        }
+    	    });
 		};
         videosContainer.appendChild(mediaElement);
     },
@@ -138,9 +165,8 @@ function captureUserMedia(callback, failure_callback) {
             config.attachStream = stream;
 
             var mediaElement = getMediaElement(video, {
-            	//	width: (videosContainer.clientWidth / 5) - 50,
                 width: 260,
-                buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
+                buttons: ['mute-audio', 'mute-video',  'volume-slider']
             });
             mediaElement.toggle('mute-audio');
             videosContainer.appendChild(mediaElement);
@@ -215,7 +241,7 @@ function pinVideo(stream) {
 	var video = document.createElement('video');
     video.muted = true;
     video.volume = 0;
-
+    
     try {
         video.setAttributeNode(document.createAttribute('autoplay'));
         video.setAttributeNode(document.createAttribute('playsinline'));
@@ -229,14 +255,11 @@ function pinVideo(stream) {
         video: video,
         onsuccess: function(stream) {
             config.attachStream = stream;
-
             var mediaElement = getMediaElement(video, {
-            	//	width: (videosContainer.clientWidth / 5) - 50,
                 width: '100%',
                 buttons: []
             });
             dom.append(mediaElement);
-
         },
         onerror: function() {
         }
