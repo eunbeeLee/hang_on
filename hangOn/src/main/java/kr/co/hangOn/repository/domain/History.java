@@ -16,7 +16,14 @@ public class History {
 	 private String roomName;
 	 private String userName;
 	 private String userEmail;
-	 
+	private int roomNo;
+	
+	public int getRoomNo() {
+		return roomNo;
+	}
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
+	}
 	private int pageNo =1;
 	private int begin;
 	private int end;

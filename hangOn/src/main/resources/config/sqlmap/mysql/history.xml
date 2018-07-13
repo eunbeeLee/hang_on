@@ -12,6 +12,7 @@
 		<result column="r_days" property="rDays"></result>
 		<result column="begin_date" property="beginDate"></result>
 		<result column="begin_end" property="beginEnd"></result>
+		<result column="room_no" property="roomNo"></result>
 	</resultMap>
 	
 	<select id="selectHistoryByUser" parameterType="int" resultMap="historyMap">
@@ -112,4 +113,12 @@
 		 where user_no=#{userNo}
 		   and connect_time between (SELECT date_add(now(),INTERVAL -#{rDays} DAY) FROM dual) and now();
 	</select>
+	<insert id="insertHistory" parameterType="history">
+		insert into tb_history
+		(
+			user_no,ip_addr,act_code,room_no
+		)values(
+			#{userNo},#{ipAddr},#{actName},#{roomNo}
+		)
+	</insert>
 </mapper>
