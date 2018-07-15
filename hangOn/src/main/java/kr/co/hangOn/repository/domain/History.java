@@ -25,7 +25,14 @@ public class History {
 	 private String roomName;
 	 private String userName;
 	 private String userEmail;
+	 private String actCode;
 	 
+	public String getActCode() {
+		return actCode;
+	}
+	public void setActCode(String actCode) {
+		this.actCode = actCode;
+	}
 	private int pageNo =1;
 	private int begin;
 	private int end;

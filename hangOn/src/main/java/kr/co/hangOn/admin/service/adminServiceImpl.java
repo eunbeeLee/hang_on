@@ -10,12 +10,17 @@ import org.springframework.stereotype.Service;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Page;
 import kr.co.hangOn.repository.domain.PageResult;
+import kr.co.hangOn.repository.domain.Room;
+import kr.co.hangOn.repository.domain.RoomMember;
 import kr.co.hangOn.repository.mapper.HistoryMapper;
+import kr.co.hangOn.repository.mapper.RoomMapper;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 	@Autowired
-	public HistoryMapper mapper;
+	public HistoryMapper hisMapper;
+	@Autowired
+	public RoomMapper roomMapper;
 
 	@Override
 	public Map<String , Object> historyPageInfo(History history) {
@@ -26,8 +31,8 @@ public class AdminServiceImpl implements AdminService {
 		history.setBegin(search.getBegin());
 		history.setEnd(search.getEnd() );
 		
-		List <History> hList = mapper.selectRecentPeriod(history);
-		int count = mapper.selectHistoryCountByUser(history);
+		List <History> hList = hisMapper.selectRecentPeriod(history);
+		int count = hisMapper.selectHistoryCountByUser(history);
 		
 		Map<String , Object> result = new HashMap<>();
 		result.put("hList", hList);
@@ -38,4 +43,36 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 
+	@Override
+	public Map<String, Object> roomMgmPageInfo(int userNo) {
+		List<Room> rList = roomMapper.selectRoomByUser(userNo);
+		int roomCount = roomMapper.countRoomList(userNo);
+		
+		List<RoomMember> rmList;
+		Map<Integer,Object> rmMap = new HashMap<>();
+		
+		for(Room r : rList) {
+			RoomMember rm = new RoomMember();
+			rm.setActCode("da04");
+			rm.setRoomAuthCode("bb03");
+			rm.setRoomConnectCode("bb13");
+			rm.setRoomNo(r.getRoomNo());
+			rmList = roomMapper.selectMemberByRoom(rm);
+			rmMap.put(r.getRoomNo(), rmList);
+		}
+		Map<String, Object> result = new HashMap<>();
+		result.put("rList", rList);
+		result.put("rmMap", rmMap);
+		result.put("roomCount", roomCount);
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+

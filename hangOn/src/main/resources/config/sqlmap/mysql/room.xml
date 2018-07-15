@@ -14,10 +14,31 @@
 	</resultMap>
 		
 	<resultMap id="roomMemberMap" type="roomMember">
-		<result column="room_no" property="roonNo"/>
+		<result column="room_no" property="roomNo"/>
 		<result column="user_no" property="userNo"/>
 		<result column="room_auth_code" property="roomAuthCode"/>
 		<result column="room_connect_code" property="roomConnectCode"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="last_connet_time" property="lastConnetTime"/>
+		<result column="auth_info" property="authInfo"/>
+	</resultMap>
+	
+	<resultMap id="codeMap"  type="code">
+		<result column="frist_code" property="fristCode"/>
+		<result column="code_no" property="codeNo"/>
+		<result column="code_name" property="codeName"/>
+		<result column="code_info" property="codeInfo"/>
+		<result column="code_created_time" property="codeCreatedTime"/>
+		<result column="code_update_time" property="codeUpdateTime"/>
+	</resultMap>
+		<resultMap id="historyMap" type="history">
+		<result column="user_name" property="userName"></result>
+		<result column="connect_time" property="connectTime"></result>
+		<result column="ip_addr" property="ipAddr"></result>
+		<result column="act_code" property="actCode"></result>
+		<result column="history_seq" property="historySeq"></result>
+		<result column="room_no" property="roomNo"></result>
 	</resultMap>
 	<select id="roomByJoinCode" parameterType="string" resultType="int">
 		select room_no
@@ -33,7 +54,52 @@
 		   set room_connect_code='bb12'
 	    </if>
 		 where user_no=#{userNo}
-		 and room_no=#{roomNo}
+		   and room_no=#{roomNo}
 	</update>
-	
-</mapper>
+	<select id="selectRoomByUser" parameterType="int" resultMap="roomMap">
+		select *
+		  from tb_room
+		 where user_no = #{userNo}
+	</select>
+	<select id="selectMemberByRoom" parameterType="roomMember" resultMap="roomMemberMap">
+		select (select u.user_name
+		          from tb_user as u
+			     where u.user_no = rm.user_no) as user_name,
+			     (select u.user_no
+		          from tb_user as u
+			     where u.user_no = rm.user_no) as user_no,
+			   (select u.user_email
+		          from tb_user as u
+			     where u.user_no = rm.user_no) as user_email,
+			   (select h.connect_time 
+			      from tb_history as h
+			     where h.user_no = rm.user_no
+			       and h.act_code = #{actCode}) as last_connet_time,
+			   (select c.code_info
+			      from tb_code as c
+			     where c.code_no = rm.room_auth_code) as auth_info
+		  from tb_room_member as rm
+		 where room_no = #{roomNo} 
+		   and room_auth_code != #{roomAuthCode}
+		   and room_connect_code != #{roomConnectCode}
+	</select>
+	<select id="countRoomList" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_room
+		 where user_no = #{userNo}
+	</select>
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
