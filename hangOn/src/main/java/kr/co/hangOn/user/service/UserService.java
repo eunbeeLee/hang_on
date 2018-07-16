@@ -4,8 +4,8 @@ import kr.co.hangOn.repository.domain.User;
 
 public interface UserService {
 	public User login(String userEmail) throws Exception;
-	public int emailCheck(String userEmail);
-	public void stateCodeChangerLogin(String userEmail);
-	public void stateCodeChangerLogout(String userEmail);
-	public void register(User user);
+	public int emailCheck(String userEmail) throws Exception;
+	public void stateCodeChangerLogin(String userEmail) throws Exception;
+	public void stateCodeChangerLogout(String userEmail) throws Exception;
+	public void register(User user) throws Exception;
 }

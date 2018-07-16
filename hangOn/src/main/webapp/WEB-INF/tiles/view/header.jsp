@@ -19,13 +19,10 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
 	        <li class="nav-item">
-	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/login.do">메인페이지</a>
-	        </li>
-	        <li class="nav-item">
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/registerForm.do">회원가입</a>
 	        </li>
 	        <li class="nav-item">
-	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/customerService.do"><i class="fa fa-info-circle"></i>고객센터</a>
+	        	<a class="nav-link" href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-info-circle"></i>고객센터</a>
 	        </li>
 	        <li class="nav-item">
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/logout.do">로그아웃</a>

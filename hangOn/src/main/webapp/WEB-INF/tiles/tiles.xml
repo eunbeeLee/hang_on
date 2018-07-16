@@ -13,5 +13,8 @@
     <definition name="main/*" extends="main">
         <put-attribute name="content" value="/WEB-INF/jsp/main/{1}.jsp" />
     </definition>
+    <definition name="board/*" extends="main">
+        <put-attribute name="content" value="/WEB-INF/jsp/board/{1}.jsp" />
+    </definition>
     
 </tiles-definitions>
