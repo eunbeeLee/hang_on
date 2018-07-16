@@ -47,7 +47,7 @@ public class AdminController {
 	@RequestMapping("/delRoom.json")
 	@ResponseBody
 	public Map<String, Object> delRoomInfo(int roomNo){
-		
+		return null;
 	}
 	
 }
