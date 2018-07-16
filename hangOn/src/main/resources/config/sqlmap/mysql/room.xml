@@ -56,10 +56,13 @@
 		 where user_no=#{userNo}
 		   and room_no=#{roomNo}
 	</update>
-	<select id="selectRoomByUser" parameterType="int" resultMap="roomMap">
+	<select id="selectRoom" parameterType="room" resultMap="roomMap">
 		select *
 		  from tb_room
 		 where user_no = #{userNo}
+		 <if test='roomName !="0"'>
+		   and room_name = #{roomName} 
+		 </if>
 	</select>
 	<select id="selectMemberByRoom" parameterType="roomMember" resultMap="roomMemberMap">
 		select (select u.user_name

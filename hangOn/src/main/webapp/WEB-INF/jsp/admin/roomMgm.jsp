@@ -86,13 +86,14 @@
     </div>
   </nav>
 <!-- 검색 -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id = "contentWrapper">
   <div class="container-fluid">
           <div id="searchContainer">
            <form class="navbar-form navbar-left" role="search">
              <div class="form-group">
                <input type="text" id="roomSearchInput"class="form-control col-md-4 col-lg-4" placeholder="채팅방이름">
-               <button id="roomSearchBtn" type="submit" class="btn btn-default">검색</button>
+               <button id="roomSearchBtn" type="button" class="btn btn-default" data-toggle="modal">검색</button>
+               <button id="roomAllhBtn" type="button" class="btn btn-default">전체검색</button>
              </div>
             </form>
           </div>

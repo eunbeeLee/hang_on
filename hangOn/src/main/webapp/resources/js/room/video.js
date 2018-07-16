@@ -36,7 +36,6 @@ var config = {
             width: 260,
             buttons: ['mute-audio', 'mute-video', 'volume-slider']
         });
-        console.dir(media.video);
         mediaElement.id = media.stream.streamid;
         
         mediaElement.onclick = function(event) {
@@ -61,7 +60,7 @@ var config = {
 	            video.srcObject = media.video.srcObject;
 	            var mediaElement = getMediaElement(video, {
 	                width: '100%',
-	                buttons: []
+	                buttons: ['stop']
 	            });
 	            dom.append(mediaElement);
     	        },
@@ -166,8 +165,12 @@ function captureUserMedia(callback, failure_callback) {
 
             var mediaElement = getMediaElement(video, {
                 width: 260,
-                buttons: ['mute-audio', 'mute-video',  'volume-slider']
+                buttons: ['mute-audio', 'mute-video', 'volume-slider']
             });
+            /*let span = document.createElement('span');
+            let name = ${user};
+            let txt = document.createTextNode(name);
+            span.appendChild(txt);*/
             mediaElement.toggle('mute-audio');
             videosContainer.appendChild(mediaElement);
 
@@ -257,7 +260,7 @@ function pinVideo(stream) {
             config.attachStream = stream;
             var mediaElement = getMediaElement(video, {
                 width: '100%',
-                buttons: []
+                buttons: ['stop']
             });
             dom.append(mediaElement);
         },

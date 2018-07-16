@@ -3,13 +3,22 @@
  */
 window.onload = function(){
 	roomList();
-	swal('Any fool can use a computer');
+	/*모달 추가*/
+	modalUp("emptySearchModal", "검색어를 입력하세요");
+	modalUp("passEmptyModal", "기존비밀번호를 입럭하세요.");
+	modalUp("modModal", "수정완료되었습니다.");
+	modalUp("delModal", "정말 방을 삭제하시겠습니까");
+	roomSearch();
+	
 };
 
-	function roomList(){
+	function roomList(roomName){
+		if( roomName == null){
+			roomName = '0';
+		}
 		$.ajax({
 			url : "makeRoomList.json",
-			data : {"userNo" : 7},
+			data : {"userNo" : 7, "roomName" : roomName},
 			dataType :"json", 
 			type : "POST"
 		}).done(makeRoomList)
@@ -23,9 +32,10 @@ window.onload = function(){
 		var today = new Date();
 //		console.dir(data);
 		let count = document.querySelector("#countRoomList");
-		count.innerHTML = "<h6>생성된 회의방 갯수  : <strong>"+data.roomCount+"</strong>개</h6>"
+		count.innerHTML = "<h6>생성된 회의방 갯수  : <strong>"+data.rList.length+"</strong>개</h6>"
 		
 		var roomListContent = document.querySelector("#roomListContent");
+		roomListContent.innerHTML = "";
 		for(let room of data.rList){
 		//아코디언 헤드
 		html =
@@ -109,8 +119,8 @@ window.onload = function(){
 						}
 					  html +='</tbody>\
 					  </table>\
-					  <button type="button" class="btn btn-default room-edit-btn" id="'+room.roomNo+'_roomModBtn">수정</button>\
-					  <button type="button" class="btn btn-default room-edit-btn" id="'+room.roomNo+'_roomDelBtn">삭제</button>\
+					  <button type="button" class="btn btn-default room-edit-btn" data-toggle="modal" data-target="#modModal" id="'+room.roomNo+'_roomModBtn">수정</button>\
+					  <button type="button" class="btn btn-default room-edit-btn" data-toggle="modal" data-target="#delModal" id="'+room.roomNo+'_roomDelBtn">삭제</button>\
 					</form>\
 				</div>\
 				</div>\
@@ -165,17 +175,76 @@ window.onload = function(){
 	/*방 정보 수정 함수*/
 	function editRoomInfo(id){
 		if(id.split('_')[1] == "roomModBtn"){
+			let roomNodBtn = document.getElementById(id.split('_')[0]+"_roomModBtn");
+			 
 			var oldPass = document.querySelector("#oldPassAtRoom"+id.split('_')[0])
-//			console.log(oldPass.value);
+			/*기존 비밀번호를 미 입력시*/
 			if(oldPass.value == ""){
-				alert("기존 비밀번호를 입력하세요.");
+				roomNodBtn.setAttribute("data-target", "#passEmptyModal");
+			/*비밀번호 입력완료*/	
+			}else{
+				roomNodBtn.setAttribute("data-target", "#modModal");
 			}
 		}
 		if(id.split('_')[1] == "roomDelBtn"){
-			
+			let roomNodBtn = document.getElementById(id.split('_')[0]+"_roomDelBtn");
+			document.querySelector("#modalCheckBtn").onclick = function(){
+				alert("클릭");
+			}
 		}
 	}
-
+	
+	/*방 검색 함수*/
+	function roomSearch(){
+		var searchBtn = document.querySelector("#roomSearchBtn");
+		searchBtn.onclick=function(){
+			var roomSearchInput = document.querySelector("#roomSearchInput");
+			if(roomSearchInput.value == ""){
+				searchBtn.setAttribute("data-target", "#emptySearchModal");
+			}else{
+				searchBtn.removeAttribute("data-target");
+				$.ajax({
+					url : "makeRoomList.json",
+					data : {"userNo" : 7,"roomName": roomSearchInput.value } ,
+					dataType : "json",
+				}).done(makeRoomList)
+				.fail(function(e){
+					console.log(e);
+				});
+			}
+		}
+		
+		var roomAllhBtn = document.querySelector("#roomAllhBtn");
+		roomAllhBtn.onclick = function(){
+			roomList();
+		}
+	}
+	
+	/*모달 생성함수*/
+	function modalUp(modalId, modalBody){
+		var contentWrapper = document.querySelector("#contentWrapper");
+		var modal = '<div class="modal fade" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
+				      <div class="modal-dialog" role="document">\
+					      <div class="modal-content">\
+					        <div class="modal-header">\
+					          <h5 class="modal-title" id="exampleModalLabel"><strong>알림</strong></h5>\
+					          <button class="close" type="button" data-dismiss="modal" aria-label="Close">\
+					            <span aria-hidden="true">×</span>\
+					          </button>\
+					        </div>\
+					        <div class="modal-body">'+modalBody+'</div>\
+					        <div class="modal-footer">'
+					        if(modalId == "delModal"){
+					        	modal += '<a class="btn btn-danger" href="#" id="modalCheckBtn" data-dismiss="modal" aria-label="Close">확인</a>';
+					        }else{
+					        	modal += '<a class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">확인</a>';
+					        }
+					 modal +='</div>\
+					      </div>\
+					    </div>\
+					  </div>';
+		contentWrapper.innerHTML += modal;
+	}
 
 
 

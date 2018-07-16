@@ -1,5 +1,6 @@
 package kr.co.hangOn.admin.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.hangOn.admin.service.AdminService123;
+import kr.co.hangOn.admin.service.AdminService;
 import kr.co.hangOn.repository.domain.History;
+import kr.co.hangOn.repository.domain.Room;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private AdminService123 service;
+	private AdminService service;
 	
 	@RequestMapping("/dashBoard.do")
 	public String dashBoardView() {
@@ -37,9 +39,15 @@ public class AdminController {
 	
 	@RequestMapping("/makeRoomList.json")
 	@ResponseBody
-	public Map<String, Object> roomMgmPage(int userNo){
+	public Map<String, Object> roomMgmPage(Room room){
 //		System.out.println("넘어온 userNo"+userNo);
-		return service.roomMgmPageInfo(userNo);
+		return service.roomMgmPageInfo(room);
 	}
-
+	
+	@RequestMapping("/delRoom.json")
+	@ResponseBody
+	public Map<String, Object> delRoomInfo(int roomNo){
+		return null;
+	}
+	
 }

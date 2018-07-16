@@ -44,9 +44,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Map<String, Object> roomMgmPageInfo(int userNo) {
-		List<Room> rList = roomMapper.selectRoomByUser(userNo);
-		int roomCount = roomMapper.countRoomList(userNo);
+	public Map<String, Object> roomMgmPageInfo(Room room) {
+//		System.out.println("방이름"+room.getRoomName());
+		List<Room> rList = roomMapper.selectRoom(room);
+		int roomCount = roomMapper.countRoomList(room.getRoomNo());
 		
 		List<RoomMember> rmList;
 		Map<Integer,Object> rmMap = new HashMap<>();

@@ -19,16 +19,13 @@
 	 where user_email = #{userEmail}
 </select>
 
-<update id="stateCodeChangerLogin" parameterType="user">
-    update hangon.tb_user
-       set user_state_code = 'aa01'
-     where user_email = #{userEmail}
-</update>
-
-<update id="stateCodeChangerLogout" parameterType="user">
-    update hangon.tb_user
-       set user_state_code = 'aa02'
-     where user_email = #{userEmail}
+<update id="stateCodeChanger" parameterType="user">
+	UPDATE hangon.tb_user 
+	<set>
+		<if test="userStateCode != 'aa02'">user_state_code='aa02',</if>
+		<if test="userStateCode != 'aa01'">user_state_code='aa01',</if>
+	</set>
+	 WHERE user_email = #{userEmail}
 </update>
 
 <select id="emailCheck" parameterType="String" resultType="int">
