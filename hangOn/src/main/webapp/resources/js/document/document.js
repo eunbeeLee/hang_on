@@ -47,7 +47,13 @@ $("#documentFileUpload").on("change",function(){
 	        	</div>
 			`);
 			docIndex.html(index+1);
+			$("#documentShareView").append(`
+					<canvas id="canvas${index+1}" class="document-canvas"
+					></canvas>
+			`);
 		});
+		console.dir(documentShareView)
+		$("#canvas1").css("display","block");
 		PDFObject.embed("/hangOn"+result.docOriPath,"#documentViewArea",{id:"documentViewer"});
 		documentViewOrder.val(1);
 		documentViewOrder.attr("value",1);
@@ -88,3 +94,6 @@ documentList.on("click",".document-list-prev",function(){
 })
 
 $("#documentChange button").on("click",()=>{documentUpload.click();})
+
+
+
