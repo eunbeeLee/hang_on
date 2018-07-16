@@ -31,9 +31,6 @@ public class UserController {
 	public String login(User user, HttpSession session) throws Exception {
 		User loginUser = userService.login(user.getUserEmail());
 		String msg = "비밀번호가 틀렸습니다";
-//		System.out.println(loginUser.getUserPw());
-		System.out.println("아니 이게 무슨소리요");
-//		System.out.println(BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw()));
 		if (loginUser == null) {
 			msg = "등록되지 않은 이메일 입니다";
 		}	
@@ -41,8 +38,8 @@ public class UserController {
 		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
                 session.setAttribute("loginUser", loginUser);
                 session.setAttribute("userEmail", loginUser.getUserEmail());
-                userService.stateCodeChanger(loginUser.getUserEmail());
-                return "/main/login.do";
+                userService.stateCodeChanger(loginUser);
+                return "/lobby/view.do";
         }
 		return msg;
 	}
@@ -79,8 +76,10 @@ public class UserController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) throws Exception {
-		String userEmail = (String) session.getAttribute("userEmail");
-		userService.stateCodeChanger(userEmail);
+		User loginUser = (User) session.getAttribute("loginUser");
+		loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우
+		userService.stateCodeChanger(loginUser);
+		System.out.println(loginUser.getUserEmail());
 		session.invalidate();
 		return "redirect:login.do";
 	}

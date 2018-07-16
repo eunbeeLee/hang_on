@@ -21,7 +21,10 @@
 
 <update id="stateCodeChanger" parameterType="user">
 	UPDATE hangon.tb_user 
-	   SET user_state_code = IF (user_state_code = 'aa02', 'aa01', 'aa02') 
+	<set>
+		<if test="userStateCode != 'aa02'">user_state_code='aa02',</if>
+		<if test="userStateCode != 'aa01'">user_state_code='aa01',</if>
+	</set>
 	 WHERE user_email = #{userEmail}
 </update>
 

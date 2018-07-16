@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void stateCodeChanger(String userEmail) {
-		mapper.stateCodeChanger(userEmail);
+	public void stateCodeChanger(User loginUser) {
+		mapper.stateCodeChanger(loginUser);
 	}
 
 	@Override
