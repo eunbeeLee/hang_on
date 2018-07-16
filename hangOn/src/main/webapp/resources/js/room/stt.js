@@ -41,9 +41,6 @@ var translator = new Translator();
 
             localStorageGetItem();
 
-            var blockquote = document.getElementById('blockquote');
-            blockquote.style.display = 'block';
-            blockquote.innerHTML = 'You can translate your voice & texts among <strong class="highlight">' + languages.length + '</strong> languages.';
         });
         
         var textareaFrom = document.getElementById('textarea-from');
@@ -61,7 +58,7 @@ var translator = new Translator();
         
         document.getElementById('btn-convert-voice').onclick = function() {
             this.disabled = true;
-            this.innerHTML = 'Start Speaking!';
+            this.innerHTML = '음성 인식중';
 
             var languages = getLanguages();
             
@@ -76,7 +73,6 @@ var translator = new Translator();
             var languages = getLanguages();
             
             textareaTo.value = 'Converting into >> ' + document.getElementById('convert-into').value;
-        
             translator.translateLanguage(textareaFrom.value, {
                 from: languages.from,
                 to: languages.to,
@@ -85,23 +81,13 @@ var translator = new Translator();
                     localStorage.setItem('textarea-to', textareaTo.value);
                 
                     if(speakAsWell !== true) return;
-                    if (document.getElementById('robot-voice').checked) {
-                        translator.speakTextUsingRobot(translatedText, {
-                            workerPath: 'https://cdn.webrtc-experiment.com/Robot-Speaker.js',
-                            onWorkerFileDownloadStart: function() {
-                                console.log('Downloading worker file. It is about 2MB in size.');
-                            },
-                            onWorkerFileDownloadEnd: function() {
-                                console.log('Worker file is downloaded.');
-                            }
-                        });
-                    } else {
+                    else {
                         translator.speakTextUsingGoogleSpeaker({
                             textToSpeak: translatedText,
                             targetLanguage: languages.to,
 
                             // please use your own API key; if possible
-                            api_key: 'AIzaSyCgB5hmFY74WYB-EoWkhr9cAGr6TiTHrEE'
+                            api_key: 'AIzaSyBioPgfLWVXr2oLCz7_wo_bfPHOP-E5vUw'
                         });
                     }
                 }
@@ -123,10 +109,6 @@ var translator = new Translator();
         textareaTo.onchange = function() {
             localStorage.setItem('textarea-to', this.value);
         };
-        
-        document.getElementById('robot-voice').onchange = function() {
-            localStorage.setItem('robot-checked', this.checked + '');
-        };
 
         function localStorageGetItem() {
             if(localStorage.getItem('convert-from')) {
@@ -143,10 +125,6 @@ var translator = new Translator();
             
             if(localStorage.getItem('textarea-to')) {
                 textareaTo.value = localStorage.getItem('textarea-to');
-            }
-            
-            if(localStorage.getItem('robot-checked')) {
-                document.getElementById('robot-voice').checked = localStorage.getItem('robot-checked') === 'true';
             }
         }
 
