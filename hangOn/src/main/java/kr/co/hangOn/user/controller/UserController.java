@@ -36,7 +36,7 @@ public class UserController {
 		}	
 		// parameter로 받은 평문과 DB에 저장된 암호화값 비교
 		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
-                session.setAttribute("loginUser", loginUser);
+                session.setAttribute("user", loginUser);
                 session.setAttribute("userEmail", loginUser.getUserEmail());
                 userService.stateCodeChanger(loginUser);
                 return "/lobby/view.do";
