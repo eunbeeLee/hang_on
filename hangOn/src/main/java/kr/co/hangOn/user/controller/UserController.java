@@ -26,15 +26,14 @@ public class UserController {
 		return "main/login";
 	}
 	
-	@SuppressWarnings({ "unused" })
 	@RequestMapping("/loginPost.json")
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
 		User loginUser = userService.login(user.getUserEmail());
-		String msg = "";
-		System.out.println(loginUser.getUserPw());
+		String msg = "비밀번호가 틀렸습니다";
+//		System.out.println(loginUser.getUserPw());
 		System.out.println("아니 이게 무슨소리요");
-		System.out.println(BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw()));
+//		System.out.println(BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw()));
 		if (loginUser == null) {
 			msg = "등록되지 않은 이메일 입니다";
 		}	
@@ -42,25 +41,11 @@ public class UserController {
 		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
                 session.setAttribute("loginUser", loginUser);
                 session.setAttribute("userEmail", loginUser.getUserEmail());
-                userService.stateCodeChangerLogin(loginUser.getUserEmail());
+                userService.stateCodeChanger(loginUser.getUserEmail());
                 return "/main/login.do";
         }
-		System.out.println(msg);
 		return msg;
 	}
-
-        // 해당 email을 가진 유저가 없거나 비밀번호 불일치
-//        ra.addFlashAttribute("resultMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-//        return "redirect:/login";
-			
-//		} else if (!loginUser.getUserPw().equals(user.getUserPw())) {
-//			msg = "비밀번호가 잘못됐습니다";
-//		} else {
-//			session.setAttribute("user", loginUser);
-//			session.setAttribute("userEmail", loginUser.getUserEmail());
-//			userService.stateCodeChangerLogin(loginUser.getUserEmail());
-//			return "/lobby/view.do";
-//		}
 		
 	@RequestMapping("/emailCheck.json")
 	@ResponseBody
@@ -95,7 +80,7 @@ public class UserController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) throws Exception {
 		String userEmail = (String) session.getAttribute("userEmail");
-		userService.stateCodeChangerLogout(userEmail);
+		userService.stateCodeChanger(userEmail);
 		session.invalidate();
 		return "redirect:login.do";
 	}
