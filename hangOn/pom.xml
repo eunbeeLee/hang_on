@@ -129,7 +129,7 @@
 		    <version>5.0.6.RELEASE</version>
 		</dependency>	
 		
-		<!-- DB 연결, MySQL -->	
+		<!-- DB 연결, MySQL	 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -211,6 +211,25 @@
 		    <version>3.0.8</version>
 		</dependency>	
 			
+		<!-- 이메일 인증 기능 -->
+<!--         <dependency> -->
+<!--             <groupId>javax.mail</groupId> -->
+<!--             <artifactId>mail</artifactId> -->
+<!--             <version>1.4</version> -->
+<!--         </dependency> -->
+        
+<!--         <dependency> -->
+<!--             <groupId>org.springframework</groupId> -->
+<!--             <artifactId>spring-context-support</artifactId> -->
+<!--             <version>4.3.8.RELEASE</version> -->
+<!--         </dependency> -->
+ 
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.integration</groupId> -->
+<!--             <artifactId>spring-integration-mail</artifactId> -->
+<!--             <version>4.3.8.RELEASE</version> -->
+<!--         </dependency>	 -->
+		
 	</dependencies>
   
   	<build>

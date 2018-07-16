@@ -1,0 +1,7 @@
+.experiment{
+	display: none;
+    position: absolute;
+    top: 65px;
+    left: 100px;
+    z-index: 3;
+}

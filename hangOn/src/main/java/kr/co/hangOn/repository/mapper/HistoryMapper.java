@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Page;
 import kr.co.hangOn.repository.domain.Room;
+import kr.co.hangOn.repository.domain.RoomMember;
 
 public interface HistoryMapper {
 	List<History> selectHistoryByUser(int userNo);
@@ -21,6 +22,8 @@ public interface HistoryMapper {
 	//최근 일자 히스토리 갯수
 	int selectRecentHistoryCount(History history);
 	
-	//히스토리 입력
-	void insertHistory(History history);
+    //히스토리 입력
+    void insertHistory(History history);
+   
+	
 }

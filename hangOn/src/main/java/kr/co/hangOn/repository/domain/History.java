@@ -10,27 +10,36 @@ public class History {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
+    private int roomNo;
+    
+    public int getRoomNo() {
+        return roomNo;
+    }
+    public void setRoomNo(int roomNo) {
+        this.roomNo = roomNo;
+    }
+
 	private String actName;
 	 private Date connectTime;
 	 private String ipAddr;
 	 private String roomName;
 	 private String userName;
 	 private String userEmail;
-	private int roomNo;
-	
-	public int getRoomNo() {
-		return roomNo;
+	 private String actCode;
+	 
+	public String getActCode() {
+		return actCode;
 	}
-	public void setRoomNo(int roomNo) {
-		this.roomNo = roomNo;
+	public void setActCode(String actCode) {
+		this.actCode = actCode;
 	}
 	private int pageNo =1;
 	private int begin;
 	private int end;
 	
 	
-	private Date beginDate;
-	private Date endDate; 
+	private String beginDate;
+	private String endDate; 
 	
 	private int rDays;
 	
@@ -42,17 +51,17 @@ public class History {
 	public void setrDays(int rDays) {
 		this.rDays = rDays;
 	}
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public Date getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public void setBeginDate(String string) {
+		this.beginDate = string;
 	}
 	public void setBegin(int begin) {
 		this.begin = begin;

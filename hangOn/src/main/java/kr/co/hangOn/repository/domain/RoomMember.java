@@ -1,5 +1,7 @@
 package kr.co.hangOn.repository.domain;
 
+import java.util.Date;
+
 public class RoomMember {
 	private int roomNo;
 	private int userNo;
@@ -8,6 +10,42 @@ public class RoomMember {
 	private String roomConnectCode;
 	private String roomJoinCode;
 	
+	private String userName;
+	private String userEmail;
+	private Date lastConnetTime;
+	private String authInfo;
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public Date getLastConnetTime() {
+		return lastConnetTime;
+	}
+	public void setLastConnetTime(Date lastConnetTime) {
+		this.lastConnetTime = lastConnetTime;
+	}
+	public String getAuthInfo() {
+		return authInfo;
+	}
+	public void setAuthInfo(String authInfo) {
+		this.authInfo = authInfo;
+	}
+	private String actCode;
+	public String getActCode() {
+		return actCode;
+	}
+	public void setActCode(String actCode) {
+		this.actCode = actCode;
+	}
 	public String getRoomJoinCode() {
 		return roomJoinCode;
 	}
