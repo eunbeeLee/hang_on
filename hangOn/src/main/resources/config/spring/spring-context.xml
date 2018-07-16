@@ -37,8 +37,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
       	p:driverClassName="com.mysql.cj.jdbc.Driver"
         p:url="jdbc:mysql://hangon.cl2otyezrmgx.ap-northeast-2.rds.amazonaws.com:3306/hangon?useUnicode=true&amp;characterEncoding=utf8"    
-        p:username="???" 
-        p:password="???" />
+        p:username="hangOn" 
+        p:password="bitfinal#45" />
 	
 	<!-- sqlConfig.xml 내부 설정을 하나의 bean 객체로 처리 -  VO 객체 alias 지정, mappers -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

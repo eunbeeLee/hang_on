@@ -65,21 +65,21 @@
     <!-- tiles 설정 끝 -->
     
     <!-- email 인증 : gmail -->
-    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-        <property name="defaultEncoding" value="utf-8"/>
-        <property name="username" value="구글이메일@gmail.com" />
-        <property name="password" value="구글비밀번호" />
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.smtp.auth">true</prop>
-            </props>
-        </property>
-    </bean>
+<!--     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" > -->
+<!--         <property name="host" value="smtp.gmail.com" /> -->
+<!--         <property name="port" value="587" /> -->
+<!--         <property name="defaultEncoding" value="utf-8"/> -->
+<!--         <property name="username" value="구글이메일@gmail.com" /> -->
+<!--         <property name="password" value="구글비밀번호" /> -->
+<!--         <property name="javaMailProperties"> -->
+<!--             <props> -->
+<!--                 <prop key="mail.smtp.starttls.enable">true</prop> -->
+<!--                 <prop key="mail.smtp.auth">true</prop> -->
+<!--             </props> -->
+<!--         </property> -->
+<!--     </bean> -->
      
-    <bean id="email" class="org.poom.sap.member.model.vo.Email"></bean>
-    <bean id="emailSender" class="org.poom.sap.common.util.EmailSender"></bean>
+<!--     <bean id="email" class="org.poom.sap.member.model.vo.Email"></bean> -->
+<!--     <bean id="emailSender" class="org.poom.sap.common.util.EmailSender"></bean> -->
 	
 </beans>

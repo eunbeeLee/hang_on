@@ -18,7 +18,8 @@
   <!-- Custom styles for this template-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
   <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/sweetalert/sweetalert2.css" />
+<script src="${pageContext.request.contextPath}/sweetalert/sweetalert2.all.min.js"></script>
   <!-- 아이콘 출력을 위한
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <style>
@@ -97,108 +98,16 @@
           </div>
           <!-- !검색 -->
           <div id="countRoomList">
-<!-- 	          <h6>생성된 회의방 갯수 : 2</h6> -->
           </div>
           
+		  <!-- 아코디언 예제 시작 -->
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-         </div> 
-          
-          
-<!-- 아코디언 예제 시작 -->
-  <div class="col-md-8 col-xs-12 panel panel-default room-header" id="roomListContent">
-  
-<!--     <div class=" card mb-3 panel-heading" role="tab" id="headingOne"> -->
-<!--       <h6 class="card-header" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
-<!--         <strong>파이널 프로젝트</strong> -->
-<!--       </h6> -->
-<!--     </div> -->
-    
-<!--     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"> -->
-<!--       <div class="panel-body"> -->
-<!--                 <div id="existRoomList" class="container col-md-11"> -->
-<!-- 				<form> -->
-<!-- 			         <div class="form-group row"> -->
-<!-- 			           <label for="inputPassword" class="col-md-2 control-label">회의방설명</label> -->
-<!-- 			           <div class="col-md-10"> -->
-<!-- 			             <textarea class="form-control" id="roomInfo" placeholder="회의방설명"></textarea> -->
-<!-- 			           </div> -->
-<!-- 			         </div> -->
-<!-- 			         <div class="form-group row"> -->
-<!-- 			           <label for="inputPassword" class="col-md-2 control-label">비밀번호</label> -->
-<!-- 			           <div class="col-md-10"> -->
-<!-- 			             <input type="password" class="form-control pass-input" id="oldInputPassword" placeholder="기존의 비밀번호를 입력하세요"> -->
-<!-- 			             <input type="password" class="form-control pass-input" id="newInputPassword" placeholder="새로운 비밀번호를 입력하세요"> -->
-<!-- 			           </div> -->
-<!-- 			         </div> -->
-<!-- 			       <div class="form-group row fix-content"> -->
-<!-- 			           <label class="col-sm-2 control-label">생성날짜</label> -->
-<!-- 			           <div class="col-sm-10"> -->
-<!-- 			             <p class="form-control-static">2018.08.01 15:55</p> -->
-<!-- 			           </div> -->
-<!-- 			         </div> -->
-<!-- 			       <div class="form-group row fix-content "> -->
-<!-- 			           <label class="col-sm-2 control-label">총 회의 시간</label> -->
-<!-- 			           <div class="col-sm-10"> -->
-<!-- 			             <p class="form-control-static">01:34:23</p> -->
-<!-- 			           </div> -->
-<!-- 			         </div> -->
-<!-- 				  <table class="table table-border" id="roomMemberTable"> -->
-<!-- 					  <thead> -->
-<!-- 					    <tr> -->
-<!-- 					      <th>이름</th> -->
-<!-- 					      <th>이메일</th> -->
-<!-- 					      <th>마지막 참여시간</th> -->
-<!-- 					      <th>권한</th> -->
-<!-- 					      <th>권한부여</th> -->
-<!-- 					      <th>삭제</th> -->
-<!-- 					    </tr> -->
-<!-- 					  </thead>  -->
-					  
-<!-- 					  <tbody> -->
-<!-- 					  <tr> -->
-<!-- 					  	<td>이은비</td> -->
-<!-- 					  	<td>eundee1224@gmail.com</td> -->
-<!-- 					  	<td>2018.08.01 15:55</td> -->
-<!-- 					  	<td>참여자</td> -->
-<!-- 					  	<td> -->
-<!-- 						  <label class="switch"> -->
-<!-- 						  <input type="checkbox"> -->
-<!-- 						  <span class="slider round"></span> -->
-<!-- 						</label> -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 						  <button type="button" class="btn btn-sm btn-danger mem-del-btn">내보내기</button> -->
-<!-- 						</td> -->
-<!-- 					  </tr> -->
-<!-- 					  <tr> -->
-<!-- 					  	<td>이은비</td> -->
-<!-- 					  	<td>eundee1224@gmail.com</td> -->
-<!-- 					  	<td>2018.08.01 15:55</td> -->
-<!-- 					  	<td>참여자</td> -->
-<!-- 					  	<td> -->
-<!-- 						  <label class="switch"> -->
-<!-- 						  <input type="checkbox"> -->
-<!-- 						  <span class="slider round"></span> -->
-<!-- 						</label> -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 						  <button type="button" class="btn btn-sm btn-danger mem-del-btn">내보내기</button> -->
-<!-- 						</td> -->
-<!-- 					  </tr> -->
-					  	
-<!-- 					  </tbody> -->
-<!-- 				  </table> -->
-				  
-<!-- 				  <button type="submit" class="btn btn-default pull-right room-edit-btn" id="roomDelBtn">삭제</button> -->
-<!-- 				  <button type="submit" class="btn btn-default pull-right room-edit-btn" id="roomModBtn">수정</button> -->
-<!-- 				</form>   	 -->
-<!--             </div> -->
-<!--       </div> -->
-<!--     </div> -->
+          </div> 
+		  <div class="col-md-8 col-xs-12 panel panel-default room-header" id="roomListContent">
+		  </div>
+		  <!-- 아코디언 예제 끝 -->
   </div>
- 
-<!-- 아코디언 예제 끝 -->
-	</div>
+  
     <!-- /.container-fluid-->
     <footer class="sticky-footer">
       <div class="container">

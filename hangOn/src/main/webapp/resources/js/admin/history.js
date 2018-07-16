@@ -35,7 +35,7 @@ function pageList(pageNo, rDays){
 }
 /*히스토리 테이블 출력 함수*/
 function makeTableList(result){
-	console.log("makeTableList : ",result);
+//	console.log("makeTableList : ",result);
 			var hTable = document.querySelector("#historyTable");
 			html = '<thead>\
 		        	  <tr>\
@@ -66,8 +66,8 @@ function makeTableList(result){
 
 /* 페이징 함수*/
 function makePageLink(data){
-	console.log("시작일 : ", data.startDate);
-	console.log("페이지 결과: ", data.pageResult);
+//	console.log("시작일 : ", data.startDate);
+//	console.log("페이지 결과: ", data.pageResult);
 	
 	var page = document.querySelector("#paginationContent");
 	var html = "";
