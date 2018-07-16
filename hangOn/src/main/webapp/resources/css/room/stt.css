@@ -1,7 +1,32 @@
 .experiment{
 	display: none;
     position: absolute;
-    top: 65px;
-    left: 100px;
+    top: 15px;
+    left: 10px;
     z-index: 3;
+    opacity: 0.9;
+    background-color: #fff;
+}
+#convert-from,#convert-into{
+    width: 45%;
+}
+.section-divider{
+	border: solid 1px #dddddd
+}
+#textarea-from,#textarea-to{
+    width: 100%;
+   	height: 100px;
+}
+.btn-stt{
+	font-size: 14px;
+	background-color: white;
+	border: 1px solid #c0c0c0;
+/* 	color : #c0c0c0; */
+/* 	font-weight: bold; */
+	margin: 0px 5px 5px 0px;
+}
+.btn-stt:hover{
+	background-color: #c0c0c0;
+	color: white;
+	
 }

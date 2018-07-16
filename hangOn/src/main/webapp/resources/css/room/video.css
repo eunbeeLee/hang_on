@@ -14,3 +14,22 @@ audio, video {
     width: 99%;
     height: 200px;
 }
+#videos-container > div > span{
+    margin-left: 100px;
+}
+
+.unmute-audio{
+	background-image: url("https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/d87de7bf3849bc7437f7fd47d6124bf8/baseline-volume_up-24px.svg") !important;
+}
+.mute-audio{
+	background-image: url("https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/c8e853f1d92afc43e3409c6a57b1b6ec/baseline-volume_off-24px.svg") !important;
+}
+.unmute-video{
+	background-image: url("https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/5b8d74b7dbf1fff4ac9ed3ce633c44d5/baseline-videocam_off-24px.svg") !important;
+}
+.mute-video{
+	background-image: url("https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/23c7446dfb8e1b7d57e351d25810b65e/baseline-videocam-24px.svg") !important;
+}
+.stop{
+	background-image: url("https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/30896877d28fca9f53ee76a529b43d17/baseline-clear-24px.svg") !important;
+}
