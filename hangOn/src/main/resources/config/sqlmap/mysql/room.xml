@@ -32,7 +32,7 @@
 		<result column="code_created_time" property="codeCreatedTime"/>
 		<result column="code_update_time" property="codeUpdateTime"/>
 	</resultMap>
-		<resultMap id="historyMap" type="history">
+	<resultMap id="historyMap" type="history">
 		<result column="user_name" property="userName"></result>
 		<result column="connect_time" property="connectTime"></result>
 		<result column="ip_addr" property="ipAddr"></result>

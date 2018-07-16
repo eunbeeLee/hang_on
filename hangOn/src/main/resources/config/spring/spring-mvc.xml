@@ -64,7 +64,7 @@
     </bean>
     <!-- tiles 설정 끝 -->
     
-    <!-- email 인증 : gmail -->
+<!--     email 인증 : gmail -->
 <!--     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" > -->
 <!--         <property name="host" value="smtp.gmail.com" /> -->
 <!--         <property name="port" value="587" /> -->

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.hangOn.admin.service.AdminService;
+import kr.co.hangOn.admin.service.AdminService123;
 import kr.co.hangOn.repository.domain.History;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	private AdminService service;
+	private AdminService123 service;
 	
 	@RequestMapping("/dashBoard.do")
 	public String dashBoardView() {

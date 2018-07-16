@@ -24,6 +24,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/chat.css">	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/video.css">	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/stt.css">	
 </head>
 
 <body class="fixed-nav bg-dark sidenav-toggled" id="page-top">
@@ -54,7 +55,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="음성번역">
-          <a class="nav-link" href="tables.html">
+          <a id="sttNav" class="nav-link" >
               <i class="material-icons">g_translate</i>
             <span class="nav-link-text">음성번역</span>
           </a>
@@ -120,6 +121,9 @@
     <!-- /.content-wrapper-->
 
   </div>
+  <c:import  url="/WEB-INF/jsp/room/stt.jsp">
+  </c:import>
+  
   <c:import  url="/WEB-INF/jsp/room/chat.jsp">
   </c:import>
   
@@ -146,7 +150,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/document/pdfobject.min.js"></script><%-- document js 진솔 --%>
 	<script src="${pageContext.request.contextPath}/resources/js/document/document.js"></script><%-- document js 진솔 --%>
 	
-	<!-- video confernece -->
+	<!-- 영상회의 -->
 	<script src="https://cdn.webrtc-experiment.com/getMediaElement.min.js"> </script>
     <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
@@ -154,11 +158,13 @@
     <script src="https://cdn.webrtc-experiment.com/CodecsHandler.js"></script>
     <script src="https://cdn.webrtc-experiment.com/video-conferencing/RTCPeerConnection-v1.5.js"> </script>
     <script src="https://cdn.webrtc-experiment.com/video-conferencing/conference.js"> </script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
-    
-	<script src="${pageContext.request.contextPath}/resources/js/room/chat.js"></script>
+    <!-- 음성번역 -->
+    <script src="https://cdn.webrtc-experiment.com/Translator.js"></script>
+     
+     
+<%-- 	<script src="${pageContext.request.contextPath}/resources/js/room/chat.js"></script> --%>
 	<script src="${pageContext.request.contextPath}/resources/js/room/video.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/room/stt.js"></script>
 </body>
 
 </html>
