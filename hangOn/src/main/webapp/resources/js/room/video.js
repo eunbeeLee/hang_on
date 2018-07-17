@@ -37,8 +37,8 @@ var config = {
             buttons: ['mute-audio', 'mute-video', 'volume-slider']
         });
         mediaElement.id = media.stream.streamid;
-        
         mediaElement.onclick = function(event) {
+        	$('#page-top > div.content-wrapper > div.main-doc > .media-container').remove();
         	/* 화면복사 */      	
         	let dom = $('.main-doc');
         	var video = document.createElement('video');
@@ -244,7 +244,7 @@ function pinVideo(stream) {
 	var video = document.createElement('video');
     video.muted = true;
     video.volume = 0;
-    
+    $('#page-top > div.content-wrapper > div.main-doc > .media-container').remove();
     try {
         video.setAttributeNode(document.createAttribute('autoplay'));
         video.setAttributeNode(document.createAttribute('playsinline'));
