@@ -15,33 +15,43 @@ public class LobbyServiceImpl implements LobbyService {
 	
 	@Autowired
 	private LobbyMapper mapper;
-
+	
+	/**
+	 * @return
+	 * 난수 생성 메서드
+	 */
+	public String randomNum() {
+		String randomNum = "";
+		Random r = new Random();
+		StringBuffer buf =new StringBuffer();
+		for(int i = 0 ; i < 6 ; i++){
+			if(r.nextBoolean()){
+				buf.append((char)((int)(r.nextInt(26))+65));
+			}else{
+				buf.append((r.nextInt(10)));
+			}
+		}
+		randomNum = String.valueOf(buf);
+		return randomNum;
+	}
+	
 	@Override
 	public void roomRegist(Room room) {
 		String randomNum = "";
 		while(true) {
-			// 난수 생성
-			Random r = new Random();
-			StringBuffer buf =new StringBuffer();
-			for(int i = 0 ; i < 6 ; i++){
-				if(r.nextBoolean()){
-					buf.append((char)((int)(r.nextInt(26))+65));
-				}else{
-					buf.append((r.nextInt(10)));
-				}
-			}
-			randomNum = String.valueOf(buf);
+			randomNum = randomNum();
 			// 난수 중복 검사
 			int result = mapper.selectJoinCodeByRandomNum(randomNum);
 			if(result == 1) continue;
 			break;
 		}
+		
     	// 방 접속 경로 코드
     	room.setRoomJoinCode(randomNum);
     	// db에 새로운 room 저장
     	mapper.insertRoom(room);
     	
-//    	 방 멤버 생성
+    	// 방 멤버 생성
     	RoomMember member = new RoomMember();
     	member.setRoomNo(room.getRoomNo());
     	member.setUserNo(room.getUserNo());
@@ -58,6 +68,7 @@ public class LobbyServiceImpl implements LobbyService {
 
 	@Override
 	public int roomFindUser(RoomMember member) {
+		member.setRoomConnectCode("bb13");
 		// 사용자가 등록한 방인지 확인
 		int userCount = mapper.selectFindUserCount(member);
 		// 방 참여인수가 6명인지 확인
@@ -68,9 +79,10 @@ public class LobbyServiceImpl implements LobbyService {
 			return 2;
 		}
 		else {
-			// 탈퇴한 회원인지 아닌지 확인
+			// 탈퇴한 회원인지 아닌지 확인 탈퇴코드 bb13
 			int leaveCnt = mapper.selectUserLeaveCount(member);
 			if(leaveCnt == 1) {
+				member.setRoomConnectCode("bb12");
 				mapper.updateUserRoomRegist(member);
 				return 0;
 			} else {
@@ -94,6 +106,7 @@ public class LobbyServiceImpl implements LobbyService {
 
 	@Override
 	public void roomUserLeave(RoomMember roomMember) {
+		roomMember.setRoomConnectCode("bb13");
 		mapper.updateUserRoomLeave(roomMember);
 	}
 

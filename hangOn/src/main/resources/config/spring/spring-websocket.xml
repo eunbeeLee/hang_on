@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/websocket   
+    http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<websocket:handlers>
+		<!-- path : 컨트롤러, 사용할 url, handler : bean의 id.. -->
+		<!-- /chatDetail.do를 호출할 경우 핸들러클래스 동작 -->
+		<websocket:mapping handler="chat" path="/room/chat.do" />
+		<!-- 사용자의 세션 정보를 웹소켓 세션을 통해 꺼냄 -->
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+	
+	<bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <!-- 메시지 데이터의 전송 사이즈 -->
+        <property name="maxTextMessageBufferSize" value="8192"/>
+        <!-- 이미지나, 파일 전송 사이즈 -->
+        <property name="maxBinaryMessageBufferSize" value="819200"/>
+    </bean>
+</beans>

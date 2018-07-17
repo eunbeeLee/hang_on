@@ -7,6 +7,18 @@
 /* 	width: 100%; */
 /* 	height: 100%; */
 /* } */
+#alarm {
+	background: gray;
+	font-weight: bold;
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	margin-bottom: 5px;
+}
+#alarm > span {
+	display: block;
+	margin: 0 auto;
+}
+
 #chatBigBox {
     position: fixed;
     height: 87%;
@@ -72,6 +84,9 @@ a{
     margin-bottom: 10px;
 }
 
+.self time {
+	float: left;
+}
     
 .chat li {
     padding: 0.5rem;
@@ -122,7 +137,7 @@ a{
     position: relative;
     top: 10px;
     right: 0px;
-    left: 50px;
+    left: 60px;
     width: 0px;
     height: 0px;
     border: 5px solid #fff;
@@ -155,19 +170,23 @@ a{
     border-top-color: transparent;
     box-shadow: 0px 2px 0px #D4D4D4;
 }
-
+.otherName {
+	font-weight: bold;
+}
 .msg {
+	word-break: break-all;
     background: white;
     min-width: 50px;
     padding: 10px;
     border-radius: 2px;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
-    margin: 10px 10px;
+    margin: 10px 20px;
 }
 .msg p {
     font-size: 0.8rem;
     margin: 0 0 0.2rem 0;
     color: #777;
+    word-spacing:normal;
 }
 .msg img {
     position: relative;
@@ -194,12 +213,10 @@ a{
     font-size: 0.7rem;
     color: #ccc;
     margin-top: 3px;
-    float: right;
     cursor: default;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+}
+.other time {
+	float: right;
 }
 .msg time:before{
     content:"\f017";
@@ -209,16 +226,6 @@ a{
     margin-right: 4px;
 }
 
-emoji{
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin-top: -7px;
-    margin-right: 2px;
-    transform: translate3d(0px, 3px, 0px);
-}
 emoji.please{background-image: url(https://imgur.com/ftowh0s.png);}
 emoji.lmao{background-image: url(https://i.imgur.com/MllSy5N.png);}
 emoji.happy{background-image: url(https://imgur.com/5WUpcPZ.png);}
@@ -293,25 +300,9 @@ emoji.funny{background-image: url(https://i.imgur.com/qKia58V.png);}
     margin: 4% 2%;
     background-color: #dbdbdb;
 }
-.emojis {
-    float: left;
-    width: 10%;
-    margin-top: 10px;
-    margin-left: 7px;
-    height: 30%;
-}
-.emojis i {
-    font-size: 40px;
-    cursor: pointer;
-    color: gray;
-}
-.emojis:active {
-    opacity: 0.9;
-}
 #textBoxBtn {
-    clear: both;
-    height: 30%;
+    height: 60%;
     width: 13%;
     border-radius: 10px;
-    margin-top: 3%;
+    margin-top: 5%;
 }
