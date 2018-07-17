@@ -37,27 +37,28 @@
         	
         	<div id="documentUtilBtns">
         	
-        		<button class="document-util-btn btn btn-default" title="마우스">
+        		<button value="mouse" class="document-util-btn btn btn-default" title="마우스">
 	        		<i class="fa fa-mouse-pointer doc-util-btn-detail" aria-hidden="true"></i>
         		</button>
         		
-        		<button class="document-util-btn btn btn-default" title="포인터">
+        		<button value="pointer" class="document-util-btn btn btn-default" title="포인터">
 	        		<i class="fa fa-dot-circle-o" aria-hidden="true"></i>
         		</button>
         		
-        		<button class="document-util-btn btn btn-default" title="펜">
+        		<button value="pen" class="document-util-btn btn btn-default" title="펜">
 	        		<i class="fa fa-pencil" aria-hidden="true"></i>
         		</button>
         		
-        		<button class="document-util-btn btn btn-default" title="지우개">
+        		<button value="eraser" class="document-util-btn btn btn-default" title="지우개">
 	        		<i class="fa fa-eraser doc-util-btn-detail" aria-hidden="true"></i>
         		</button>
         		
-        		<button class="document-util-btn btn btn-default" title="색변경">
-	        		<i class="material-icons doc-util-btn-detail-plus">
+        		<button id="documentColorBtn" class="document-util-btn btn btn-default" title="색변경">
+	        		<i id="colorLens" class="material-icons doc-util-btn-detail-plus">
 						color_lens
 					</i>
         		</button>
+        		<input type="color" id="documentColor">
         		
         		<button class="document-util-btn btn btn-default" title="텍스트">
 	        		<i class="fa fa-font doc-util-btn-detail" aria-hidden="true"></i>
@@ -94,7 +95,7 @@
         	
         	
         	<div id="documentShareView">
-        		<img src="">	
+        		<img id="documentViewImg" src="">	
         	</div>
         	
         </div>
