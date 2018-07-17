@@ -3,11 +3,7 @@
  */
 window.onload = function(){
 	roomList();
-	/*모달 추가*/
-	modalUp("emptySearchModal", "검색어를 입력하세요");
-	modalUp("passEmptyModal", "기존비밀번호를 입럭하세요.");
-	modalUp("modModal", "수정완료되었습니다.");
-	modalUp("delModal", "정말 방을 삭제하시겠습니까");
+	modalMaker();
 	roomSearch();
 	
 };
@@ -23,7 +19,7 @@ window.onload = function(){
 			type : "POST"
 		}).done(makeRoomList)
 		  .fail(function(e){
-			  console.dir(e);
+//			  console.dir(e);
 		  });
 	}
 	
@@ -53,6 +49,12 @@ window.onload = function(){
 			      <div class="panel-body">\
 				    <div class="container col-md-11">\
 					<form>\
+					  <div class="form-group row">\
+						<label for="inputPassword" class="col-md-2 control-label">회의방이름</label>\
+						<div class="col-md-10">\
+						<textarea class="form-control pass-input" id="room'+room.roomNo+'Name" placeholder="'+room.roomName+'"></textarea>\
+						</div>\
+					  </div>\
 				      <div class="form-group row">\
 				        <label for="inputPassword" class="col-md-2 control-label">회의방설명</label>\
 				         <div class="col-md-10">\
@@ -92,10 +94,11 @@ window.onload = function(){
 							}
 							
 							html += '<tr>\
+								<td style = "display : none;">'+member.userNo+'</td>\
 								<td>'+member.userName+'</td>\
 								<td>'+member.userEmail+'</td>\
 								<td>'+member.lastConnectTime+'</td>\
-								<td id="authInfo_'+room.roomNo+'_'+member.userNo+'">'+member.authInfo+'</td>\
+								<td class="auth-info-'+room.roomNo+'" id="authInfo_'+room.roomNo+'_'+member.userNo+'" change =0>'+member.authInfo+'</td>\
 								<td>\
 								<label class="switch">';
 							if(member.authInfo == "참여자"){
@@ -107,7 +110,7 @@ window.onload = function(){
 								</label>\
 								</td>\
 								<td>\
-							 	  <button type="button" class="btn btn-sm btn-danger mem-del-btn">내보내기</button>\
+							 	  <button type="button" id="memberOut_'+room.roomNo+'_'+member.userNo+'" class="btn btn-sm btn-danger mem-del-btn">내보내기</button>\
 								</td>\
 							 </tr>';
 								
@@ -119,7 +122,7 @@ window.onload = function(){
 						}
 					  html +='</tbody>\
 					  </table>\
-					  <button type="button" class="btn btn-default room-edit-btn" data-toggle="modal" data-target="#modModal" id="'+room.roomNo+'_roomModBtn">수정</button>\
+					  <button type="button" class="btn btn-default room-edit-btn" id="'+room.roomNo+'_roomModBtn">수정</button>\
 					  <button type="button" class="btn btn-default room-edit-btn" data-toggle="modal" data-target="#delModal" id="'+room.roomNo+'_roomDelBtn">삭제</button>\
 					</form>\
 				</div>\
@@ -156,12 +159,31 @@ window.onload = function(){
 	function clickTarget(){
 		document.body.onclick = function(e){
 			if(e.target.id!= null){
+				/*멤버내보내기 함수*/
+//				console.log(e.target.id.split('_')[0])
+				if(e.target.id.split('_')[0] == "memberOut"){
+//					memberout(e.target.id);
+					document.querySelector("#delMemberModalBtn").click();
+					document.querySelector("#delMemberModalCheckBtn").onclick = function(){
+						memberOut(e.target.id);
+						roomList();
+						};
+					
+				}
 				/*방 수정, 삭제 함수*/
 				editRoomInfo(e.target.id);
 				/*회원 권한 슬라이더*/
+				if(e.target.id.split('_')[0] == "authInfo_"){
+					
 				let authInfo = document.querySelector("#authInfo_"+e.target.id.split('_')[1]+"_"+e.target.id.split('_')[2]);
 				if(authInfo!= null){
-					console.log(authInfo.innerHTML);
+//					console.log(authInfo.innerHTML);
+//					console.log(authInfo.getAttribute("change"));
+					if(authInfo.getAttribute("change") == 0){
+						authInfo.setAttribute("change", 1);
+					}else{
+						authInfo.setAttribute("change", 0);
+					}
 					if(authInfo.innerHTML == "참여자"){
 						authInfo.innerHTML = "관리자";
 					}else{
@@ -169,27 +191,36 @@ window.onload = function(){
 					}
 					
 				}
+				}
+				
 			}
 		};
 	}
 	/*방 정보 수정 함수*/
 	function editRoomInfo(id){
+		/*방 수정*/
 		if(id.split('_')[1] == "roomModBtn"){
 			let roomNodBtn = document.getElementById(id.split('_')[0]+"_roomModBtn");
 			 
 			var oldPass = document.querySelector("#oldPassAtRoom"+id.split('_')[0])
 			/*기존 비밀번호를 미 입력시*/
 			if(oldPass.value == ""){
-				roomNodBtn.setAttribute("data-target", "#passEmptyModal");
+				document.querySelector("#passEmptyModalBtn").click();
 			/*비밀번호 입력완료*/	
 			}else{
-				roomNodBtn.setAttribute("data-target", "#modModal");
+				roomInfoGetter(id.split('_')[0]);
+				roomList();
 			}
 		}
+		/*방삭제*/
 		if(id.split('_')[1] == "roomDelBtn"){
 			let roomNodBtn = document.getElementById(id.split('_')[0]+"_roomDelBtn");
 			document.querySelector("#modalCheckBtn").onclick = function(){
-				alert("클릭");
+				$.ajax({
+					url : "delRoom.json",
+					data : {"userNo" : 7, "roomNo" : id.split('_')[0], "roomName" : "0"},
+					dataType :"json",
+				}).done(makeRoomList);
 			}
 		}
 	}
@@ -209,11 +240,10 @@ window.onload = function(){
 					dataType : "json",
 				}).done(makeRoomList)
 				.fail(function(e){
-					console.log(e);
+//					console.log(e);
 				});
 			}
 		}
-		
 		var roomAllhBtn = document.querySelector("#roomAllhBtn");
 		roomAllhBtn.onclick = function(){
 			roomList();
@@ -222,7 +252,7 @@ window.onload = function(){
 	
 	/*모달 생성함수*/
 	function modalUp(modalId, modalBody){
-		var contentWrapper = document.querySelector("#contentWrapper");
+		var modalWrapper = document.querySelector("#modalWrapper");
 		var modal = '<div class="modal fade" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
 				      <div class="modal-dialog" role="document">\
 					      <div class="modal-content">\
@@ -234,19 +264,81 @@ window.onload = function(){
 					        </div>\
 					        <div class="modal-body">'+modalBody+'</div>\
 					        <div class="modal-footer">'
-					        if(modalId == "delModal"){
-					        	modal += '<a class="btn btn-danger" href="#" id="modalCheckBtn" data-dismiss="modal" aria-label="Close">확인</a>';
+					        if(modalId == "delModal" || modalId == "delMemberModal"  ){
+					        	modal += '<a class="btn btn-danger" href="#" id="'+modalId+'CheckBtn" data-dismiss="modal" aria-label="Close">확인</a>';
 					        }else{
 					        	modal += '<a class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">확인</a>';
 					        }
 					 modal +='</div>\
 					      </div>\
 					    </div>\
-					  </div>';
-		contentWrapper.innerHTML += modal;
+					  </div>\
+					  <button style ="display : none;" id="'+modalId+'Btn" data-toggle="modal" data-target="#'+modalId+'"></button>';
+		 modalWrapper.innerHTML += modal;
 	}
-
-
+	/*필요한 모달 추가 함수*/
+	function modalMaker(){
+		modalUp("emptySearchModal", "검색어를 입력하세요");
+		modalUp("passEmptyModal", "기존비밀번호를 입력하세요.");
+		modalUp("wrongPassModal", "비밀번호가 일치하지 않습니다.");
+		modalUp("modModal", "수정완료되었습니다.");
+		modalUp("delModal", "정말 방을 삭제하시겠습니까?");
+		modalUp("delMemberModal", "정말 멤버를 내보내겠습니까?");
+	}
+	
+	/*방정보 수정*/
+	function roomInfoGetter(roomNo){
+		let oldPass = document.querySelector("#oldPassAtRoom"+roomNo).value;
+		var roomInfo = document.querySelector("#room"+roomNo+"Info").value;
+		var roomName = document.querySelector("#room"+roomNo+"Name").value;
+		var roomPassword = document.querySelector("#newPassAtRoom"+roomNo).value;
+		var authInfo = document.querySelectorAll(".auth-info-"+roomNo);
+		var userNoArr=[];
+		for(let auth of authInfo){
+			if(auth.getAttribute("change") == 1){
+				userNoArr.push(auth.id)
+			}
+		}
+//		console.log("베열 : ",userNoArr);
+		$.ajax({
+			url : "roomPassCount.json",
+			data : {"roomNo" : roomNo, "roomPassword" :oldPass},
+			dataType : "json"
+		}).done(function(result){
+			if(result == 0){
+				document.querySelector("#wrongPassModalBtn").click();
+			}else{
+				roomInfoUpdate(roomName, roomNo, roomInfo, roomPassword, userNoArr);
+				document.querySelector("#modModalBtn").click();
+			}
+		});
+	}
+	/*방정보 업데이트 처리함수*/
+	function roomInfoUpdate(roomName, roomNo, roomInfo, roomPassword, userNoArr){
+//		console.log(userNoArr);
+		let userNo = [];
+		for(let no of userNoArr){
+			userNo.push(no.split('_')[2]);
+		}
+//		console.log(userNo);
+		$.ajax({
+			url : "roomUpdate.json",
+			data : {"roomName" : roomName, "roomNo" :roomNo, "roomInfo":roomInfo, "roomPassword":roomPassword, "severalUserNo":userNo.join(",")},
+			type : "POST",
+			dataType : "json"
+		});
+	};
+	/*멤버내보내기*/
+	function memberOut(id){
+//		console.log(id);
+		let roomNo = id.split('_')[1];
+		let userNo = id.split('_')[2];
+		$.ajax({
+			url : "memberOut.json", 
+			data : {"roomNo" : roomNo, "userNo" : userNo},
+			dataType : "json"
+		}).done(alert("성공"));
+	}
 
 
 

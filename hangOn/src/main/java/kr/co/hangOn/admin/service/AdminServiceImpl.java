@@ -46,6 +46,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Map<String, Object> roomMgmPageInfo(Room room) {
 //		System.out.println("방이름"+room.getRoomName());
+		room.setRoomDelState("ba01");
 		List<Room> rList = roomMapper.selectRoom(room);
 		int roomCount = roomMapper.countRoomList(room.getRoomNo());
 		
@@ -67,6 +68,52 @@ public class AdminServiceImpl implements AdminService {
 		result.put("roomCount", roomCount);
 		return result;
 	}
+
+	@Override
+	public Map<String, Object> pageInfoAfterRoomDel(Room room) {
+		room.setRoomDelState("ba02");
+		roomMapper.updateRoomDelState(room);
+		return roomMgmPageInfo(room);
+	}
+
+	@Override
+	//방 비밀번호 일치 여부 확인
+	public int roomPassInfo(Room room) {
+		return roomMapper.checkRoomPass(room);
+	}
+
+	@Override
+	public void roomInfoUpdate(Room room) {
+		String[] sArr = room.getSeveralUserNo().split(",");
+		for(String s : sArr) {
+			roomMapper.updateRoomMemberAuth(room);
+			System.out.println("사람 : "+s);
+		}
+//		System.out.println("방이름 : "+room.getRoomName());
+//		System.out.println("방설명 : "+room.getRoomInfo());
+//		System.out.println("방비번 : "+room.getRoomPassword());
+		Room dRoom = roomMapper.searchRoomInfo(room.getRoomNo());
+		if(room.getRoomInfo().equals("")) {
+			room.setRoomInfo(dRoom.getRoomInfo());
+		}
+		if(room.getRoomName().equals("")) {
+			room.setRoomName(dRoom.getRoomName());
+		}
+		if(room.getRoomPassword().equals("")) {
+			room.setRoomPassword(dRoom.getRoomPassword());
+		}
+		roomMapper.updateRoomInfo(room);
+	}
+
+	@Override
+	public void memberOut(RoomMember rm) {
+//		System.out.println(rm.getRoomNo());
+//		System.out.println(rm.getUserNo());
+		
+		rm.setRoomConnectCode("bb13");
+		roomMapper.memberOut(rm);
+	}
+	
 
 }
 

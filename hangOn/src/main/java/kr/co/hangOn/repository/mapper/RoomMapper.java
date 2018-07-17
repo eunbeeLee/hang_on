@@ -19,5 +19,22 @@ public interface RoomMapper {
     //유저에 따른 방 갯수 조회
      int countRoomList(int userNo);
      
+     //방 삭제코드 업데이트
+     void updateRoomDelState(Room room);
+     
+ 	//방 비밀번호 일치 여부 확인
+ 	public int checkRoomPass(Room room);
+ 	
+ 	//방정보 업데이트
+ 	public void updateRoomInfo(Room room);
+ 	
+ 	//방멤버 권한 정보 업데이트
+ 	public void updateRoomMemberAuth(Room room);
+ 	
+ 	//방정보 선택
+ 	public Room searchRoomInfo(int roomNo);
+     
+ 	//회원 방 탈퇴
+ 	public void memberOut(RoomMember rm);
 }
 	

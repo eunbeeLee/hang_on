@@ -11,6 +11,7 @@
 			<result column="room_join_code" property="roomJoinCode" />
 			<result column="room_del_state" property="roomDelState" />
 			<result column="user_no" property="userNo" />
+			<result column="several_user_no" property="severalUserNo" />
 	</resultMap>
 		
 	<resultMap id="roomMemberMap" type="roomMember">
@@ -60,6 +61,7 @@
 		select *
 		  from tb_room
 		 where user_no = #{userNo}
+		   and room_del_state = #{roomDelState}
 		 <if test='roomName !="0"'>
 		   and room_name = #{roomName} 
 		 </if>
@@ -91,6 +93,44 @@
 		  from tb_room
 		 where user_no = #{userNo}
 	</select>
+	<update id="updateRoomDelState" parameterType="room"> 
+		update tb_room
+		   set room_del_state = #{roomDelState}
+		 where room_no = #{roomNo}
+	</update>
+	<select id="checkRoomPass" parameterType="room" resultType="int">
+		select count(*)
+		  from tb_room
+		 where room_no = #{roomNo}
+		   and room_password = #{roomPassword}
+	</select> 
+	<update id="updateRoomInfo" parameterType="room">
+		update tb_room
+		   set 
+			   room_info  = #{roomInfo},
+		       room_password =#{roomPassword}, 
+		       room_name = #{roomName}
+		 where room_no = #{roomNo}
+	</update>
+	<update id="updateRoomMemberAuth" parameterType="room">
+		update tb_room_member 
+		   set room_auth_code = case
+							when room_auth_code = 'bb01' then 'bb02'
+							when room_auth_code = 'bb02' then 'bb01'
+		   end
+		 where user_no =#{userNo} and room_no = #{roomNo}
+	</update>
+	<select id="searchRoomInfo" parameterType="int" resultMap="roomMap">
+		select *
+		  from tb_room
+		 where room_no = #{roomNo}
+	</select>
+	<update id="memberOut" parameterType="roomMember">
+		update tb_room_member
+		   set room_connect_code = #{roomConnectCode}
+		 where room_no = #{roomNo} 
+		   and user_no = #{userNo}
+	</update>
 </mapper>	
 
 
