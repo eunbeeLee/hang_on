@@ -2,9 +2,9 @@
  * 
  */
 
-$('#downNav').click(function(e) { 
+$('#cloudNav').click(function(e) { 
 	e.preventDefault(); 
-	$( ".download-manager" ).toggle(  "slow" );
+	$( ".cloud-manager" ).toggle(  "slow" );
 });
 $('#sttNav').click(function(e) { 
 	e.preventDefault(); 
