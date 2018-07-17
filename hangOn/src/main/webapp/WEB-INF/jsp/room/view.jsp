@@ -36,6 +36,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="공지사항">
+          <a id="notiNav" class="nav-link" >
+              <i class="material-icons">notification_important</i>
+            <span class="nav-link-text">공지사항</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="채팅">
           <a id="chatNav" class="nav-link" href="index.html">
               <i class="material-icons">chat</i>

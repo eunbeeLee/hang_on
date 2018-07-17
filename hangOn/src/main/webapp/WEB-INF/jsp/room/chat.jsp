@@ -31,7 +31,7 @@
     var sendMsg = "";
 
     $(function () {
-        ws = new WebSocket('ws://localhost:8000/hangOn/room/chat.do');
+        ws = new WebSocket('wss://192.168.0.2/hangOn/room/chat.do');
     	ws.onopen = function() {
        	    console.log('웹소켓 서버 접속 성공');
         	// 사용자 입장시 메세지 출력

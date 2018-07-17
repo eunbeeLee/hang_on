@@ -29,6 +29,15 @@
     <div class="cloud-title">
           <span>파일</span>
     </div>
+    <form id="cloudForm" style="display:none;" method="post" enctype="multipart/form-data"> 
+	    <input type="text" name="id" value="test" /><br /> 
+	    <input type="text" name="path" value="123" /><br /> 
+	    <input id="cloudUpload" type="file" name="attachFile" multiple="multiple" /><br /> 
+	    <input type="submit" value="업로드" /> 
+	</form>
+    
+    
+    
    <table class="table table-hover table-cloud">
 	  <thead>
 	    <tr>
