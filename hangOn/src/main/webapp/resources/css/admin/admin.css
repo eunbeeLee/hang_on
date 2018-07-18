@@ -182,11 +182,31 @@ input:checked + .slider:before {
 #doughnutChartContent, #barChartContent, #myLineChartContent {
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19);
 }
+.button-left, .button-right {
+	background-color: white;
+	border : white;
+	margin: 10px;
+	margin-top: 0px;
+}
+.month{
+	font-size: 25px;
+	font-weight:300;
+	
+}
+.year{
+	font-weight:400;
+	font-size: 13px;
+}
+.button-left, .button-right{
+	margin: 0px;
+}
+.datePicker{
+	margin-bottom: 10px;
+}
 
-
-
-
-
+.nodeHover{
+	background-color: rgba(0,0,0,0);
+}
 
 
 

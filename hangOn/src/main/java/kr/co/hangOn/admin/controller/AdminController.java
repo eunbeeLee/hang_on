@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hangOn.admin.service.AdminService;
+import kr.co.hangOn.repository.domain.DashBoard;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Room;
 import kr.co.hangOn.repository.domain.RoomMember;
@@ -65,6 +66,12 @@ public class AdminController {
 	@ResponseBody
 	public void memberOut(RoomMember rm) {
 		service.memberOut(rm);
+	}
+	
+	@RequestMapping("/countRoomByMonth.json")
+	@ResponseBody
+	public int[] countRoomByMonth(DashBoard dashBoard) {
+		return service.countRoomByMonth(dashBoard);
 	}
 	
 	
