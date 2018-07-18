@@ -2,6 +2,7 @@ package kr.co.hangOn.repository.mapper;
 
 import java.util.List;
 
+import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Room;
 import kr.co.hangOn.repository.domain.RoomMember;
 
@@ -41,5 +42,7 @@ public interface RoomMapper {
  	public String selectRoomName(String roomJoinCode);
  	// 챗 소켓에서 유저접속시 상태정보 업데이트
  	public void updateRoomMemberConnect(RoomMember member);
+ 	// 소켓에서 히스토리 남겨주기
+ 	public void insertHistoryBySocket(History history);
 }
 	

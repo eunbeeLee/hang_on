@@ -9,10 +9,12 @@
 	height: 100%;
 }
 #roomTitle {
+	margin-top: 3px;
 	float: left;
 	color: white;
 }
 #roomJoinCode {
+	margin-top: 3px;
 	float : right;
 	color: white;
 }

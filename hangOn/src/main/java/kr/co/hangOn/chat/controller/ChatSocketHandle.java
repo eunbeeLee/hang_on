@@ -28,8 +28,6 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 	
 	@Autowired
 	private RoomMapper mapper;
-	@Autowired
-	private HistoryMapper mapper1;
 	
 	// 접속한 사용자에 대한 정보를 담을 map
 	private Map<String, List<Chat>> roomInfo = new HashMap<>();
@@ -43,7 +41,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 	// 사용자 접속시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println(session.getId()+ "웹소켓세션 아이디 님이 서버 접속");
+//		System.out.println(session.getId()+ "웹소켓세션 아이디 님이 서버 접속");
 	}
 	
 	// 사용자 종료시
@@ -85,8 +83,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		history.setActName("da04");
 		history.setRoomNo(mapper.roomByJoinCode(userIncludeKey));
 		
-		mapper1.insertHistory(history);
-		System.out.println("히스토리3 기록 남기기 성공");
+		mapper.insertHistoryBySocket(history);
 		
 		// 같은 방 사용자에게 퇴장 메세지를 전송한다.
 		// 단, 퇴장하는 유저는 제외한다.
@@ -109,8 +106,8 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		User seUser = (User)userData.get("user");
 		
 		
-		debug("보낸 아이디 세션 아이디 - " + wss.getId());
-		debug("보낸 메세지 - " + message.getPayload());
+//		debug("보낸 아이디 세션 아이디 - " + wss.getId());
+//		debug("보낸 메세지 - " + message.getPayload());
 		
 		String rcvMsg = message.getPayload();
 		String sendMsg = "";
@@ -140,6 +137,14 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 				users.add(user);
 
 				roomInfo.put(joinCode, users);
+				// 히스토리 기록 남기기
+				History history = new History();
+				history.setUserNo(userNo);
+				history.setIpAddr(wss.getRemoteAddress().getHostName());
+				history.setActName("da01");
+				history.setRoomNo(mapper.roomByJoinCode(joinCode));
+				mapper.insertHistoryBySocket(history);
+				
 				
 				// 룸 유저 접속코드 변경
 				RoomMember member = new RoomMember();
@@ -148,15 +153,6 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 				member.setRoomConnectCode("bb11");
 				
 				mapper.updateRoomMemberConnect(member);
-				
-				// 히스토리 기록 남기기
-				History history = new History();
-				history.setUserNo(userNo);
-				history.setIpAddr(wss.getRemoteAddress().getHostName());
-				history.setActName("da01");
-				history.setRoomNo(mapper.roomByJoinCode(joinCode));
-				mapper1.insertHistory(history);
-				System.out.println("히스토리1 기록 남기기 성공");
 				
 			} else {
 				Chat user = new Chat();
@@ -181,8 +177,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 				history.setActName("da01");
 				history.setRoomNo(mapper.roomByJoinCode(joinCode));
 				
-				mapper1.insertHistory(history);
-				System.out.println("히스토리2 기록 남기기 성공");
+				mapper.insertHistoryBySocket(history);
 			}
 			sendMsg = "condition:"+userName + content + " ( " + alarmTime.format(new Date()) + " )";
 		}
