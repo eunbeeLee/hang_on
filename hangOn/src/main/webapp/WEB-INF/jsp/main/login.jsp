@@ -10,11 +10,6 @@
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script>
-	if ("${msg}") {
-		alert("${msg}")
-	}
-</script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -23,7 +18,7 @@
 	<!-- 배경 비디오 -->
 	<figure class='vid'>
 	   <video autoplay="autoplay" loop="loop" muted="muted">
-	      <source src="${pageContext.request.contextPath}/resources/backgroundvideo/bgv.mp4">
+	      <source src="${pageContext.request.contextPath}/resources/backgroundvideo/before.mp4">
 	   </video>
 	</figure>
   
@@ -73,7 +68,11 @@
 
 <script>
 
-sessionUserEmail = '${userEmail}';
+$(document).ready(function () {
+	if ("${msg}" == "emailSent") {
+		document.querySelector("#emailSentModalBtn").click();
+	}
+});
 
 $('#login').click(function () {
 	var userEmail = $('#email').val();

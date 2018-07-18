@@ -23,8 +23,8 @@ video {
 	float: left;
 	z-index: 0; 
 	vertical-align: middle;
-	top: 25%;
-	left: 60%;
+    top: 280px;
+	left: 200px;
 }
 
 .intro-context {

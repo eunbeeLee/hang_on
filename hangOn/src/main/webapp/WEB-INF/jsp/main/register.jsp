@@ -31,11 +31,11 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="userEmail">이메일 주소</label>
-                <input class="form-control" id="userEmail" type="email" name="userEmail" placeholder="이메일 주소를 입력하세요" autofocus required>
+                <input class="form-control" id="userEmail" type="email" name="userEmail" placeholder="이메일 주소를 입력하세요" autofocus>
               </div>
               <div class="col-md-6">
                 <label for="userName">이름</label>
-                <input class="form-control" id="userName" type="text" name="userName" placeholder="이름을 입력하세요" required>
+                <input class="form-control" id="userName" type="text" name="userName" placeholder="이름을 입력하세요">
               </div>
             </div>
           </div>
@@ -46,11 +46,11 @@
               <div class="col-md-6">
                 <label for="userPw">비밀번호</label>&nbsp;&nbsp;&nbsp;
 <!--                 <button class="btn btn-primary" style="background-color:#b39bdd; border:0;"><span>유효성 체크</span></button> -->
-                <input class="form-control" id="userPw" type="password" name="userPw" placeholder="8자 이상으로 입력하세요" required>
+                <input class="form-control" id="userPw" type="password" name="userPw" placeholder="8자 이상으로 입력하세요">
               </div>
               <div class="col-md-6">
                 <label for="userPwCheck">비밀번호 확인</label>
-                <input class="form-control" id="userPwCheck" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력하세요" required>
+                <input class="form-control" id="userPwCheck" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력하세요">
               </div>
             </div>
           </div> <br>
@@ -95,7 +95,19 @@
 	
 	$("#registerBtn").click(function () {
 		
-		if ( $("#userPw").val() != $("#userPwCheck").val()) {
+		if ( $("#userEmail").val() == "") {
+			alert("이메일을 입력해주세요")
+			return false;
+		}
+		else if ( $("#userName").val() == "") {
+			alert("이름을 입력해주세요")
+			return false;
+		}
+		else if ( $("#userPw").val() == "") {
+			alert("비번을 입력해주세요")
+			return false;
+		}
+		else if ( $("#userPw").val() != $("#userPwCheck").val()) {
 			alert("비밀번호 재입력을 확인해주세요")
 			return false;
 		}

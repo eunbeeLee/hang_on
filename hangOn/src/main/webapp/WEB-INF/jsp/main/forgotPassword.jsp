@@ -10,6 +10,11 @@
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script>
+	if ("${msg}") {
+		alert("${msg}")
+	}
+</script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -33,7 +38,7 @@
       </div>
       <form action="${pageContext.request.contextPath}/mail/forgotPassword.do" method="POST" id="form">
         <div class="form-group">
-          <input class="form-control" id="email" type="email" placeholder="이메일 주소를 입력하세요" autofocus autocomplete="off" required>
+          <input class="form-control" id="email" type="email" name="userEmail" placeholder="이메일 주소를 입력하세요" autofocus autocomplete="off">
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="btn" style="background-color:#b39bdd; border: 0;">새 비밀번호를 보내드립니다</button>
       </form>
@@ -49,7 +54,7 @@
 <div id="loginModalWrapper"></div>
 
 <script>
-	
+
 	$("#btn").click(function () {
 		if($("#email").val() == "") {
 			document.querySelector("#emptyEmailModalBtn").click();

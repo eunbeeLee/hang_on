@@ -1,6 +1,5 @@
 		
 	$(document).ready( function () {
-		console.log(sessionUserEmail);
 		modalMaker();
 	});
 	
@@ -32,4 +31,6 @@
 		modalUp("emptyPwModal", "비밀번호를 입력하세요");
 		modalUp("wrongEmailModal", "등록되지 않은 이메일 입니다");
 		modalUp("wrongPwModal", "비밀번호를 확인하세요");
+		modalUp("emailSentModal", "등록된 이메일로 새로운 비밀번호가 발송되었습니다");
+		modalUp("aaa", "으아앙");
 	}
