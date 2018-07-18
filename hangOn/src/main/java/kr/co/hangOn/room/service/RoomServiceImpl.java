@@ -27,5 +27,15 @@ public class RoomServiceImpl implements RoomService {
 		history.setRoomNo(mapper.roomByJoinCode(roomJoinCode));
 		mapper1.insertHistory(history);
 	}
+
+	@Override
+	public String selectRoomName(String roomJoinCode) {
+		return mapper.selectRoomName(roomJoinCode);
+	}
+
+	@Override
+	public int selectRoomNo(String joinCode) {
+		return mapper.roomByJoinCode(joinCode);
+	}
 	
 }

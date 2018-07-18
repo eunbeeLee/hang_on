@@ -18,21 +18,32 @@ public class RoomController {
 	
 	@Autowired
 	private RoomService service;
+	
 	@RequestMapping("/{roomNo}/view.do")
 	public String view(HttpSession session, HttpServletRequest req) {
-		RoomMember roomMember = new RoomMember();
 		String joinCode=req.getRequestURI().split("/")[3];
-		roomMember.setRoomJoinCode(joinCode);
 		int userNo = ((User)session.getAttribute("user")).getUserNo();
-		roomMember.setUserNo(userNo);
-		roomMember.setType("in");
-		service.roomMemberUpdate(roomMember);
-		History history = new History();
-		history.setUserNo(userNo);
-		history.setIpAddr(req.getRemoteAddr());
-		history.setActName("da01");
-		service.historyInsert(history ,joinCode);
+		
+		String roomName = service.selectRoomName(joinCode);
+		
+		// 소켓에서 처리하도록 변경
+//		RoomMember roomMember = new RoomMember();
+//		
+//		roomMember.setRoomJoinCode(joinCode);
+//		roomMember.setUserNo(userNo);
+//		roomMember.setType("in");
+//		service.roomMemberUpdate(roomMember);
+		
+//		History history = new History();
+//		history.setUserNo(userNo);
+//		history.setIpAddr(req.getRemoteAddr());
+//		history.setActName("da01");
+//		service.historyInsert(history ,joinCode);
+		
 		req.setAttribute("code", joinCode);
+		req.setAttribute("roomName", roomName);
+		req.setAttribute("roomNo", service.selectRoomNo(joinCode));
+		
 		return "room/view";
 	}
 	
@@ -44,4 +55,6 @@ public class RoomController {
 	public String down() {
 		return "room/view";
 	}
+	
+	
 }

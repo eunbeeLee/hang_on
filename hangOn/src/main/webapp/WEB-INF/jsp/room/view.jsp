@@ -21,6 +21,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/cloud.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/room/notice.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/chat.css">	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/video.css">	
@@ -30,11 +31,46 @@
 <body class="fixed-nav bg-dark sidenav-toggled" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img id="hangOnLogo" src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
+    <a class="navbar-brand"><img id="hangOnLogo" src="${pageContext.request.contextPath}/resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+	    <div id="navRoomBigBox">
+	      <div id="roomTitle">
+	      	<span class="roomMsg">${roomName}</span>
+	      </div>
+	      	<div id="roomJoinCode">
+	      	<span class="roomMsg">${code}</span>
+	      </div>
+	      <div  id="alarmBigUl">
+	      	<ul class="navbar-nav ml-auto" >
+	      	 <li class="nav-item dropdown" id="peopleAlarm">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">how_to_reg</i>
+            <span class="d-lg-none">Alerts
+              <span class="badge badge-pill badge-warning">6 New</span>
+            </span>
+            <span class="indicator text-success d-none d-lg-block">
+              <i class="fa fa-fw fa-circle" id="peopleColor"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">현재 접속중인 유저</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-fw fa-circle"></i>박은진</strong>
+              </span>
+              <span class="small float-right text-muted">13:21</span>
+              <div class="dropdown-message small"></div>
+            </a>
+          </div>
+        </li>
+	      	</ul>
+	      </div>
+	    </div>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="공지사항">
           <a id="notiNav" class="nav-link" >
@@ -80,10 +116,12 @@
           <a class="nav-link" >
             <i class="material-icons">videocam</i></a>
         </li>--%>
+        
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/lobby/view.do">
             <i class="fa fa-fw fa-sign-out"></i>나가기</a>
         </li>
+        
       </ul>
     </div>
   </nav>
@@ -98,9 +136,14 @@
    	<%-- 클라우드 --%>
     <c:import url="/WEB-INF/jsp/room/cloud.jsp">
   	</c:import>
+  	
+    <c:import url="/WEB-INF/jsp/room/notice.jsp">
+  	</c:import>
    	
     <div class="main-doc">
 
+	  <c:import  url="/WEB-INF/jsp/room/chat.jsp">
+	  </c:import>
    	<%-- 음성인식 --%>
 	<c:import  url="/WEB-INF/jsp/room/stt.jsp">
  	</c:import>
@@ -129,8 +172,6 @@
 
   </div>
  
-  <c:import  url="/WEB-INF/jsp/room/chat.jsp">
-  </c:import>
   
 
   <div id="setup-room">
