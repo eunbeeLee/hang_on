@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<input type="hidden" id="documentUserNo" value="${param.userNo}">
+<input type="hidden" id="documentRoomNo" value="${param.roomNo}">
+<input type="hidden" id="documentRoomCode" value="${param.code}">
 	<div id="documentArea">
 	<div id="documentReadyScreen">
 		<div>
@@ -14,7 +17,7 @@
 		</div>
 		<form id="uploadFileForm" action="/hangOn/document/parser.json" enctype="multipart/form-data">
 			<input type="file" name="file" id="documentFileUpload" accept=".pdf">
-			<input type="hidden" name="roomNo" value="2">
+			<input type="hidden" name="roomNo" value="${param.roomNo}">
 		</form>
 	</div>
 

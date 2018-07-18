@@ -20,7 +20,6 @@ public class DocumentController {
 	@RequestMapping(value="/parser.json", method=RequestMethod.POST)  
 	@ResponseBody
 	public DocumentGroup parser(DocumentGroup documentGroup,HttpServletRequest request) throws Exception{
-		System.out.println("pdf 변환 시작");
 		return documentService.pdfParser(documentService.saveOriFile(documentGroup,request),request);
 	}
 }

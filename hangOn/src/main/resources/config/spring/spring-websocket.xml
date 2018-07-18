@@ -18,6 +18,7 @@
 		<!-- path : 컨트롤러, 사용할 url, handler : bean의 id.. -->
 		<!-- /chatDetail.do를 호출할 경우 핸들러클래스 동작 -->
 		<websocket:mapping handler="chat" path="/room/chat.do" />
+		<websocket:mapping handler="docview" path="/document/docview.do" />
 		<!-- 사용자의 세션 정보를 웹소켓 세션을 통해 꺼냄 -->
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
