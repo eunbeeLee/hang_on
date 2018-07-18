@@ -186,7 +186,8 @@ function eraser(event,id) {
     var coors = getPosition(event);
     pos.X = coors.X;
     pos.Y = coors.Y;
-    canvasProp[id].ctx.clearRect(pos.X,pos.Y,30,30);
+    canvasProp[id].ctx.clearRect(pos.X,pos.Y,15,15);
+    canvasProp[id].ctx.clearRect(pos.X-15,pos.Y-15,15,15);
 }
 
 function finishDraw(){
