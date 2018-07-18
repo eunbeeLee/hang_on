@@ -1,3 +1,26 @@
+#alarmBigUl {
+	float: right;
+	width: 10%;
+	margin-right: 30px;
+}
+#navRoomBigBox {
+	margin-left : 23%;
+	width: 65%;
+	height: 100%;
+}
+#roomTitle {
+	float: left;
+	color: white;
+}
+#roomJoinCode {
+	float : right;
+	color: white;
+}
+.roomMsg {
+	font-size: 20px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
 .content-wrapper{
   padding: 0px;
 }

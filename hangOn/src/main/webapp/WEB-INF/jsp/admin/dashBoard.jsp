@@ -16,7 +16,7 @@
   <!-- Page level plugin CSS-->
   <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
   <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
   <!-- 아이콘 출력을 위한
@@ -85,51 +85,43 @@
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="col-lg-4 col-md-6 col-xs-12">
-            <!-- Example Bar Chart Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-bar-chart"></i>사용량</div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-8 my-auto">
-                  <canvas id="myBarChart" width="100" height="50"></canvas>
-                </div>
-                <div class="col-sm-4 text-center my-auto">
-                  <div class="h4 mb-0 text-primary">$34,693</div>
-                  <div class="small text-muted">YTD Revenue</div>
-                  <hr>
-                  <div class="h4 mb-0 text-warning">$18,474</div>
-                  <div class="small text-muted">YTD Expenses</div>
-                  <hr>
-                  <div class="h4 mb-0 text-success">$16,219</div>
-                  <div class="small text-muted">YTD Margin</div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
-          </div>
-  <div class="col-lg-4 col-md-6 col-xs-12">
-  <!-- 월별 회의갯수-->
-   <div class="card mb-3" id="pieChartContent">
+
+   
+   <!-- 회의방별 통화량 -->
+  <div class="col-xs-12" id="doughnutChart">
+   <div class="card mb-3" id="doughnutChartContent">
      <div class="card-header">
-       <i class="fa fa-pie-chart"></i>회의 갯수</div>
+       <i class="fa fa-pie-chart"></i>회의방별 통화량</div>
      <div class="card-body">
        <canvas id="myPieChart" width="100%" height="100"></canvas>
      </div>
-     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+     <div class="card-footer small text-muted"></div>
    </div>
    </div>
    
-    <div class="col-lg-10 col-md-10 col-xs-12">
-         <div class="card mb-3">
+     <!-- 월별 회의방 생성 갯수 -->
+  <div id="barChart">
+     <div class="card mb-3" id="barChartContent"> 
+       <div class="card-header">
+         <i class="fa fa-bar-chart"></i>월별 회의방 생성 갯수</div>
+       <div class="card-body">
+       <div class="row">
+           <canvas id="myBarChart" width="100" height="50"></canvas>
+       </div>
+       </div>
+       <div class="card-footer small text-muted"></div>
+     </div>
+   </div>
+   
+   <!-- 일일 통화량 -->
+    <div class="col-lg-10 col-md-10 col-xs-12" id="myLineChart">
+         <div class="card mb-3" id="myLineChartContent">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i> 일일 통화량</div>
         <div class="card-body">
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted"></div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -165,6 +157,9 @@
     </div>
   </div>
 </body>
+<!-- Chart.js By Eunbee -->
+ <script src="${pageContext.request.contextPath}/resources/js/admin/dashBoard.js"></script>
+   
 <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -178,5 +173,6 @@
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
+<%--     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script> --%>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/dashBoard.js"></script>
 </html>

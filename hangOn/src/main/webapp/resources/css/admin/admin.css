@@ -164,7 +164,28 @@ input:checked + .slider:before {
 	background-color: #c0c0c0;
 	color: white;
 	
+	
 }
+#barChart, #doughnutChart{
+	display : inline-block;
+	margin-left: 17px;
+}
+
+#myPieChart{
+	height: 380px !important;
+	width: 380px !important;
+}
+#barChart{
+	width : 775px;
+}
+
+#doughnutChartContent, #barChartContent, #myLineChartContent {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+}
+
+
+
+
 
 
 
