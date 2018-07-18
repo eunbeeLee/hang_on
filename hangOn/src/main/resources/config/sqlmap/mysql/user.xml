@@ -46,6 +46,12 @@
 	)
 </insert>
 
+<update id="updatePw" parameterType="String">
+	update hangon.tb_user
+	   set user_pw = #{userPw}
+	 where user_Email = #{userEmail}
+</update>
+
 
 
 </mapper>

@@ -32,4 +32,15 @@ public class UserServiceImpl implements UserService{
 		mapper.register(user);
 	}
 
+	@Override
+	public User findAccount(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updatePw(User user) {
+		mapper.updatePw(user);
+	}
+
 }

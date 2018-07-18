@@ -8,10 +8,9 @@
 </head>
 <body>
 
-   <div class="container">
+   <div class="container" style="padding:0; max-width:100%" >
 	   <tiles:insertAttribute name="header" />
 	   <tiles:insertAttribute name="content" />
-<%-- 	   <tiles:insertAttribute name="menu" /> --%>
 	   <tiles:insertAttribute name="footer" />
    </div>
 
