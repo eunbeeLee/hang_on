@@ -15,8 +15,15 @@ public class Room {
 	private int roomConnectUserCount;
 	// 방에 등록되어 있지만 접속중이 아닌 유저 수
 	private int roomNoConnectUserCount;
+	private String severalUserNo;
 	
 	
+	public String getSeveralUserNo() {
+		return severalUserNo;
+	}
+	public void setSeveralUserNo(String severalUserNo) {
+		this.severalUserNo = severalUserNo;
+	}
 	public int getRoomConnectUserCount() {
 		return roomConnectUserCount;
 	}

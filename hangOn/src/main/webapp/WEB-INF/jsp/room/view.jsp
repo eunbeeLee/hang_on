@@ -20,7 +20,7 @@
 	<!-- 구글 아이콘 -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/room/room.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/room/down.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/room/cloud.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/document/document.css" rel="stylesheet"> <%-- document css 진솔 --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/chat.css">	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/video.css">	
@@ -36,16 +36,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="공지사항">
+          <a id="notiNav" class="nav-link" >
+              <i class="material-icons">notification_important</i>
+            <span class="nav-link-text">공지사항</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="채팅">
           <a id="chatNav" class="nav-link" href="index.html">
               <i class="material-icons">chat</i>
             <span class="nav-link-text">채팅</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="다운로드">
-          <a id="downNav" class="nav-link" href="charts.html">
-              <i class="material-icons">folder</i>
-            <span class="nav-link-text">다운로드</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="클라우드">
+          <a id="cloudNav" class="nav-link">
+              <i class="material-icons">wb_cloudy</i>
+            <span class="nav-link-text">클라우드</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="문서공유">
@@ -87,11 +93,17 @@
 		<c:param name="msg" value="test"/>
 	</c:import>
    	<%-- 문서공유 영역 진솔 --%>
+   	
+   	
+   	<%-- 클라우드 --%>
+    <c:import url="/WEB-INF/jsp/room/cloud.jsp">
+  	</c:import>
+   	
     <div class="main-doc">
 
+   	<%-- 음성인식 --%>
 	<c:import  url="/WEB-INF/jsp/room/stt.jsp">
  	</c:import>
-  
      <%--  
      <div class="user" style="height: 20%;">
           <i class="material-icons">videocam</i>
@@ -120,8 +132,7 @@
   <c:import  url="/WEB-INF/jsp/room/chat.jsp">
   </c:import>
   
-  <c:import url="/WEB-INF/jsp/room/down.jsp">
-  </c:import>
+
   <div id="setup-room">
   	  <input type="text" id="conference-name">
       <button id="setup-new-room" class="setup">new</button>
@@ -158,6 +169,7 @@
 <%-- 	<script src="${pageContext.request.contextPath}/resources/js/room/chat.js"></script> --%>
 	<script src="${pageContext.request.contextPath}/resources/js/room/video.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/room/stt.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/room/cloud.js"></script>
 </body>
 
 </html>

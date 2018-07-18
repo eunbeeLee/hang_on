@@ -97,8 +97,8 @@ if ("${msg}") {
         <!-- 사용자 아이콘 -->
         <c:choose>
         	<c:when test="${empty user}">
-		        <li id="openMyPageBtn" class="nav-item">
-		          <a class="nav-link" >
+		        <li class="nav-item">
+		          <a class="nav-link" href="${pageContext.request.contextPath}/main/login.do">
 		            <i class="fa fa-user-circle-o"></i>로그인 하세요</a>
 		        </li>
         	</c:when>
@@ -110,7 +110,7 @@ if ("${msg}") {
         	</c:otherwise>
         </c:choose>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a href="${pageContext.request.contextPath}/main/logout.do" class="nav-link">
             <i class="fa fa-fw fa-sign-out"></i>로그아웃</a>
         </li>
       </ul>
@@ -141,7 +141,7 @@ if ("${msg}") {
 		            <c:forEach var="room" items="${room}">
 			            <div class="room-box">
 			                <div class="room">
-			                    <span class="room-title">[ ${room.roomName } ]</span><br>
+			                    <span class="room-title">${room.roomName }</span><br>
 			                    <h6 class="room-people">${room.roomInfo}방설명자리</h6><br>
 			                    <h5 class="total-people">${room.roomConnectUserCount} / ${room.roomNoConnectUserCount}</h5>
 			                </div>

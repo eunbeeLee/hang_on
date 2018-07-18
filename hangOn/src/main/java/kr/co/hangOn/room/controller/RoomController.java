@@ -32,6 +32,7 @@ public class RoomController {
 		history.setIpAddr(req.getRemoteAddr());
 		history.setActName("da01");
 		service.historyInsert(history ,joinCode);
+		req.setAttribute("code", joinCode);
 		return "room/view";
 	}
 	

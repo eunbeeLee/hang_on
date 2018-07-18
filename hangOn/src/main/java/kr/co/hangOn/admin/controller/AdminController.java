@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.hangOn.admin.service.AdminService;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Room;
+import kr.co.hangOn.repository.domain.RoomMember;
 
 @Controller
 @RequestMapping("/admin")
@@ -46,8 +47,29 @@ public class AdminController {
 	
 	@RequestMapping("/delRoom.json")
 	@ResponseBody
-	public Map<String, Object> delRoomInfo(int roomNo){
-		return null;
+	public Map<String, Object> delRoomInfo(Room room){
+		return service.pageInfoAfterRoomDel(room);
 	}
+	@RequestMapping("/roomPassCount.json")
+	@ResponseBody
+	public int roomPassInfo(Room room) {
+		return service.roomPassInfo(room);
+	}
+	@RequestMapping("/roomUpdate.json")
+	@ResponseBody
+	public void roomInfoUpdate(Room room) {
+		service.roomInfoUpdate(room);
+	}
+	
+	@RequestMapping("/memberOut.json")
+	@ResponseBody
+	public void memberOut(RoomMember rm) {
+		service.memberOut(rm);
+	}
+	
+	
+	
+	
+	
 	
 }

@@ -5,9 +5,15 @@ import java.util.Map;
 
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Room;
+import kr.co.hangOn.repository.domain.RoomMember;
 
 public interface AdminService {
 	public Map<String , Object> historyPageInfo(History history);
 	public Map<String , Object> roomMgmPageInfo(Room room);
+	public Map<String , Object> pageInfoAfterRoomDel(Room room);
+	public int roomPassInfo(Room room);
+	public void roomInfoUpdate(Room room);
+	
+	public void memberOut(RoomMember rm);
 }
  

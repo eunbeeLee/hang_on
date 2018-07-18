@@ -38,6 +38,8 @@ public class UserController {
 		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
                 session.setAttribute("user", loginUser);
                 session.setAttribute("userEmail", loginUser.getUserEmail());
+                session.setAttribute("userName", loginUser.getUserName());
+                session.setAttribute("userNo", loginUser.getUserNo());
                 userService.stateCodeChanger(loginUser);
                 return "/lobby/view.do";
         }
@@ -76,7 +78,8 @@ public class UserController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) throws Exception {
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("user");
+		System.out.println(loginUser.getUserName());
 		loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우
 		userService.stateCodeChanger(loginUser);
 		System.out.println(loginUser.getUserEmail());
