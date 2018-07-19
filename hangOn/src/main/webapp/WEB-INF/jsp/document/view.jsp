@@ -68,7 +68,7 @@
         		</button>
         		<input type="color" id="documentColor">
         		
-        		<button class="document-util-btn btn btn-default" title="전체 지우기">
+        		<button id="documentAllClear" class="document-util-btn btn btn-default" title="전체 지우기">
         			<i class="document-screen-clear">clear</i>
         		</button>
 		

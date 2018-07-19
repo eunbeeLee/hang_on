@@ -146,6 +146,23 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		}
 	}
 	
+	public void clear(String data) throws Exception {
+		String arr[] = data.split(";");
+		Map<String, List<String>> drawInfo = roomInfo.get(arr[0]);
+		List<String> pageDraw = new ArrayList<>();
+		if(drawInfo == null) {
+			drawInfo = new HashMap<String, List<String>>();
+		}
+		drawInfo.put(arr[1],pageDraw);
+		roomInfo.put(arr[0], drawInfo);
+		Set<Integer> keys = socketInfo.keySet();
+		for(int key : keys) {
+			DocumentSocket ds = socketInfo.get(key);
+			if(ds.getCode().equals(arr[0]))ds.getSessioninfo().sendMessage(new TextMessage("clear::"+arr[1]));
+		}
+		
+	}
+	
 	@Override
 	public void handleTextMessage(WebSocketSession wss, TextMessage message) throws Exception {
 		String arr[] = message.getPayload().split("::");
@@ -159,6 +176,7 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		case "draw": draw(wss,arr[1]); break;
 		case "pointer": pointer(wss,arr[1]); break;
 		case "getDrawInfo": getDrawInfo(arr[1]); break;
+		case "clear": clear(arr[1]); break;
 		}
 	}
 	

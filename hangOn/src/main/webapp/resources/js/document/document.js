@@ -25,7 +25,6 @@ const userProp = {
 		roomNo : $("#documentRoomNo").val(),
 		code : $("#documentRoomCode").val()
 }
-const MAINHOST = "ws://localhost";
 const docWs = new WebSocket(MAINHOST+'/hangOn/document/docview.do');
 var drawData = {};
 var canvasProp = {};
@@ -61,10 +60,13 @@ docWs.onmessage = function(evt) {
 	}else if(data[0]=="docView"){
 		docViewOrder(data[1]);
 		return;
+	}else if(data[0]=="clear"){
+		onClear(data[1]);
+		return;
 	}
+
 	let obj = null;
 	if(data[1]) obj = JSON.parse(data[1]);
-	console.log(obj)
 	switch (data[0]) {
 	case "conn" : documentConnEvt(obj); break;
 	case "start": documentLoadStart(); break;
@@ -200,6 +202,7 @@ function pageMoveKeyup(data){
 	let orderPage = parseInt(data);
 	if(isNaN(orderPage)){return;}
 	documentShareView.attr("src",$("#documentIndex"+orderPage).children("img").attr("src"));
+	documentViewOrder.val(orderPage);
 	documentViewOrder.attr("value",orderPage);
 	canvasPixel(orderPage);
 	docWs.send(`viewPage::set;${userProp.code};${orderPage}`);
@@ -254,7 +257,7 @@ function getCanvas(id){
 
 function listener(event){
 	let id = event.target.id;
-	if(pos.type == "mouse") return;
+	if(pos.type != 	"pen" || "eraser" || "pointer") return;
 	if(pos.type == "pointer"){
 		pointer(event);
 		return;
@@ -447,4 +450,16 @@ function onEraser(drawDatas) {
         canvasProp[id].ctx.clearRect(onX-halfSize,onY,halfSize,halfSize);
         canvasProp[id].ctx.clearRect(onX,onY-halfSize,halfSize,halfSize);
 	}
+}
+
+$("#documentAllClear").on("click",()=>{
+	canvas = `canvas${documentViewOrder.val()}`;
+	docWs.send(`clear::${userProp.code};${canvas}`);
+})
+
+function onClear(id) {
+	canvas = $(`#${id}`)[0];
+    let X = canvas.clientWidth;
+    let Y = canvas.clientHeight;
+    canvasProp[id].ctx.clearRect(0,0,X,Y);
 }
