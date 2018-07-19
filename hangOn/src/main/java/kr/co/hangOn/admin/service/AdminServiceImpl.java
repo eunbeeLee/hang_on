@@ -1,5 +1,7 @@
 package kr.co.hangOn.admin.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.hangOn.repository.domain.DashBoard;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Page;
 import kr.co.hangOn.repository.domain.PageResult;
 import kr.co.hangOn.repository.domain.Room;
 import kr.co.hangOn.repository.domain.RoomMember;
+import kr.co.hangOn.repository.mapper.DashBoadMapper;
 import kr.co.hangOn.repository.mapper.HistoryMapper;
 import kr.co.hangOn.repository.mapper.RoomMapper;
 
@@ -21,6 +25,8 @@ public class AdminServiceImpl implements AdminService {
 	public HistoryMapper hisMapper;
 	@Autowired
 	public RoomMapper roomMapper;
+	@Autowired
+	public DashBoadMapper dashMapper;
 
 	@Override
 	public Map<String , Object> historyPageInfo(History history) {
@@ -109,9 +115,20 @@ public class AdminServiceImpl implements AdminService {
 	public void memberOut(RoomMember rm) {
 //		System.out.println(rm.getRoomNo());
 //		System.out.println(rm.getUserNo());
-		
 		rm.setRoomConnectCode("bb13");
 		roomMapper.memberOut(rm);
+	}
+
+	@Override
+	public int[] countRoomByMonth(DashBoard dashBoard) {
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int mArr[] = new int[12];
+		for(int i = 0; i <12; i++) {
+			dashBoard.setSelectYear(year);
+			dashBoard.setSelectMonth(i+1);
+			mArr[i] =  dashMapper.countRoomByMonth(dashBoard);
+		}
+		return mArr;
 	}
 	
 

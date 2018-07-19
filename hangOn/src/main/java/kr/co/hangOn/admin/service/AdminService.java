@@ -3,6 +3,7 @@ package kr.co.hangOn.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.hangOn.repository.domain.DashBoard;
 import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.Room;
 import kr.co.hangOn.repository.domain.RoomMember;
@@ -15,5 +16,7 @@ public interface AdminService {
 	public void roomInfoUpdate(Room room);
 	
 	public void memberOut(RoomMember rm);
+	int[] countRoomByMonth(DashBoard dashBoard);
+	
 }
  

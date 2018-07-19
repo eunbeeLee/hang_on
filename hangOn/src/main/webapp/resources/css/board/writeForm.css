@@ -1,49 +1,20 @@
-.vid {
-	width: 100%; 
-	height: 100%; 
-	position:fixed; 
-	left: 0px; 
-	opacity: 0.5;
+#table-body {
+	position: relative;
+	width: 60%;
+    margin-left: 250px;
+    margin-top: 100px;
 }
 
-video {
-	z-index: 10; 
-	position: fixed; 
-	right: 0; 
-	bottom: 0;
-	min-width: 100%; 
-	min-height: 100%;
-	width: auto; 
-	height: auto;
-	background-size: cover;
-}
-
-.intro-header {
+#table-on-the-left {
 	position: relative;
 	float: left;
-	z-index: 0; 
-	vertical-align: middle;
-    top: 280px;
-	left: 200px;
+	margin-left: 50px;
 }
 
-.intro-context {
-	position: fixed;
-	z-index: 20; 
-	color: white;
-}
-
-.log-in {
+.row {
 	position: relative;
-	z-index: 20;
-    width: 400px;
-    vertical-align: middle;
-    top: 150px;
-	left: 380px;
-}
-
-#login {
-	background-color : #b39bdd;
+	margin-left: 550px;
+	margin-top: auto;
 }
 
 html {
@@ -98,25 +69,3 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

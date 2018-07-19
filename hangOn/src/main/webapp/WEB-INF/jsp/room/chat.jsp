@@ -31,7 +31,7 @@
     var sendMsg = "";
 
     $(function () {
-        ws = new WebSocket('ws://localhost/hangOn/room/chat.do');
+        ws = new WebSocket('ws://localhost:8000/hangOn/room/chat.do');
     	ws.onopen = function() {
        	    console.log('웹소켓 서버 접속 성공');
         	// 사용자 입장시 메세지 출력
@@ -41,9 +41,29 @@
         ws.onmessage = function(evt) {
         	var arr = evt.data.split(":");
         	var state = arr[0];
+        	var peNo = arr[6]+"";
         	if(isNaN(state)){
 	        	if("condition" == state){
-	            	$(".chat").append("<li id='alarm'><span>"+arr[1]+":"+arr[2]+"</span></li>");
+	            	$(".chat").append("<li id='alarm'><span>"+arr[2]+arr[3]+arr[4]+":"+arr[5]+"</span></li>");
+	            	if(arr[1] == 2) {
+	            		$("."+peNo).remove();
+	            		
+	            	}
+	        	}
+	        	if("peAlarm" == state) {
+	        		$("#userState").append(
+	        				"<div class='"+arr[3]+"''>"+
+	        				"<a class='dropdown-item' >"+
+	        	              "<span class='text-success'>"+
+	        	                "<strong>"+
+	        	                  "<i class='fa fa-fw fa-circle'></i>"+arr[2]+"</strong>"+
+	        	              "</span>"+
+	        	              "<span class='small float-right text-muted'>"+arr[4]+":"+arr[5]+"</span>"+
+	        	              "<div class='dropdown-message small'></div>"+
+	        	            "</a>"+
+	        	             "<div class='dropdown-divider'></div>"+
+	        	             "</div>"
+	        				);
 	        	} 
         	} else {
 	        	if(${sessionScope.user.userNo} == state) {
@@ -66,12 +86,6 @@
 	        	    			"</li>");
 	        	}
         	}
-        	$(window).scroll(function(){ 
-        	    if  ($(window).scrollTop() == $("#chatBigBox").height() - $(window).height()){ 
-        	       alert("로딩하기~~"); 
-        	    } 
-        	});
-
 	        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
 		};
         ws.onerror = function(evt) {

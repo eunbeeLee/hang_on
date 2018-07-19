@@ -148,6 +148,13 @@
 		   		  from tb_room
 		   		 where room_join_code = #{roomJoinCode})
 	</update>
+	<insert id="insertHistoryBySocket" parameterType="history">
+		 insert into tb_history(
+	            user_no, ip_addr, act_code, room_no
+	        )values(
+	            #{userNo}, #{ipAddr}, #{actName}, #{roomNo}
+	        )
+	</insert>
 	
 </mapper>	
 

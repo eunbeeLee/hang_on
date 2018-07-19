@@ -7,4 +7,5 @@ public interface UserMapper {
     void stateCodeChanger(User loginUser);
 	int emailCheck(String userEmail);
 	void register(User user);
+	void updatePw(User user);
 }

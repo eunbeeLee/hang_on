@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hangOn.repository.mapper.DashBoadMapper">
+	<resultMap type="dashBoard" id="dashBoardMap">
+		<result column="count_room" property="countRoom"/>
+		<result column="user_no" property="userNo"/>
+		<result column="select_month" property="selectMonth"/>
+		<result column="select_year" property="selectYear"/>
+	</resultMap>
+	<select id="countRoomByMonth" parameterType="dashBoard" resultType="int">
+		select count(*)
+		  from tb_room
+		 where user_no = #{userNo}
+		   and month(room_create_date) = #{selectMonth}
+		   and year(room_create_date) = #{selectYear}
+	</select>
+	<select id="selectCallByUser" parameterType="dashBoard">
+	
+	</select>
+</mapper>

@@ -30,9 +30,9 @@ public class UserController {
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
 		User loginUser = userService.login(user.getUserEmail());
-		String msg = "비밀번호가 틀렸습니다";
+		String msg = "2"; // 비번 틀림
 		if (loginUser == null) {
-			msg = "등록되지 않은 이메일 입니다";
+			msg = "1"; // 없는 이메일 입력시
 		}	
 		// parameter로 받은 평문과 DB에 저장된 암호화값 비교
 		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
@@ -54,7 +54,7 @@ public class UserController {
 		return no;
 	}
 	
-	@RequestMapping(value = "/registerForm.do")
+	@RequestMapping(value = "/registerForm.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public String registerForm(User user) {
 		return "main/register";
 	}

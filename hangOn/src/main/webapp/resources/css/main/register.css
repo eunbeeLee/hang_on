@@ -14,9 +14,17 @@
 	z-index: 30;
 	width: 600px;
 	height: 800px;
-	margin: 0;
-	top: 15%;
 	left: 30%;
+	top: 15%;
+}
+
+#forgotPw {
+	padding-top: 1rem;
+}
+
+#registerBtn {
+	margin: auto;
+	width: 80%;
 }
 
 #register-text {
