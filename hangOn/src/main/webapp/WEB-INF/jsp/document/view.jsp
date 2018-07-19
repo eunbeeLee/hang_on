@@ -56,25 +56,17 @@
 	        		<i class="fa fa-eraser doc-util-btn-detail" aria-hidden="true"></i>
         		</button>
         		
+        		
+        		<button class="document-util-btn btn btn-default" title="텍스트">
+	        		<i class="fa fa-font doc-util-btn-detail" aria-hidden="true"></i>
+        		</button>
+        		
         		<button id="documentColorBtn" class="document-util-btn btn btn-default" title="색변경">
 	        		<i id="colorLens" class="material-icons doc-util-btn-detail-plus">
 						color_lens
 					</i>
         		</button>
         		<input type="color" id="documentColor">
-        		
-        		<button class="document-util-btn btn btn-default" title="텍스트">
-	        		<i class="fa fa-font doc-util-btn-detail" aria-hidden="true"></i>
-        		</button>
-        		
-        		
-        		<button class="document-util-btn btn btn-default" title="도형">
-        			<i class="fa fa-cube doc-util-btn-detail" aria-hidden="true"></i>
-        		</button>
-        		
-        		<button class="document-util-btn btn btn-default" title="차트">
-        			<i class="fa fa-pie-chart doc-util-btn-detail" aria-hidden="true"></i>
-        		</button>
         		
         		<button class="document-util-btn btn btn-default" title="전체 지우기">
         			<i class="document-screen-clear">clear</i>

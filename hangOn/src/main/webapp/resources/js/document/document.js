@@ -10,6 +10,9 @@ const documentReadyScreen = $("#documentReadyScreen");
 const documentViewOrder = $("#documentViewPageOrder");
 const docIndex = $("#documentMaxIndex");
 const documentViewing = {view : false};
+const documentPointerArea = $("#documentShareView");
+const eraserSize = 30;
+const halfSize = eraserSize/2;
 const pos = {
         drawable: false,
         x: -1,
@@ -24,13 +27,15 @@ const userProp = {
 }
 const MAINHOST = "ws://localhost";
 const docWs = new WebSocket(MAINHOST+'/hangOn/document/docview.do');
+var drawData = {};
+var canvasProp = {};
+
 
 $(()=>{
 	docWs.send(`conn::${userProp.userNo};${userProp.code}`);
 })
 
 
-var canvasProp = {};
 $('#documentNav').click(function(e) { 
 	e.preventDefault(); 
 	if(!documentViewing.view){
@@ -59,10 +64,18 @@ docWs.onmessage = function(evt) {
 	}
 	let obj = null;
 	if(data[1]) obj = JSON.parse(data[1]);
+	console.log(obj)
 	switch (data[0]) {
 	case "conn" : documentConnEvt(obj); break;
 	case "start": documentLoadStart(); break;
 	case "load" : documentLoadEvt(obj); break;
+	case "pointer" : onPointer(obj); break;
+	case "draw" : 
+		switch (obj.type) {
+		case "pen": onDraw(obj); break;
+		case "eraser": onEraser(obj); break;
+		}
+		
 	}
 }
 
@@ -179,6 +192,7 @@ function pageMoveList(data){
 	documentShareView.attr("src",$("#documentIndex"+viewPage).children("img").attr("src"));
 	canvasPixel(viewPage);
 	docWs.send(`viewPage::set;${userProp.code};${viewPage}`);
+	setTimeout(function(){docWs.send(`getDrawInfo::${userProp.code};canvas${viewPage}`);},200);
 }
 
 function pageMoveKeyup(data){
@@ -189,6 +203,7 @@ function pageMoveKeyup(data){
 	documentViewOrder.attr("value",orderPage);
 	canvasPixel(orderPage);
 	docWs.send(`viewPage::set;${userProp.code};${orderPage}`);
+	setTimeout(function(){docWs.send(`getDrawInfo::${userProp.code};canvas${orderPage}`);},200);
 }
 
 function pageMoveBtn(data){
@@ -212,14 +227,14 @@ function viewPageOrder(viewPage){
 	documentViewOrder.attr("value",viewPage);
 	documentShareView.attr("src",$("#documentIndex"+viewPage).children("img").attr("src"));
 	canvasPixel(viewPage);
+	setTimeout(function(){docWs.send(`getDrawInfo::${userProp.code};canvas${viewPage}`);},200);
 }
 
 
 
 $("#documentChange button").on("click",()=>{documentUpload.click();})
 
-function canvasPixel(index){
-	if(index==undefined) index = 1;
+function canvasPixel(index = 1){
 	let view = $(`#canvas${index}`);
 	$(".document-canvas").each((index,ele)=>{$(ele).css("display","none");});
 	view.css({"display":"block"});
@@ -227,7 +242,6 @@ function canvasPixel(index){
 }
 
 function getCanvas(id){
-	if(canvasProp[id]) return;
     let canvas = document.getElementById(id);
     let ctx = canvas.getContext("2d");
     canvasProp[id] = {"canvas" : canvas , "ctx" : ctx};
@@ -240,6 +254,11 @@ function getCanvas(id){
 
 function listener(event){
 	let id = event.target.id;
+	if(pos.type == "mouse") return;
+	if(pos.type == "pointer"){
+		pointer(event);
+		return;
+	}
     switch(event.type){
         case "mousedown":
             initDraw(event,id);
@@ -247,7 +266,6 @@ function listener(event){
 
         case "mousemove":
         	switch (pos.type) {
-			case "mouse": return; break;
 			case "pen": if(pos.drawable) draw(event,id); break;
 			case "eraser": if(pos.drawable) eraser(event,id); break;
 			}    
@@ -255,10 +273,69 @@ function listener(event){
 
         case "mouseout":
         case "mouseup":
-            finishDraw();
+            finishDraw(id);
             break;
     }
 }
+
+function pointer(event){
+	var coors = getPosition(event);
+	let id = event.target.id;
+	let canvas = $("#"+id)[0];
+	let pointerInfo = {};
+	pointerInfo["top"] = coors.Y / canvas.clientHeight;
+	pointerInfo["left"] = coors.X / canvas.clientWidth;
+	pointerInfo["color"] = pos.color;
+	pointerInfo["userNo"] = userProp.userNo;
+	pointerInfo["canvas"] = id;
+
+	if(!$(`#${userProp.userNo}pointer`).attr("value")){
+		documentPointerArea.append(`
+				<div id="${userProp.userNo}pointer" class="document-pointer-view" value="true"></div>
+		`)
+	}
+	switch(event.type){
+    case "mousedown":
+    	$(`#${userProp.userNo}pointer`).css({"top":coors.Y,"left":coors.X,"border":`5px solid ${pos.color}`});
+    	if($(`#${userProp.userNo}pointer`).css("display") == "none"){
+    		$(`#${userProp.userNo}pointer`).css("display","block");
+    		pointerInfo["display"] = "block";
+    	}else{
+    		$(`#${userProp.userNo}pointer`).css("display","none");
+    		pointerInfo["display"] = "none";
+    	}
+    	pointerInfo["type"] = "view";
+        break;
+
+    case "mousemove":
+    	$(`#${userProp.userNo}pointer`).css({"top":coors.Y,"left":coors.X});
+    	pointerInfo["type"] = "move";
+        break;
+	}
+	docWs.send(`pointer::${userProp.code};${JSON.stringify(pointerInfo)}`);
+}
+function onPointer(pointerInfo){
+	let canvas = $("#"+pointerInfo.canvas)[0];
+	let x = pointerInfo.left * canvas.clientWidth;
+	let y = pointerInfo.top * canvas.clientHeight;
+	
+	
+	if(!$(`#${pointerInfo.userNo}pointer`).attr("value")){
+		documentPointerArea.append(`
+				<div id="${pointerInfo.userNo}pointer" class="document-pointer-view" value="true"></div>
+		`)
+	}
+	switch (pointerInfo.type) {
+	case "view": $(`#${pointerInfo.userNo}pointer`).css({
+						"display":pointerInfo.display,
+						"top":y,
+						"left":x,
+						"border":`5px solid ${pointerInfo.color}`
+				 }); break;
+	case "move": $(`#${pointerInfo.userNo}pointer`).css({"top":y,"left":x}); break;
+	}
+}
+
 function initDraw(event,id){
 	canvasProp[id].ctx.beginPath(0,0);
     pos.drawable = true;
@@ -266,6 +343,11 @@ function initDraw(event,id){
     pos.X = coors.X;
     pos.Y = coors.Y;
     canvasProp[id].ctx.moveTo(pos.X, pos.Y);
+    
+    let canvas = $("#"+id)[0];
+    drawData["id"] = id;
+    drawData["moveX"] = pos.X / canvas.clientWidth;
+    drawData["moveY"] = pos.Y / canvas.clientHeight;
 }
 
 function draw(event,id){
@@ -275,11 +357,19 @@ function draw(event,id){
     pos.X = coors.X;
     pos.Y = coors.Y;
     canvasProp[id].ctx.stroke();
+    
+    
+    let canvas = $("#"+id)[0];
+    let emitX = coors.X / canvas.clientWidth;
+    let emitY = coors.Y / canvas.clientHeight;
+    
+    drawData["color"] = pos.color;
+    if(drawData["line"]) drawData["line"].push({x:emitX,y:emitY});
+    else drawData["line"] = [{x:emitX,y:emitY}];
+
 }
 
 function eraser(event,id) {
-	let eraserSize = 30;
-	let halfSize = eraserSize/2;
     var coors = getPosition(event);
     pos.X = coors.X;
     pos.Y = coors.Y;
@@ -287,12 +377,23 @@ function eraser(event,id) {
     canvasProp[id].ctx.clearRect(pos.X-halfSize,pos.Y-halfSize,halfSize,halfSize);
     canvasProp[id].ctx.clearRect(pos.X-halfSize,pos.Y,halfSize,halfSize);
     canvasProp[id].ctx.clearRect(pos.X,pos.Y-halfSize,halfSize,halfSize);
+    
+    let canvas = $("#"+id)[0];
+    let emitX = coors.X / canvas.clientWidth;
+    let emitY = coors.Y / canvas.clientHeight;
+    if(drawData["line"]) drawData["line"].push({x:emitX,y:emitY});
+    else drawData["line"] = [{x:emitX,y:emitY}];
 }
 
-function finishDraw(){
+function finishDraw(id){
     pos.drawable = false;
     pos.X = -1;
     pos.Y = -1;
+    drawData["type"] = pos.type;
+    docWs.send(`draw::${userProp.code}:/:${id}:/:${JSON.stringify(drawData)}`);
+    drawData["moveX"] = 0;
+    drawData["moveY"] = 0;
+    drawData["line"] = [];
 }
 
 function getPosition(event){
@@ -305,7 +406,6 @@ function getPosition(event){
 $("#documentUtilBtns button").on("click",function(e){
 	let types = $(this).val();
 	if(types) pos.type = $(this).val()
-	console.log(types)
 });
 
 $("#documentColorBtn").on("click",function(){
@@ -317,3 +417,34 @@ $("#documentColorBtn").on("click",function(){
 	});
 })
 
+
+
+function onDraw(drawDatas){
+	let id = drawDatas["id"]
+	let canvas = $("#"+id)[0];
+
+	canvasProp[id].ctx.strokeStyle = drawDatas["color"];
+	canvasProp[id].ctx.beginPath(0,0);
+	canvasProp[id].ctx.moveTo(drawDatas["moveX"] * canvas.clientWidth,drawDatas["moveY"] * canvas.clientHeight);
+    for(let line of drawDatas["line"]){
+        let onX = line.x * canvas.clientWidth;
+        let onY = line.y * canvas.clientHeight;
+    	canvasProp[id].ctx.lineTo(onX,onY);
+    	canvasProp[id].ctx.stroke();
+	}
+    canvasProp[id].ctx.closePath();
+}
+
+function onEraser(drawDatas) {
+	let id = drawDatas["id"]
+	let canvas = $("#"+id)[0];
+	
+    for(let line of drawDatas["line"]){
+        let onX = line.x * canvas.clientWidth;
+        let onY = line.y * canvas.clientHeight;
+    	canvasProp[id].ctx.clearRect(onX,onY,halfSize,halfSize);
+        canvasProp[id].ctx.clearRect(onX-halfSize,onY-halfSize,halfSize,halfSize);
+        canvasProp[id].ctx.clearRect(onX-halfSize,onY,halfSize,halfSize);
+        canvasProp[id].ctx.clearRect(onX,onY-halfSize,halfSize,halfSize);
+	}
+}

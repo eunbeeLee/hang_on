@@ -121,7 +121,7 @@
 #documentUtilBtns{
 	margin-top:15px;
 	height: 80px;
-	width: 30%;
+	width: 23%;
 	top:0%;
 	left: 35%;
 	position: absolute;
@@ -142,7 +142,7 @@
 	height: 50px;
 	width: 190px;
 	top:0%;
-	left: 72.5%;
+	left: 75%;
 	position: absolute;
 	padding-top: 10px;
 	text-align: center;
@@ -239,4 +239,15 @@
 
 #documentColor{
 	display: none;
+}
+
+.document-pointer-view{
+	position: absolute;
+	z-index: 1000;
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	background-color:red;
+	border:5px solid black;
+	display:none;
 }

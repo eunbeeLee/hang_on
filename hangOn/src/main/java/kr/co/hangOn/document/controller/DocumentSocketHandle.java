@@ -3,7 +3,6 @@ package kr.co.hangOn.document.controller;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +19,11 @@ import kr.co.hangOn.repository.domain.DocumentSocket;
 
 @Component("docview")
 public class DocumentSocketHandle extends TextWebSocketHandler {
-	private Map<String,List<String>> roomInfo = new HashMap<>();
 	private Map<String,String> pdfInfo = new HashMap<>();
 	private Map<String,Integer> pageInfo = new HashMap<>();
 	private Map<String,String> docView = new HashMap<>();
-	private List<String> docInfo = new ArrayList<>();
 	private Map<Integer,DocumentSocket> socketInfo = new HashMap<>();
+	private Map<String,Map<String,List<String>>> roomInfo = new HashMap<>();
 	
 	public DocumentSocketHandle () {}
 
@@ -42,6 +40,7 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		String arr[] = data.split(";");
 		pdfInfo.put(arr[1], arr[2]);
 		Set<Integer> keys = socketInfo.keySet();
+		roomInfo.remove(arr[1]);
 		for(int key : keys) {
 			DocumentSocket ds = socketInfo.get(key);
 			if(ds.getCode().equals(arr[1])) {
@@ -59,8 +58,42 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		}
 	}
 	
-	public void canvas(String data) throws Exception {
-		
+	public void draw(WebSocketSession wss,String data) throws Exception {
+		String arr[] = data.split(":/:");
+		Map<String, List<String>> drawInfo = roomInfo.get(arr[0]);
+		List<String> pageDraw = null;
+		String emitData = "draw::"+arr[2];
+		if(drawInfo == null) {
+			drawInfo = new HashMap<String, List<String>>();
+			pageDraw = new ArrayList<>();
+			
+		}else { 
+			pageDraw = drawInfo.get(arr[1]);
+			if(pageDraw == null) pageDraw = new ArrayList<>();
+		}
+		pageDraw.add(emitData);
+		drawInfo.put(arr[1],pageDraw);
+		roomInfo.put(arr[0], drawInfo);
+		Set<Integer> keys = socketInfo.keySet();
+		for(int key : keys) {
+			DocumentSocket ds = socketInfo.get(key);
+			if(ds.getSessioninfo().getId().equals(wss.getId())) continue;
+			if(ds.getCode().equals(arr[0])) {
+				ds.getSessioninfo().sendMessage(new TextMessage(emitData));
+			}
+		}
+	}
+	
+	public void pointer(WebSocketSession wss,String data) throws Exception {
+		String arr[] = data.split(";");
+		Set<Integer> keys = socketInfo.keySet();
+		for(int key : keys) {
+			DocumentSocket ds = socketInfo.get(key);
+			if(ds.getSessioninfo().getId().equals(wss.getId())) continue;
+			if(ds.getCode().equals(arr[0])) {
+				ds.getSessioninfo().sendMessage(new TextMessage("pointer::"+arr[1]));
+			}
+		}
 	}
 	
 	public void pageMove(String data) throws Exception {
@@ -98,6 +131,21 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		}
 	}
 	
+	public void getDrawInfo(String data) throws Exception {
+		String arr[] = data.split(";");
+		Map<String,List<String>> roomInfo = this.roomInfo.get(arr[0]);
+		if(roomInfo == null) return;
+		List<String> drawInfos = roomInfo.get(arr[1]);
+		if(drawInfos == null) return;
+		for(String info : drawInfos) {
+			Set<Integer> keys = socketInfo.keySet();
+			for(int key : keys) {
+				DocumentSocket ds = socketInfo.get(key);
+				if(ds.getCode().equals(arr[0]))ds.getSessioninfo().sendMessage(new TextMessage(info));
+			}
+		}
+	}
+	
 	@Override
 	public void handleTextMessage(WebSocketSession wss, TextMessage message) throws Exception {
 		String arr[] = message.getPayload().split("::");
@@ -105,10 +153,12 @@ public class DocumentSocketHandle extends TextWebSocketHandler {
 		case "conn": conn(wss,arr[1]); break;
 		case "start": start(arr[1]); break;
 		case "pdfLoad": pdfLoad(arr[1]); break;
-		case "canvas": canvas(arr[1]); break;
 		case "pageMove": pageMove(arr[1]); break;
 		case "viewPage": viewPage(wss,arr[1]); break;
 		case "docView": docView(arr[1]); break;
+		case "draw": draw(wss,arr[1]); break;
+		case "pointer": pointer(wss,arr[1]); break;
+		case "getDrawInfo": getDrawInfo(arr[1]); break;
 		}
 	}
 	
