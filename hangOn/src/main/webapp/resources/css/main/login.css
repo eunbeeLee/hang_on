@@ -42,6 +42,15 @@ video {
 	left: 380px;
 }
 
+#google {
+	padding-top: 1rem;
+	float: left;
+}
+
+#smallText {
+	float: right;
+}
+
 #login {
 	background-color : #b39bdd;
 }
