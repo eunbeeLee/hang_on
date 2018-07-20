@@ -188,8 +188,8 @@
 }
 .document-screen-clear{
 	font-size: 11px;
-	right: 2px !important;
-	bottom: 8px !important;
+	right: 3.5px !important;
+	bottom: 6px !important;
 }
 
 .documentPageView button{
@@ -250,4 +250,46 @@
 	background-color:red;
 	border:5px solid black;
 	display:none;
+}
+
+.document-text-area{
+	position: absolute;
+	width: auto;
+	height: auto;
+	z-index:1000;
+	padding:2px;
+	border: 2px dashed rgba(255,255,255,.1);
+	border-radius: 10px;
+	cursor : move;
+}
+.document-text-area:hover{
+	transition:.3s;
+	border: 2px dashed rgba(0,84,255,.8);
+}
+.input-text-area{
+	border: 1px solid rgba(0,0,0,.5);
+	font-size:20px;
+	cursor: default;
+	line-height: 20px;
+	font-weight: normal;
+}
+
+.text-btn-info{
+	width: 15px;
+	height: 10px;
+	font-size: 10px;
+	float: right;
+	margin: 3px;
+	position: relative;
+	cursor: pointer;
+}
+
+.text-btn-info i{
+	position: absolute;
+	right: 3px;
+	bottom: -1px;
+}
+#textInputViewArea{
+	position: absolute;
+	display: none;
 }

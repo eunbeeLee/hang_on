@@ -25,6 +25,7 @@ const userProp = {
 		roomNo : $("#documentRoomNo").val(),
 		code : $("#documentRoomCode").val()
 }
+const MAINHOST = "ws://localhost";
 const docWs = new WebSocket(MAINHOST+'/hangOn/document/docview.do');
 var drawData = {};
 var canvasProp = {};
@@ -72,6 +73,7 @@ docWs.onmessage = function(evt) {
 	case "start": documentLoadStart(); break;
 	case "load" : documentLoadEvt(obj); break;
 	case "pointer" : onPointer(obj); break;
+	case "text" : onText(obj); break;
 	case "draw" : 
 		switch (obj.type) {
 		case "pen": onDraw(obj); break;
@@ -231,6 +233,11 @@ function viewPageOrder(viewPage){
 	documentShareView.attr("src",$("#documentIndex"+viewPage).children("img").attr("src"));
 	canvasPixel(viewPage);
 	setTimeout(function(){docWs.send(`getDrawInfo::${userProp.code};canvas${viewPage}`);},200);
+	
+	$("#textInputViewArea").css({
+		"height":documentShareView[0].clientHeight+"px",
+		"width":documentShareView[0].clientWidth+"px"
+	})
 }
 
 
@@ -257,7 +264,7 @@ function getCanvas(id){
 
 function listener(event){
 	let id = event.target.id;
-	if(pos.type != 	"pen" || "eraser" || "pointer") return;
+	if(pos.type == "mouse") return;
 	if(pos.type == "pointer"){
 		pointer(event);
 		return;
@@ -423,7 +430,7 @@ $("#documentColorBtn").on("click",function(){
 
 
 function onDraw(drawDatas){
-	let id = drawDatas["id"]
+	let id = drawDatas["id"];
 	let canvas = $("#"+id)[0];
 
 	canvasProp[id].ctx.strokeStyle = drawDatas["color"];
@@ -439,7 +446,7 @@ function onDraw(drawDatas){
 }
 
 function onEraser(drawDatas) {
-	let id = drawDatas["id"]
+	let id = drawDatas["id"];
 	let canvas = $("#"+id)[0];
 	
     for(let line of drawDatas["line"]){
@@ -462,4 +469,90 @@ function onClear(id) {
     let X = canvas.clientWidth;
     let Y = canvas.clientHeight;
     canvasProp[id].ctx.clearRect(0,0,X,Y);
+}
+
+$("#documentTextBtn").on("click",function(){
+	$("#textInputViewArea").css("display","block");
+	$("#textInputBox").remove();
+	$("#textInputViewArea").append(`
+        	<div id="textInputBox" class="document-text-area">
+				<div id="textInputMsg" class="input-text-area" contenteditable="true">
+				</div>
+				<button id="textRemoveBtn" class="text-btn-info btn btn-default"><i>취소<i/></button>
+				<button id="textInsertBtn" class="text-btn-info btn btn-default"><i>입력</i></button>
+			</div>
+	`)
+});
+
+$("#textInputViewArea")
+.on("mousedown",".document-text-area",function() {
+    $(this).draggable({ disabled: false });
+})
+.on("click",".document-text-area",function(){
+	$(this).draggable({ disabled: true });
+})
+.on("mouseup",".document-text-area",function(){
+	let textBox = $(this);
+	textBoxJoin(textBox);
+})
+.on("mouseout",".document-text-area",function(){
+	let textBox = $(this);
+	textBoxJoin(textBox);
+});
+
+function textBoxJoin(textBox){
+	let area = $("#textInputViewArea")[0];
+	let boxX = textBox[0].offsetLeft;
+	let boxY = textBox[0].offsetTop;
+	let areaX = area.clientWidth;
+	let areaY = area.clientHeight;
+	
+	if(boxX<0) textBox.css("left","0px");
+	if(boxY<0) textBox.css("top","0px");
+	if(boxX>areaX) textBox.css("left",`${areaX-textBox[0].clientWidth}px`);
+	if(boxY>areaY) textBox.css("top",`${areaY-textBox[0].clientHeight}px`);
+};
+$("#textInputViewArea").on("click","#textRemoveBtn",function(){
+	$("#textInputBox").remove();
+});
+$("#textInputViewArea").on("click","#textInsertBtn",function(){
+	let textInfo = $("#textInputMsg");
+	let textInputBox = $("#textInputBox");
+	if(textInfo.text().replace(/^\s+|\s+$/g, "").length < 1){
+		textInputBox.remove();
+		return;
+	}
+	let textBox = $("#textInputBox");
+	$(".document-canvas").each((index,ele)=>{
+		if($(ele).css("display") == "block"){	
+			let id = $(ele).prop("id");
+			let obj = {
+					"id"  : id,
+					"x"   : (textBox[0].offsetLeft+5)/$(ele)[0].clientWidth,
+					"y"   : (textBox[0].offsetTop+51)/$(ele)[0].clientHeight,
+					"msg" : textInfo.html(),
+					"color" : pos.color
+			}
+			docWs.send(`text::${userProp.code};${id};${JSON.stringify(obj)}`);
+			textInputBox.remove();
+			return;
+		}
+	});
+});
+function onText(textData){
+	let id = textData["id"];
+	let canvas = $("#"+id)[0];
+	let ctx = canvas.getContext('2d');
+	ctx.font = "normal 20px 고딕";
+	ctx.textBaseline = "top";
+    let x = textData["x"]*canvas.clientWidth;
+    let y = textData["y"]*canvas.clientHeight;
+    
+    console.log(textData["msg"]);
+    let texts = textData["msg"].replace(/<\/div>/g,"").replace(/&nbsp;/g,"").split("<div>");
+    for(let text of texts){
+    	ctx.fillStyle = textData["color"];
+        ctx.fillText(text,x,y);
+        y = y+20;
+    }
 }

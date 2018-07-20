@@ -31,7 +31,6 @@
         
         
         <div id="documentShare" class="col-sm-6">
-        	
         	<div id="documentChange">
 	        	<button class="document-util-btn btn btn-default" title="문서변경">
 		        		<i class="material-icons">file_copy</i>
@@ -57,7 +56,7 @@
         		</button>
         		
         		
-        		<button class="document-util-btn btn btn-default" title="텍스트">
+        		<button id="documentTextBtn" class="document-util-btn btn btn-default" title="텍스트">
 	        		<i class="fa fa-font doc-util-btn-detail" aria-hidden="true"></i>
         		</button>
         		
@@ -90,7 +89,8 @@
         	
         	
         	<div id="documentShareView">
-        		<img id="documentViewImg" src="">	
+        		<img id="documentViewImg" src="">
+        		<div id="textInputViewArea"></div>
         	</div>
         	
         </div>
