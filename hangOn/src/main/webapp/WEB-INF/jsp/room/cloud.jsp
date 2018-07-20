@@ -12,6 +12,7 @@
 </head>
 <body>
   <section class="cloud-manager">
+	  	<img  id="loader" alt="" src="https://trello-attachments.s3.amazonaws.com/5b349f3848c32368c660fc5d/5b35eef6c9545d84a3cc64d3/3375ebf832089f9f597d891f7704116d/30.gif">
    	<form class="form-inline">
          <div class="input-group">
            <span class="input-group-append">
@@ -24,6 +25,12 @@
                	업로드
 	         </button>
            </span>
+       		<div id="cloudUsage">
+	       		<span id="cloudUsageNum">여기가숫자</span>
+	       		<div id="cloudUsageProgress">
+		       		<div id="cloudUsageBar"></div>
+				</div>
+       		</div>
          </div>
       </form>
     <div class="cloud-title">
