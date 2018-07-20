@@ -23,6 +23,7 @@
     	</div>
     </div>
 	</div>
+	
     <script type="text/javascript">
 
     var ws = null;
@@ -31,7 +32,7 @@
     var sendMsg = "";
 
     $(function () {
-        ws = new WebSocket('ws://localhost/hangOn/room/chat.do');
+        ws = new WebSocket('ws://localhost:8000/hangOn/room/chat.do');
     	ws.onopen = function() {
        	    console.log('웹소켓 서버 접속 성공');
         	// 사용자 입장시 메세지 출력
@@ -41,37 +42,62 @@
         ws.onmessage = function(evt) {
         	var arr = evt.data.split(":");
         	var state = arr[0];
+        	var peNo = arr[6]+"";
         	if(isNaN(state)){
 	        	if("condition" == state){
-	            	$(".chat").append("<li id='alarm'><span>"+arr[1]+":"+arr[2]+"</span></li>");
+	            	$(".chat").append("<li id='alarm'><span>"+arr[2]+arr[3]+arr[4]+":"+arr[5]+"</span></li>");
+	            	if(arr[1] == 2) {
+	            		$("."+peNo).remove();
+	            		
+	            	}
+	        	}
+	        	if("peAlarm" == state) {
+	        		$("#userState").append(
+	        				"<div class='"+arr[3]+"''>"+
+	        				"<a class='dropdown-item' >"+
+	        	              "<span class='text-success'>"+
+	        	                "<strong>"+
+	        	                  "<i class='fa fa-fw fa-circle'></i>"+arr[2]+"</strong>"+
+	        	              "</span>"+
+	        	              "<span class='small float-right text-muted'>"+arr[4]+":"+arr[5]+"</span>"+
+	        	              "<div class='dropdown-message small'></div>"+
+	        	            "</a>"+
+	        	             "<div class='dropdown-divider'></div>"+
+	        	             "</div>"
+	        				);
 	        	} 
         	} else {
 	        	if(${sessionScope.user.userNo} == state) {
 	        		$(".chat").append(
 	        					"<li class='self'>"+
-	        	    				"<div class='msg'>"+
-	        						"<p>"+arr[2]+"</p>"+
+	        	    				"<div class='msg' data-userNo="+state+">"+
+	        	    				"<p class='noticeContent'>"+arr[2]+"</p>"+
 	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
+	        	    				"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+	        					  	"<i class='material-icons'>create</i>"+
+	        						"</div>"+
+	        					    "<div class='dropdown-menu'>"+
+	        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
+	        						"</div>"+
 	        	    				"</div>"+
 	        	    			"</li>");
 	        	} else {
 	        		$(".chat").append(
 	        					"<li class='other'>"+
-	        						"<div class='avatar'><img src='https://i.imgur.com/DY6gND0.png' draggable='false'/></div>"+
 	        	    				"<div class='msg'>"+
 	        	    				"<div class='otherName'>"+arr[1] +"</div>"+
-	        						"<p>"+arr[2]+"</p>"+
+	        						"<p class='noticeContent'>"+arr[2]+"</p>"+
 	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
+	        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+	        					  	"<i class='material-icons'>create</i>"+
+	        						"</div>"+
+	        					    "<div class='dropdown-menu'>"+
+	        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
+	        						"</div>"+
 	        	    				"</div>"+
 	        	    			"</li>");
 	        	}
         	}
-        	$(window).scroll(function(){ 
-        	    if  ($(window).scrollTop() == $("#chatBigBox").height() - $(window).height()){ 
-        	       alert("로딩하기~~"); 
-        	    } 
-        	});
-
 	        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
 		};
         ws.onerror = function(evt) {
@@ -104,6 +130,34 @@
         $msg.val(""); 
     }
     
+    $(".chat").on("click", ".noticeRegistBtn", function (e) {
+    	var userNo = $(this).attr("data-userNo");
+    	var roomNo = ${roomNo};
+    	var noticeContent = $(this).parent().siblings(".noticeContent").html();
+    	e.preventDefault();
+    	
+    	$.ajax({
+    		url: `${pageContext.request.contextPath}/room/noticeRegist.json`,
+    		data: {
+    			userNo: userNo,
+    			roomNo: roomNo,
+    			noticeContent: noticeContent
+    		},
+    		type: "POST",
+    		dataType: "json",
+    		success: function(data){
+    		}
+    	})
+    	
+    })
+    
+	function makeNoticeList(data) {
+    	let $noticeBox = $("#noticeBox");
+    	for(let i = 0; i < data.length ; i++) {
+    		data[i].split()
+    		
+    	}
+    }    
 
     
     

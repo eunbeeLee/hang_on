@@ -24,12 +24,20 @@
 	        <li class="nav-item">
 	        	<a class="nav-link" href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-info-circle"></i>   고객센터</a>
 	        </li>
-<!-- 	        <li class="nav-item"> -->
-<%-- 	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/logout.do">로그아웃</a> --%>
-<!-- 	        </li> -->
+	        <li class="nav-item" id="logout">
+	        	<a class="nav-link" href="${pageContext.request.contextPath}/main/logout.do">로그아웃</a>
+	        </li>
         </ul>
     </div>
 </nav>
+
+<script>
+
+if("${userEmail}" == "") {
+	$("#logout").hide();
+}
+
+</script>
 
 </body>
 </html>

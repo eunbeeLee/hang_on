@@ -21,12 +21,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/login.do") // 메인페이지
 	public String main() {
 		return "main/login";
 	}
 	
-	@RequestMapping("/loginPost.json")
+	@RequestMapping("/loginPost.json") // 로그인
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
 		User loginUser = userService.login(user.getUserEmail());
@@ -46,7 +46,7 @@ public class UserController {
 		return msg;
 	}
 		
-	@RequestMapping("/emailCheck.json")
+	@RequestMapping("/emailCheck.json") // 회원가입시 이메일 사용 가능한지..
 	@ResponseBody
 	public int emailCheck(HttpServletRequest request) throws Exception {
 		String userEmail = request.getParameter("userEmail");
@@ -71,6 +71,24 @@ public class UserController {
 		return "redirect:login.do";
 	}
 	
+	@RequestMapping(value="/googleLogin.json") // 구글로 로그인했을때 db에 이메일이 있나 확인
+	@ResponseBody
+	public int googleLogin(User user, RedirectAttributes attr) throws Exception {
+		String userEmail = user.getUserEmail();
+		System.out.println(userEmail);
+		int no = userService.emailCheck(userEmail);
+		return no;
+	}
+	
+	@RequestMapping("/googleRegister.json") // 이메일이 없을때 회원가입시킨다
+	@ResponseBody
+	public void googleRegister(User user, RedirectAttributes attr) throws Exception {
+		// DB 저장 전 Bcrypt를 이용한 비밀번호의 암호화
+		String hashPassword = BCrypt.hashpw(user.getUserPw(), BCrypt.gensalt());
+	    user.setUserPw(hashPassword);
+		userService.register(user);
+	}
+	
 	@RequestMapping("/forgotPassword.do")
 	public String forgotPassword() {
 		return "main/forgotPassword";
@@ -84,6 +102,7 @@ public class UserController {
 		userService.stateCodeChanger(loginUser);
 		System.out.println(loginUser.getUserEmail());
 		session.invalidate();
+		
 		return "redirect:login.do";
 	}
 }

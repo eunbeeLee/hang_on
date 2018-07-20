@@ -23,8 +23,8 @@ video {
 	float: left;
 	z-index: 0; 
 	vertical-align: middle;
-	top: 25%;
-	left: 60%;
+    top: 280px;
+	left: 200px;
 }
 
 .intro-context {
@@ -40,6 +40,15 @@ video {
     vertical-align: middle;
     top: 150px;
 	left: 380px;
+}
+
+#google {
+	padding-top: 1rem;
+	float: left;
+}
+
+#smallText {
+	float: right;
 }
 
 #login {

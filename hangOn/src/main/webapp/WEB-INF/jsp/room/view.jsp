@@ -55,17 +55,9 @@
               <i class="fa fa-fw fa-circle" id="peopleColor"></i>
             </span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <h6 class="dropdown-header">현재 접속중인 유저</h6>
+          <div id="userState" class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">현재 접속중인 유저 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;입장 시간</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                  <i class="fa fa-fw fa-circle"></i>박은진</strong>
-              </span>
-              <span class="small float-right text-muted">13:21</span>
-              <div class="dropdown-message small"></div>
-            </a>
           </div>
         </li>
 	      	</ul>

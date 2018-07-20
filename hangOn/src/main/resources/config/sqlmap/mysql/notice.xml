@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hangOn.repository.mapper.NoticeMapper">
+	<resultMap type="notice" id="noticeMap">
+			<result column="notice_no" property="noticeNo" />
+			<result column="room_no" property="roomNo" />
+			<result column="user_no" property="userNo" />
+			<result column="user_name" property="userName" />
+			<result column="notice_content" property="noticeContent" />
+			<result column="notice_date" property="noticeDate" />
+	</resultMap>
+		
+	<insert id="insertnotice" parameterType="notice">
+		 insert into tb_notice(
+	            room_no, user_no, notice_content
+	        )values(
+	            #{roomNo}, #{userNo}, #{noticeContent} 
+	        )
+	</insert>
+	
+	<select id="selectNoticeList" parameterType="int" resultMap="noticeMap">
+		select *
+		  from tb_notice
+		 where room_no = #{roomNo}
+	</select>
+	
+	<select id="selectNoticeUserName" parameterType="int" resultType="string">
+		select user_name
+		  from tb_user
+		 where user_no = #{userNo}
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete
+		  from tb_notice
+		 where notice_no = #{noticeNo}
+	</delete>
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
