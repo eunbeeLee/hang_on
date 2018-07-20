@@ -126,7 +126,7 @@ setTimeout(function(){
 	}else{
 		$('#setup-new-room').trigger("click");
 	}
-}, 4000);
+}, 6000);
 
 function setupNewRoomButtonClickHandler() {
     btnSetupNewRoom.disabled = true;
