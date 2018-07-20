@@ -12,14 +12,12 @@
   	<div id="backBox">
       <div id="chatBigBox">
         <div class="menu">
-            <input type="text" placeholder="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
         </div>
         <ol class="chat">
     	</ol>
     	<div id="textBox">
-        	<textarea class="textarea"></textarea>
-        	<button id="textBoxBtn">전송</button>
+        	<textarea class="textarea form-control" rows="3"></textarea>
+        	<button type="button" class="btn btn-default textBoxBtn" >전송</button>
     	</div>
     </div>
 	</div>
@@ -72,24 +70,24 @@
 	        					"<li class='self'>"+
 	        	    				"<div class='msg' data-userNo="+state+">"+
 	        	    				"<p class='noticeContent'>"+arr[2]+"</p>"+
-	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
-	        	    				"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='material-icons'>create</i>"+
+	        	    				"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+	        					  	"<i class='fa fa-thumb-tack'></i>"+
 	        						"</div>"+
 	        					    "<div class='dropdown-menu'>"+
 	        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
 	        						"</div>"+
+	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
 	        	    				"</div>"+
 	        	    			"</li>");
 	        	} else {
 	        		$(".chat").append(
 	        					"<li class='other'>"+
+	        	    				"<div class='otherName'><span>"+arr[1] +"</span></div>"+
 	        	    				"<div class='msg'>"+
-	        	    				"<div class='otherName'>"+arr[1] +"</div>"+
 	        						"<p class='noticeContent'>"+arr[2]+"</p>"+
 	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
 	        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='material-icons'>create</i>"+
+	        					  	"<i class='fa fa-thumb-tack'></i>"+
 	        						"</div>"+
 	        					    "<div class='dropdown-menu'>"+
 	        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
@@ -111,7 +109,7 @@
     });
 
 
-    $('#textBoxBtn').click(function() { 
+    $('.textBoxBtn').click(function() { 
     	chatsend();
     });
     $('.textarea').keydown(function (e) {

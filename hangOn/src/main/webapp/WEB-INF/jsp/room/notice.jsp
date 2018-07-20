@@ -10,28 +10,15 @@
 </head>
 <body>
   <section class="notice-manager">
-  	<h1 id="noticetitle">공지사항</h1>
-  	<div id="noticeSearch">
-   		<form class="form-inline">
-         <div class="input-group">
-           <input class="form-control" type="text" placeholder="단어 검색" >
-           <span class="input-group-append">
-             <button class="btn" type="button">
-               <i class="fa fa-search"></i>
-             </button>
-           </span>
-         </div>
-         </form>
-  	</div>
-    
+  	<h1 id="noticetitle">공지 게시판</h1>
    <div id="noticeTable">
-	   <table class="table table-hover table-cloud">
+	   <table class="table table-condensed table-striped table-bordered notice-table">
 		  <thead>
-		    <tr>
-		      <th width=50%>공지사항</th>
-		      <th width=20%>공지일시</th>
-		      <th width=20%>글쓴이</th>
-		      <th width=10%>삭제</th>
+		    <tr class="th-tr">
+		      <th class="noticeTh" width=50%>공지사항</th>
+		      <th class="noticeTh" width=15%>공지일시</th>
+		      <th class="noticeTh" width=20%>글쓴이</th>
+		      <th class="noticeTh" width=15%>삭제</th>
 		    </tr>
 		  </thead>
 		  <tbody id="noticeBodyTable">
@@ -61,9 +48,9 @@
 			      "<td>"+data[i].noticeContent+"</td>"+
 			      "<td>"+data[i].noticeDatetoString+"</td>"+
 			      "<td>"+data[i].userName+"</td>"+
-			      "<td class='more-btn'>"+
+			      "<td>"+
 				      "<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-					  	"<i class='material-icons'>more_vert</i>"+
+					  	"<i class='material-icons delIcon'>delete_forever</i>"+
 					  "</div>"+
 				      "<div class='dropdown-menu'>"+
 						  "<a class='dropdown-item noticeDel' data[i].notice data-noticeNo='"+data[i].noticeNo+"' href=''>삭제</a>"+

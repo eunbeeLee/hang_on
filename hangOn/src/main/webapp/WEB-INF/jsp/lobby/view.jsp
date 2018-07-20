@@ -125,17 +125,6 @@ if ("${msg}") {
         <div id="roomGroup">
            	<c:choose>
 		    	<c:when test="${empty room}">
-		            <div class="room-box">
-		                <div class="room">
-		                    <span class="room-title">비트 회의방</span>
-		                    <span class="total-people">3 / 6</span><br>
-		                    <p class="room-people">방에대한 설명입니다.</p>
-		                </div>
-		                <div class="room-over">
-		                    <button class="room-btn">참여</button>
-		                    <button class="room-btn">탈퇴</button>
-		                </div>
-		            </div>
 		    	</c:when>    
 		    	<c:otherwise>
 		            <c:forEach var="room" items="${room}">

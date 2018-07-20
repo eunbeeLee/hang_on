@@ -17,6 +17,6 @@ $('#sttNav').click(function(e) {
 
 $('#chatNav').click(function(e) { 
 	e.preventDefault(); 
-	$( "#chatBigBox" ).fadeToggle(200);
+	$( "#backBox" ).fadeToggle(200);
 });
 
