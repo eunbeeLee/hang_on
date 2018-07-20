@@ -74,3 +74,30 @@ a:active{
     background: white;
     box-shadow: 5px 10px 18px #888888;
 }
+#cloudUsage{
+    position: absolute;
+    right: 5%;
+    top: 6%;
+}
+
+#cloudUsageProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#cloudUsageBar {
+  width: 1%;
+  height: 8px;
+  background-color: #b39bdd;
+}
+
+#page-top > div.content-wrapper > section.cloud-manager > form.form-inline > div{
+	width:100%;
+}
+
+#loader{
+	position: absolute;
+    top: 50%;
+    left: 36%;
+    z-index: 5;
+}
