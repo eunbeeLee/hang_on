@@ -1,10 +1,15 @@
 package kr.co.hangOn.admin.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,14 +135,151 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return mArr;
 	}
+
+	@Override
+	public int[] selectCallByUser(DashBoard dashBoard) {
+		dashBoard.setActStartCode("da01");
+		dashBoard.setActEndCode("da04");
+		
+		int maxDate = 31;
+		int[] callArr = new int[maxDate];
+
+		for(int i = 1; i<= maxDate; i++) {
+			dashBoard.setSelectDay(i);
+			List<History> hList = dashMapper.selectCallByUser(dashBoard);
+//			System.out.println("리스트 사이즈" + hList.size());
+			int hListSize = hList.size();
+//			System.out.println(hListSize);
+//			System.out.println("----------------------");
+			//해당 날짜에 데이터가 없을 경우
+			if( hListSize == 0) {
+				callArr[i-1] =  0;
+			}else {
+				int callContent = 0;
+				if(hListSize %2 !=0) {
+					hListSize -= 1;
+				}
+				for(int j = 0; j < hListSize/2; j++) {
+//					int start = (2*j);
+//					int end = (2*j)+1;
+//					System.out.println("시작"+start);
+//					System.out.println("끝"+end);
+//					System.out.println("통화 시작 : "+hList.get(2*j).getConnectTime());
+//					System.out.println("통화 종료 : "+hList.get((2*j)+1).getConnectTime());
+					Long start = hList.get(2*j).getConnectTime().getTime();
+					Long end = hList.get( (2*j)+1).getConnectTime().getTime();
+//					System.out.println((end - start)/1000);
+					callContent +=((end - start)/1000/60);
+				}
+				callArr[i-1] = callContent;
+			}
+		}
+		return callArr;
+	}
+
+	@Override
+	public Map<String, List> conferenceTimeInfo(DashBoard dashBoard) {
+		 Map<String, List> resultMap = new HashMap<>();
+		List<Room> rList = dashMapper.selectRoomNoByUser(dashBoard.getUserNo());
+//		Long[] conArr = new Long[rList.size()];
+		Map<String, Long> conMap = new HashMap<>();
+		for(int i = 0; i < rList.size(); i++) {
+			Room r = rList.get(i);
+			List<RoomMember> rmList = dashMapper.roomMemberByRoom(r.getRoomNo());
+			System.out.println(r.getRoomNo()+"번방");
+//			System.out.println(rmList.size());
+			if(rmList.size() != 0 ) {
+			for(RoomMember rm : rmList) {
+				dashBoard.setUserNo(rm.getUserNo());
+				dashBoard.setRoomNo(r.getRoomNo());
+				List<History> hList = dashMapper.selectConferenceTime(dashBoard);
+				System.out.println("히스토리 사이즈 :"+hList.size());
+				DashBoard db = new DashBoard();
+				int hListSize = hList.size();
+				if(hList.size() %2 !=0) {
+					hListSize-=1;
+				}
+				for(int j = 0; j < hListSize; j++) {
+					History h = hList.get(j);
+//					System.out.println("코드"+h.getActCode());
+					db.setRoomNo(r.getRoomNo());
+					db.setUserNo(dashBoard.getUserNo());
+					if(h.getActCode().equals("da01")) {
+						db.setConStart(h.getConnectTime());
+//						System.out.println(dashBoard.getUserNo()+"입장 : "+h.getConnectTime());
+					}
+					if(h.getActCode().equals("da04")) {
+						db.setConEnd(h.getConnectTime());
+//						System.out.println(dashBoard.getUserNo()+"퇴장: "+h.getConnectTime());
+					}
+				}
+				dashMapper.insertConTimeByRoom(db);
+			}
+			}
+			//회의시간 담는 변수
+			Long conTime = (long)0;
+			List<DashBoard> dbList = dashMapper.selectConInfoByRoom(dashBoard);
+			System.out.println("con에서 가져온 데이터 수"+dbList.size());
+			Date min = null;
+			Date max = null;
+			for(DashBoard db : dbList) {
+				if(min == null ) {
+					min = db.getConStart();
+				}
+				if(max == null) {
+					max = db.getConEnd();
+				}
+				if(db.getConStart().getTime() < max.getTime()) {
+					if(db.getConEnd().getTime() > max.getTime()) {
+						max = db.getConEnd();
+					}
+				}
+				if(db.getConStart().getTime() > max.getTime()) {
+					//회의 시간 계산
+					//최소값 변경, 최대값 null
+					conTime += max.getTime() - min.getTime();
+					System.out.println("회의시간"+conTime/60000+"분");
+					max = null;
+				}
+			}
+			String roomName = dashMapper.selectRoomName(r.getRoomNo());
+			conMap.put(roomName, conTime/60000);
+		}
+		dashMapper.dropConferenceTable(); 
+
+		//회의방결과 맵 오름차순 정렬
+		 MyComparator comp=new MyComparator(conMap);
+	    Map<String,Long> newMap = new TreeMap(comp);
+	    newMap.putAll(conMap);
+	    List<String> roomNameList = new ArrayList<>();
+	    List<Long> conferList = new ArrayList<>();
+	    
+	    for( String key : newMap.keySet() ){
+            System.out.println( String.format("키 : %s, 값 : %s", key, newMap.get(key)) );
+            roomNameList.add(key);
+            conferList.add(newMap.get(key));
+        }
+	    
+	    resultMap.put("roomNameList", roomNameList);
+	    resultMap.put("conferList", conferList);
+		return resultMap;
+	}
 	
-
-}
-
+ }
 
 
 
 
+//맵 오름차순 정렬하는 클래스
+class MyComparator implements Comparator {
+	Map map;
+	public MyComparator(Map map) {
+	    this.map = map;
+	}
+	public int compare(Object o1, Object o2) {
+	    return ((Long) map.get(o2)).compareTo((Long) map.get(o1));
+	}
+};
 
 
 

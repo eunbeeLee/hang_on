@@ -94,8 +94,8 @@
        <i class="fa fa-pie-chart"></i>회의방별 통화량</div>
      <div class="card-body">
         <div class="datePicker">
-        	<button class="button-left"><i class="fa fa-fw fa-angle-left"></i></button>
-            <span><a class="month">June </a><a class="year">2018</a></span>
+        	<button class="button-left" id="doughnutBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
+            <span><a class="month" id="doughnutBtnRight">June </a><a class="year">2018</a></span>
         	<button class="button-right"><i class="fa fa-fw fa-angle-right"></i></button>
         </div>
        <canvas id="myPieChart" width="100%" height="100"></canvas>
@@ -111,9 +111,9 @@
          <i class="fa fa-bar-chart"></i>월별 회의방 생성 갯수</div>
        <div class="card-body">
         <div class="datePicker">
-        	<button class="button-left"><i class="fa fa-fw fa-angle-left"></i></button>
+        	<button class="button-left" id="barBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
             <span><a class="month">June </a><a class="year">2018</a></span>
-        	<button class="button-right"><i class="fa fa-fw fa-angle-right"></i></button>
+        	<button class="button-right" id="barBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
         </div>
        <div class="row">
            <canvas id="myBarChart" width="100" height="50"></canvas>
@@ -130,9 +130,9 @@
           <i class="fa fa-area-chart"></i> 일일 통화량</div>
         <div class="card-body">
         <div class="datePicker">
-        	<button class="button-left"><i class="fa fa-fw fa-angle-left"></i></button>
+        	<button class="button-left" id="areaBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
             <span><a class="month">June </a><a class="year">2018</a></span>
-        	<button class="button-right"><i class="fa fa-fw fa-angle-right"></i></button>
+        	<button class="button-right" id="areaBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
         </div>
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>

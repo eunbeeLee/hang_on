@@ -5,8 +5,40 @@
 	<resultMap type="dashBoard" id="dashBoardMap">
 		<result column="count_room" property="countRoom"/>
 		<result column="user_no" property="userNo"/>
+		<result column="select_day" property="selectDay"/>
 		<result column="select_month" property="selectMonth"/>
 		<result column="select_year" property="selectYear"/>
+		<result column="room_no" property="roomNo"/>
+		<result column="con_start" property="conStart"/>
+		<result column="con_end" property="conEnd"/>
+	</resultMap>
+	
+	<resultMap id="historyMap" type="history">
+		<result column="room_no" property="roomNo"></result>
+		<result column="act_code" property="actCode"></result>
+		<result column="connect_time" property="connectTime"></result>
+	</resultMap>
+	<resultMap type="room" id="roomMap">
+			<result column="room_no" property="roomNo" />
+			<result column="room_name" property="roomName" />
+			<result column="room_create_date" property="roomCreateDate" />
+			<result column="room_info" property="roomInfo" />
+			<result column="room_password" property="roomPassword" />
+			<result column="room_join_code" property="roomJoinCode" />
+			<result column="room_del_state" property="roomDelState" />
+			<result column="user_no" property="userNo" />
+			<result column="several_user_no" property="severalUserNo" />
+	</resultMap>
+	
+	<resultMap id="roomMemberMap" type="roomMember">
+		<result column="room_no" property="roomNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="room_auth_code" property="roomAuthCode"/>
+		<result column="room_connect_code" property="roomConnectCode"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="last_connet_time" property="lastConnetTime"/>
+		<result column="auth_info" property="authInfo"/>
 	</resultMap>
 	<select id="countRoomByMonth" parameterType="dashBoard" resultType="int">
 		select count(*)
@@ -15,7 +47,64 @@
 		   and month(room_create_date) = #{selectMonth}
 		   and year(room_create_date) = #{selectYear}
 	</select>
-	<select id="selectCallByUser" parameterType="dashBoard">
-	
+	<select id="selectCallByUser" parameterType="dashBoard" resultMap="historyMap">
+		select room_no,connect_time, act_code
+		  from tb_history
+		 where room_no in (select room_no
+		    				 from tb_room_member
+		    				where user_no = #{userNo})
+		   and act_code in (#{actStartCode}, #{actEndCode})
+		   and month(connect_time) = #{selectMonth}
+		   and day(connect_time) = #{selectDay}
+	</select>
+	<select id="selectConferenceTime" parameterType="dashBoard" resultMap="historyMap">
+		select *
+		  from tb_history
+		 where room_no = #{roomNo}
+		   and act_code in (#{actStartCode}, #{actEndCode})
+		   and month(connect_time) = #{selectMonth}
+		   and year(connect_time) = #{selectYear}
+		   and user_no = #{userNo}
+		 order by connect_time
+	</select>
+	<select id="selectRoomNoByUser" parameterType="int" resultMap="roomMap">
+		select room_no
+		  from tb_room
+		 where user_no = #{userNo}
+	</select>
+	<select id="roomMemberByRoom" parameterType="int" resultMap="roomMemberMap">
+		select *
+		  from tb_room_member
+		 where room_no = #{roomNo}
+	</select>
+	<insert id="insertConTimeByRoom" parameterType="dashBoard">
+		insert into tb_conference(room_no, user_no, con_start, con_end)
+		values (#{roomNo}, 
+				#{userNo}, 
+				#{conStart}, 
+				#{conEnd})
+	</insert>
+	<select id="selectConInfoByRoom" parameterType="dashBoard" resultMap="dashBoardMap">
+		select  (select room_name
+				   from tb_room
+		          where c.room_no = room_no) as room_name, 
+		          user_no, 
+		          con_end, 
+		          con_start
+		  from tb_conference c
+		 where room_no = #{roomNo}
+		   and month(con_start) = #{selectMonth}
+		   and month(con_end) = #{selectMonth}
+		   and year(con_start) = #{selectYear}
+		   and year(con_end) = #{selectYear}
+		 order by con_start;
+	</select>
+	<delete id="dropConferenceTable">
+		  TRUNCATE TABLE tb_conference;
+	</delete>
+	<select id="selectRoomName" parameterType="int" resultType="string">
+		select room_name
+		  from tb_room
+		 where room_no = #{roomNo}
 	</select>
 </mapper>

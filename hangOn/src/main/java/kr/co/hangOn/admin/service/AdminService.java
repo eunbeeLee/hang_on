@@ -16,7 +16,8 @@ public interface AdminService {
 	public void roomInfoUpdate(Room room);
 	
 	public void memberOut(RoomMember rm);
-	int[] countRoomByMonth(DashBoard dashBoard);
-	
+	public int[] countRoomByMonth(DashBoard dashBoard);
+	public int[]  selectCallByUser(DashBoard dashBoard);
+	public Map<String, List>  conferenceTimeInfo(DashBoard dashBoard);
 }
  

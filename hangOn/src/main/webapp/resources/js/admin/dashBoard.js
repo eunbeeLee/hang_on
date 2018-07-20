@@ -1,58 +1,111 @@
 window.onload = function(){
 	roomCountArr();
+	lineChartDate();
+	conferenceGetter();
+	personalCallGetter;
+	myPieChart();	
 };
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
-var lineCtx = document.getElementById("myAreaChart").getContext('2d');
-var myLineChart = new Chart(lineCtx, {
-        type: "line",
-        data: {
-            labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
-            datasets: [{
-                label: "Sessions",
-                lineTension: .3,
-                backgroundColor: "rgba(2,117,216,0.2)",
-                borderColor: "rgba(2,117,216,1)",
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(2,117,216,1)",
-                pointBorderColor: "rgba(255,255,255,0.8)",
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                pointHitRadius: 20,
-                pointBorderWidth: 2,
-                data: [1e4, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451]
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: "date"
-                    },
-                    gridLines: {
-                        display: !1
-                    },
-                    ticks: {
-                        maxTicksLimit: 7
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: 4e4,
-                        maxTicksLimit: 5
-                    },
-                    gridLines: {
-                        color: "rgba(0, 0, 0, .125)"
-                    }
-                }]
-            },
-            legend: {
-                display: !1
-            }
-        }
-    });
+	Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
+	
+	/**선그래프*/
+	var lineCtx = document.getElementById("myAreaChart").getContext('2d');
+	
+	/*일일 통화량 x축 값 받는 함수*/
+	function lineChartDate(){
+		
+		var month = new Date().getMonth()+1;
+		var year = new Date().getYear();
+		var dateArr = [];
+		var maxDate = 31;
+		
+		switch(month){
+		case 4: case 6: case 9: case 11: 
+			maxDate=30; 
+			break; 
+		case 2 :  
+			if( year%4==0 && year%100!=0 || year%400==0 ) {
+				maxDate = 29;
+			}else 
+				maxDate =28;
+				break;
+		}
+		
+		for(let i = 0; i <maxDate; i++){
+			dateArr.push(i+1);
+		}
+		personalCallGetter(dateArr);
+//		console.log("이번달 일수:", dateArr);
+//		myLineChart(dateArr);
+		
+	};
+	/*일일 통화량 받아오는 함수*/
+	function personalCallGetter(dateArr){
+		var month = new Date().getMonth()+1;
+		var year = new Date().getYear()+1900;
+		$.ajax({
+			url : "personalCallInfo.json",
+			data : {"userNo" : 7, "selectMonth" : month}, 
+			dataType : "json"
+		})
+		.done(function(call){
+//			console.log(call);
+			myLineChart(dateArr, call);
+		});
+	};
+	var myLineChart = function(dateArr, call){ 
+		new Chart(lineCtx, {
+	        type: "line",
+	        data: {
+	            labels: dateArr,
+	            datasets: [{
+	                label: "통화량",
+	                lineTension: .3,
+	                backgroundColor: "rgba(2,117,216,0.2)",
+	                borderColor: "rgba(2,117,216,1)",
+	                pointRadius: 5,
+	                pointBackgroundColor: "rgba(2,117,216,1)",
+	                pointBorderColor: "rgba(255,255,255,0.8)",
+	                pointHoverRadius: 5,
+	                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+	                pointHitRadius: 20,
+	                pointBorderWidth: 2,
+	                data: call
+	            }]
+	        },
+	        options: {
+	            scales: {
+	                xAxes: [{
+	                    time: {
+	                        unit: "date"
+	                    },
+	                    gridLines: {
+	                        display: !1
+	                    },
+	                    ticks: {
+	                        maxTicksLimit: 31
+	                    }
+	                }],
+	                yAxes: [{
+	                    ticks: {
+	                        min: 0,
+	                        max: 1600,
+	                        maxTicksLimit: 100
+	                    },
+	                    gridLines: {
+	                        color: "rgba(0, 0, 0, .125)"
+	                    }
+	                }]
+	            },
+	            legend: {
+	                display: !1
+	            }
+	        }
+	    })
+	};
 
+	/**막대그래프*/
    var barCtx = document.getElementById("myBarChart").getContext('2d');
+   /*회의방 생성 갯수 데이터 받아오는 함수*/
     var roomCountArr = function(){
 	$.ajax({
 		url : "countRoomByMonth.json",
@@ -110,14 +163,37 @@ var myLineChart = new Chart(lineCtx, {
     }; 
     
     
-   var  pieCtx = document.getElementById("myPieChart").getContext('2d');
-    myPieChart = new Chart(pieCtx, {
-        type: "doughnut",
-        data: {
-            labels: ["Blue", "Red", "Yellow", "Green"],
-            datasets: [{
-                data: [12.21, 15.58, 11.25, 8.32],
-                backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745"]
-            }]
-        }
-    });
+	var  pieCtx = document.getElementById("myPieChart").getContext('2d');
+	
+	function conferenceGetter(){
+		var month = new Date().getMonth()+1;
+		var year = new Date().getYear()+1900;
+		$.ajax({
+			url : "conferenceTimeInfo.json",
+			data :{"userNo":32, "selectYear":year, "selectMonth":month, "actStartCode":"da01","actEndCode":"da04" }, 
+			dataType : "json"
+		})
+		.done(function(result){
+//			console.log("방이름", result.roomNameList);
+//			console.log("회의시간", result.conferList);
+			var pieLabels = result.roomNameList;
+			var pieDate= result.conferList;
+//			console.log(pieDate.length);
+			if(p)
+			myPieChart(pieLabels, pieDate);
+			
+		});
+	};
+	
+	function myPieChart(pieLabels, pieDate){
+		 new Chart(pieCtx, {
+	     type: "doughnut",
+	     data: {
+	         labels: pieLabels,
+	         datasets: [{
+	             data: pieDate,
+	             backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745", "#007bff", "#dc3545", "#ffc107", "#28a745", "#007bff", "#dc3545", "#ffc107", "#28a745"]
+	         }]
+	     }
+	 });
+	 };

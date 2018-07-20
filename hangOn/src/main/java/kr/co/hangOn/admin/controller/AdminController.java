@@ -73,6 +73,18 @@ public class AdminController {
 	public int[] countRoomByMonth(DashBoard dashBoard) {
 		return service.countRoomByMonth(dashBoard);
 	}
+	@RequestMapping("/personalCallInfo.json")
+	@ResponseBody
+	public int[]  personalCallInfo(DashBoard dashBoard) {
+		return service.selectCallByUser(dashBoard);
+	}
+	@RequestMapping("/conferenceTimeInfo.json")
+	@ResponseBody
+	public Map<String, List>  conferenceTimeInfo(DashBoard dashBoard) {
+		return service.conferenceTimeInfo(dashBoard);
+	}
+	
+	
 	
 	
 	
