@@ -45,14 +45,14 @@
 	        <div class="form-group">
 	          <label for="exampleInputPassword1">비밀번호</label>
 	          <input class="form-control" id="pw" type="password" placeholder="비밀번호를 입력하세요">
-	        </div>
+	        </div><br>
 	        <button class="btn btn-primary btn-block" id="login" type="button" style="background-color:#b39bdd; border: 0;">로그인</button>
 	      </form>
-	      <div >
+	      <div>
 	        <span class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="google"></span>
 		    <span class="text-center" id="smallText">
-				<a class="d-block small mt-3" style="color:#b39bdd;" href="registerForm.do">회원가입</a>
-				<a class="d-block small" style="color:#b39bdd;" href="forgotPassword.do">비밀번호를 잊어버리셨나요?</a>
+				<a class="d-block small mt-3" style="color:#b39bdd;" href="registerForm.do">회원가입&nbsp;&nbsp;</a>
+				<a class="d-block small" style="color:#b39bdd;" href="forgotPassword.do">비밀번호를 잊어버리셨나요?&nbsp;&nbsp;</a>
 			</span>
 	      </div>
 	    </div>
@@ -138,9 +138,6 @@
 			document.querySelector("#emailSentModalBtn").click();
 		}
 		console.log("${userEmail}");
-		if("${userEmail}") {
-			$("#login-window").hide();
-		}
 	});
 
 $('#login').click(function () {

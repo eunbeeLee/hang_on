@@ -3,7 +3,7 @@
 	height: 100%; 
 	position:fixed; 
 	left: 0px; 
-	opacity: 0.5;
+	opacity: 0.9;
 }
 
 video {
@@ -53,6 +53,7 @@ video {
 
 #login {
 	background-color : #b39bdd;
+/* 	padding-top: 1rem; */
 }
 
 html {
