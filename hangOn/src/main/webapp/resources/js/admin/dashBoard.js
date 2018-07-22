@@ -1,9 +1,9 @@
 window.onload = function(){
+	myPieChart();	
 	roomCountArr();
 	lineChartDate();
-	conferenceGetter();
-	personalCallGetter;
-	myPieChart();	
+//	conferenceCetter();
+//	personalCallGetter;
 };
 	Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
 	
@@ -44,7 +44,7 @@ window.onload = function(){
 		var year = new Date().getYear()+1900;
 		$.ajax({
 			url : "personalCallInfo.json",
-			data : {"userNo" : 7, "selectMonth" : month}, 
+			data : {"userNo" :userNo, "selectMonth" : month}, 
 			dataType : "json"
 		})
 		.done(function(call){
@@ -109,11 +109,17 @@ window.onload = function(){
     var roomCountArr = function(){
 	$.ajax({
 		url : "countRoomByMonth.json",
-		data : {"userNo": 7}, 
+		data : {"userNo": userNo}, 
 		dataType : "json"
 	}).done(function(result){
-		console.log(result);
 		myBarChart(result);
+		var count = new Date().getMonth();
+		if(result[count] != 0){
+			conferenceGetter();
+		}
+//		console.log(result[count]);
+		
+//		if(result)
 	})
 	.fail(function(e){
 		console.log(e);
@@ -170,16 +176,16 @@ window.onload = function(){
 		var year = new Date().getYear()+1900;
 		$.ajax({
 			url : "conferenceTimeInfo.json",
-			data :{"userNo":32, "selectYear":year, "selectMonth":month, "actStartCode":"da01","actEndCode":"da04" }, 
+			data :{"userNo": userNo, "selectYear":year, "selectMonth":month, "actStartCode":"da01","actEndCode":"da04" }, 
 			dataType : "json"
 		})
 		.done(function(result){
-//			console.log("방이름", result.roomNameList);
-//			console.log("회의시간", result.conferList);
+			console.log("방이름", result.roomNameList);
+			console.log("회의시간", result.conferList);
 			var pieLabels = result.roomNameList;
 			var pieDate= result.conferList;
 //			console.log(pieDate.length);
-			if(p)
+//			if(p)
 			myPieChart(pieLabels, pieDate);
 			
 		});
@@ -197,3 +203,43 @@ window.onload = function(){
 	     }
 	 });
 	 };
+	 
+	 
+	 document.body.onclick = function(e){
+			if(e.target.id!= null){
+				switch(e.target.id){
+				case "areaBtnRight": break;
+				case "barBtnRight": break;
+				case "doughnutBtnRight": break;
+				
+				case "areaBtnLeft": break;
+				case "barBtnLeft": break;
+				case "doughnutBtnLeft": break;
+			
+				}	
+			}
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

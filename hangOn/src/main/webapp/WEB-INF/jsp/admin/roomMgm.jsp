@@ -33,7 +33,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img id="hangOnLogo"src="../resources/image/HangOnLogo_3.png"></a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/lobby/view.do"><img id="hangOnLogo"src="../resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,16 +71,16 @@
         <li class="nav-item dropdown">
         
 		<!-- 사용자 아이콘 -->
-		<li class="nav-item"><a class="nav-link"> 
+		<li class="nav-item"><a class="nav-link" id="adminTitle"> 
 		  관리자페이지</a>
 		</li>
 		<!-- 사용자 아이콘 -->
-		<li class="nav-item"><a class="nav-link"> 
-		  <i class="fa fa-user-circle-o"></i>홍길동님</a>
+		<li class="nav-item"><a class="nav-link" id="userName"> 
+		  <i class="fa fa-user-circle-o"></i>${user.userName}님</a>
 		</li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>로그아웃</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/lobby/view.do" >
+            <i class="fa fa-fw fa-sign-out"></i>로비로 가기</a>
         </li>
       </ul>
     </div>
@@ -148,6 +148,7 @@
   </div>
     <!-- /.content-wrapper-->
 </body>
+    <script>var userNo = "${sessionScope.user.userNo}"</script>
 <!-- roomMgm JavaScript byEunbee -->
     <script src="${pageContext.request.contextPath}/resources/js/admin/roomMgm.js"></script>
 

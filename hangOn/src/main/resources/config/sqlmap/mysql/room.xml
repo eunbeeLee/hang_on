@@ -63,7 +63,7 @@
 		 where user_no = #{userNo}
 		   and room_del_state = #{roomDelState}
 		 <if test='roomName !="0"'>
-		   and room_name = #{roomName} 
+		   and room_name like concat ('%',#{roomName},'%')
 		 </if>
 	</select>
 	<select id="selectMemberByRoom" parameterType="roomMember" resultMap="roomMemberMap">

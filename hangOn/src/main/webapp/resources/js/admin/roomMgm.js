@@ -11,15 +11,15 @@ window.onload = function(){
 	function roomList(roomName){
 		if( roomName == null){
 			roomName = '0';
-		}
+		};
 		$.ajax({
 			url : "makeRoomList.json",
-			data : {"userNo" : 7, "roomName" : roomName},
+			data : {"userNo" : userNo, "roomName" : roomName},
 			dataType :"json", 
 			type : "POST"
 		}).done(makeRoomList)
 		  .fail(function(e){
-//			  console.dir(e);
+			  console.dir(e);
 		  });
 	}
 	
@@ -79,7 +79,6 @@ window.onload = function(){
 					    <tr>\
 					      <th>이름</th>\
 					      <th>이메일</th>\
-					      <th>마지막 참여시간</th>\
 					      <th>권한</th>\
 					      <th>권한부여</th>\
 					      <th>삭제</th>\
@@ -97,7 +96,6 @@ window.onload = function(){
 								<td style = "display : none;">'+member.userNo+'</td>\
 								<td>'+member.userName+'</td>\
 								<td>'+member.userEmail+'</td>\
-								<td>'+member.lastConnectTime+'</td>\
 								<td class="auth-info-'+room.roomNo+'" id="authInfo_'+room.roomNo+'_'+member.userNo+'" change =0>'+member.authInfo+'</td>\
 								<td>\
 								<label class="switch">';
@@ -158,8 +156,9 @@ window.onload = function(){
 	/*클릭 객체 얻어오는 함수*/
 	function clickTarget(){
 		document.body.onclick = function(e){
-			if(e.target.id!= null){
+			if(e.target.id!= ""){
 				/*멤버내보내기 함수*/
+//				console.log(e.target.id)
 //				console.log(e.target.id.split('_')[0])
 				if(e.target.id.split('_')[0] == "memberOut"){
 //					memberout(e.target.id);
@@ -173,7 +172,7 @@ window.onload = function(){
 				/*방 수정, 삭제 함수*/
 				editRoomInfo(e.target.id);
 				/*회원 권한 슬라이더*/
-				if(e.target.id.split('_')[0] == "authInfo_"){
+				if(e.target.id.split('_')[0] == "authSwitch"){
 					
 				let authInfo = document.querySelector("#authInfo_"+e.target.id.split('_')[1]+"_"+e.target.id.split('_')[2]);
 				if(authInfo!= null){
@@ -218,7 +217,7 @@ window.onload = function(){
 			document.querySelector("#modalCheckBtn").onclick = function(){
 				$.ajax({
 					url : "delRoom.json",
-					data : {"userNo" : 7, "roomNo" : id.split('_')[0], "roomName" : "0"},
+					data : {"userNo" : userNo, "roomNo" : id.split('_')[0], "roomName" : "0"},
 					dataType :"json",
 				}).done(makeRoomList);
 			}
@@ -236,7 +235,7 @@ window.onload = function(){
 				searchBtn.removeAttribute("data-target");
 				$.ajax({
 					url : "makeRoomList.json",
-					data : {"userNo" : 7,"roomName": roomSearchInput.value } ,
+					data : {"userNo" : userNo,"roomName": roomSearchInput.value } ,
 					dataType : "json",
 				}).done(makeRoomList)
 				.fail(function(e){
@@ -322,7 +321,7 @@ window.onload = function(){
 		}
 //		console.log(userNo);
 		$.ajax({
-			url : "roomUpdate.json",
+			url : "roomUpdate.json", 	
 			data : {"roomName" : roomName, "roomNo" :roomNo, "roomInfo":roomInfo, "roomPassword":roomPassword, "severalUserNo":userNo.join(",")},
 			type : "POST",
 			dataType : "json"

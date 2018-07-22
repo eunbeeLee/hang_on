@@ -208,6 +208,17 @@ input:checked + .slider:before {
 	background-color: rgba(0,0,0,0);
 }
 
+#userName:hover, #adminTitle:hover{
+	cursor: default !important;
+	color: rgba(255,255,255,.5) !important;
+}
+
+#userName, #adminTitle{
+	cursor: default !important;
+	color: rgba(255,255,255,.5) !important;
+}
+
+
 
 
 

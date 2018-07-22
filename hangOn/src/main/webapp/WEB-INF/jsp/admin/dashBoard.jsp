@@ -32,7 +32,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img id="hangOnLogo"src="../resources/image/HangOnLogo_3.png"></a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/lobby/view.do"><img id="hangOnLogo"src="../resources/image/HangOnLogo_3.png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -70,16 +70,16 @@
         <li class="nav-item dropdown">
         
 		<!-- 사용자 아이콘 -->
-		<li class="nav-item"><a class="nav-link"> 
+		<li class="nav-item"><a class="nav-link" id="adminTitle"> 
 		  관리자페이지</a>
 		</li>
 		<!-- 사용자 아이콘 -->
-		<li class="nav-item"><a class="nav-link"> 
-		  <i class="fa fa-user-circle-o"></i>홍길동님</a>
+		<li class="nav-item"><span class="nav-link"  id="userName"> 
+		  <i class="fa fa-user-circle-o"></i>${user.userName}님</span>
 		</li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>로그아웃</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/lobby/view.do">
+            <i class="fa fa-fw fa-sign-out"></i>로비로 가기</a>
         </li>
       </ul>
     </div>
@@ -95,8 +95,8 @@
      <div class="card-body">
         <div class="datePicker">
         	<button class="button-left" id="doughnutBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
-            <span><a class="month" id="doughnutBtnRight">June </a><a class="year">2018</a></span>
-        	<button class="button-right"><i class="fa fa-fw fa-angle-right"></i></button>
+            <span><a class="month">June </a><a class="year">2018</a></span>
+        	<button class="button-right" id="doughnutBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
         </div>
        <canvas id="myPieChart" width="100%" height="100"></canvas>
      </div>
@@ -152,26 +152,9 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </body>
+   <script>var userNo = "${sessionScope.user.userNo}"</script>
 <!-- Chart.js By Eunbee -->
  <script src="${pageContext.request.contextPath}/resources/js/admin/dashBoard.js"></script>
    

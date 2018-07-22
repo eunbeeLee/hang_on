@@ -28,7 +28,7 @@ function pageList(pageNo, rDays){
 	}
 	$.ajax({
 		url : "makeHistoryPage.json", 
-		data : {"pageNo" : pageNo, "userNo" : 7, "rDays" : rDays}, 
+		data : {"pageNo" : pageNo, "userNo" : userNo, "rDays" : rDays}, 
 		dateType : "json",
 		type : "POST"
 	}).done(makeTableList)
@@ -163,7 +163,7 @@ function searchRecentPeriod(rDays){
 	page.innerHTML = "";
 		$.ajax({
 			url : "makeHistoryPage.json",
-			data : {"rDays" : rDays, "userNo" : 7, "beginDate":startDate, "endDate" :endDate},
+			data : {"rDays" : rDays, "userNo" : userNo, "beginDate":startDate, "endDate" :endDate},
 			dateType : "json",
 			type : "POST"
 		}).done(makeTableList)

@@ -93,10 +93,10 @@
 		          con_start
 		  from tb_conference c
 		 where room_no = #{roomNo}
-		   and month(con_start) = #{selectMonth}
-		   and month(con_end) = #{selectMonth}
-		   and year(con_start) = #{selectYear}
-		   and year(con_end) = #{selectYear}
+<!-- 		   and month(con_start) = #{selectMonth} -->
+<!-- 		   and month(con_end) = #{selectMonth} -->
+<!-- 		   and year(con_start) = #{selectYear} -->
+<!-- 		   and year(con_end) = #{selectYear} -->
 		 order by con_start;
 	</select>
 	<delete id="dropConferenceTable">

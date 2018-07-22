@@ -72,7 +72,9 @@
 		           from tb_user as u
 			      where u.user_no = h.user_no) as user_email
 		           from tb_history h
-		          where user_no=#{userNo}
+		          where room_no in (select room_no
+				 		     from tb_room
+				 		    where user_no = #{userNo})
 		           <!-- 최근 날짜 히스토리 조회-->
 		           <if test="rDays == 7 ||rDays == 30 || rDays == 60 || rDays == 90">
                      and connect_time between (SELECT date_add(now(),INTERVAL -#{rDays} DAY) FROM dual) and now()
