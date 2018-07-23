@@ -22,12 +22,15 @@ public class AlterController {
 	@RequestMapping("/updateInfo.json")
 	@ResponseBody
 	public void updateInfo(User user, HttpSession session) throws Exception {
-		alterService.updateInfo(user);
 		User updateUser = (User) session.getAttribute("user");
 		if(user.getUserName() != null) updateUser.setUserName(user.getUserName());
-		if(user.getUserPw() != null) updateUser.setUserPw(user.getUserPw());
+		if(user.getUserPw() != null) {
+			user.setUserPw(BCrypt.hashpw(user.getUserPw(), BCrypt.gensalt()));
+			updateUser.setUserPw(user.getUserPw());
+		}
 		if(user.getUserProfilePath() != null) updateUser.setUserProfilePath(user.getUserProfilePath());
 		session.setAttribute("user",updateUser);
+		alterService.updateInfo(user);
 	}
 	
 	@RequestMapping(value="/profile.json", method=RequestMethod.POST)  

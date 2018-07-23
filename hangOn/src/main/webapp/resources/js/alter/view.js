@@ -130,14 +130,15 @@ function modalUp(modalId, modalBody, btnText){
 }
 /*필요한 모달 추가 함수*/
 function modalMaker(){
-	modalUp("passwordModal", "<input id='passwordCheckInput' type='password' placeholder='현재 비밀번호를 입력해주세요!' />","취소");
+	modalUp("passwordModal", "<input id='passwordCheckInput'class='form-control' type='password' placeholder='현재 비밀번호를 입력해주세요!' />","취소");
 	modalUp("passwordUpdateModal", `
-	<input id='passUpdateInput' type='password' placeholder='새 비밀번호'/>
-	<input id='passUpCheckInput' type='password' placeholder='비밀번호 확인'/>
+	<input id='passUpdateInput' class="form-control" type='password' placeholder='새 비밀번호'/>
+	<input id='passUpCheckInput' class="form-control" type='password' readonly placeholder='비밀번호 확인'/>
 	`,"취소");
 	modalUp("nameErrModal", "올바른 이름을 입력해주세요!","확인");
 	modalUp("imgErrModal", "이미지 파일만 등록이 가능합니다!","확인");
 	modalUp("existModal", "정말 탈퇴하시겠습니까?","취소");
+	modalUp("passUpdateSuccessModal", "비밀번호가 변경되었습니다!","확인");
 }
 
 $(()=>{modalMaker()});
@@ -160,6 +161,9 @@ $("#backGroundByMyPage").on("keyup","#passwordCheckInput",function(){
 				$("#passwordModalErrMsg").html("");
 				thisEle.val("");
 				if(checkType == "pass"){
+					$("#passUpdateInput").val("");
+					$("#passUpCheckInput").val("");
+					$("#passUpCheckInput").css("background-color","khaki").prop("readonly",true);
 					checkType = null;
 					$("#passwordUpdateModalBtn").click();
 				}else{
@@ -183,4 +187,46 @@ $("#backGroundByMyPage").on("keyup","#passwordCheckInput",function(){
 	},300);
 });
 
+$("#backGroundByMyPage").on("keyup","#passUpdateInput",function(){
+	let fristPass = $(this).val();
+	let checkPass = $("#passUpCheckInput").val();
+	let errArea = $("#passwordUpdateModalErrMsg");
+	let checked = $("#passUpCheckInput");
+	if(fristPass.length < 8){
+		errArea.html("비밀번호는 8자 이상이여야 합니다!");
+		checked.css("background-color","khaki").prop("readonly",true);
+		return;
+	}else{
+		errArea.html("");
+	}
+	let pass = [...fristPass];
+	for(let temp of pass){
+		if(temp == " "){
+			errArea.html("비밀번호에 공백문자를 사용할 수 없습니다!");
+			checked.css("background-color","khaki").prop("readonly",true);
+			return;
+		}
+	}
+	if(fristPass != checkPass) errArea.html("비밀번호가 일치하지 않습니다!");
+	else errArea.html(`<a id="updatePasswordBtn" class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">변경</a>`);
+	checked.css("background-color","white").prop("readonly",false);
+});
+
+$("#backGroundByMyPage").on("keyup","#passUpCheckInput",function(){
+	let fristPass = $("#passUpdateInput").val();
+	let checkPass = $(this).val();
+	let errArea = $("#passwordUpdateModalErrMsg");
+	if(fristPass != checkPass){
+		errArea.html("비밀번호가 일치하지 않습니다!");
+	}else{
+		errArea.html(`<a id="updatePasswordBtn" class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">변경</a>`);
+	}
+});
+
+$("#backGroundByMyPage").on("click","#updatePasswordBtn",function(){
+	myPageUser["userPw"] = $("#passUpCheckInput").val();
+	alterAjax('/hangOn/alter/updateInfo.json',myPageUser,function(){
+		$("#passUpdateSuccessModalBtn").click();
+	});
+});
 

@@ -126,3 +126,6 @@
 .modal-err-msg{
 	color : red;
 }
+#passUpCheckInput{
+	background-color: khaki;
+}
