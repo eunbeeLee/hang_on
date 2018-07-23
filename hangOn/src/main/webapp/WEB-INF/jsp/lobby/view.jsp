@@ -105,6 +105,10 @@ if ("${msg}") {
         	<c:otherwise>
 		        <li id="openMyPageBtn" class="nav-item">
 		          <a class="nav-link" >
+		         	<i class="fa fa-cog" aria-hidden="true"></i>정보변경</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" >
 		            <i class="fa fa-user-circle-o"></i>${user.userName}님</a>
 		        </li>
         	</c:otherwise>
