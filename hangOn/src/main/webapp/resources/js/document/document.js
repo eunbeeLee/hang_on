@@ -32,6 +32,7 @@ var canvasProp = {};
 
 
 $(()=>{
+	modalMaker();
 	docWs.send(`conn::${userProp.userNo};${userProp.code}`);
 })
 
@@ -88,7 +89,7 @@ $("#documentFileUpload").on("change",function(){
 	let fileext = $(this).val();	
 	fileext = fileext.slice(fileext.indexOf(".")+1).toUpperCase();
 	if(fileext != "PDF"){
-		alert("PDF 파일만 등록이 가능합니다.");
+		$("#pdfCheckMsgBtn").click();
 		return;
 	}
 	docWs.send(`start::${userProp.code}`);
@@ -562,3 +563,37 @@ function onText(textData){
         y = y+20;
     }
 }
+
+
+
+/*모달 생성함수*/
+function modalUp(modalId, modalBody){
+	var modalWrapper = document.querySelector("#backGroundByDocument");
+	var modal = '<div class="modal fade" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
+			      <div class="modal-dialog" role="document">\
+				      <div class="modal-content">\
+				        <div class="modal-header">\
+				          <h5 class="modal-title" id="exampleModalLabel"><strong>알림</strong></h5>\
+				          <button class="close" type="button" data-dismiss="modal" aria-label="Close">\
+				            <span aria-hidden="true">×</span>\
+				          </button>\
+				        </div>\
+				        <div class="modal-body">'+modalBody+'</div>\
+				        <div class="modal-footer">'
+				        if(modalId == "delModal" || modalId == "delMemberModal"  ){
+				        	modal += '<a class="btn btn-danger" href="#" id="'+modalId+'CheckBtn" data-dismiss="modal" aria-label="Close">확인</a>';
+				        }else{
+				        	modal += '<a class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">확인</a>';
+				        }
+				 modal +='</div>\
+				      </div>\
+				    </div>\
+				  </div>\
+				  <button style ="display : none;" id="'+modalId+'Btn" data-toggle="modal" data-target="#'+modalId+'"></button>';
+	 modalWrapper.innerHTML += modal;
+}
+/*필요한 모달 추가 함수*/
+function modalMaker(){
+	modalUp("pdfCheckMsg", "PDF 확장자만 업로드가 가능합니다!");
+}
+

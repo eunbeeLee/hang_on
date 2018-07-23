@@ -17,7 +17,7 @@
 <!-- 구글 아이콘 -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/view.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/alter/view.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/lobby.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lobby/roomRegist.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/css/mainNav.css">

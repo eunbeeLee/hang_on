@@ -4,4 +4,5 @@ import kr.co.hangOn.repository.domain.User;
 
 public interface AlterMapper {
 	public void updateUserInfo(User user);
+	public String selectPassword(User user);
 }

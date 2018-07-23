@@ -115,3 +115,14 @@
 #myPage{
 	display: none;
 }
+
+#passwordCheckInput,#passUpdateInput,#passUpCheckInput{
+	width: 100%;
+}
+#passUpdateInput{
+	margin-bottom: 15px;
+}
+
+.modal-err-msg{
+	color : red;
+}

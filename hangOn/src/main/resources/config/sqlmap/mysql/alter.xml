@@ -26,6 +26,12 @@
 	 where user_no = #{userNo}
 </update>
 
+<select id="selectPassword" parameterType="user" resultType="string">
+	select user_pw
+	  from tb_user
+	 where user_no = #{userNo}
+</select>
+
 
 
 

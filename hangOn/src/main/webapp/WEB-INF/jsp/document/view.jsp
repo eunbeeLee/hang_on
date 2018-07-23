@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="backGroundByDocument"></div>
 <input type="hidden" id="documentUserNo" value="${param.userNo}">
 <input type="hidden" id="documentRoomNo" value="${param.roomNo}">
 <input type="hidden" id="documentRoomCode" value="${param.code}">

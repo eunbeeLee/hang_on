@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +43,11 @@ public class AlterServiceImpl implements AlterService{
 		user.setUserProfilePath(saveFolder);
 		mapper.updateUserInfo(user);
 		return saveFolder;
+	}
+
+	@Override
+	public boolean retrievePassword(User user) {
+		return BCrypt.checkpw(user.getUserPw(),mapper.selectPassword(user));
 	}
 	
 
