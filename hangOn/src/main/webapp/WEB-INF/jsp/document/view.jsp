@@ -18,7 +18,8 @@
 		</div>
 		<form id="uploadFileForm" action="/hangOn/document/parser.json" enctype="multipart/form-data">
 			<input type="file" name="file" id="documentFileUpload" accept=".pdf">
-			<input type="hidden" name="roomNo" value="${param.roomNo}">
+			<input id="documentRoomNoForm" type="hidden" name="roomNo" value="${param.roomNo}">
+			<input type="hidden" name="userNo" value="${param.userNo}">
 		</form>
 	</div>
 

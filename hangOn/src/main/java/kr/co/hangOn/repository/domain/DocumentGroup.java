@@ -10,6 +10,7 @@ public class DocumentGroup {
 	private String docOriName;
 	private String docImgPath;
 	private int roomNo;
+	private int userNo;
 	private MultipartFile file;
 	private List<Document> document;
 	
@@ -60,6 +61,13 @@ public class DocumentGroup {
 	}
 	public DocumentGroup setDocument(List<Document> document) {
 		this.document = document;
+		return this;
+	}
+	public int getUserNo() {
+		return userNo;
+	}
+	public DocumentGroup setUserNo(int userNo) {
+		this.userNo = userNo;
 		return this;
 	}
 	

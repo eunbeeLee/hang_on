@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hangOn.repository.domain.Document;
 import kr.co.hangOn.repository.domain.DocumentGroup;
+import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.mapper.DocumentMapper;
+import kr.co.hangOn.repository.mapper.RoomMapper;
 
 
 
@@ -26,8 +28,18 @@ public class DocumentServiceImpl implements DocumentService {
 	@Autowired
 	private DocumentMapper mapper;
 	
+	@Autowired
+	private RoomMapper roomMapper;
+	
 	@Override
 	public DocumentGroup saveOriFile(DocumentGroup documentGroup,HttpServletRequest request) throws Exception{
+		History history = new History();
+		history.setUserNo(documentGroup.getUserNo());
+		history.setRoomNo(documentGroup.getRoomNo());
+		history.setActCode("da02");
+		history.setIpAddr(request.getRemoteAddr());
+		roomMapper.insertHistoryBySocket(history);
+		
 		ServletContext context = request.getServletContext();                    
 		MultipartFile file = documentGroup.getFile();
 		String oriName = file.getOriginalFilename();	                    // 원본파일명
