@@ -41,7 +41,7 @@
 	      	<span class="roomMsg">${roomName}</span>
 	      </div>
 	      	<div id="roomJoinCode">
-	      	<span class="roomMsg">${code}</span>
+	      	<span class="roomMsg">초대코드&nbsp;:&nbsp;${code}</span>
 	      </div>
 	      <div  id="alarmBigUl">
 	      	<ul class="navbar-nav ml-auto" >

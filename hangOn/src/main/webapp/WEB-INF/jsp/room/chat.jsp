@@ -12,11 +12,13 @@
   	<div id="backBox">
       <div id="chatBigBox">
         <div class="menu">
+        	<span id="cES">Ctrl + Enter 메세지 전송</span>
+        	<span id="nR"><i class='fa fa-thumb-tack'></i>&nbsp;&nbsp;공지로 등록</span>
         </div>
         <ol class="chat">
     	</ol>
     	<div id="textBox">
-        	<textarea class="textarea form-control" rows="3"></textarea>
+        	<textarea class="textarea form-control" rows="3" placeholder="전송하실 메세지를 입력해주세요"></textarea>
         	<button type="button" class="btn btn-default textBoxBtn" >전송</button>
     	</div>
     </div>
@@ -82,16 +84,22 @@
 		        	} else {
 		        		$(".chat").append(
 		        					"<li class='other'>"+
-		        	    				"<div class='otherName'><span>"+arr[2] +"</span></div>"+
 		        	    				"<div class='msg'>"+
+		        	    				"<div class='otherName'>"+
+		        	    				`
+		        	    				<div>
+		        	    					<img src="${pageContext.request.contextPath}${user.userProfilePath}"/>
+		        	    				</div>
+		        	    				`+
+		        	    				"<span>"+arr[2] +"</span></div>"+
 		        						"<p class='noticeContent'>"+arr[3]+"</p>"+
-		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
-		        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+		        						"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
 		        					  	"<i class='fa fa-thumb-tack'></i>"+
 		        						"</div>"+
 		        					    "<div class='dropdown-menu'>"+
-		        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
+		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
 		        						"</div>"+
+		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
 		        	    				"</div>"+
 		        	    			"</li>");
 		        	}
@@ -144,19 +152,12 @@
     		},
     		type: "POST",
     		dataType: "json",
-    		success: function(data){
-    		}
-    	})
-    	
+    	}).done(function(result) {
+			alert("공지로 등록되었습니다.");
+			noticeList(data);
+    	});
     })
     
-	function makeNoticeList(data) {
-    	let $noticeBox = $("#noticeBox");
-    	for(let i = 0; i < data.length ; i++) {
-    		data[i].split()
-    		
-    	}
-    }    
 
     
     
