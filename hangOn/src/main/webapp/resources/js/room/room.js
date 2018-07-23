@@ -12,7 +12,12 @@ $('#notiNav').click(function(e) {
 });
 $('#sttNav').click(function(e) { 
 	e.preventDefault(); 
-	$( ".experiment" ).toggle(  "slow" );
+	const $exp = $( ".experiment" );
+	$exp.toggle(  "slow" );
+	if($exp.css("display")=='block'){
+		$( "#backBox" ).show();
+	}
+	localStorage.clear();
 });
 
 $('#chatNav').click(function(e) { 

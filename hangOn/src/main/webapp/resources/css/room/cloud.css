@@ -37,13 +37,13 @@
 	background-color: #f1f1f1;
 }
 a:link{
-    color: red;
+    text-decoration: none;
 }
 a:hover{
-    color: blue;
+    text-decoration: none;
 }
 a:active{
-    color: green;
+    text-decoration: none;
 }
 
 .cloud-title > i{

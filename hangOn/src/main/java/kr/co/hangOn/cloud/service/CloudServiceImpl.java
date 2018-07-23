@@ -81,29 +81,36 @@ public class CloudServiceImpl implements CloudService{
 	public Map<String, Object> cloudDelt(String filePath, String curPath, HttpServletRequest req) throws Exception {
 		Map<String, Object>result=new HashMap<>();
 		String roomNo =req.getRequestURI().split("/")[3]+"/";
-		String path=PATH+roomNo;
-		String delPath=DELETE+roomNo;
-		String dirPath=path;
-		if(filePath!=null) {
-			path+=filePath;
-			delPath+=filePath;
-		}
+		String path=PATH+roomNo; //삭제할 파일 경로
+		String delPath=DELETE+roomNo;	//삭제할 파일을 옮길 경로
+		String dirPath=path; //상위 폴더
 		if(curPath!=null) {
-			dirPath+=curPath;
+			path+=curPath+"/";
+			dirPath+=curPath+"/";
+			delPath+=curPath+"/";
 		}
 		File targetDir = new File(delPath);  
 		if(!targetDir.exists()) {    //디렉토리 없으면 생성.
 			targetDir.mkdirs();
 		}
+		if(filePath!=null) {
+			path+=filePath;
+			delPath+=filePath;
+		}
+	
 		Path file = Paths.get(path);
-		Path movePath = Paths.get(delPath);
-		Files.move(file , movePath .resolve(file .getFileName()));
-		
+		File delFile = new File(path);
+		System.out.println(delFile.isDirectory());
+		Path movePath = null;
+		if(delFile.isDirectory()) {
+			movePath = Paths.get(delPath+filePath);
+		}else movePath = Paths.get(delPath);
+		Files.move(file , movePath);
 		result.put("result", "성공");
 		
 		result.put("list", cloudListPath(dirPath));
 		result.put("cloudSize", cloudSize(PATH+roomNo));
-		result.put("list", cloudListPath(path));
+//		result.put("list", cloudListPath(path));
 		return result;
 	}
 
