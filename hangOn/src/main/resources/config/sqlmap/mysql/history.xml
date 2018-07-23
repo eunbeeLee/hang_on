@@ -39,7 +39,9 @@
 	<select id="selectHistoryCountByUser" parameterType="history" resultType="int">
 		select count(*)
 		  from tb_history
-		 where user_no = #{userNo}
+		 where room_no in (select room_no
+				 		     from tb_room
+				 		    where user_no = #{userNo})
 		 <if test="rDays == 7 ||rDays == 30 || rDays == 60 || rDays == 90">
 		   and connect_time between (SELECT date_add(now(),INTERVAL -#{rDays} DAY) FROM dual) and now();
 		 </if>

@@ -19,23 +19,31 @@ window.onload = function(){
 	    });
 
 };
-function pageList(pageNo, rDays){
+function pageList(pageNo, rDays, startDate, endDate){
+	console.log("Start:", startDate);
+	console.log("End:", endDate);
 	if(pageNo == ""){
 		pageNo = 1;
 	}
 	if(rDays == undefined){
 		rDays = 0;
 	}
+//	if(startDate == ""){
+//		pageNo = "0";
+//	}
+//	if(endDate == ""){
+//		pageNo = "0";
+//	}
 	$.ajax({
 		url : "makeHistoryPage.json", 
-		data : {"pageNo" : pageNo, "userNo" : userNo, "rDays" : rDays}, 
+		data : {"pageNo" : pageNo, "userNo" : userNo, "rDays" : rDays, "startDate": startDate, "endDate":endDate}, 
 		dateType : "json",
 		type : "POST"
 	}).done(makeTableList)
 }
 /*히스토리 테이블 출력 함수*/
 function makeTableList(result){
-//	console.log("makeTableList : ",result);
+	console.log("makeTableList : ",result);
 			var hTable = document.querySelector("#historyTable");
 			html = '<thead>\
 		        	  <tr>\
@@ -90,7 +98,7 @@ function makePageLink(data){
 	    	}
 	    	else {
 	    		html += '<li class="paginate_button page-item">\
-	    			<a href="javascript:pageList(' + i + ','+data.rDays+');" aria-controls="dataTable" data-dt-idx="'+i+'" tabindex="0" class="page-link">'
+	    			<a href="javascript:pageList(' + i + ','+data.rDays+','+data.startDate+','+data.endDate+');" aria-controls="dataTable" data-dt-idx="'+i+'" tabindex="0" class="page-link">'
 	    			+ i + '</a></li>';
 	    	}
 	    }

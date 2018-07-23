@@ -22,7 +22,7 @@ const pos = {
 };
 const userProp = {
 		userNo : $("#documentUserNo").val(),
-		roomNo : $("#documentRoomNo").val(),
+		roomNo : parseInt($("#documentRoomNo").val()),
 		code : $("#documentRoomCode").val()
 }
 const MAINHOST = "ws://localhost";
@@ -92,6 +92,7 @@ $("#documentFileUpload").on("change",function(){
 		$("#pdfCheckMsgBtn").click();
 		return;
 	}
+	$("#documentRoomNoForm").val(userProp.roomNo);
 	docWs.send(`start::${userProp.code}`);
 	$.ajax({
 		type:"POST",

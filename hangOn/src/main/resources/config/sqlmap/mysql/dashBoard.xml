@@ -50,9 +50,7 @@
 	<select id="selectCallByUser" parameterType="dashBoard" resultMap="historyMap">
 		select room_no,connect_time, act_code
 		  from tb_history
-		 where room_no in (select room_no
-		    				 from tb_room_member
-		    				where user_no = #{userNo})
+		 where user_no = #{userNo}
 		   and act_code in (#{actStartCode}, #{actEndCode})
 		   and month(connect_time) = #{selectMonth}
 		   and day(connect_time) = #{selectDay}
@@ -91,7 +89,7 @@
 		          user_no, 
 		          con_end, 
 		          con_start
-		  from tb_conference c
+		 from tb_conference c
 		 where room_no = #{roomNo}
 <!-- 		   and month(con_start) = #{selectMonth} -->
 <!-- 		   and month(con_end) = #{selectMonth} -->

@@ -76,10 +76,6 @@
 			   (select u.user_email
 		          from tb_user as u
 			     where u.user_no = rm.user_no) as user_email,
-			   (select h.connect_time 
-			      from tb_history as h
-			     where h.user_no = rm.user_no
-			       and h.act_code = #{actCode}) as last_connet_time,
 			   (select c.code_info
 			      from tb_code as c
 			     where c.code_no = rm.room_auth_code) as auth_info
@@ -90,7 +86,7 @@
 	</select>
 	<select id="countRoomList" parameterType="int" resultType="int">
 		select count(*)
-		  from tb_room
+		  from tb_room 	
 		 where user_no = #{userNo}
 	</select>
 	<update id="updateRoomDelState" parameterType="room"> 
@@ -131,7 +127,11 @@
 		 where room_no = #{roomNo} 
 		   and user_no = #{userNo}
 	</update>
-
+	<update id="deleteRoom" parameterType="room">
+		update tb_room
+		   set room_del_state = #{roomDelState}	
+		 where room_no = #{roomNo}
+	</update>
 	<!-- 룸 네임을 가져옴 -->
 	<select id="selectRoomName" parameterType="string" resultType="string">
 		select room_name
@@ -152,7 +152,7 @@
 		 insert into tb_history(
 	            user_no, ip_addr, act_code, room_no
 	        )values(
-	            #{userNo}, #{ipAddr}, #{actName}, #{roomNo}
+	            #{userNo}, #{ipAddr}, #{actCode}, #{roomNo}
 	        )
 	</insert>
 	

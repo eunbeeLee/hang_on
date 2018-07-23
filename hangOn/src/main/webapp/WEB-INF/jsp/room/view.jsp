@@ -121,7 +121,7 @@
      <%-- 문서공유 영역 진솔 --%>
    	<c:import url="/WEB-INF/jsp/document/view.jsp">
 		<c:param name="userNo" value="${userNo}"/>
-		<c:param name="roomNo" value="2"/>
+		<c:param name="roomNo" value="${roomNo} }"/>
 		<c:param name="code" value="${code}"/>
 	</c:import>
    	<%-- 문서공유 영역 진솔 --%>
