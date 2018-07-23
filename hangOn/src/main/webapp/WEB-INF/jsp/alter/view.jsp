@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <div id="myPage" >
+    <div id="myPage">
         <div id="myPageProfileArea" class="container card">
-        
+        	<input id="myPageUserNo" type="hidden" value="${param.userNo}"/>
         
             <button id="myPageClose" type="button" class="btn btn-default" style="padding: 0px !important;">
 				<i class="material-icons">close</i>
@@ -18,7 +18,7 @@
 			
             <div>
                 <div id="myPageImgArea">
-                    <img src="${param.profilePath}"/>
+                    <img src="${param.userProfilePath}"/>
                 </div>
                 <div id="myPageProfileImgBtns">
                     <span>
@@ -33,7 +33,10 @@
                     <button id="myPageAttachImgBtn" type="button" class="btn btn-default" style="padding: 0px !important;">
 					  <i class="material-icons">attach_file</i>
 					</button>
-                    <input id="myPageImgInput" type="file"/>
+					<form id="uploadFileForm" action="/hangOn/document/parser.json" enctype="multipart/form-data">
+                    	<input id="myPageImgInput" type="file" name="file" accept="image/*"/>
+                    	<input type="hidden" name="userNo" value="${param.userNo}"/>
+					</form>
                 </div>
             </div>
             
@@ -43,13 +46,13 @@
 	          <button id="myPageNameUpdateBtn" type="button" class="btn btn-default" style="padding: 0px !important;">
 			  	<i class="material-icons">create</i>
 			  </button>
-	          <input class="form-control" id="myPageName" type="text" aria-describedby="idHelp" readonly value="${param.name}">
+	          <input class="form-control" id="myPageName" type="text" aria-describedby="idHelp" readonly value="${param.userName}">
 	        </div>
 	        
 	        
 	        <div class="form-group">
 	          <label for="myPageEmail">이메일</label>
-	          <input class="form-control" id="myPageEmail" type="email" aria-describedby="emailHelp" readonly value="${param.mail}">
+	          <input class="form-control" id="myPageEmail" type="email" aria-describedby="emailHelp" readonly value="${param.userEmail}">
 	        </div>
         
         
