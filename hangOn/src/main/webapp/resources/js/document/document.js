@@ -85,6 +85,12 @@ docWs.onmessage = function(evt) {
 
 $("#documentFileUpload").on("change",function(){
 	if($(this).val().length == 0) return;
+	let fileext = $(this).val();	
+	fileext = fileext.slice(fileext.indexOf(".")+1).toUpperCase();
+	if(fileext != "PDF"){
+		alert("PDF 파일만 등록이 가능합니다.");
+		return;
+	}
 	docWs.send(`start::${userProp.code}`);
 	$.ajax({
 		type:"POST",

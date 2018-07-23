@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.hangOn.repository.mapper.AlterMapper">
+
+<resultMap id="userMap" type="user">
+	<result column="user_no" property="userNo"/>
+	<result column="user_email" property="userEmail"/>
+	<result column="user_name" property="userName"/>
+	<result column="user_pw" property="userPw"/>
+	<result column="user_state_code" property="userStateCode"/>
+	<result column="user_exist_code" property="userExistCode"/>
+	<result column="user_auth_code" property="userAuthCode"/>
+	<result column="user_profile_path" property="userProfilePath"/>
+</resultMap>
+
+
+<update id="updateUserInfo" parameterType="user">
+	update tb_user 
+	<set>
+		<if test="userName != null">user_name = #{userName}</if>
+		<if test="userProfilePath != null">user_profile_path = #{userProfilePath}</if>
+		<if test="userPw != null">user_pw = #{userPw}</if>
+		<if test="userExistCode != null">user_exist_code = #{userExistCode}</if>
+	</set>
+	 where user_no = #{userNo}
+</update>
+
+
+
+
+</mapper>

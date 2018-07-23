@@ -12,11 +12,13 @@
   	<div id="backBox">
       <div id="chatBigBox">
         <div class="menu">
+        	<span id="cES">Ctrl + Enter 메세지 전송</span>
+        	<span id="nR"><i class='fa fa-thumb-tack'></i>&nbsp;&nbsp;공지로 등록</span>
         </div>
         <ol class="chat">
     	</ol>
     	<div id="textBox">
-        	<textarea class="textarea form-control" rows="3"></textarea>
+        	<textarea class="textarea form-control" rows="3" placeholder="전송하실 메세지를 입력해주세요"></textarea>
         	<button type="button" class="btn btn-default textBoxBtn" >전송</button>
     	</div>
     </div>
@@ -64,39 +66,46 @@
 	        	             "</div>"
 	        				);
 	        	} 
-        	} else {
-	        	if(${sessionScope.user.userNo} == state) {
-	        		$(".chat").append(
-	        					"<li class='self'>"+
-	        	    				"<div class='msg' data-userNo="+state+">"+
-	        	    				"<p class='noticeContent'>"+arr[2]+"</p>"+
-	        	    				"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='fa fa-thumb-tack'></i>"+
-	        						"</div>"+
-	        					    "<div class='dropdown-menu'>"+
-	        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
-	        						"</div>"+
-	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
-	        	    				"</div>"+
-	        	    			"</li>");
-	        	} else {
-	        		$(".chat").append(
-	        					"<li class='other'>"+
-	        	    				"<div class='otherName'><span>"+arr[1] +"</span></div>"+
-	        	    				"<div class='msg'>"+
-	        						"<p class='noticeContent'>"+arr[2]+"</p>"+
-	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
-	        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='fa fa-thumb-tack'></i>"+
-	        						"</div>"+
-	        					    "<div class='dropdown-menu'>"+
-	        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
-	        						"</div>"+
-	        	    				"</div>"+
-	        	    			"</li>");
+	        	if("sendMsg" == state) {
+		        	if(${sessionScope.user.userNo} == arr[1]) {
+		        		$(".chat").append(
+		        					"<li class='self'>"+
+		        	    				"<div class='msg' data-userNo="+arr[1]+">"+
+		        	    				"<p class='noticeContent'>"+arr[3]+"</p>"+
+		        	    				"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+		        					  	"<i class='fa fa-thumb-tack'></i>"+
+		        						"</div>"+
+		        					    "<div class='dropdown-menu'>"+
+		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
+		        						"</div>"+
+		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        	    				"</div>"+
+		        	    			"</li>");
+		        	} else {
+		        		$(".chat").append(
+		        					"<li class='other'>"+
+		        	    				"<div class='msg'>"+
+		        	    				"<div class='otherName'>"+
+		        	    				`
+		        	    				<div>
+		        	    					<img src="${pageContext.request.contextPath}${user.userProfilePath}"/>
+		        	    				</div>
+		        	    				`+
+		        	    				"<span>"+arr[2] +"</span></div>"+
+		        						"<p class='noticeContent'>"+arr[3]+"</p>"+
+		        						"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+		        					  	"<i class='fa fa-thumb-tack'></i>"+
+		        						"</div>"+
+		        					    "<div class='dropdown-menu'>"+
+		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
+		        						"</div>"+
+		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        	    				"</div>"+
+		        	    			"</li>");
+		        	}
 	        	}
+		        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
         	}
-	        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
 		};
         ws.onerror = function(evt) {
 			console.log("에러발생" + evt.data);
@@ -143,19 +152,12 @@
     		},
     		type: "POST",
     		dataType: "json",
-    		success: function(data){
-    		}
-    	})
-    	
+    	}).done(function(result) {
+			alert("공지로 등록되었습니다.");
+			noticeList(data);
+    	});
     })
     
-	function makeNoticeList(data) {
-    	let $noticeBox = $("#noticeBox");
-    	for(let i = 0; i < data.length ; i++) {
-    		data[i].split()
-    		
-    	}
-    }    
 
     
     

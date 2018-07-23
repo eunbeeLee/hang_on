@@ -11,6 +11,7 @@
 	<result column="user_state_code" property="userStateCode"/>
 	<result column="user_exist_code" property="userExistCode"/>
 	<result column="user_auth_code" property="userAuthCode"/>
+	<result column="user_profile_path" property="userProfilePath"/>
 </resultMap>
 
 <select id="login" parameterType="String" resultMap="userMap">

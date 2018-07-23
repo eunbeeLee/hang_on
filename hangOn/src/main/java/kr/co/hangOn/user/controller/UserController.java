@@ -51,6 +51,9 @@ public class UserController {
 	public int emailCheck(HttpServletRequest request) throws Exception {
 		String userEmail = request.getParameter("userEmail");
 		int no = userService.emailCheck(userEmail);
+		if (userEmail == "") {
+			no = 2;
+		}
 		return no;
 	}
 	
@@ -96,13 +99,17 @@ public class UserController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) throws Exception {
-		User loginUser = (User) session.getAttribute("user");
-		System.out.println(loginUser.getUserName());
-		loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우
-		userService.stateCodeChanger(loginUser);
-		System.out.println(loginUser.getUserEmail());
-		session.invalidate();
-		
+		if (session.getAttribute("userEmail") == "") {
+			return "main/login.do";
+		}
+		else {
+			User loginUser = (User) session.getAttribute("user");
+			System.out.println(loginUser.getUserName());
+			loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우
+			userService.stateCodeChanger(loginUser);
+			System.out.println(loginUser.getUserEmail());
+			session.invalidate();
+		}
 		return "redirect:login.do";
 	}
 }

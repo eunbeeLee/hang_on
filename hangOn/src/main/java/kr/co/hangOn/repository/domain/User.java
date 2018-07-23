@@ -1,5 +1,7 @@
 package kr.co.hangOn.repository.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class User {
 	private int userNo;
 	private String userName;
@@ -8,6 +10,8 @@ public class User {
 	private String userStateCode;
 	private String userExistCode;
 	private String userAuthCode;
+	private String userProfilePath;
+	private MultipartFile file;
 	
 	public int getUserNo() {
 		return userNo;
@@ -51,4 +55,17 @@ public class User {
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
+	public String getUserProfilePath() {
+		return userProfilePath;
+	}
+	public void setUserProfilePath(String userProfilePath) {
+		this.userProfilePath = userProfilePath;
+	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
 }

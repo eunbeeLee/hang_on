@@ -105,7 +105,11 @@ if ("${msg}") {
         	<c:otherwise>
 		        <li id="openMyPageBtn" class="nav-item">
 		          <a class="nav-link" >
-		            <i class="fa fa-user-circle-o"></i>${user.userName}님</a>
+		         	<i class="fa fa-cog" aria-hidden="true"></i>정보변경</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" >
+		            <i class="fa fa-user-circle-o"></i><span id="userNameView">${user.userName}</span>님</a>
 		        </li>
         	</c:otherwise>
         </c:choose>
@@ -159,16 +163,16 @@ if ("${msg}") {
   
 
 <%-- 개인 페이지 불러오기 (진솔) --%>
-<c:import url="/WEB-INF/jsp/mypage/view.jsp">
-	<c:param name="name" value="홍길동"/>
-	<c:param name="mail" value="abcd@gmail.com"/>
-	<c:param name="profilePath" value="${pageContext.request.contextPath}/resources/image/defalutImg.jpg"/>
-	<c:param name="no" value="1"/>
+<c:import url="/WEB-INF/jsp/alter/view.jsp">
+	<c:param name="userName" value="${user.userName}"/>
+	<c:param name="userEmail" value="${user.userEmail}"/>
+	<c:param name="userProfilePath" value="${pageContext.request.contextPath}${user.userProfilePath}"/>
+	<c:param name="userNo" value="${user.userNo}"/>
 </c:import>
 
 <script src="${pageContext.request.contextPath}/resources/js/lobby/lobby.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/lobby/roomRegist.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/mypage/view.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/alter/view.js"></script>
 
 
 </body>
