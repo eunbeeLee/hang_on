@@ -64,39 +64,40 @@
 	        	             "</div>"
 	        				);
 	        	} 
-        	} else {
-	        	if(${sessionScope.user.userNo} == state) {
-	        		$(".chat").append(
-	        					"<li class='self'>"+
-	        	    				"<div class='msg' data-userNo="+state+">"+
-	        	    				"<p class='noticeContent'>"+arr[2]+"</p>"+
-	        	    				"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='fa fa-thumb-tack'></i>"+
-	        						"</div>"+
-	        					    "<div class='dropdown-menu'>"+
-	        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
-	        						"</div>"+
-	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
-	        	    				"</div>"+
-	        	    			"</li>");
-	        	} else {
-	        		$(".chat").append(
-	        					"<li class='other'>"+
-	        	    				"<div class='otherName'><span>"+arr[1] +"</span></div>"+
-	        	    				"<div class='msg'>"+
-	        						"<p class='noticeContent'>"+arr[2]+"</p>"+
-	        						"<time>"+arr[3]+":"+arr[4]+"</time>"+
-	        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
-	        					  	"<i class='fa fa-thumb-tack'></i>"+
-	        						"</div>"+
-	        					    "<div class='dropdown-menu'>"+
-	        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+state+">공지로 등록</a>"+
-	        						"</div>"+
-	        	    				"</div>"+
-	        	    			"</li>");
+	        	if("sendMsg" == state) {
+		        	if(${sessionScope.user.userNo} == arr[1]) {
+		        		$(".chat").append(
+		        					"<li class='self'>"+
+		        	    				"<div class='msg' data-userNo="+arr[1]+">"+
+		        	    				"<p class='noticeContent'>"+arr[3]+"</p>"+
+		        	    				"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+		        					  	"<i class='fa fa-thumb-tack'></i>"+
+		        						"</div>"+
+		        					    "<div class='dropdown-menu'>"+
+		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
+		        						"</div>"+
+		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        	    				"</div>"+
+		        	    			"</li>");
+		        	} else {
+		        		$(".chat").append(
+		        					"<li class='other'>"+
+		        	    				"<div class='otherName'><span>"+arr[2] +"</span></div>"+
+		        	    				"<div class='msg'>"+
+		        						"<p class='noticeContent'>"+arr[3]+"</p>"+
+		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        						"<div data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
+		        					  	"<i class='fa fa-thumb-tack'></i>"+
+		        						"</div>"+
+		        					    "<div class='dropdown-menu'>"+
+		        						"<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
+		        						"</div>"+
+		        	    				"</div>"+
+		        	    			"</li>");
+		        	}
 	        	}
+		        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
         	}
-	        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
 		};
         ws.onerror = function(evt) {
 			console.log("에러발생" + evt.data);
