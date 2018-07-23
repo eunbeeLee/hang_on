@@ -93,6 +93,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 			wSession.sendMessage(new TextMessage("condition:2:"+seUser.getUserName() + ":님이 퇴장하셨습니다. :( " +alarmTime.format(new Date())+" ):"+seUser.getUserNo()));
 		}
 		users.remove(removeUser);
+		System.out.println("빠졌나"+roomInfo);
 	}
 
 	// 데이터가 왔을 때, 대화중
@@ -187,14 +188,14 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 			List<Chat> alusers = null;
 			alusers = roomInfo.get(joinCode);
 			for(Chat aluser : alusers) {
-				msgs.add("peAlarm:1:"+aluser.getUserName() + ":" + aluser.getUserNo() + " :( " + alarmTime.format(aluser.getDate()) + " )");
+				msgs.add("peAlarm:1:"+aluser.getUserName() + ":" + aluser.getUserNo() + ":( " + alarmTime.format(aluser.getDate()) + " )");
 			}
-			sendMsg = "condition:1:"+userName + ":" + content + " :( " + alarmTime.format(new Date()) + " )";
+			sendMsg = "condition:1:"+userName + ":" + content + ":( " + alarmTime.format(new Date()) + " )";
 		}
 		else if(condition.equals("sendMsg")) {
 			// 내가 보낸 메세지인지 남이 보낸 메세지인지 확인 후 전송
 			// 회원 번호로 내용을 보내서 jsp에서 비교
-			sendMsg = userNo +":"+ userName + ":" + content + ":" + alarmTime.format(new Date());
+			sendMsg = "sendMsg:"+ userNo +":"+ userName + ":" + content + ":" + alarmTime.format(new Date());
 		}
 		
 		System.out.println("방접속정보 : " + roomInfo);
@@ -211,16 +212,22 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		}
 		// 메세지가 전송된 방에만 메세지 뿌리기
 		for(Chat user : roomLiveUser) {
+			String[] sendMsgs = sendMsg.split(":");
 			if(user.getUserNo() == seUser.getUserNo()) {
 				WebSocketSession wSession = user.getSessioninfo();
 				wSession.sendMessage(new TextMessage(sendMsg));
 				for(String msg : msgs) {
 					wSession.sendMessage(new TextMessage(msg));
 				}				
-			} else {
+			} 
+			else {
 				WebSocketSession wSession = user.getSessioninfo();
-				wSession.sendMessage(new TextMessage(sendMsg));
-				wSession.sendMessage(new TextMessage("peAlarm:1:"+seUser.getUserName() + ":" + seUser.getUserNo() + " :( " + alarmTime.format(new Date()) + " )"));
+				if(sendMsgs[0].equals("sendMsg")) {
+					wSession.sendMessage(new TextMessage(sendMsg));
+				} else {
+					wSession.sendMessage(new TextMessage(sendMsg));
+					wSession.sendMessage(new TextMessage("peAlarm:1:"+seUser.getUserName() + ":" + seUser.getUserNo() + " :( " + alarmTime.format(new Date()) + " )"));
+				}
 			}
 		}
 	}

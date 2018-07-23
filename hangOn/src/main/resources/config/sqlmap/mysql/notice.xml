@@ -23,6 +23,7 @@
 		select *
 		  from tb_notice
 		 where room_no = #{roomNo}
+		 order by notice_no desc
 	</select>
 	
 	<select id="selectNoticeUserName" parameterType="int" resultType="string">
