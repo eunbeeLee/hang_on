@@ -17,14 +17,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hangOn.repository.domain.Cloud;
 import kr.co.hangOn.repository.domain.FileVO;
+import kr.co.hangOn.repository.domain.History;
+import kr.co.hangOn.repository.domain.User;
+import kr.co.hangOn.repository.mapper.RoomMapper;
 
 @Service("cloudService")
 public class CloudServiceImpl implements CloudService{
@@ -34,15 +39,22 @@ public class CloudServiceImpl implements CloudService{
 	
 	private static final String[] SI_UNITS = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
 	private static final String[] BINARY_UNITS = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
-	
+	@Autowired
+	private RoomMapper mapper;
 	
 	@Override
-	public Map<String, Object> fileUpload(FileVO fileVO, HttpServletRequest req) throws Exception {
+	public Map<String, Object> fileUpload(FileVO fileVO, HttpServletRequest req,HttpSession session) throws Exception {
 		Map<String, Object>result=new HashMap<>();
 		
-		String roomNo =req.getRequestURI().split("/")[3]+"/";
+		String roomNo =req.getRequestURI().split("/")[3];
 		// 파일정보 가져오기
-		String path=PATH+roomNo+fileVO.getPath();
+		String path=PATH+roomNo+"/"+fileVO.getPath();
+		History history = new History();
+		history.setActCode("da03");
+		history.setRoomNo(mapper.roomByJoinCode(roomNo));
+		history.setUserNo(((User)session.getAttribute("user")).getUserNo());
+		history.setIpAddr(req.getRemoteAddr());
+		mapper.insertHistoryBySocket(history);
 		
 		File targetDir = new File(path);  
         if(!targetDir.exists()) {    //디렉토리 없으면 생성.

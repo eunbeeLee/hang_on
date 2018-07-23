@@ -175,6 +175,7 @@ function captureUserMedia(callback, failure_callback) {
             videosContainer.appendChild(mediaElement);
 
             callback && callback();
+            pinVideo(stream);
         },
         onerror: function() {
             alert('unable to get access to your webcam');
