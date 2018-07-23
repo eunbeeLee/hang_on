@@ -62,7 +62,6 @@
 		      <th>이름</th>
 		      <th></th>
 		      <th>수정한 날짜</th>
-		      <th>촬영한 날짜</th>
 		      <th>크기</th>
 		    </tr>
 		  </thead>

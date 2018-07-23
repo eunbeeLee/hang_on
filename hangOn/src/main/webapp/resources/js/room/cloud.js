@@ -107,6 +107,9 @@ $('#cloudUpload').bind('change', function() {
 //  파일삭제
 function cloudDelt(filePath,curPath){
 	var curPath = $("input[name='path']").val();
+	curPath = curPath.substring(0, curPath.length - 1);
+	
+	console.log(filePath);
 	$.ajax({
 		url:'cloudDelt.json',
 		dataType:"json",
@@ -192,7 +195,7 @@ function makeCloudList(response){
 				  <a class="dropdown-item" href='javascript:void(0);' onclick="cloudDelt('`+file.fileName+`');">삭제</a>
 			  </div>
 		  </td>
-	      <td colspan="2">`+file.updtDate+`</td>
+	      <td>`+file.updtDate+`</td>
 	      <td>`+file.fileSize+`</td>
 	    </tr>`;
     }

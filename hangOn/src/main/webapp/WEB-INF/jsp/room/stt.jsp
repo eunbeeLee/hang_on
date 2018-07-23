@@ -15,8 +15,8 @@
 
         <section class="section-divider">
             <select id="convert-from">
-                        <option>en (English)</option>
                         <option>ko (한국어)</option>
+                        <option>en (English)</option>
                         <option>ja (日本人)</option>
             </select>
             <br>
