@@ -96,12 +96,12 @@
         	<form  id="roomRegistForm"  method="post" action="<%=request.getContextPath()%>/lobby/roomRegist.do">
 			  <div class="form-group" id="roomRegNm">
 			    <label for="exampleInputEmail1"><h4><strong>방 이름</strong></h4></label>
-			    <input class="form-control" maxlength="10" name="roomName" type="text" class="input" placeholder="방이름을 입력하세요.">
+			    <input class="form-control" maxlength="10" name="roomName" type="text" class="input" placeholder="방 이름을 입력하세요.">
 			    <div class="warningText" id="roomRegWarn">방 이름을입력하세요</div>
 			  </div>
 			  <div class="form-group">
 			    <label for="roomPassword"><h4><strong>방 비밀번호</strong></h4></label>
-			    <input id="roomPassword" class="form-control input" maxlength="10" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
+			    <input id="roomPassword" class="form-control input" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
 			    <div class="warningText" id="roomRegPassWarn">비밀번호는 4자~8자 사이로 입력하세요.</div>
 			  </div>
 			  <button type="submit" style="display : none" class="btn btn-default">제출</button>
@@ -109,7 +109,7 @@
         	
         	</div>
         	<div class="modal-footer" id="boxFooter">
-				<a class="btn" id="roomRegistBtn" href="#" data-dismiss="modal" aria-label="Close">방생성</a>
+				<a class="btn" id="roomRegistBtn" href="#" data-dismiss="modal" aria-label="Close">방 생성</a>
 			</div>
 			</div>
 			
@@ -126,12 +126,12 @@
 		  	<form  id="roomFindForm"  method="post" action="<%=request.getContextPath()%>/lobby/roomFind.do">
 		  	  <div class="form-group" id="roomRegNm">
 		  	    <label for="exampleInputEmail1"><h4><strong>방 코드</strong></h4></label>
-		  	    <input class="form-control" maxlength="10" name="roomJoinCode" type="text" class="input" placeholder="방 코드을 입력하세요.">
+		  	    <input class="form-control" maxlength="6" name="roomJoinCode" type="text" class="input" placeholder="방 코드을 입력하세요.">
 		  	    <div class="warningText" id="roomEnWarn">방 코드를 입력하세요</div>
 		  	  </div>
 		  	  <div class="form-group" id="roomRePa">
 		  	    <label for="roomPassword"><h4><strong>방 비밀번호</strong></h4></label>
-		  	    <input class="form-control input"maxlength="10" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
+		  	    <input class="form-control input" id="findPass" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
 		  	    <div class="warningText" id="roomEnPassWarn">비밀번호는 4자~8자 사이로 입력하세요.</div>
 		  	  </div>
 		  	  <button type="submit" style="display : none" class="btn btn-default">제출</button>

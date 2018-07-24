@@ -19,7 +19,7 @@ $(".room-over").mouseleave(function () {
     $(this).css("display", "none");
     $(this).siblings().css("opacity", "none");
 });
-$(".back").click(function () {
+$(".close").click(function () {
     $(".plus").css("opacity", "none");
 });
 

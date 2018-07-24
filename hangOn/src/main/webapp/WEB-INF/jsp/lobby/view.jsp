@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hangOn</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <!-- Bootstrap core CSS-->
@@ -88,12 +88,12 @@ if ("${msg}") {
         
         <!-- 고객센터 아이콘 -->
         <li class="nav-item">
-          <a class="nav-link" >
+          <a class="nav-link" href='<c:url value="/board/list.do"/>'>
             <i class="fa fa-info-circle"></i>고객센터</a>
         </li>
         <!-- 사용자 아이콘 -->
 		<li class="nav-item"><a class="nav-link" href='<c:url value="/admin/dashBoard.do"/>'> 
-		  관리자페이지</a></li>
+		  관리 페이지</a></li>
         <!-- 사용자 아이콘 -->
         <c:choose>
         	<c:when test="${empty user}">

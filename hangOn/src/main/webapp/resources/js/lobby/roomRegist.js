@@ -11,6 +11,8 @@ $("#roomEntranceNav").click(function () {
 	
 	$("#roomEntrance").show();
     $("#roomRegist").hide();
+    $("#roomEntranceNav").children("a").css("color", "#a585c6");
+    $("#roomRegistNav").children("a").css("color", "#494949");
 })
 $("#roomRegistNav").click(function () {
 	$("#roomRegistNav").attr("class", "active");
@@ -18,6 +20,8 @@ $("#roomRegistNav").click(function () {
 	
 	$("#roomEntrance").hide();
     $("#roomRegist").show();
+    $("#roomRegistNav").children("a").css("color", "#a585c6");
+    $("#roomEntranceNav").children("a").css("color", "#494949");
 })
 
 $(".plus").click(function () {
@@ -50,16 +54,16 @@ $("input[name=roomPassword]").keyup(function () {
 
 $("#roomFindBtn").click(function (e) {
 	var $code = $("input[name=roomJoinCode]");
-	var $pass = $("input[name=roomPassword]");
+	var $pass = $("#findPass");
 	if($code.val().length == 0) {
 		$("roomEnWarn").attr("visibility", "block");
-//		alert("방 코드를 입력해주세요");
+		alert("방 코드를 입력해주세요");
 		$code.select();
 	} else if($pass.val().length == 0) {
 		alert("방 비밀번호를 입력해주세요");
 		$pass.select();
-	} else if($pass.val().length < 8 || $pass.val().length > 10) {
-		alert("방 비밀번호는 8자~10자로 설정해주세요.");
+	} else if($pass.val().length < 4 || $pass.val().length > 8) {
+		alert("방 비밀번호를 4자~8자로 입력해주세요.");
 		$pass.select();
 	} else {
 		$("#roomFindForm").submit();
@@ -75,8 +79,8 @@ $("#roomRegistBtn").click(function () {
 	} else if($pass.val().length == 0) {
 		alert("방 비밀번호를 입력해주세요");
 		$pass.select();
-	} else if($pass.val().length < 8 || $pass.val().length > 10) {
-		alert("방 비밀번호는 8자~10자로 설정해주세요.");
+	} else if($pass.val().length < 4 || $pass.val().length > 8) {
+		alert("방 비밀번호는 4자~8자로 설정해주세요.");
 		$pass.select();
 	} else {
 		$("#roomRegistForm").submit();
