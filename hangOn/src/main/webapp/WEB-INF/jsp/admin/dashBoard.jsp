@@ -71,7 +71,7 @@
         
 		<!-- 사용자 아이콘 -->
 		<li class="nav-item"><a class="nav-link" id="adminTitle"> 
-		  관리자페이지</a>
+		  관리페이지</a>
 		</li>
 		<!-- 사용자 아이콘 -->
 		<li class="nav-item"><span class="nav-link"  id="userName"> 
@@ -93,11 +93,11 @@
      <div class="card-header">
        <i class="fa fa-pie-chart"></i>회의방별 통화량</div>
      <div class="card-body">
-        <div class="datePicker">
-        	<button class="button-left" id="doughnutBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
-            <span><a class="month">June </a><a class="year">2018</a></span>
-        	<button class="button-right" id="doughnutBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
-        </div>
+<!--         <div class="datePicker"> -->
+<!--         	<button class="button-left" id="doughnutBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button> -->
+<!--             <span><a class="month">June </a><a class="year">2018</a></span> -->
+<!--         	<button class="button-right" id="doughnutBtnRight"><i class="fa fa-fw fa-angle-right"></i></button> -->
+<!--         </div> -->
        <canvas id="myPieChart" width="100%" height="100"></canvas>
      </div>
      <div class="card-footer small text-muted"></div>
@@ -110,11 +110,11 @@
        <div class="card-header noHover">
          <i class="fa fa-bar-chart"></i>월별 회의방 생성 갯수</div>
        <div class="card-body">
-        <div class="datePicker">
-        	<button class="button-left" id="barBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
-            <span><a class="month">June </a><a class="year">2018</a></span>
-        	<button class="button-right" id="barBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
-        </div>
+<!--         <div class="datePicker"> -->
+<!--         	<button class="button-left" id="barBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button> -->
+<!--             <span><a class="month">June </a><a class="year">2018</a></span> -->
+<!--         	<button class="button-right" id="barBtnRight"><i class="fa fa-fw fa-angle-right"></i></button> -->
+<!--         </div> -->
        <div class="row">
            <canvas id="myBarChart" width="100" height="50"></canvas>
        </div>
@@ -129,11 +129,11 @@
         <div class="card-header">
           <i class="fa fa-area-chart"></i> 일일 통화량</div>
         <div class="card-body">
-        <div class="datePicker">
-        	<button class="button-left" id="areaBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button>
-            <span><a class="month">June </a><a class="year">2018</a></span>
-        	<button class="button-right" id="areaBtnRight"><i class="fa fa-fw fa-angle-right"></i></button>
-        </div>
+<!--         <div class="datePicker"> -->
+<!--         	<button class="button-left" id="areaBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button> -->
+<!--             <span><a class="month">June </a><a class="year">2018</a></span> -->
+<!--         	<button class="button-right" id="areaBtnRight"><i class="fa fa-fw fa-angle-right"></i></button> -->
+<!--         </div> -->
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
         <div class="card-footer small text-muted"></div>

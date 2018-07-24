@@ -72,7 +72,7 @@
         
 		<!-- 사용자 아이콘 -->
 		<li class="nav-item"><a class="nav-link" id="adminTitle"> 
-		  관리자페이지</a>
+		  관리페이지</a>
 		</li>
 		<!-- 사용자 아이콘 -->
 		<li class="nav-item"><a class="nav-link" id="userName"> 

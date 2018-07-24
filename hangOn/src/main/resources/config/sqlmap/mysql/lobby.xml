@@ -77,8 +77,9 @@
 		 	  from tb_room_member
 		 	 where user_no = #{userNo} AND room_connect_code NOT IN('bb13')
 		 )
+		 and room_del_state = 'ba01'
 	</select>
-	
+		
 	<!-- 방 참여인수가 6명이하 인지 확인 (탈퇴한 회원을 제외)-->
 	<select id="selectRoomCount" parameterType="int" resultType="int">
 		select count(*)
@@ -97,7 +98,8 @@
 	<select id="selectRoomNoConnectCnt" parameterType="int" resultType="int">
 		select count(*)
 		  from tb_room_member
-		 where room_no = #{roomNo} 
+		 where room_no = #{roomNo}
+		  and room_connect_code != 'bb13' 
 	</select>
 	
 	<!-- 탈퇴하는 회원 -->

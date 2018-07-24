@@ -75,7 +75,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown">
 					<!-- 사용자 아이콘 -->
-				<li class="nav-item"><a class="nav-link" id="adminTitle"> 관리자페이지</a></li>
+				<li class="nav-item"><a class="nav-link" id="adminTitle"> 관리페이지</a></li>
 				<!-- 사용자 아이콘 -->
 				<li class="nav-item"><a class="nav-link"  id="userName"> <i
 						class="fa fa-user-circle-o"></i>${user.userName}님

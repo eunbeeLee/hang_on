@@ -88,8 +88,8 @@ window.onload = function(){
 	                yAxes: [{
 	                    ticks: {
 	                        min: 0,
-	                        max: 1600,
-	                        maxTicksLimit: 100
+	                        max: 160,
+	                        maxTicksLimit: 10
 	                    },
 	                    gridLines: {
 	                        color: "rgba(0, 0, 0, .125)"
