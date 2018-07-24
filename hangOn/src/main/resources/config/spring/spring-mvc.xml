@@ -64,4 +64,14 @@
     </bean>
     <!-- tiles 설정 끝 -->
     
+    <!-- interceptor -->
+    <mvc:interceptors> 
+	    <mvc:interceptor>
+		    <mvc:mapping path="/*/*"/>
+            <mvc:exclude-mapping path="/main/*"/> 
+            <mvc:exclude-mapping path="/board/list.do"/> 
+		    <bean class="kr.co.hangOn.user.interceptor.AuthInterceptor"/> 
+		</mvc:interceptor> 
+    </mvc:interceptors>
+    
 </beans>
