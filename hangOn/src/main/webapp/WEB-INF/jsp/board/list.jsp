@@ -19,26 +19,6 @@
 
 <body class="fixed-nav sticky-footer" id="page-top">
 
-<!-- 왼쪽 창 -->
-	<div id="table-on-the-left">
-		<table class="table card">
-			<tbody>
-				<tr>
-					<th>공지사항</th>
-				</tr>
-				<tr>
-					<th>자주 묻는 질문</th>
-				</tr>
-				<tr>
-					<th>찾아오시는 길</th>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			고객센터 : 02) 000 - 0000
-		</div>
-	</div>
-
 <!-- 고객센터 게시판 -->
 
 	<div class="card mb-3" id="table-body">
@@ -107,7 +87,6 @@
 			  </ul>
 			</nav>
 		</c:if>
-			    	
 	    	
 		<div class="btn ">
 			<button id="write" type="button" onclick="window.location.href='${pageContext.request.contextPath}/board/writeForm.do'">글쓰기</button>
@@ -115,15 +94,24 @@
 	</div>
 	</div>
 
-
 <script>
-	$(()=>{
+
+	$(document).ready(function () {
+		
 		console.log("${boardResult.lastPage}")	// 모든 페이지의 끝
 		console.log("${boardResult.pageNo+1}")	// 현재 페이지
 		console.log("${boardResult.prev}")	// 현재 페이지
 		console.log("${boardResult.next}")	// 현재 페이지
+		console.log("${userEmail}");
+	
+		if ("${user}" == "") {
+			console.log("유저가 죽어있어!!");
+		}
+		else if ("${user}" != "") {
+			console.log("유저가 살아있어!!");
+		}
 	})
-
+	
 	$("ul.nav.navbar-nav > li").removeClass("active");
 	$("ul.nav.navbar-nav > li:eq(2)").addClass("active");
 
