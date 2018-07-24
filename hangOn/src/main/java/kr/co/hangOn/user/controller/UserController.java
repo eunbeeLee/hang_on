@@ -36,7 +36,32 @@ public class UserController {
 		return "redirect:login.do";
 	}
 	
-	@RequestMapping("/loginPost.json") // 로그인
+	@RequestMapping(value = "/loginPost.do", method= {RequestMethod.GET})
+	public String loginPost(User user, HttpSession session, RedirectAttributes attr) throws Exception {
+		User loginUser = userService.login(user.getUserEmail());
+		System.out.println(loginUser);
+		if (loginUser == null) {
+			attr.addFlashAttribute("msg", "wrongEmail");
+			return "redirect:login.do";
+		}	
+		// parameter로 받은 평문과 DB에 저장된 암호화값 비교
+		else if (BCrypt.checkpw(user.getUserPw(), loginUser.getUserPw())) {
+                session.setAttribute("user", loginUser);
+                session.setAttribute("userEmail", loginUser.getUserEmail());
+                session.setAttribute("userName", loginUser.getUserName());
+                session.setAttribute("userNo", loginUser.getUserNo());
+                session.removeAttribute("msg");
+                userService.stateCodeChanger(loginUser);
+                attr.addFlashAttribute("msg", "welcome");
+                return "redirect:../lobby/view.do";
+        }
+		else {
+			attr.addFlashAttribute("msg", "wrongPw");
+			return "redirect:login.do";
+		}
+	}
+	
+	@RequestMapping("/loginPost.json") // 구글 로그인
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
 		User loginUser = userService.login(user.getUserEmail());
@@ -110,15 +135,14 @@ public class UserController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) throws Exception {
-		if (session.getAttribute("userEmail") == "") {
+		if (session.getAttribute("user") == "") {
+			session.invalidate();
 			return "main/login.do";
 		}
 		else {
 			User loginUser = (User) session.getAttribute("user");
-			System.out.println(loginUser.getUserName());
-			loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우
+			loginUser.setUserStateCode("aa02");  // 현재 로그인 상태일 경우  // 접속:aa01, 미접속:aa02
 			userService.stateCodeChanger(loginUser);
-			System.out.println(loginUser.getUserEmail());
 			session.invalidate();
 		}
 		return "redirect:login.do";

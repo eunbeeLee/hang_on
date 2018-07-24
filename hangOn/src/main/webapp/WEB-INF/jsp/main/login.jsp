@@ -37,14 +37,14 @@
 	<div class="card card-login mx-auto">
 	    <div class="card-header" style="text-align:center;"><strong>로그인</strong></div>
 	    <div class="card-body">
-	      <form id="loginForm">
+	      <form id="loginForm" action="${pageContext.request.contextPath}/main/loginPost.do">
 	        <div class="form-group">
 	          <label for="exampleInputEmail1">이메일 주소</label>
-	          <input class="form-control" id="email" onkeyup="toPwFocus()" type="email" placeholder="이메일을 입력하세요" autofocus>
+	          <input class="form-control" id="email" name="userEmail" type="email" placeholder="이메일을 입력하세요" autofocus>
 	        </div>
 	        <div class="form-group">
 	          <label for="exampleInputPassword1">비밀번호</label>
-	          <input class="form-control" id="pw" onkeyup="toLoginBtn();" type="password" placeholder="비밀번호를 입력하세요">
+	          <input class="form-control" id="pw" name="userPw" onkeydown="toLoginBtn();" type="password" placeholder="비밀번호를 입력하세요">
 	        </div><br>
 	        <button class="btn btn-primary btn-block" id="login" type="submit" style="background-color:#b39bdd; border: 0;">로그인</button>
 	      </form>
@@ -80,8 +80,21 @@
 		else if ("${msg}" == "filter") {
 			document.querySelector("#loginPlzModalBtn").click();
 		}
+		else if ("${msg}" == "wrongPw") {
+			document.querySelector("#wrongPwModalBtn").click();
+		}
+		else if ("${msg}" == "wrongEmail") {
+			document.querySelector("#wrongEmailModalBtn").click();
+		}
+		else if ("${user}" != "") {
+			$("#login-window").hide();
+			console.log("유저가 살아있어!!");
+		}
+		else if ("${user}" == "") {
+			console.log("유저가 죽어있어!!");
+		}
 		console.log("${userEmail}");
-		$("#email").focus();
+// 		console.log(${user});
 	});
 
 	// 구글 로그인시 넘어오는 정보
@@ -97,6 +110,7 @@
 		
 		// The ID token you need to pass to your backend:
 		var id_token = googleUser.getAuthResponse().id_token;
+		console.log("ID Token: " + id_token);
 		console.log("ID Token: " + id_token);
 		
 		// 구글 로그인했을때 바로 회원가입으로 던져준다. 이미 가입되있으면 로그인으로 던지고 안되있으면 가입후 로그인으로 던진다.
@@ -154,52 +168,59 @@
 // 	}
 
 // 로그인 유효성 검사
-$('#login').click(function () {
+$('#loginForm').submit(function () {
 	var userEmail = $('#email').val();
 	var userPw = $('#pw').val();
-	
 	if(userEmail == '') {
 		document.querySelector("#emptyEmailModalBtn").click();
 		return false;
 	} 
-	if(userPw == '') {
+	else if(userPw == '') {
 		document.querySelector("#emptyPwModalBtn").click();
 		return false;
 	}
-	$.ajax({
-		url: `${pageContext.request.contextPath}/main/loginPost.json`,
-		data: {userEmail: userEmail, userPw: userPw},
-		type: "POST",
-		dataType: "json",
-		success: function(result){
- 			if (result.startsWith("/")){
- 				location.href = `${pageContext.request.contextPath}` + result;
- 				return;
- 			}
- 			if (result == "1") {
-				document.querySelector("#wrongEmailModalBtn").click();
- 				return;
- 			}
- 			else if (result == "2") {
-				document.querySelector("#wrongPwModalBtn").click();
- 				return;
- 			}
-		}
-	});
+	else {
+		$("#form").submit();
+		return;
+	}
 });
-
+	
+	
+// 	$.ajax({
+// 		url: `${pageContext.request.contextPath}/main/loginPost.json`,
+// 		data: {userEmail: userEmail, userPw: userPw},
+// 		type: "POST",
+// 		dataType: "json",
+// 		success: function(result){
+// 			alert(result);
+//  			if (result.startsWith("/")){
+//  				location.href = `${pageContext.request.contextPath}` + result;
+//  				return;
+//  			}
+//  			if (result == "1") {
+// 				document.querySelector("#wrongEmailModalBtn").click();
+//  				return;
+//  			}
+//  			else if (result == "2") {
+// 				document.querySelector("#wrongPwModalBtn").click();
+//  				return;
+//  			}
+// 		}
+// 	});
 
 // function toPwFocus() {
 // 	if (window.event.keyCode == 13) {
 //         $("#pw").focus();
+//         return false;
 //    }
 // }
 
-// function toLoginBtn() {
-// 	if (window.event.keyCode == 13) {
-//         $("#loginForm").submit();
-//    }
-// }
+function toLoginBtn() {
+	if (window.event.keyCode == 13) {
+        $("#login").click(function () {
+        });
+   }
+};
 
 </script>
 
