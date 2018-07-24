@@ -1,27 +1,41 @@
 /**
  * 
  */
+const $clMa = $( ".cloud-manager" );
+const $noMa = $( ".notice-manager" );
+const $exp = $( ".experiment" );
+const $back = $( "#backBox" );
+const sideArr=[$clMa,$noMa,$exp,$back];
 
 $('#cloudNav').click(function(e) { 
 	e.preventDefault(); 
-	$( ".cloud-manager" ).toggle(  "slow" );
+	sideHide();
+	$clMa.css( "display",'block');
 });
 $('#notiNav').click(function(e) { 
 	e.preventDefault(); 
-	$( ".notice-manager" ).toggle(  "slow" );
+	sideHide();
+	$noMa.css( "display",'block');
 });
 $('#sttNav').click(function(e) { 
 	e.preventDefault(); 
-	const $exp = $( ".experiment" );
-	$exp.toggle(  "slow" );
+	sideHide();
+	$exp.css( "display",'block');
 	if($exp.css("display")=='block'){
-		$( "#backBox" ).show();
+		$back.css( "display",'block');
 	}
 	localStorage.clear();
 });
 
 $('#chatNav').click(function(e) { 
 	e.preventDefault(); 
-	$( "#backBox" ).fadeToggle(200);
+	sideHide();
+	$back.css( "display",'block');
 });
 
+// 사이드 하이드
+function sideHide(){
+	for(side of sideArr){
+		side.css( "display",'none');
+	}
+}

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -20,7 +21,7 @@ public interface CloudService {
 	
 	public Map<String,Object> newFolder(Cloud cloud,HttpServletRequest req) throws Exception;
 	
-	public Map<String,Object> fileUpload(FileVO fileVO,HttpServletRequest req) throws Exception;
+	public Map<String,Object> fileUpload(FileVO fileVO,HttpServletRequest req,HttpSession session) throws Exception;
 	
 	
 }

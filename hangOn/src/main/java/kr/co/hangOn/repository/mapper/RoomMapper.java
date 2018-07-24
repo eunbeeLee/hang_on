@@ -38,6 +38,9 @@ public interface RoomMapper {
  	//회원 방 탈퇴
  	public void memberOut(RoomMember rm);
  	
+ 	//방삭제
+ 	public void deleteRoom(Room room);
+ 	
  	// 방 이름 가져오기
  	public String selectRoomName(String roomJoinCode);
  	// 챗 소켓에서 유저접속시 상태정보 업데이트

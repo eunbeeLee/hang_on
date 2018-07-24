@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -44,8 +45,8 @@ public class CloudController {
 		return service.newFolder(cloud, req);
 	}
 	@RequestMapping(value="/{roomNo}/upload.json")
-	public Map<String,Object> fileUpload(FileVO fileVO,HttpServletRequest req) throws Exception {
-		return service.fileUpload(fileVO, req);
+	public Map<String,Object> fileUpload(FileVO fileVO,HttpServletRequest req,HttpSession session) throws Exception {
+		return service.fileUpload(fileVO, req, session);
 	}
 	
 		

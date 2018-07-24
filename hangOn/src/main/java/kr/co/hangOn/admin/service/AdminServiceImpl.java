@@ -1,5 +1,6 @@
 package kr.co.hangOn.admin.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,15 +43,33 @@ public class AdminServiceImpl implements AdminService {
 		history.setBegin(search.getBegin());
 		history.setEnd(search.getEnd() );
 		
-		List <History> hList = hisMapper.selectRecentPeriod(history);
+		String endAddOneDay = "";
+//		System.out.println(history.getEndDate());
+		if(history.getEndDate() !=null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date endDate = sdf.parse(history.getEndDate());
+				Calendar cal = Calendar.getInstance();
+		        cal.setTime(endDate);
+		        cal.add(Calendar.DATE, 1);
+//		        System.out.println(cal.getTime());
+//		        System.out.println(sdf.format(cal.getTime()));
+		        endAddOneDay = sdf.format(cal.getTime());
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		history.setEndDate(endAddOneDay);
 		int count = hisMapper.selectHistoryCountByUser(history);
+		List <History> hList = hisMapper.selectRecentPeriod(history);
 		
 		Map<String , Object> result = new HashMap<>();
 		result.put("hList", hList);
 		result.put("pageResult", new PageResult(search.getPageNo(), count));
 		result.put("rDays", history.getrDays());
 		result.put("startDate", history.getBeginDate());
-		result.put("endDate", history.getEndDate());
+		result.put("endDate", endAddOneDay);
 		return result;
 	}
 

@@ -177,7 +177,7 @@ window.onload = function(){
 				let authInfo = document.querySelector("#authInfo_"+e.target.id.split('_')[1]+"_"+e.target.id.split('_')[2]);
 				if(authInfo!= null){
 //					console.log(authInfo.innerHTML);
-//					console.log(authInfo.getAttribute("change"));
+//					console.log(authInfo.getAttri6tbute("change"));
 					if(authInfo.getAttribute("change") == 0){
 						authInfo.setAttribute("change", 1);
 					}else{
@@ -214,7 +214,7 @@ window.onload = function(){
 		/*방삭제*/
 		if(id.split('_')[1] == "roomDelBtn"){
 			let roomNodBtn = document.getElementById(id.split('_')[0]+"_roomDelBtn");
-			document.querySelector("#modalCheckBtn").onclick = function(){
+			document.querySelector("#delModalCheckBtn").onclick = function(){
 				$.ajax({
 					url : "delRoom.json",
 					data : {"userNo" : userNo, "roomNo" : id.split('_')[0], "roomName" : "0"},
