@@ -21,7 +21,7 @@
 /*     -ms-flex-direction: column; */
     flex-direction: column;
 /*      width: 70%;  */
-    pointer-events: auto;
+/*     pointer-events: auto; */
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.2);
@@ -63,6 +63,18 @@
 	margin-left: 13px;
 	color : #e24848;
 	visibility : hidden;
+	}
+	#navbarResponsive{
+	position: absolute;
+	right : 0px;
+	}
+	.navbar-brand{
+		position: absolute;
+		top : -7px;
+	}
+	#hangOnLogo{
+		width : 53%;
+		margin-left: -7px;
 	}
 </style>
 <body>
