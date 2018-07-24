@@ -559,6 +559,10 @@ function onText(textData){
     console.log(textData["msg"]);
     let texts = textData["msg"].replace(/<\/div>/g,"").replace(/&nbsp;/g,"").split("<div>");
     for(let text of texts){
+    	if(text == "<br>"){
+    		y = y+20;
+    		continue;
+    	}
     	ctx.fillStyle = textData["color"];
         ctx.fillText(text,x,y);
         y = y+20;
