@@ -1,6 +1,16 @@
 /**
  * lobby 은진
  */
+const defalutBtn = {
+		"border" : "1px solid #D5D5D5",
+		"background-color" : "#EAEAEA"
+}
+const onBtn = {
+		"border" : "1px solid #dbd0ef",
+		"background-color" : "#b39bdd"
+}
+
+
 $( document ).ready(function() {
 	$("#roomEntrance").hide();
 	$("#roomRegist").show();
@@ -11,8 +21,8 @@ $("#roomEntranceNav").click(function () {
 	
 	$("#roomEntrance").show();
     $("#roomRegist").hide();
-    $("#roomEntranceNav").children("a").css("color", "#a585c6");
-    $("#roomRegistNav").children("a").css("color", "#494949");
+    $("#roomEntranceNav").children("a").css("color", "#fff").children("h4").css(onBtn);
+    $("#roomRegistNav").children("a").css("color", "#BDBDBD").children("h4").css(defalutBtn);
 })
 $("#roomRegistNav").click(function () {
 	$("#roomRegistNav").attr("class", "active");
@@ -20,13 +30,15 @@ $("#roomRegistNav").click(function () {
 	
 	$("#roomEntrance").hide();
     $("#roomRegist").show();
-    $("#roomRegistNav").children("a").css("color", "#a585c6");
-    $("#roomEntranceNav").children("a").css("color", "#494949");
+    $("#roomRegistNav").children("a").css("color", "#fff").children("h4").css(onBtn);
+    $("#roomEntranceNav").children("a").css("color", "#BDBDBD").children("h4").css(defalutBtn);
 })
 
 $(".plus").click(function () {
 //	$("#roomEntranceBtn").click();
 	$("#roomRegistBox").slideDown();
+	$("#roomRegistNav").children("a").click();
+
 })
 $(".close").click(function(){
 	$("#roomRegistBox").slideUp(300);
@@ -39,7 +51,7 @@ $(".back").click(function () {
 function noSpaceForm(obj) { 
     var str_space = /\s/;  
     if(str_space.exec(obj.value)) { 
-    	alert('해당 항목에는 공백을 사용하실 수 없습니다.');
+    	$("#err6Btn").click();
         obj.focus();
         obj.value = obj.value.replace(' ',''); 
         return false;
@@ -57,13 +69,13 @@ $("#roomFindBtn").click(function (e) {
 	var $pass = $("#findPass");
 	if($code.val().length == 0) {
 		$("roomEnWarn").attr("visibility", "block");
-		alert("방 코드를 입력해주세요");
+		$("#err7Btn").click();
 		$code.select();
 	} else if($pass.val().length == 0) {
-		alert("방 비밀번호를 입력해주세요");
+		$("#err8Btn").click();
 		$pass.select();
 	} else if($pass.val().length < 4 || $pass.val().length > 8) {
-		alert("방 비밀번호를 4자~8자로 입력해주세요.");
+		$("#err9Btn").click();
 		$pass.select();
 	} else {
 		$("#roomFindForm").submit();
@@ -74,13 +86,13 @@ $("#roomRegistBtn").click(function () {
 	var $name = $("input[name=roomName]");
 	var $pass = $("#roomPassword");
 	if($name.val().length == 0) {
-		alert("방 이름을 설정해주세요");
+		$("#err10Btn").click();
 		$name.select();
 	} else if($pass.val().length == 0) {
-		alert("방 비밀번호를 입력해주세요");
+		$("#err11Btn").click();
 		$pass.select();
 	} else if($pass.val().length < 4 || $pass.val().length > 8) {
-		alert("방 비밀번호는 4자~8자로 설정해주세요.");
+		$("#err12Btn").click();
 		$pass.select();
 	} else {
 		$("#roomRegistForm").submit();

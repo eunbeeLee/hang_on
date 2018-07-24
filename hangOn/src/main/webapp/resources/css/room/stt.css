@@ -6,12 +6,14 @@
     z-index: 3;
     opacity: 0.9;
     background-color: #fff;
+    width: 380px;
 }
 #convert-from,#convert-into{
-    width: 45%;
+    width: 100%;
 }
 .section-divider{
-	border: solid 1px #dddddd
+	float: left;
+	width: 50%;
 }
 #textarea-from,#textarea-to{
     width: 100%;

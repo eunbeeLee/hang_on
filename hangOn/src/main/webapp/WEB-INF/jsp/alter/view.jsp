@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="backGroundByMyPage"></div>
     <div id="myPage">
         <div id="myPageProfileArea" class="container card">
         	<input id="myPageUserNo" type="hidden" value="${param.userNo}"/>

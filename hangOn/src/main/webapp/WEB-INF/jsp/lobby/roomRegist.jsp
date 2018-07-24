@@ -59,6 +59,9 @@
 	#roomRegistNav a{
 	color:#a585c6;
 	}
+	#roomRegistNav{
+		margin-right: 20px;
+	}
 	.warningText{
 	margin-left: 13px;
 	color : #e24848;
@@ -80,6 +83,23 @@
 	.fixed-top{
 	height : 55px;
 	}
+	.room-reg-text{
+		border: 1px solid #D5D5D5;
+		border-radius: 10px;
+		padding: 5px;
+		padding-bottom: 7px;
+		background-color: #EAEAEA;
+		transition: .3s;
+	}
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+a:active{
+    text-decoration: none;
+}
 </style>
 <body>
 	<div id="roomRegistBox" >
@@ -89,8 +109,8 @@
 				  <span aria-hidden="true">×</span>
 				</button>
 	        	<ul class="nav nav-tabs">
-				  <li role="presentation" class="active" id="roomRegistNav"><a href="#"><h4>방 생성</h4></a></li>
-				  <li role="presentation" id="roomEntranceNav"><a href="#"><h4>방 입장</h4></a></li>
+				  <li role="presentation" class="active room-reg-join-btns" id="roomRegistNav"><a href="#"><h4 class="room-reg-text">방 생성</h4></a></li>
+				  <li role="presentation" class="room-reg-join-btns" id="roomEntranceNav"><a href="#"><h4 class="room-reg-text room-join-btn">방 입장</h4></a></li>
 				</ul>
         	</div>
         		
@@ -105,7 +125,7 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="roomPassword"><h4><strong>방 비밀번호</strong></h4></label>
-			    <input id="roomPassword" class="form-control input" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
+			    <input id="roomPassword" class="form-control" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
 			    <div class="warningText" id="roomRegPassWarn">비밀번호는 4자~8자 사이로 입력하세요.</div>
 			  </div>
 			  <button type="submit" style="display : none" class="btn btn-default">제출</button>
@@ -135,7 +155,7 @@
 		  	  </div>
 		  	  <div class="form-group" id="roomRePa">
 		  	    <label for="roomPassword"><h4><strong>방 비밀번호</strong></h4></label>
-		  	    <input class="form-control input" id="findPass" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
+		  	    <input class="form-control" id="findPass" maxlength="8" name="roomPassword" type="password" placeholder="비밀번호(4자 ~ 8자)">
 		  	    <div class="warningText" id="roomEnPassWarn">비밀번호는 4자~8자 사이로 입력하세요.</div>
 		  	  </div>
 		  	  <button type="submit" style="display : none" class="btn btn-default">제출</button>

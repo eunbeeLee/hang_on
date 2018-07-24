@@ -33,13 +33,51 @@
 <!-- Custom scripts for this page-->
 
 <script>
-if ("${msg}") {
-	alert("${msg}")
+$(()=>{modalMakerLobby()});
+/*모달 생성함수*/
+function modalUpLobby(modalId, modalBody){
+	var modalWrapper = document.querySelector("#backGroundByMyPage");
+	var modal = '<div class="modal fade" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
+			      <div class="modal-dialog" role="document">\
+				      <div class="modal-content">\
+				        <div class="modal-header">\
+				          <h5 class="modal-title" id="exampleModalLabel"><strong>알림</strong></h5>\
+				          <button class="close" type="button" data-dismiss="modal" aria-label="Close">\
+				            <span aria-hidden="true">×</span>\
+				          </button>\
+				        </div>\
+				        <div class="modal-body">'+modalBody+'</div>\
+				        <div class="modal-footer">\
+				        	<a class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">확인</a>\
+				 		</div>\
+				      </div>\
+				    </div>\
+				  </div>\
+				  <button style ="display : none;" id="'+modalId+'Btn" data-toggle="modal" data-target="#'+modalId+'"></button>';
+	 modalWrapper.innerHTML += modal;
+}
+/*필요한 모달 추가 함수*/
+function modalMakerLobby(){
+	modalUpLobby("err1", "room 찾기 오류: room 코드를 확인해주세요.");
+	modalUpLobby("err2", "room 찾기 오류: 삭제된 room 입니다.");
+	modalUpLobby("err3", "room 찾기 오류: room 비밀번호를 확인해주세요.");
+	modalUpLobby("err4", "오류: 이미 등록되어 있는 room 입니다.");
+	modalUpLobby("err5", "오류: 최대 인원이 참여하고 있는 room 입니다.");
+	modalUpLobby("err6", "해당 항목에는 공백을 사용하실 수 없습니다.");
+	modalUpLobby("err7", "방 코드를 입력해주세요");
+	modalUpLobby("err8", "방 비밀번호를 입력해주세요");
+	modalUpLobby("err9", "방 비밀번호를 4자~8자로 입력해주세요.");
+	modalUpLobby("err10", "방 이름을 설정해주세요");
+	modalUpLobby("err11", "방 비밀번호를 입력해주세요");
+	modalUpLobby("err12", "방 비밀번호는 4자~8자로 설정해주세요.");
+	if ("${msg}") {
+		$("#${msg}Btn").click();
+	}
 }
 </script>
 </head>
 <body>
-
+<div id="backGroundByMyPage"></div>
 <!-- Navigation-->
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -135,7 +173,7 @@ if ("${msg}") {
 			            <div class="room-box">
 			                <div class="room">
 			                    <span class="room-title">${room.roomName }</span><br>
-			                    <h6 class="room-people">${room.roomInfo}방설명자리</h6><br>
+			                    <h6 class="room-people">${room.roomInfo}</h6><br>
 			                    <h5 class="total-people">${room.roomConnectUserCount} / ${room.roomNoConnectUserCount}</h5>
 			                </div>
 			                <div class="room-over">
