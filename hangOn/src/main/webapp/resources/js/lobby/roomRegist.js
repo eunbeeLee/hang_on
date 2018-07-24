@@ -1,17 +1,31 @@
 /**
  * lobby 은진
  */
-$(".room-find").click(function () {
+$( document ).ready(function() {
+	$("#roomEntrance").hide();
+	$("#roomRegist").show();
+});
+$("#roomEntranceNav").click(function () {
+	$("#roomEntranceNav").attr("class", "active");
+	$("#roomRegistNav").attr("class", "");
+	
 	$("#roomEntrance").show();
     $("#roomRegist").hide();
 })
-$(".room-regist").click(function () {
+$("#roomRegistNav").click(function () {
+	$("#roomRegistNav").attr("class", "active");
+	$("#roomEntranceNav").attr("class", "");
+	
 	$("#roomEntrance").hide();
     $("#roomRegist").show();
 })
 
 $(".plus").click(function () {
+//	$("#roomEntranceBtn").click();
 	$("#roomRegistBox").slideDown();
+})
+$(".close").click(function(){
+	$("#roomRegistBox").slideUp(300);
 })
 $(".back").click(function () {
 	$("#roomRegistBox").slideUp(300);
@@ -38,13 +52,14 @@ $("#roomFindBtn").click(function (e) {
 	var $code = $("input[name=roomJoinCode]");
 	var $pass = $("input[name=roomPassword]");
 	if($code.val().length == 0) {
-		alert("방 코드를 입력해주세요");
+		$("roomEnWarn").attr("visibility", "block");
+//		alert("방 코드를 입력해주세요");
 		$code.select();
 	} else if($pass.val().length == 0) {
 		alert("방 비밀번호를 입력해주세요");
 		$pass.select();
 	} else if($pass.val().length < 8 || $pass.val().length > 10) {
-		alert("방 비밀번호를 확인해주세요");
+		alert("방 비밀번호는 8자~10자로 설정해주세요.");
 		$pass.select();
 	} else {
 		$("#roomFindForm").submit();
@@ -61,14 +76,10 @@ $("#roomRegistBtn").click(function () {
 		alert("방 비밀번호를 입력해주세요");
 		$pass.select();
 	} else if($pass.val().length < 8 || $pass.val().length > 10) {
-		alert("방 비밀번호를 확인해주세요");
+		alert("방 비밀번호는 8자~10자로 설정해주세요.");
 		$pass.select();
 	} else {
 		$("#roomRegistForm").submit();
 	}
 });
-
-
-
-
 
