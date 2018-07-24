@@ -538,7 +538,7 @@ $("#textInputViewArea").on("click","#textInsertBtn",function(){
 					"id"  : id,
 					"x"   : (textBox[0].offsetLeft+5)/$(ele)[0].clientWidth,
 					"y"   : (textBox[0].offsetTop+51)/$(ele)[0].clientHeight,
-					"msg" : textInfo.html(),
+					"msg" : textInfo.html().replace(/&nbsp;/g," "),
 					"color" : pos.color
 			}
 			docWs.send(`text::${userProp.code};${id};${JSON.stringify(obj)}`);
@@ -557,8 +557,12 @@ function onText(textData){
     let y = textData["y"]*canvas.clientHeight;
     
     console.log(textData["msg"]);
-    let texts = textData["msg"].replace(/<\/div>/g,"").replace(/&nbsp;/g,"").split("<div>");
+    let texts = textData["msg"].replace(/<\/div>/g,"").split("<div>");
     for(let text of texts){
+    	if(text == "<br>"){
+    		y = y+20;
+    		continue;
+    	}
     	ctx.fillStyle = textData["color"];
         ctx.fillText(text,x,y);
         y = y+20;
