@@ -58,8 +58,8 @@
         
         
             <div>
-                <button id="myPagePassBtn">비밀번호 변경</button>
-                <button id="myPageOutBtn">회원탈퇴</button>
+                <button id="myPagePassBtn" class="infoUpdateBtns btn">비밀번호 변경</button>
+                <button id="myPageOutBtn" class="infoUpdateBtns btn">회원탈퇴</button>
             </div>
           
             
