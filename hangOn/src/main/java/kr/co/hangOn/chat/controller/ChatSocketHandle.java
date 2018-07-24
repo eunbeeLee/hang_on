@@ -45,7 +45,6 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 	// 사용자 종료시
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-//		debug(session.getId() + " 연결 종료됨");
 		
 		Map<String, Object> userData =  session.getAttributes();
 		User seUser = (User)userData.get("user");
@@ -78,7 +77,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		History history = new History();
 		history.setUserNo(seUser.getUserNo());
 		history.setIpAddr(session.getRemoteAddress().getHostName());
-		history.setActName("da04");
+		history.setActCode("da04");
 		history.setRoomNo(mapper.roomByJoinCode(userIncludeKey));
 		
 		mapper.insertHistoryBySocket(history);
@@ -90,7 +89,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		for(Chat user : users) {
 			if (user == removeUser) continue;
 			WebSocketSession wSession = user.getSessioninfo();
-			wSession.sendMessage(new TextMessage("condition:2:"+seUser.getUserName() + ":님이 퇴장하셨습니다. :( " +alarmTime.format(new Date())+" ):"+seUser.getUserNo()));
+			wSession.sendMessage(new TextMessage("condition＆2＆"+seUser.getUserName() + "＆님이 퇴장하셨습니다. ＆( " +alarmTime.format(new Date())+" )＆"+seUser.getUserNo()));
 		}
 		users.remove(removeUser);
 		System.out.println("빠졌나"+roomInfo);
@@ -111,7 +110,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		String sendMsg = "";
 		List<String> msgs = new ArrayList<>();
 		
-		String[] arr = rcvMsg.split(":");
+		String[] arr = rcvMsg.split("＆");
 		// 접속시 : connect / 메세지를 보내왔을때 : send
 		String condition = arr[0];
 		// 방코드
@@ -122,7 +121,6 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		String userName = arr[3];
 		// 메세지
 		String content = arr[4];
-		
 		
 		// 사용자가 방에 접속했을때
 		if(condition.equals("connect")) {
@@ -143,7 +141,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 				History history = new History();
 				history.setUserNo(userNo);
 				history.setIpAddr(wss.getRemoteAddress().getHostName());
-				history.setActName("da01");
+				history.setActCode("da01");
 				history.setRoomNo(mapper.roomByJoinCode(joinCode));
 				mapper.insertHistoryBySocket(history);
 				
@@ -178,7 +176,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 				History history = new History();
 				history.setUserNo(userNo);
 				history.setIpAddr(wss.getRemoteAddress().getHostName());
-				history.setActName("da01");
+				history.setActCode("da01");
 				history.setRoomNo(mapper.roomByJoinCode(joinCode));
 				
 				mapper.insertHistoryBySocket(history);
@@ -188,14 +186,14 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 			List<Chat> alusers = null;
 			alusers = roomInfo.get(joinCode);
 			for(Chat aluser : alusers) {
-				msgs.add("peAlarm:1:"+aluser.getUserName() + ":" + aluser.getUserNo() + ":( " + alarmTime.format(aluser.getDate()) + " )");
+				msgs.add("peAlarm＆1＆"+aluser.getUserName() + "＆" + aluser.getUserNo() + "＆( " + alarmTime.format(aluser.getDate()) + " )");
 			}
-			sendMsg = "condition:1:"+userName + ":" + content + ":( " + alarmTime.format(new Date()) + " )";
+			sendMsg = "condition＆1＆"+userName + "＆" + content + "＆( " + alarmTime.format(new Date()) + " )";
 		}
 		else if(condition.equals("sendMsg")) {
 			// 내가 보낸 메세지인지 남이 보낸 메세지인지 확인 후 전송
 			// 회원 번호로 내용을 보내서 jsp에서 비교
-			sendMsg = "sendMsg:"+ userNo +":"+ userName + ":" + content + ":" + alarmTime.format(new Date());
+			sendMsg = "sendMsg＆"+ userNo +"＆"+ userName + "＆" + content + "＆" + alarmTime.format(new Date());
 		}
 		
 		System.out.println("방접속정보 : " + roomInfo);
@@ -212,7 +210,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 		}
 		// 메세지가 전송된 방에만 메세지 뿌리기
 		for(Chat user : roomLiveUser) {
-			String[] sendMsgs = sendMsg.split(":");
+			String[] sendMsgs = sendMsg.split("＆");
 			if(user.getUserNo() == seUser.getUserNo()) {
 				WebSocketSession wSession = user.getSessioninfo();
 				wSession.sendMessage(new TextMessage(sendMsg));
@@ -226,7 +224,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 					wSession.sendMessage(new TextMessage(sendMsg));
 				} else {
 					wSession.sendMessage(new TextMessage(sendMsg));
-					wSession.sendMessage(new TextMessage("peAlarm:1:"+seUser.getUserName() + ":" + seUser.getUserNo() + " :( " + alarmTime.format(new Date()) + " )"));
+					wSession.sendMessage(new TextMessage("peAlarm＆1＆"+seUser.getUserName() + "＆" + seUser.getUserNo() + " ＆( " + alarmTime.format(new Date()) + " )"));
 				}
 			}
 		}

@@ -11,15 +11,13 @@
 <body>
   	<div id="backBox">
       <div id="chatBigBox">
-        <div class="menu">
-        	<span id="cES">Ctrl + Enter 메세지 전송</span>
-        	<span id="nR"><i class='fa fa-thumb-tack'></i>&nbsp;&nbsp;공지로 등록</span>
-        </div>
         <ol class="chat">
     	</ol>
     	<div id="textBox">
         	<textarea class="textarea form-control" rows="3" placeholder="전송하실 메세지를 입력해주세요"></textarea>
         	<button type="button" class="btn btn-default textBoxBtn" >전송</button>
+			<span id="cES">Ctrl + Enter 메세지 전송</span>
+        	<span id="nR"><i class='fa fa-thumb-tack'></i>&nbsp;&nbsp;공지로 등록</span>
     	</div>
     </div>
 	</div>
@@ -36,16 +34,16 @@
     	ws.onopen = function() {
        	    console.log('웹소켓 서버 접속 성공');
         	// 사용자 입장시 메세지 출력
-        	ws.send("connect:"+"${code}"+":"+connectNo+":"+connectName+":님이 입장하셨습니다.");
+        	ws.send("connect＆"+"${code}"+"＆"+connectNo+"＆"+connectName+"＆님이 입장하셨습니다.");
     	};
         // 메세지 받기
         ws.onmessage = function(evt) {
-        	var arr = evt.data.split(":");
+        	var arr = evt.data.split("＆");
         	var state = arr[0];
-        	var peNo = arr[6]+"";
+        	var peNo = arr[5]+"";
         	if(isNaN(state)){
 	        	if("condition" == state){
-	            	$(".chat").append("<li id='alarm'><span>"+arr[2]+arr[3]+arr[4]+":"+arr[5]+"</span></li>");
+	            	$(".chat").append("<li id='alarm'><span>"+arr[2]+arr[3]+arr[4]+"</span></li>");
 	            	if(arr[1] == 2) {
 	            		$("."+peNo).remove();
 	            		
@@ -59,7 +57,7 @@
 	        	                "<strong>"+
 	        	                  "<i class='fa fa-fw fa-circle'></i>"+arr[2]+"</strong>"+
 	        	              "</span>"+
-	        	              "<span class='small float-right text-muted'>"+arr[4]+":"+arr[5]+"</span>"+
+	        	              "<span class='small float-right text-muted'>"+arr[4]+"</span>"+
 	        	              "<div class='dropdown-message small'></div>"+
 	        	            "</a>"+
 	        	             "<div class='dropdown-divider'></div>"+
@@ -78,7 +76,7 @@
 		        					    "<div class='dropdown-menu'>"+
 		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
 		        						"</div>"+
-		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        						"<time>"+arr[4]+"</time>"+
 		        	    				"</div>"+
 		        	    			"</li>");
 		        	} else {
@@ -86,11 +84,6 @@
 		        					"<li class='other'>"+
 		        	    				"<div class='msg'>"+
 		        	    				"<div class='otherName'>"+
-		        	    				`
-		        	    				<div>
-		        	    					<img src="${pageContext.request.contextPath}${user.userProfilePath}"/>
-		        	    				</div>
-		        	    				`+
 		        	    				"<span>"+arr[2] +"</span></div>"+
 		        						"<p class='noticeContent'>"+arr[3]+"</p>"+
 		        						"<div class='selfBar' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"+
@@ -99,14 +92,14 @@
 		        					    "<div class='dropdown-menu'>"+
 		        					    "<a class='dropdown-item noticeRegistBtn' href='#' data-userNo="+arr[1]+">공지로 등록</a>"+
 		        						"</div>"+
-		        						"<time>"+arr[4]+":"+arr[5]+"</time>"+
+		        						"<time>"+arr[4]+"</time>"+
 		        	    				"</div>"+
 		        	    			"</li>");
 		        	}
 	        	}
 		        $("#chatBigBox").scrollTop($("#chatBigBox")[0].scrollHeight);
         	}
-		};
+        };
         ws.onerror = function(evt) {
 			console.log("에러발생" + evt.data);
         };
@@ -133,14 +126,15 @@
     	if($msg.val().length < 1) return;
         var blank_pattern =/^\s+|\s+$/g;
         if($msg.val().replace(blank_pattern,'') == '') return;
-        ws.send("sendMsg:"+"${code}:" + connectNo + ":" + connectName + ":" + $msg.val());
+        ws.send("sendMsg＆"+"${code}＆" + connectNo + "＆" + connectName + "＆" + $msg.val());
         $msg.val(""); 
     }
     
     $(".chat").on("click", ".noticeRegistBtn", function (e) {
-    	var userNo = $(this).attr("data-userNo");
+    	var $this = $(this);
+    	var userNo = $this.attr("data-userNo");
     	var roomNo = ${roomNo};
-    	var noticeContent = $(this).parent().siblings(".noticeContent").html();
+    	var noticeContent = $this.parent().siblings(".noticeContent").html();
     	e.preventDefault();
     	
     	$.ajax({
@@ -152,9 +146,14 @@
     		},
     		type: "POST",
     		dataType: "json",
-    	}).done(function(result) {
-			alert("공지로 등록되었습니다.");
-			noticeList(data);
+    		complete: function() {
+    			// 모달로 변경 예정
+    			alert("공지 등록이 완료되었습니다.");
+ 				$this.parent().siblings(".selfBar").children().css("color", "#595959");
+ 				$this.parent().siblings(".selfBar").children().css("cursor", "inherit");
+ 				$this.parent().remove();
+ 				$this.remove();
+    		}
     	});
     })
     
