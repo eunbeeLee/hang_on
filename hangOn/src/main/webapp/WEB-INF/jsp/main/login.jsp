@@ -37,16 +37,16 @@
 	<div class="card card-login mx-auto">
 	    <div class="card-header" style="text-align:center;"><strong>로그인</strong></div>
 	    <div class="card-body">
-	      <form>
+	      <form id="loginForm">
 	        <div class="form-group">
 	          <label for="exampleInputEmail1">이메일 주소</label>
-	          <input class="form-control" id="email" type="email" placeholder="이메일을 입력하세요" autofocus>
+	          <input class="form-control" id="email" onkeyup="toPwFocus()" type="email" placeholder="이메일을 입력하세요" autofocus>
 	        </div>
 	        <div class="form-group">
 	          <label for="exampleInputPassword1">비밀번호</label>
-	          <input class="form-control" id="pw" type="password" placeholder="비밀번호를 입력하세요">
+	          <input class="form-control" id="pw" onkeyup="toLoginBtn();" type="password" placeholder="비밀번호를 입력하세요">
 	        </div><br>
-	        <button class="btn btn-primary btn-block" id="login" type="button" style="background-color:#b39bdd; border: 0;">로그인</button>
+	        <button class="btn btn-primary btn-block" id="login" type="submit" style="background-color:#b39bdd; border: 0;">로그인</button>
 	      </form>
 	      <div>
 	        <span class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="google"></span>
@@ -65,7 +65,26 @@
 </div> <!-- content-wraper -->
 
 <script>
+	
+	// 페이지 시작시 실행 함수
+	$(document).ready(function () {
+		if ("${msg}" == "emailSent") {
+			document.querySelector("#emailSentModalBtn").click();
+		}
+		else if ("${msg}" == "congratulations") {
+			document.querySelector("#congratulationsModalBtn").click();
+		}
+		else if ("${msg}" == "loginPlz") {
+			document.querySelector("#loginPlzModalBtn").click();
+		}
+		else if ("${msg}" == "filter") {
+			document.querySelector("#loginPlzModalBtn").click();
+		}
+		console.log("${userEmail}");
+		$("#email").focus();
+	});
 
+	// 구글 로그인시 넘어오는 정보
 	function onSignIn(googleUser) {
 		// Useful data for your client-side scripts:
 		var profile = googleUser.getBasicProfile();
@@ -129,17 +148,12 @@
 		});
 	};
 	
+// 구글 로그아웃 함수
 // 	var logout = function() {
 // 	    document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8000/hangOn/lobby/view.do";
 // 	}
 
-	$(document).ready(function () {
-		if ("${msg}" == "emailSent") {
-			document.querySelector("#emailSentModalBtn").click();
-		}
-		console.log("${userEmail}");
-	});
-
+// 로그인 유효성 검사
 $('#login').click(function () {
 	var userEmail = $('#email').val();
 	var userPw = $('#pw').val();
@@ -173,6 +187,19 @@ $('#login').click(function () {
 		}
 	});
 });
+
+
+// function toPwFocus() {
+// 	if (window.event.keyCode == 13) {
+//         $("#pw").focus();
+//    }
+// }
+
+// function toLoginBtn() {
+// 	if (window.event.keyCode == 13) {
+//         $("#loginForm").submit();
+//    }
+// }
 
 </script>
 

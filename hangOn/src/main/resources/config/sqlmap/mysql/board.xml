@@ -11,12 +11,15 @@
 		<result column="board_category" property="boardCategory" />
 		<result column="reg_date" property="regDate" />
 		<result column="view_cnt" property="viewCnt" />
+		<result column="ref_no" property="refNo" />
+		<result column="lev_no" property="levNo" />
+		<result column="depth_no" property="depthNo" />
 	</resultMap>
 
     <select id="selectBoard" resultMap="boardMap">
 	    select *
 	      from tb_board
-	     order by board_no desc 
+	     order by ref_no desc, lev_no
     </select>
     	
     <select id="selectBoardByNo" parameterType="int" resultMap="boardMap">
@@ -32,16 +35,30 @@
     		board_writer,
     		board_content,
     		board_category,
-    		user_no
+    		user_no,
+    		ref_no
     	) values (
     		#{boardNo},
     		#{boardTitle},
     		#{boardWriter},
     		#{boardContent},
     		#{boardCategory},
-    		#{userNo}
+    		#{userNo},
+    		#{refNo}
     	)
     </insert>
+    
+    <select id="maxBoardNo" resultType="int">
+    	select * 
+    	  from tb_board
+		 where board_no = (select max(board_no) from tb_board)
+    </select>
+    
+    <update id="refNoUpdate" parameterType="board">
+    	update tb_board
+    	   set ref_no = #{refNo}
+    	 where board_no = #{boardNo}
+    </update>
     
     <update id="updateBoard" parameterType="board">
     	update tb_board
@@ -62,5 +79,49 @@
     	   set view_cnt = view_cnt + 1
     	 where board_no = #{boardNo}
     </update>
+	
+	<insert id="insertReply" parameterType="board">
+		insert into tb_board (
+    		board_no,
+    		board_title, 
+    		board_writer,
+    		board_content,
+    		board_category,
+    		user_no,
+    		ref_no,
+    		lev_no,
+    		depth_no
+    	) values (
+    		#{boardNo},
+    		#{boardTitle},
+    		#{boardWriter},
+    		#{boardContent},
+    		#{boardCategory},
+    		#{userNo},
+    		#{refNo},
+    		#{levNo},
+    		#{depthNo}
+    	)
+	</insert>
+	
+	<update id="updateLevNo" parameterType="int">
+		update tb_board
+		   set lev_no = lev_no + 1
+		 where ref_no = #{refNo} and lev_no > 0
+	</update>
+    
+    <!-- 페이징 -->
+    <select id="paging" parameterType="int" resultMap="boardMap">
+    	select *
+    	  from hangon.tb_board
+      	 order by ref_no desc, lev_no
+      	 LIMIT #{pageNo}, 5
+    </select>
+    
+    <select id="selectBoardCount" resultType="int">
+    	select count(*)
+    	  from tb_board
+    </select>
+
 
 </mapper>

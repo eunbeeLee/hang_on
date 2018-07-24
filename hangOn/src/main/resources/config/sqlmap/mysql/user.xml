@@ -18,6 +18,7 @@
 	select *
 	  from hangon.tb_user
 	 where user_email = #{userEmail}
+	 and user_exist_code = 'aa11'
 </select>
 
 <update id="stateCodeChanger" parameterType="user">
@@ -53,6 +54,10 @@
 	 where user_Email = #{userEmail}
 </update>
 
-
+<update id="leaveUser" parameterType="String">
+	update hangon.tb_user
+	   set user_exist_code = 'aa12'
+	 where user_Email = #{userEmail}
+</update>
 
 </mapper>

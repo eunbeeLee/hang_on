@@ -9,4 +9,5 @@ public interface UserService {
 	public void register(User user) throws Exception;
 	public User findAccount(String email);
 	public void updatePw(User user);
+	public void leaveUser(String userEmail);
 }

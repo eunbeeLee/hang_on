@@ -26,6 +26,16 @@ public class UserController {
 		return "main/login";
 	}
 	
+	@RequestMapping("/filter.do")
+	public String filter(String msg, HttpSession session, RedirectAttributes attr) {
+		String filter = (String) session.getAttribute("filter");
+		if(filter != "") {
+			session.removeAttribute("filter");
+			attr.addFlashAttribute("msg", "filter");
+		}
+		return "redirect:login.do";
+	}
+	
 	@RequestMapping("/loginPost.json") // 로그인
 	@ResponseBody
 	public String login(User user, HttpSession session) throws Exception {
@@ -40,6 +50,7 @@ public class UserController {
                 session.setAttribute("userEmail", loginUser.getUserEmail());
                 session.setAttribute("userName", loginUser.getUserName());
                 session.setAttribute("userNo", loginUser.getUserNo());
+                session.removeAttribute("msg");
                 userService.stateCodeChanger(loginUser);
                 return "/lobby/view.do";
         }
@@ -70,11 +81,11 @@ public class UserController {
 	    user.setUserPw(hashPassword);
 		
 		userService.register(user);
-		attr.addFlashAttribute("msg", "가입을 축하합니다.");
+		attr.addFlashAttribute("msg", "congratulations");
 		return "redirect:login.do";
 	}
 	
-	@RequestMapping(value="/googleLogin.json") // 구글로 로그인했을때 db에 이메일이 있나 확인
+	@RequestMapping("/googleLogin.json") // 구글로 로그인했을때 db에 이메일이 있나 확인
 	@ResponseBody
 	public int googleLogin(User user, RedirectAttributes attr) throws Exception {
 		String userEmail = user.getUserEmail();
@@ -111,5 +122,11 @@ public class UserController {
 			session.invalidate();
 		}
 		return "redirect:login.do";
+	}
+	
+	@RequestMapping("/leave.do")
+	public String leave(String userEmail) {
+		userService.leaveUser(userEmail);
+		return "main/login.do";
 	}
 }

@@ -51,9 +51,9 @@ public class MailController {
 			user.setUserPw(hashPassword);
 			userService.updatePw(user); // 암호화된 비번을 DB에 업뎃
 			
-			String subject = "임시 비밀번호 발급 안내 입니다.";
+			String subject = "hangOn 임시 비밀번호 발급 안내 입니다";
 			StringBuilder sb = new StringBuilder();
-			sb.append("귀하의 임시 비밀번호는 " + ranPw + " 입니다.");
+			sb.append("임시 비밀번호는 " + ranPw + " 입니다");
 			mailService.send(subject, sb.toString(), "findmebongseok2018@gmail.com", user.getUserEmail(), null);
 			ra.addFlashAttribute("msg", "emailSent");
 		}

@@ -25,7 +25,7 @@ public class MailServiceImpl implements MailService{
     public boolean send(String subject, String text, String from, String to, String filePath) {
         // javax.mail.internet.MimeMessage
         MimeMessage message = javaMailSender.createMimeMessage();
- 
+        
         try {
            
         	// org.springframework.mail.javamail.MimeMessageHelper

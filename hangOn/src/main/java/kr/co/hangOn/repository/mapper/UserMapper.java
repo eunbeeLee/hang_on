@@ -8,4 +8,5 @@ public interface UserMapper {
 	int emailCheck(String userEmail);
 	void register(User user);
 	void updatePw(User user);
+	void leaveUser(String userEmail);
 }

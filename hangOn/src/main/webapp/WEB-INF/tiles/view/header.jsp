@@ -35,7 +35,14 @@
 
 if("${userEmail}" == "") {
 	$("#logout").hide();
-}
+};
+
+$("#logout").click(function () {
+	if ("${userEmail}" == "") {
+		location.href ="${pageContext.request.contextPath}/main/login.do";
+	};
+})
+
 
 </script>
 

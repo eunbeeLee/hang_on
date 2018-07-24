@@ -56,6 +56,7 @@
 		</div>
 	</div>
 <div id="modAndDel"></div>
+<div id="reply"></div>
 
 <script>
 
@@ -66,7 +67,18 @@ $(document).ready(function () {
 		html += '<a href="${pageContext.request.contextPath}/board/delete.do?no=${board.boardNo}">글 삭제하기</a>';
 		$("#modAndDel").html(html);
 	}
+	else if("${sessionScope.userName}" == "admin") {
+		var html = '';
+		html += '<form action="${pageContext.request.contextPath}/board/replyForm.do">';
+		html += '<input type="hidden" name="no" value="${board.boardNo}"></input>';
+		html += '<button type="submit">답글달기</button>';
+		html += '</form>';
+		$("#reply").html(html);
+	}
 });
+
+name = "${sessionScope.userName}";
+console.log(name);
 
 </script>
 

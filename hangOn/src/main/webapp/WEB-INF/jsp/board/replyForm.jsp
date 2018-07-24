@@ -47,18 +47,20 @@
 	    </div>
 	    <div class="card-body">
 	        <div class="table-responsive">
-	        	<form action="${pageContext.request.contextPath}/board/write.do" id="form">
-				        카테고리 : <select name="boardCategory" id="category">
-								<option value="">선택</option>
-								<option value="회원정보">회원정보</option>
-								<option value="화상회의">화상회의</option>
-								<option value="채팅">채팅</option>
-								<option value="기타">기타</option>
-							</select><br>
-				        글쓴이 : <input type="text" id="writer" name="boardWriter" readonly value="${sessionScope.userName}" size="30" /><br>
-				        제목 : <input type="text" id="title" size="50" name="boardTitle"/><br>
-				        내용 : <textarea rows="5" cols="100" id="content" name="boardContent" ></textarea>
-				    <input type="hidden" name="userNo" id="no" value="${sessionScope.userNo}" /><br>
+	        	<form action="${pageContext.request.contextPath}/board/reply.do" id="form" method="post">
+				        글쓴이 : <input type="text" id="writer" name="boardWriter" readonly value="admin" size="30" /><br>
+				        제목 : <input type="text" id="title" size="50" name="boardTitle" value="${board.boardTitle} 의 답글입니다"/><br>
+				        내용 : <textarea rows="5" cols="100" id="content" name="boardContent">
+----------------------------기존 내용------------------------------
+${board.boardContent}
+---------------------------------------------------------------------
+</textarea>
+				        <input type="hidden" name="userNo" value="${sessionScope.userNo}" /><br>
+				        <input type="hidden" name="refNo" value="${board.refNo}" />
+				        <input type="hidden" name="levNo" value="1" />
+				        <input type="hidden" name="depthNo" value="${board.depthNo}" />
+				        <input type="hidden" name="boardCategory" value="답변" />
+<!-- 				        <input type="hidden" name="boardNo" value="" /> -->
 				    <button type="submit" id="btn">글쓰기</button>
 	        	</form>
 	    	</div>
@@ -75,6 +77,9 @@ console.log(no);
 
 var name = '${userName}';
 console.log(name);
+console.log(${board.refNo});
+console.log(${board.depthNo});
+
 
 $("#btn").click(function (e) {
 	e.preventDefault();

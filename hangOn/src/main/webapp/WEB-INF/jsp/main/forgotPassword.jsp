@@ -10,11 +10,6 @@
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script>
-	if ("${msg}") {
-		alert("${msg}")
-	}
-</script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -42,8 +37,8 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="btn" style="background-color:#b39bdd; border: 0;">새 비밀번호를 보내드립니다</button>
       </form>
+      <br>
       <div class="text-center">
-<%--         <a class="d-block small mt-3" style="color:#b39bdd;" href="${pageContext.request.contextPath}/main/register.do">회원가입 페이지로 이동하기</a> --%>
       </div>
     </div>
   </div>

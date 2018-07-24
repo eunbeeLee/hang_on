@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService{
 		mapper.updatePw(user);
 	}
 
+	@Override
+	public void leaveUser(String userEmail) {
+		mapper.leaveUser(userEmail);
+	}
+
 }

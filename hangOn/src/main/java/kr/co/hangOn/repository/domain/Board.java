@@ -11,7 +11,28 @@ public class Board {
 	private String boardCategory;
 	private Date regDate;
 	private int viewCnt;
+	private int refNo;
+	private int levNo;
+	private int depthNo;
 	
+	public int getRefNo() {
+		return refNo;
+	}
+	public void setRefNo(int refNo) {
+		this.refNo = refNo;
+	}
+	public int getLevNo() {
+		return levNo;
+	}
+	public void setLevNo(int levNo) {
+		this.levNo = levNo;
+	}
+	public int getDepthNo() {
+		return depthNo;
+	}
+	public void setDepthNo(int depthNo) {
+		this.depthNo = depthNo;
+	}
 	public int getUserNo() {
 		return userNo;
 	}
@@ -60,6 +81,4 @@ public class Board {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-
-	
 }

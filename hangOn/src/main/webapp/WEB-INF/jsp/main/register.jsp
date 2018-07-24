@@ -35,11 +35,11 @@
               </div>
               <div class="col-md-6">
                 <label for="userName">이름</label>
-                <input class="form-control" id="userName" type="text" name="userName" placeholder="이름을 입력하세요">
+                <input class="form-control" id="userName" type="text" name="userName" placeholder="20자 이하의 이름을 입력하세요">
               </div>
             </div>
           </div>
-          <div class="col-md-6" id="emailCheck">&nbsp;</div>
+          <div id="emailCheck"></div>
           <br>
           <div class="form-group">
             <div class="form-row">
@@ -69,11 +69,12 @@
 
 <script>
 	
+	// 이메일 중복 체커
 	emailDuplicateChecker = 1;
 	
 	$("#userEmail").keyup(function () {
 		let userEmail = $("#userEmail").val();
-		if (userEmail != "") {
+		if (1) {
 			$.ajax({
 				url : `${pageContext.request.contextPath}/main/emailCheck.json`,
 				data : {userEmail : userEmail},
@@ -86,58 +87,81 @@
 						msg = "사용 불가 합니다";
 						emailDuplicateChecker = 2;
 					}
+					else if (no == 2) {
+						msg = "이메일을 입력해주세요";
+						emailDuplicateChecker = 2;
+					}
 					$("#emailCheck").text(msg);
 				}
 			})
 		}
 	});
 	
-	
 	$("#registerBtn").click(function () {
+		var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+		regx = /[^가-힣]/;
+		for (i = 0; i < $("#userName").value.length; i++) {
+	     	ch = $("#userName").value.charAt(i)
+	        if ((ch >= '0' && ch <= '9')) {
+		 		document.querySelector("#nameWithoutNumberModalBtn").click();
+	        	return false;
+	        }
+	    }
 		
-		if ( $("#userEmail").val() == "") {
-			alert("이메일을 입력해주세요")
+		
+		// 비번에 공백없게
+        if ($("#userPw").value.indexOf(" ") >= 0) { 
+ 			document.querySelector("#pwWithoutSpaceModalBtn").click();
+            return false;
+        }
+		// 이메일 형식
+        else if (regex.test($("#userEmail")) === false) {
+ 			document.querySelector("#wrongEmailModalBtn").click();
+            return false;
+        }
+        else if ( $("#userEmail").val() == "") {
+ 			document.querySelector("#emailModalBtn").click();
 			return false;
 		}
 		else if ( $("#userName").val() == "") {
-			alert("이름을 입력해주세요")
+ 			document.querySelector("#nameModalBtn").click();
 			return false;
 		}
 		else if ( $("#userPw").val() == "") {
-			alert("비번을 입력해주세요")
+ 			document.querySelector("#pwModalBtn").click();
+			return false;
+		}
+		else if ( $("#userPwCheck").val() == "") {
+ 			document.querySelector("#pwCheckModalBtn").click();
 			return false;
 		}
 		else if ( $("#userPw").val() != $("#userPwCheck").val()) {
-			alert("비밀번호 재입력을 확인해주세요")
+ 			document.querySelector("#pwEqualModalBtn").click();
+			return false;
+		}
+		else if ($("#userPw").val().length<7) {
+			document.querySelector("#shortPwModalBtn").click();
+			return false;
+		}
+		else if ($("#userName").val().length>20) {
+			document.querySelector("#longNameModalBtn").click();
 			return false;
 		}
 		else if (emailDuplicateChecker == 2) {
-			alert("이메일 중복입니다")
+ 			document.querySelector("#emailDuplicateModalBtn").click();
 			return false;
 		}
-		else if (document.getElementById("userPw").value.length <= 7) {
-				alert("비번은 8자 이상이어야 합니다")
-//	 			document.querySelector("#shortPwModalBtn").click();
-				return false;
+		else if (regx.test($("#userEmail"))) {
+ 			document.querySelector("#emailWithoutKoreanModalBtn").click();
+			return false;
 		}
 		else {
 			$("#form").submit();
-			return true;
+			return;
 		}
 	});
+
 	
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

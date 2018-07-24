@@ -6,9 +6,11 @@
 <html>
 <head>
     <title>고객센터</title>
+    <meta name="google-signin-client_id" content="880617749149-u3k5io2lv7d6i0u5mccdl283j6tgratg.apps.googleusercontent.com">
     <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/board/list.css" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/list.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -43,6 +45,9 @@
 		<div class="card-header">
 	          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check"></i>&nbsp;&nbsp;<strong>고객센터</strong>
 	    </div>
+	    <div class="col-md-2" style="text-align: right">
+			전체 <c:out value="${boardResult.boardCount}"/>개
+		</div>
 	    <div class="card-body">
 	          <div class="table-responsive">
 	              <table class="table table-bordered" id="dataTable">
@@ -57,7 +62,7 @@
 		                </tr>
 		              </thead>
 		              
-		              <c:forEach var="board" items="${list}">
+		              <c:forEach var="board" items="${boardList}">
 		              <tbody>
 		                <tr>
 		                  <td>${board.boardNo}</td>
@@ -71,42 +76,58 @@
 		              </c:forEach>
 	            </table>
 	    	</div>
-		</div>
-	</div>
-<div><a href="${pageContext.request.contextPath}/board/writeForm.do">글쓰기</a></div>
+	    	
+ 	
+	    	<c:if test="${boardResult.boardCount != 0}">
+			<nav>
+		  <ul class="pagination">
+			    <li class="<c:if test="${boardResult.prevPage eq false}">disabled</c:if>">
+			      <a href="<c:if test="${boardResult.prevPage eq true}">list.do?pageNo=${boardResult.prev - 1}</c:if>" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li> 
 
-<div class="row">
-	<div class="col-sm-12 col-md-7">
-		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-			<ul class="pagination">
-				<li class="paginate_button page-item previous disabled" id="dataTable_previous">
-					<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-				</li>
-				<li class="paginate_button page-item active">
-					<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-				</li>
-				<li class="paginate_button page-item ">
-				<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-				</li>
-				<li class="paginate_button page-item ">
-					<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-				</li>
-				<li class="paginate_button page-item ">
-					<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-				</li>
-				<li class="paginate_button page-item ">
-					<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-				</li>
-				<li class="paginate_button page-item ">
-					<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-				</li>
-				<li class="paginate_button page-item next" id="dataTable_next">
-					<a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-				</li>
-			</ul>
+				<c:forEach var="i" begin="${boardResult.prev}" end="${boardResult.next}">
+				    <c:choose>
+				    	<c:when test="${i eq boardResult.pageNo+1}">
+						    <li class="active"><a href="#1">${i}</a></li>
+				    	</c:when>
+				    	<c:otherwise>
+						    <li><a href="list.do?pageNo=${i}">${i}</a></li>
+				    	</c:otherwise>
+				    </c:choose>
+				</c:forEach>
+				
+ 			    <li class="<c:if test="${boardResult.nextPage eq false}">disabled</c:if>">
+			      <a href="<c:if test="${boardResult.nextPage eq true}">list.do?pageNo=${boardResult.next + 1}</c:if>" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li> 
+			    	    
+			  </ul>
+			</nav>
+		</c:if>
+			    	
+	    	
+		<div class="btn ">
+			<button id="write" type="button" onclick="window.location.href='${pageContext.request.contextPath}/board/writeForm.do'">글쓰기</button>
 		</div>
 	</div>
-</div>
+	</div>
+
+
+<script>
+	$(()=>{
+		console.log("${boardResult.lastPage}")	// 모든 페이지의 끝
+		console.log("${boardResult.pageNo+1}")	// 현재 페이지
+		console.log("${boardResult.prev}")	// 현재 페이지
+		console.log("${boardResult.next}")	// 현재 페이지
+	})
+
+	$("ul.nav.navbar-nav > li").removeClass("active");
+	$("ul.nav.navbar-nav > li:eq(2)").addClass("active");
+
+</script>
 
 </body>
 </html>
