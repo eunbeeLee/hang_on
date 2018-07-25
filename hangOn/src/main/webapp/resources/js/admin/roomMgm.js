@@ -287,6 +287,7 @@ window.onload = function(){
 	
 	/*방정보 수정*/
 	function roomInfoGetter(roomNo){
+		console.log("방번호:",roomNo);
 		let oldPass = document.querySelector("#oldPassAtRoom"+roomNo).value;
 		var roomInfo = document.querySelector("#room"+roomNo+"Info").value;
 		var roomName = document.querySelector("#room"+roomNo+"Name").value;
@@ -319,12 +320,26 @@ window.onload = function(){
 		for(let no of userNoArr){
 			userNo.push(no.split('_')[2]);
 		}
-//		console.log(userNo);
+		console.log(userNoArr);
+		console.log(userNoArr.length);
+		
+//		console.log(typeof roomName);
+//		console.log(typeof parseInt(roomNo));
+//		console.log(typeof roomInfo);
+//		console.log(typeof roomPassword);
+		console.log(typeof userNoArr.join(','));
+		
+		data = '{"roomName" : roomName, "roomNo" :parseInt(roomNo), "roomInfo":roomInfo, "roomPassword":roomPassword, "severalUserNo":userNo.join(",")}';
 		$.ajax({
 			url : "roomUpdate.json", 	
-			data : {"roomName" : roomName, "roomNo" :roomNo, "roomInfo":roomInfo, "roomPassword":roomPassword, "severalUserNo":userNo.join(",")},
+			data : {"roomName" : roomName, "roomNo" :parseInt(roomNo), "roomInfo":roomInfo, "roomPassword":roomPassword, "severalUserNo":userNo.join(",")},
 			type : "POST",
 			dataType : "json"
+		}).done(function(){
+			alert("성공");
+		})
+		.fail(function(e){
+			console.log(e);
 		});
 	};
 	/*멤버내보내기*/
@@ -336,7 +351,9 @@ window.onload = function(){
 			url : "memberOut.json", 
 			data : {"roomNo" : roomNo, "userNo" : userNo},
 			dataType : "json"
-		}).done(alert("성공"));
+		}).done(
+//				alert("성공")
+				);
 	}
 
 

@@ -91,7 +91,7 @@
   <div class="col-xs-12" id="doughnutChart">
    <div class="card mb-3" id="doughnutChartContent">
      <div class="card-header">
-       <i class="fa fa-pie-chart"></i>회의방별 통화량</div>
+       <i class="fa fa-pie-chart"></i>회의방별 회의시간</div>
      <div class="card-body">
 <!--         <div class="datePicker"> -->
 <!--         	<button class="button-left" id="doughnutBtnLeft"><i class="fa fa-fw fa-angle-left"></i></button> -->

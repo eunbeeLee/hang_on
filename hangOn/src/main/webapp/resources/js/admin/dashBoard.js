@@ -198,7 +198,7 @@ window.onload = function(){
 	         labels: pieLabels,
 	         datasets: [{
 	             data: pieDate,
-	             backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745", "#007bff", "#dc3545", "#ffc107", "#28a745", "#007bff", "#dc3545", "#ffc107", "#28a745"]
+	             backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745", "#ff4b01", "#ffd801", "#ff6702", "#078f85", "#00812f", "#ffecb7", "#75d1dc", "#847a7b"]
 	         }]
 	     }
 	 });
