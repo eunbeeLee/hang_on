@@ -65,13 +65,13 @@ public class ChatSocketHandler extends TextWebSocketHandler {
 			}
 		}
 		
-		// 룸 멤버 퇴장 코드로 변경
-		RoomMember member = new RoomMember();
-		member.setUserNo(seUser.getUserNo());
-		member.setRoomJoinCode(userIncludeKey);
-		member.setRoomConnectCode("bb12");
-		
-		mapper.updateRoomMemberConnect(member);
+//		// 룸 멤버 퇴장 코드로 변경
+//		RoomMember member = new RoomMember();
+//		member.setUserNo(seUser.getUserNo());
+//		member.setRoomJoinCode(userIncludeKey);
+//		member.setRoomConnectCode("bb12");
+//		
+//		mapper.updateRoomMemberConnect(member);
 		
 		// 히스토리 퇴장 기록 남기기
 		History history = new History();

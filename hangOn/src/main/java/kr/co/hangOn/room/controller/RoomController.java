@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.hangOn.repository.domain.History;
 import kr.co.hangOn.repository.domain.RoomMember;
 import kr.co.hangOn.repository.domain.User;
 import kr.co.hangOn.room.service.RoomService;
@@ -21,7 +20,7 @@ public class RoomController {
 	
 	@RequestMapping("/{roomNo}/view.do")
 	public String view(HttpSession session, HttpServletRequest req) {
-		String joinCode=req.getRequestURI().split("/")[3];
+		String joinCode = req.getRequestURI().split("/")[3];
 		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
 		String roomName = service.selectRoomName(joinCode);
@@ -54,6 +53,21 @@ public class RoomController {
 	@RequestMapping("/{downNo}/down.do")
 	public String down() {
 		return "room/view";
+	}
+	
+	@RequestMapping("/{roomNo}/roomLeave.do")
+	public String roomLeave(HttpSession session, HttpServletRequest req) {
+		String joinCode = req.getRequestURI().split("/")[3];
+		int userNo = ((User)session.getAttribute("user")).getUserNo();
+		
+		// 룸 멤버 퇴장 코드로 변경
+		RoomMember member = new RoomMember();
+		member.setUserNo(userNo);
+		member.setRoomJoinCode(joinCode);
+		member.setRoomConnectCode("bb12");
+				
+		service.updateRoomMemberConnect(member);
+		return "redirect:/lobby/view.do";
 	}
 	
 	

@@ -26,10 +26,8 @@ public class LobbyController {
 	@RequestMapping("/view.do")
 	public void lobbyView(Model model, HttpSession session) {
 		User user = (User)session.getAttribute("user");
-		if(user != null) {
-			List<Room> room = service.roomList(user.getUserNo());
-			model.addAttribute("room", room);
-		}
+		List<Room> room = service.roomList(user.getUserNo());
+		model.addAttribute("room", room);
 	}
 	
 	// 방 생성

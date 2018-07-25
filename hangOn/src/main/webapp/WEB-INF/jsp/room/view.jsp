@@ -110,7 +110,7 @@
         </li>--%>
         
         <li class="nav-item">
-          <a class="nav-link" href="${pageContext.request.contextPath}/lobby/view.do">
+          <a class="nav-link" href="${pageContext.request.contextPath}/room/${code}/roomLeave.do">
             <i class="fa fa-fw fa-sign-out"></i>나가기</a>
         </li>
         

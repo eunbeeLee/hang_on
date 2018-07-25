@@ -37,5 +37,10 @@ public class RoomServiceImpl implements RoomService {
 	public int selectRoomNo(String joinCode) {
 		return mapper.roomByJoinCode(joinCode);
 	}
+
+	@Override
+	public void updateRoomMemberConnect(RoomMember member) {
+		mapper.updateRoomMemberConnect(member);
+	}
 	
 }

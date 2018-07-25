@@ -8,5 +8,6 @@ public interface RoomService {
 	void historyInsert(History history,String roomJoinCode);
 	String selectRoomName(String roomJoinCode);
 	int selectRoomNo(String joinCode);
+	void updateRoomMemberConnect(RoomMember member);
 }
  
