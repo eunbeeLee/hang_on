@@ -47,15 +47,15 @@ public class LobbyController {
 		User user = (User)session.getAttribute("user");
 		Room roomResult = service.roomFind(room);
 		if(roomResult == null) {
-			attr.addFlashAttribute("msg", "room 찾기 오류: room 코드를 확인해주세요.");
+			attr.addFlashAttribute("msg", "err1");
 			return "redirect:view.do";
 		}
 		if (roomResult.getRoomDelState().equals("ba02")) {
-			attr.addFlashAttribute("msg", "room 찾기 오류: 삭제된 room 입니다.");
+			attr.addFlashAttribute("msg", "err2");
 			return "redirect:view.do";
 		}
 		if (!room.getRoomPassword().equals(roomResult.getRoomPassword())) {
-			attr.addFlashAttribute("msg", "room 찾기 오류: room 비밀번호를 확인해주세요.");
+			attr.addFlashAttribute("msg", "err3");
 			return "redirect:view.do";
 		}
 		// user 등록되어 있는지 확인하고 안되어있으면 등록
@@ -70,10 +70,10 @@ public class LobbyController {
 		 * 2 : 방 참여인수가 6명 참여하고 있는지
 		 */
 		if(result == 1) {
-			attr.addFlashAttribute("msg", "오류: 이미 등록되어 있는 room 입니다.");
+			attr.addFlashAttribute("msg", "err4");
 			return "redirect:view.do";
 		} else if (result == 2) {
-			attr.addFlashAttribute("msg", "오류: 최대 인원이 참여하고 있는 room 입니다.");
+			attr.addFlashAttribute("msg", "err5");
 			return "redirect:view.do";
 		}
 		// room 에 참여사람 등록

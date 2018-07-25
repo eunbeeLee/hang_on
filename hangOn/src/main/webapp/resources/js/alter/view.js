@@ -109,7 +109,7 @@ function alterAjax(url,data,fn){
 /*모달 생성함수*/
 function modalUp(modalId, modalBody, btnText){
 	var modalWrapper = document.querySelector("#backGroundByMyPage");
-	var modal = '<div class="modal fade" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
+	var modal = '<div class="modal fade modalTempClass" id="'+modalId+'" tabindex="-1" role="dialog" aria-labelledby="'+modalId+'Label" aria-hidden="true">\
 			      <div class="modal-dialog" role="document">\
 				      <div class="modal-content">\
 				        <div class="modal-header">\
@@ -120,7 +120,7 @@ function modalUp(modalId, modalBody, btnText){
 				        </div>\
 				        <div class="modal-body">'+modalBody+'</div>\
 				        <div class="modal-footer"> <span id="'+modalId+'ErrMsg" class="modal-err-msg"></span>\
-				        <a id="'+modalId+'Close" class="btn btn-primary" href="#" data-dismiss="modal" aria-label="Close">'+btnText+'</a>\
+				        <a id="'+modalId+'Close" class="btn btn-primary modal-close-btns" href="#" data-dismiss="modal" aria-label="Close">'+btnText+'</a>\
 				        </div>\
 				      </div>\
 				    </div>\
@@ -128,6 +128,11 @@ function modalUp(modalId, modalBody, btnText){
 				  <button style ="display : none;" id="'+modalId+'Btn" data-toggle="modal" data-target="#'+modalId+'"></button>';
 	 modalWrapper.innerHTML += modal;
 }
+
+$("#backGroundByMyPage").on("click",".modal-backdrop",function(){
+	$("#passwordModalClose").click();
+})
+
 /*필요한 모달 추가 함수*/
 function modalMaker(){
 	modalUp("passwordModal", "<input id='passwordCheckInput'class='form-control' type='password' placeholder='현재 비밀번호를 입력해주세요!' />","취소");
@@ -176,7 +181,7 @@ $("#backGroundByMyPage").on("keyup","#passwordCheckInput",function(){
 							$("#existModalErrMsg").html("1");
 							setTimeout(()=>{
 								$("#existModalErrMsg").html(`
-								<a id="existOkBtn" class="btn btn-primary" href="/hangOn/alter/exist.do?userNo=${myPageUser.userNo}">탈퇴</a>
+								<a id="existOkBtn" class="btn btn-danger" href="/hangOn/alter/exist.do?userNo=${myPageUser.userNo}">탈퇴</a>
 								`);
 							},1000)
 						},1000)
@@ -229,4 +234,3 @@ $("#backGroundByMyPage").on("click","#updatePasswordBtn",function(){
 		$("#passUpdateSuccessModalBtn").click();
 	});
 });
-

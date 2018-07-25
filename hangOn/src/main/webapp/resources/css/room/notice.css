@@ -41,7 +41,7 @@
 #noticeTable {
 }
 
-#noticeTable > table > tr > th, td {
+#noticeTable > table > tr > th, #noticeTable > table > tr > td {
 	text-align: center;
 	vertical-align: middle !important;
 	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";

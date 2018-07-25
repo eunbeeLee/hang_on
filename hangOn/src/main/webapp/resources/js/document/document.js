@@ -25,7 +25,7 @@ const userProp = {
 		roomNo : parseInt($("#documentRoomNo").val()),
 		code : $("#documentRoomCode").val()
 }
-const MAINHOST = "ws://localhost";
+const MAINHOST = "wss://192.168.0.2";
 const docWs = new WebSocket(MAINHOST+'/hangOn/document/docview.do');
 var drawData = {};
 var canvasProp = {};

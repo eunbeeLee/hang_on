@@ -89,8 +89,9 @@ font-family: 'Noto Sans', sans-serif;
     cursor: pointer;  
 	background-image: url(po.jpg);
 	background-size: cover;
-	opacity: 0.9;
+	opacity: 0.85;
 	padding-top : 10px;
+	transition:.3s;
 }
 
 

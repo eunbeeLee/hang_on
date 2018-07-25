@@ -30,7 +30,7 @@
     var sendMsg = "";
 
     $(function () {
-        ws = new WebSocket('ws://localhost:8000/hangOn/room/chat.do');
+        ws = new WebSocket('wss://192.168.0.2/hangOn/room/chat.do');
     	ws.onopen = function() {
        	    console.log('웹소켓 서버 접속 성공');
         	// 사용자 입장시 메세지 출력
@@ -148,7 +148,6 @@
     		dataType: "json",
     		complete: function() {
     			// 모달로 변경 예정
-    			alert("공지 등록이 완료되었습니다.");
  				$this.parent().siblings(".selfBar").children().css("color", "#595959");
  				$this.parent().siblings(".selfBar").children().css("cursor", "inherit");
  				$this.parent().remove();

@@ -1,4 +1,4 @@
-package kr.co.hangOn.chat.controller;
+package kr.co.hangOn.chat.handler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import kr.co.hangOn.repository.domain.User;
 import kr.co.hangOn.repository.mapper.RoomMapper;
 
 @Component("chat")
-public class ChatSocketHandle extends TextWebSocketHandler {
+public class ChatSocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	private RoomMapper mapper;
@@ -33,7 +33,7 @@ public class ChatSocketHandle extends TextWebSocketHandler {
 	private SimpleDateFormat alarmTime = new SimpleDateFormat("HH:mm");
 	
 	// 서버 열리면서
-	public ChatSocketHandle () {
+	public ChatSocketHandler () {
 	}
 	
 	// 사용자 접속시

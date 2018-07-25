@@ -182,6 +182,14 @@ function makeCloudList(response){
 	      <th>`+extension(file.extension)+`</th>`;
 	      if(file.extension==null){
 	    	  html +=`<td><a href='javascript:void(0);' onclick="pathList('`+'/'+path+'/'+file.fileName+`');" >`+file.fileName+`</a></td>`;
+	      }else if(file.extension=='jpg'){
+	    	  html +=`<td>
+				    	  <a id='`+file.fileName+`' href='javascript:void(0);' onclick="imgToggle('`+file.fileName+`');" 
+					    	  <img src="cloudDown.do?fileName=`+urlencode(file.fileName)+`&filePath=`+urlencode(path)+`">
+					    	  `+file.fileName+`
+					    	  </img>
+				    	  </a>
+			    	  </td>`;
 	      }else{
 	    	  html +=`<td><a href="cloudDown.do?fileName=`+urlencode(file.fileName)+`&filePath=`+urlencode(path)+`">`+file.fileName+`</a></td>`;
 	      }
@@ -202,6 +210,10 @@ function makeCloudList(response){
     $("#page-top > div.content-wrapper > section > table > tbody").html("");
     $("#page-top > div.content-wrapper > section > table > tbody").append(html);
     init();
+}
+
+function imgToggle(img){
+	console.log($("#"+img).html());
 }
 
 // 파일 아이콘 생성 

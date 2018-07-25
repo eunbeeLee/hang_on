@@ -26,5 +26,8 @@
 	</a>
 	<hr>
 
+	<script type="text/javascript">
+	location.href="https://192.168.0.2/hangOn/main/login.do";
+	</script>
 </body>
 </html>
