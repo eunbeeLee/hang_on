@@ -94,7 +94,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/registerForm.do", method= {RequestMethod.POST, RequestMethod.GET})
-	public String registerForm(User user) {
+	public String registerForm() {
 		return "main/register";
 	}
 	

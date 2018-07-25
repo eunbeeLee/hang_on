@@ -43,12 +43,11 @@
 
 <script>
 
-if("${user}" == "") {
+if("${user}"=="") {
 	$("#logout").hide();
-};
-if("${user}" == "") {
 	$("#lobby").hide();
 };
+
 if("${user}" != "") {
 	$("#register").hide();
 };
@@ -62,9 +61,6 @@ $("#logout").click(function () {
 	};
 })
 
-
-
 </script>
-
 </body>
 </html>
