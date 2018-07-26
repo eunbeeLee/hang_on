@@ -6,36 +6,11 @@
 <html>
 <head>
     <title>고객센터</title>
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/board/detail.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/board/detail.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
-
-<!-- 왼쪽 창 -->
-	<div id="table-on-the-left">
-		<table class="table card">
-			<tbody>
-				<tr>
-					<th>공지사항</th>
-				</tr>
-				<tr>
-					<th>자주 묻는 질문</th>
-				</tr>
-				<tr>
-					<th>찾아오시는 길</th>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			고객센터 : 02) 000 - 0000
-		</div>
-	</div>
 
 <!-- 고객센터 게시판 -->
 
@@ -44,14 +19,25 @@
 	          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check"></i>&nbsp;&nbsp;<strong>고객센터</strong>
 	    </div>
 	    <div class="card-body">
-	          <div class="table-responsive">
-				번호 :  ${board.boardNo}<br>
-				카테고리 : ${board.boardCategory}<br>
-				글쓴이 : <c:out value="${board.boardWriter}" /><br>
-				제목 : <c:out value="${board.boardTitle}" /><br>
-				내용 : <c:out value="${board.boardContent}" /><br>
-				등록일 : <fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br><br>
-				조회수 : ${board.viewCnt}<br>
+	          <div class="table-responsive table-condensed">
+	          <table class="table table-condensed">
+		          <tr>
+		          	<td style="width:20%; text-align:center;">카테고리</td>
+		          	<td style="width:50%; text-align:center;">제목</td>
+		          	<td style="width:30%; text-align:center;">등록일</td>
+		          </tr>
+		          <tr>
+		          	<td style="width:20%; text-align:center;">${board.boardCategory}</td>
+		          	<td style="width:50%; text-align:center;">${board.boardTitle}</td>
+		          	<td style="width:30%; text-align:center;"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+		          </tr>
+		          <tr>
+		          	<td colspan="3" style="text-align:right"> 작성자 ${board.boardWriter} 조회수  ${board.viewCnt} </td>
+		          </tr>
+	          </table>
+	          <div style="min-width:200px; min-height:300px; text-align:left; border-top: 1px solid grey; border-bottom: 1px solid grey;">
+	          	<c:out value="${board.boardContent}" /><br><br><br>
+	          </div>
 	    	</div>
 		</div>
 	</div>

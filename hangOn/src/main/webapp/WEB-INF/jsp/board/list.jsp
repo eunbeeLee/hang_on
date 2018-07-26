@@ -6,15 +6,9 @@
 <html>
 <head>
     <title>고객센터</title>
-    <meta name="google-signin-client_id" content="880617749149-u3k5io2lv7d6i0u5mccdl283j6tgratg.apps.googleusercontent.com">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/resources/css/board/list.css" rel="stylesheet">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="${pageContext.request.contextPath}/resources/js/board/list.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/list.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/history.css">
+	<script src="${pageContext.request.contextPath}/resources/js/board/list.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -25,7 +19,7 @@
 		<div class="card-header">
 	          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check"></i>&nbsp;&nbsp;<strong>고객센터</strong>
 	    </div>
-	    <div class="col-md-2" style="text-align: right">
+	    <div class="col-md-12" style="text-align: right; margin-top: 10px; padding-right: 20px;">
 			전체 <c:out value="${boardResult.boardCount}"/>개
 		</div>
 	    <div class="card-body">
@@ -57,12 +51,12 @@
 	            </table>
 	    	</div>
 	    	
- 	
+	    	<!-- 페이징 -->
 	    	<c:if test="${boardResult.boardCount != 0}">
 			<nav>
-		  <ul class="pagination">
-			    <li class="<c:if test="${boardResult.prevPage eq false}">disabled</c:if>">
-			      <a href="<c:if test="${boardResult.prevPage eq true}">list.do?pageNo=${boardResult.prev - 1}</c:if>" aria-label="Previous">
+		  	  <ul class="pagination" style="padding-left: 25%;">
+			    <li class="paginate_button page-items previous <c:if test="${boardResult.prevPage eq false}">disabled</c:if> ">
+			      <a href="<c:if test="${boardResult.prevPage eq true}">list.do?pageNo=${boardResult.prev - 1}</c:if>" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link" aria-label="Previous">
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
 			    </li> 
@@ -70,16 +64,16 @@
 				<c:forEach var="i" begin="${boardResult.prev}" end="${boardResult.next}">
 				    <c:choose>
 				    	<c:when test="${i eq boardResult.pageNo+1}">
-						    <li class="active"><a href="#1">${i}</a></li>
+						    <li class="paginate_button page-items "><a href="#1" tabindex="0" aria-controls="dataTable" class="page-link">${i}</a></li>
 				    	</c:when>
 				    	<c:otherwise>
-						    <li><a href="list.do?pageNo=${i}">${i}</a></li>
+						    <li class="paginate_button page-items "><a href="list.do?pageNo=${i}" tabindex="0" aria-controls="dataTable" class="page-link">${i}</a></li>
 				    	</c:otherwise>
 				    </c:choose>
 				</c:forEach>
 				
- 			    <li class="<c:if test="${boardResult.nextPage eq false}">disabled</c:if>">
-			      <a href="<c:if test="${boardResult.nextPage eq true}">list.do?pageNo=${boardResult.next + 1}</c:if>" aria-label="Next">
+ 			    <li id="dataTable_next" class=" paginate_button page-items next <c:if test="${boardResult.nextPage eq false}">disabled</c:if> ">
+			      <a href="<c:if test="${boardResult.nextPage eq true}">list.do?pageNo=${boardResult.next + 1}</c:if>" aria-controls="dataTable" tabindex="0" class="page-link" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			    </li> 
@@ -88,8 +82,8 @@
 			</nav>
 		</c:if>
 	    	
-		<div class="btn ">
-			<button id="write" type="button" onclick="window.location.href='${pageContext.request.contextPath}/board/writeForm.do'">글쓰기</button>
+		<div id="btn-write" style="text-align: right; width: 100%;">
+			<button  type="button" id="btn" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/board/writeForm.do'">글쓰기</button>
 		</div>
 	</div>
 	</div>
@@ -110,7 +104,11 @@
 		else if ("${user}" != "") {
 			console.log("유저가 살아있어!!");
 		}
-	})
+	});
+	
+	$("#btn-write").hover(function () {
+		$(this).css("color", "#8d68cc");
+	});
 	
 	$("ul.nav.navbar-nav > li").removeClass("active");
 	$("ul.nav.navbar-nav > li:eq(2)").addClass("active");

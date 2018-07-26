@@ -6,38 +6,11 @@
 <html>
 <head>
     <title>고객센터</title>
-    <meta name="google-signin-client_id" content="880617749149-u3k5io2lv7d6i0u5mccdl283j6tgratg.apps.googleusercontent.com">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/board/writeForm.css" rel="stylesheet">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/writeForm.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
-
-<!-- 왼쪽 창 -->
-	<div id="table-on-the-left">
-		<table class="table card">
-			<tbody>
-				<tr>
-					<th>공지사항</th>
-				</tr>
-				<tr>
-					<th>자주 묻는 질문</th>
-				</tr>
-				<tr>
-					<th>찾아오시는 길</th>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			고객센터 : 02) 000 - 0000
-		</div>
-	</div>
 
 <!-- 고객센터 게시판 -->
 
@@ -48,18 +21,26 @@
 	    <div class="card-body">
 	        <div class="table-responsive">
 	        	<form action="${pageContext.request.contextPath}/board/write.do" id="form">
-				        카테고리 : <select name="boardCategory" id="category">
+				    <div class="form-group">
+				        카테고리  <select name="boardCategory" id="category" class="form-control" style="max-width:150px">
 								<option value="">선택</option>
 								<option value="회원정보">회원정보</option>
 								<option value="화상회의">화상회의</option>
 								<option value="채팅">채팅</option>
 								<option value="기타">기타</option>
-							</select><br>
-				        글쓴이 : <input type="text" id="writer" name="boardWriter" readonly value="${sessionScope.userName}" size="30" /><br>
-				        제목 : <input type="text" id="title" size="50" name="boardTitle"/><br>
-				        내용 : <textarea rows="5" cols="100" id="content" name="boardContent" ></textarea>
-				    <input type="hidden" name="userNo" id="no" value="${sessionScope.userNo}" /><br>
-				    <button type="submit" id="btn">글쓰기</button>
+							</select>
+				    </div>
+				    <div class="form-group">
+				       	 글쓴이  <input type="text" id="writer" style="max-width:150px" class="form-control" name="boardWriter" readonly value="${sessionScope.userName}" size="30" />
+				    </div>   
+				    <div class="form-group">
+				            제목  <input type="text" id="title" class="form-control" size="50" name="boardTitle"/>
+				    </div>   
+				    <div class="form-group">
+				       	 내용  <textarea rows="5" cols="100" id="content" class="form-control" name="boardContent" ></textarea>
+				    </div>   
+				    <input type="hidden" name="userNo" id="no"  class="form-control" value="${sessionScope.userNo}" />
+				    <button type="submit" id="btn" style="float:right; text-align: right; margin-top: 10px;">글쓰기</button>
 	        	</form>
 	    	</div>
 		</div>

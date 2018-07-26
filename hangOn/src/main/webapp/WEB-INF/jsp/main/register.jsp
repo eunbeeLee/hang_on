@@ -3,13 +3,8 @@
 <html>
 <head>
     <title>등록</title>
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/main/register.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/main/register.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -45,7 +40,6 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="userPw">비밀번호</label>&nbsp;&nbsp;&nbsp;
-<!--                 <button class="btn btn-primary" style="background-color:#b39bdd; border:0;"><span>유효성 체크</span></button> -->
                 <input class="form-control" id="userPw" type="password" name="userPw" placeholder="8자 이상으로 입력하세요">
               </div>
               <div class="col-md-6">
@@ -98,8 +92,6 @@
 	});
 	
 	$("#registerBtn").click(function () {
-		var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-		regx = /[^가-힣]/;
 		for (i = 0; i < $("#userName").value.length; i++) {
 	     	ch = $("#userName").value.charAt(i)
 	        if ((ch >= '0' && ch <= '9')) {

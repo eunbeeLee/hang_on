@@ -4,14 +4,9 @@
 <head>
     <title>메인화면</title>
     <meta name="google-signin-client_id" content="880617749149-u3k5io2lv7d6i0u5mccdl283j6tgratg.apps.googleusercontent.com">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/main/login.css" rel="stylesheet">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="${pageContext.request.contextPath}/resources/js/main/login.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -186,34 +181,6 @@ $('#loginForm').submit(function () {
 });
 	
 	
-// 	$.ajax({
-// 		url: `${pageContext.request.contextPath}/main/loginPost.json`,
-// 		data: {userEmail: userEmail, userPw: userPw},
-// 		type: "POST",
-// 		dataType: "json",
-// 		success: function(result){
-// 			alert(result);
-//  			if (result.startsWith("/")){
-//  				location.href = `${pageContext.request.contextPath}` + result;
-//  				return;
-//  			}
-//  			if (result == "1") {
-// 				document.querySelector("#wrongEmailModalBtn").click();
-//  				return;
-//  			}
-//  			else if (result == "2") {
-// 				document.querySelector("#wrongPwModalBtn").click();
-//  				return;
-//  			}
-// 		}
-// 	});
-
-// function toPwFocus() {
-// 	if (window.event.keyCode == 13) {
-//         $("#pw").focus();
-//         return false;
-//    }
-// }
 
 function toLoginBtn() {
 	if (window.event.keyCode == 13) {

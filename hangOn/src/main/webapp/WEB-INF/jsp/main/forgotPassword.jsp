@@ -3,13 +3,8 @@
 <html>
 <head>
     <title>비번찾기</title>
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/main/forgotPassword.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/main/forgotPassword.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -28,7 +23,6 @@
     <div class="card-header" style="text-align: center;"><strong>비밀번호 재설정하기</strong></div>
     <div class="card-body">
       <div class="text-center mt-4 mb-5">
-<!--         <h4>비밀번호를 잊어버리셨나요?</h4><br> -->
         <br><p> 이메일을 입력해주시면 새 비밀번호를 보내드립니다</p><br>
       </div>
       <form action="${pageContext.request.contextPath}/mail/forgotPassword.do" method="POST" id="form">

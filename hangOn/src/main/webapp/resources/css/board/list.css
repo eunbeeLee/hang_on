@@ -73,3 +73,34 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+#btn {
+	
+}
+
+<!-- 페이징 관련 -->
+
+/* .page-link{ */
+/* 	color: #8d68cc;  */
+/* } */
+
+/* .page-link:hover { */
+/* 	color: #8d68cc;  */
+/* } */
+
+.page-items.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #b39bdd;
+    border-color: #8d68cc;
+}
+
+/* .pagination { */
+/* 	text-align:center; */
+/* 	margin-left: auto;  */
+/* 	margin-right: auto; */
+/* } */
+
+
+
+
